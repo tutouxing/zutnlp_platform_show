@@ -45,7 +45,7 @@ export default[
         },
         {
             path: 'backcms1',//表单
-            component:() => import('../views/cms/addText.vue'),
+            component:() => import('../views/cms/reviseTheme.vue'),
             name: 'backcms',
         },
         {

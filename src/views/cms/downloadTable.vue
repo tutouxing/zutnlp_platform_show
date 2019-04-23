@@ -61,86 +61,86 @@
  * author:wastelands
  * Date:2019-03-31 16:27
  */
-import {delContentById, getChannelById, } from "../../api/content";
+import {delContentById, getChannelById } from '../../api/content'
 
 export default {
-        name: "downloadTable",
-        created(){
-            getChannelById("3").then(response=>{
-                this.tableData = response.data.contents;
-            });
+  name: 'downloadTable',
+  created () {
+    getChannelById('3').then(response => {
+      this.tableData = response.data.contents
+    })
+  },
+  data () {
+    return {
+      tableData: [
+        {
+          id: 1,
+          type: '焦点',
+          top: 10,
+          publisher: 'admin',
+          count: 14951,
+          date: '2016-10-11 13:55:46',
+          status: '审核通过',
+          title: '[顶1] [推荐] [系统软件] 搜狗输入法'
         },
-        data(){
-            return{
-                tableData:[
-                    {
-                        id:1,
-                        type:"焦点",
-                        top:10,
-                        publisher:"admin",
-                        count:14951,
-                        date:"2016-10-11 13:55:46",
-                        status:"审核通过",
-                        title:"[顶1] [推荐] [系统软件] 搜狗输入法",
-                    },
-                    {
-                        id:1,
-                        title:"[推荐] [媒体助手] 腾讯视频",
-                        type:"普通",
-                        top:10,
-                        publisher:"admin",
-                        count:6727,
-                        date:"2016-10-10 13:54:05",
-                        status:"审核通过",
-                    },{
-                        id:2,
-                        title:"[推荐] [媒体助手] PPTV聚力",
-                        type:"图文",
-                        top:10,
-                        publisher:"admin",
-                        count:233,
-                        date:"2016-09-23 09:54:17",
-                        status:"审核通过",
-                    },{
-                        id:3,
-                        title:"[推荐] [媒体助手] 360浏览器",
-                        type:"图文",
-                        top:7,
-                        publisher:"admin",
-                        count:6655,
-                        date:"2016-09-23 09:54:17",
-                        status:"审核通过",
-                    },{
-                        id:4,
-                        title:"[推荐] [媒体助手] 谷歌浏览器",
-                        type:"图文",
-                        top:8,
-                        publisher:"admin",
-                        count:3456,
-                        date:"2016-09-23 09:54:17",
-                        status:"审核通过",
-                    },
-                ]
-            }
-        },
-        methods:{
-            edit(rows){
-                let id = rows.id;
-                this.$router.push({
-                    path:"/backcms1",
-                    query:{
-                        id:id,
-                        type:"update"
-                    }});
-            },
-            handleClick(rows){
-                delContentById(rows.id);
-                getChannelById("3").then(response=>{
-                    this.tableData = response.data.contents;
-                });
-            }
-        },
+        {
+          id: 1,
+          title: '[推荐] [媒体助手] 腾讯视频',
+          type: '普通',
+          top: 10,
+          publisher: 'admin',
+          count: 6727,
+          date: '2016-10-10 13:54:05',
+          status: '审核通过'
+        }, {
+          id: 2,
+          title: '[推荐] [媒体助手] PPTV聚力',
+          type: '图文',
+          top: 10,
+          publisher: 'admin',
+          count: 233,
+          date: '2016-09-23 09:54:17',
+          status: '审核通过'
+        }, {
+          id: 3,
+          title: '[推荐] [媒体助手] 360浏览器',
+          type: '图文',
+          top: 7,
+          publisher: 'admin',
+          count: 6655,
+          date: '2016-09-23 09:54:17',
+          status: '审核通过'
+        }, {
+          id: 4,
+          title: '[推荐] [媒体助手] 谷歌浏览器',
+          type: '图文',
+          top: 8,
+          publisher: 'admin',
+          count: 3456,
+          date: '2016-09-23 09:54:17',
+          status: '审核通过'
+        }
+      ]
     }
+  },
+  methods: {
+    edit (rows) {
+      let id = rows.id
+      this.$router.push({
+        path: '/backcms1',
+        query: {
+          id: id,
+          type: 'update'
+        }})
+    },
+    handleClick (rows) {
+      delContentById(rows.id)
+      getChannelById('3').then(response => {
+        this.tableData = response.data.contents
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

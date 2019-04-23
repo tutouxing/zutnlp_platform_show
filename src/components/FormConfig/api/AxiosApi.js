@@ -21,7 +21,7 @@ export function PropertyFindall(){
 export function TableFindall(){
     let datas;
     let errors;
-    let url = "http://202.196.37.147:8848/TableMessage/list";
+    let url = "http://127.0.0.1:8848/TableMessage/list";
     this.$axios.get(url).then(function (response) {
         // datas=response;
         return response.data
@@ -31,7 +31,7 @@ export function TableFindall(){
     // return datas
 }export function TableFindAll(){
     return fetch({
-        url: 'http://202.196.37.147:8848/TableMessage/list',
+        url: 'http://127.0.0.1:8848/TableMessage/list',
         method:'get',
     })
 }

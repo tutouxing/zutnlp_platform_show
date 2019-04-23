@@ -96,57 +96,57 @@
 </template>
 
 <script>
-    /**
+/**
      * author:wastelands
      * Date:2019-03-31 17:09
      */
-    export default {
-        name: "addText",
-        created(){
-            let self = this
-            self.getParams()
-        },
-        watch(){
-          $route:'getParams'
-        },
-        data() {
-            return {
-                dialogImageUrl: '',
-                dialogVisible: false,
-               radio2:'',
-                input:'',
-                textarea: '',
-                options: [{
-                    value: '选项1',
-                    label: '新闻'
-                }, {
-                    value: '选项2',
-                    label: '视频'
-                }, {
-                    value: '选项3',
-                    label: '文档'
-                }, {
-                    value: '选项4',
-                    label: '下载'
-                },],
-                value: ''
-            }
-        },
-        methods:{
-            getParams(){
-                let id = this.$route.query.id;
-                let detailContent = getContentById(id);
-                let type = this.$route.query.type
-            },
-            handleRemove(file, fileList) {
-                console.log(file, fileList);
-            },
-            handlePictureCardPreview(file) {
-                this.dialogImageUrl = file.url;
-                this.dialogVisible = true;
-            }
-        }
+export default {
+  name: 'addText',
+  created () {
+    let self = this
+    self.getParams()
+  },
+  watch () {
+    $route:'getParams'
+  },
+  data () {
+    return {
+      dialogImageUrl: '',
+      dialogVisible: false,
+      radio2: '',
+      input: '',
+      textarea: '',
+      options: [{
+        value: '选项1',
+        label: '新闻'
+      }, {
+        value: '选项2',
+        label: '视频'
+      }, {
+        value: '选项3',
+        label: '文档'
+      }, {
+        value: '选项4',
+        label: '下载'
+      }],
+      value: ''
     }
+  },
+  methods: {
+    getParams () {
+      let id = this.$route.query.id
+      let detailContent = getContentById(id)
+      let type = this.$route.query.type
+    },
+    handleRemove (file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePictureCardPreview (file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
+    }
+  }
+}
 </script>
 
 <style scoped>
