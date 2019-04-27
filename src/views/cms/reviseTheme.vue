@@ -11,7 +11,7 @@
                 <p style="font-size: 18px">*选择主题: </p>
             </el-col>
             <el-col style="width: 18%">
-                <el-select v-model="value" placeholder="请选择">
+                <el-select v-model="valueOne" placeholder="请选择" @change="changeShow">
                     <el-option
                             v-for="item in options"
                             :key="item.value"
@@ -30,25 +30,25 @@
                 <p style="font-size: 18px">栏目一标题: </p>
             </el-col>
             <el-col  style="width: 15%;">
-                <el-input v-model="channelStyle1.chName" placeholder="请输入内容"></el-input>
+                <el-input v-model="channelStyleOne1.chName" placeholder="请输入内容"></el-input>
             </el-col>
             <el-col style="width: 10%">
                 <p style="font-size: 18px">栏目二标题: </p>
             </el-col>
             <el-col  style="width: 15%;">
-                <el-input v-model="channelStyle2.chName" placeholder="请输入内容"></el-input>
+                <el-input v-model="channelStyleOne2.chName" placeholder="请输入内容"></el-input>
             </el-col>
             <el-col style="width: 10%">
                 <p style="font-size: 18px">栏目三标题: </p>
             </el-col>
             <el-col  style="width: 15%;">
-                <el-input v-model="channelStyle3.chName" placeholder="请输入内容"></el-input>
+                <el-input v-model="channelStyleOne3.chName" placeholder="请输入内容"></el-input>
             </el-col>
             <el-col style="width: 10%">
                 <p style="font-size: 18px">栏目四标题: </p>
             </el-col>
             <el-col  style="width: 15%;">
-                <el-input v-model="channelStyle4.chName" placeholder="请输入内容"></el-input>
+                <el-input v-model="channelStyleOne4.chName" placeholder="请输入内容"></el-input>
             </el-col>
         </el-row>
         </el-card>
@@ -63,9 +63,9 @@
                     <p style="font-size: 18px">*选择主题: </p>
                 </el-col>
                 <el-col style="width: 18%">
-                    <el-select v-model="value" placeholder="请选择">
+                    <el-select v-model="valueTwo" placeholder="请选择">
                         <el-option
-                                v-for="item in options"
+                                v-for="item in optionsTwo"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value">
@@ -73,7 +73,7 @@
                     </el-select>
                 </el-col>
                 <el-col :span="10">
-                    <el-card :style="photoShow">
+                    <el-card :style="photoShowTwo">
                     </el-card>
                 </el-col>
             </el-row>
@@ -82,25 +82,25 @@
                     <p style="font-size: 18px">栏目一标题: </p>
                 </el-col>
                 <el-col  style="width: 15%;">
-                    <el-input v-model=" channelStyle1.chName" placeholder="请输入内容"></el-input>
+                    <el-input v-model=" channelStyleTwo1.chName" placeholder="请输入内容"></el-input>
                 </el-col>
                 <el-col style="width: 10%">
                     <p style="font-size: 18px">栏目二标题: </p>
                 </el-col>
                 <el-col  style="width: 15%;">
-                    <el-input v-model="channelStyle2.chName" placeholder="请输入内容"></el-input>
+                    <el-input v-model="channelStyleTwo2.chName" placeholder="请输入内容"></el-input>
                 </el-col>
                 <el-col style="width: 10%">
                     <p style="font-size: 18px">栏目三标题: </p>
                 </el-col>
                 <el-col  style="width: 15%;">
-                    <el-input v-model="channelStyle3.chName" placeholder="请输入内容"></el-input>
+                    <el-input v-model="channelStyleTwo3.chName" placeholder="请输入内容"></el-input>
                 </el-col>
                 <el-col style="width: 10%">
                     <p style="font-size: 18px">栏目四标题: </p>
                 </el-col>
                 <el-col  style="width: 15%;">
-                    <el-input v-model="channelStyle4.chName" placeholder="请输入内容"></el-input>
+                    <el-input v-model="channelStyleTwo4.chName" placeholder="请输入内容"></el-input>
                 </el-col>
             </el-row>
 
@@ -118,52 +118,94 @@
   export default {
     name: 'reviseTheme',
     methods:{
+      changeShow(val) {
+        if (val == "主题一")
+          this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themeone.png') + ')';
+        if (val == "主题二")
+          this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themetwo.png') + ')';
+        if (val == "主题三")
+          this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styleone.png') + ')';
+        if (val == "主题四")
+          this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styletwo.png') + ')';
+      },
       passTheme(){
-        this.pageSet.push(this.value);
-        this.pageSet.push(this.value);
-        this.pageSet.push(this.value);
-        console.log(this.value);
-        addChannel(this.$store.state.userid, this.channelStyle1)
-        addChannel(this.$store.state.userid, this.channelStyle2)
-        addChannel(this.$store.state.userid, this.channelStyle3)
-        addChannel(this.$store.state.userid, this.channelStyle4)
+        this.pageSet.push(this.valueOne);
+        this.pageSet.push(this.valueTwo);
+        this.pageSet.push("待添加");
+        console.log(this.valueOne);
+        console.log(this.valueTwo);
+        addChannel(this.$store.state.userid, this.channelStyleOne1)
+        addChannel(this.$store.state.userid, this.channelStyleOne2)
+        addChannel(this.$store.state.userid, this.channelStyleOne3)
+        addChannel(this.$store.state.userid, this.channelStyleOne4)
         setObj(this.$store.state.userid, this.pageSet)
         }
       },
     data () {
       return {
-        channelStyle1:{
-          chName:''
+        channelStyleOne1: {
+          chName: ''
         },
-        channelStyle2:{
-          chName:''
+        channelStyleOne2: {
+          chName: ''
         },
-        channelStyle3:{
-          chName:''
+        channelStyleOne3: {
+          chName: ''
         },
-        channelStyle4:{
-          chName:''
+        channelStyleOne4: {
+          chName: ''
         },
-        pageSet:[],
+        channelStyleTwo1: {
+          chName: ''
+        },
+        channelStyleTwo2: {
+          chName: ''
+        },
+        channelStyleTwo3: {
+          chName: ''
+        },
+        channelStyleTwo4: {
+          chName: ''
+        },
+        pageSet: [],
         photoShow: {
           backgroundImage: 'url(' + require('../../assets/img/welcome.png') + ')',
           width: '900px',
           height: '500px',
         },
+        photoShowTwo: {
+          backgroundImage: 'url(' + require('../../assets/img/welcome.png') + ')',
+          width: '900px',
+          height: '500px',
+        },
         options: [{
-          value: '主题1',
+          value: '主题一',
           label: '主题一'
         }, {
-          value: '主题2',
+          value: '主题二',
           label: '主题二'
         }, {
-          value: '主题3',
+          value: '主题三',
           label: '主题三'
         }, {
-          value: '主题4',
+          value: '主题四',
           label: '主题四'
         }],
-        value: ''
+        optionsTwo: [{
+          value: '主题一',
+          label: '主题一'
+        }, {
+          value: '主题二',
+          label: '主题二'
+        }, {
+          value: '主题三',
+          label: '主题三'
+        }, {
+          value: '主题四',
+          label: '主题四'
+        }],
+        valueOne: '',
+        valueTwo: ''
       }
     }
   }

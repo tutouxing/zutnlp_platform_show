@@ -30,6 +30,13 @@ export function delContentById(id) {
         method:'delete',
     })
 }
+export function addContent(id1,id2,obj) {
+  return fetch({
+    url:'http://127.0.0.1:8848/Content/add/?channelId='+id2+'&userId='+id1,
+    method:'post',
+    data:obj
+  })
+}
 export function postContent(obj) {
     return fetch({
         url:'http://127.0.0.1:8848/Content',

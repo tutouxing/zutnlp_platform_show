@@ -40,5 +40,8 @@ const mutations = {
     SET_COMP_STATE(state,comp){
         state.comp = comp;
     },
+    SET_USERINFORMATION_STATE(state,information){
+      state.userInformation=information;
+    }
 };
 export default mutations;

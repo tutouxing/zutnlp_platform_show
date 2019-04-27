@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col style="width: 20%">
-        <el-card style="height: 800px">
+        <el-card style="height: 900px">
           <el-tree
               class="filter-tree"
               :data="data2"
@@ -19,7 +19,7 @@
         </el-card>
       </el-col>
       <el-col style="width: 80%">
-        <el-card style="height: 800px">
+        <el-card style="height: 900px">
           <el-row>
           <el-col style="width: 20%">
             <el-button type="primary" class="el-icon-circle-plus-outline" style="float: left;margin-bottom:20px; ">
@@ -27,7 +27,7 @@
             </el-button>
           </el-col>
           <el-col style="width: 20%">
-            <el-button type="primary" class="el-icon-circle-plus-outline" style="float: left;margin-bottom:20px; "@click="addContent">
+            <el-button type="primary" class="el-icon-circle-plus-outline" style="float: left;margin-bottom:20px; " @click="addContent">
               添加内容
             </el-button>
           </el-col>
