@@ -17,4 +17,10 @@ import fetch from '../../utils/fetch.js'
     data:obj,
   })
 }
+export function getChannelById(id) {
+    return fetch({
+        url: 'http://localhost:8848/Channel/userid?id='+id,
+        method: 'get',
+    })
+}
 

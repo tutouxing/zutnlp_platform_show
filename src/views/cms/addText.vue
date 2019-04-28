@@ -94,6 +94,7 @@
      * Date:2019-03-31 17:09
      */
 import {addContent}from '../../api/content/index.js'
+import {getContentById} from "../../api/content";
 export default {
   name: 'addText',
   created () {

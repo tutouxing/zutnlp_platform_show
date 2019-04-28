@@ -13,9 +13,9 @@ export function putContentById(id,obj) {
 }
 export function getContent(query) {
     return fetch({
-        url: 'http://127.0.0.1:8848/Content/',
+        url: 'http://localhost:8848/Content/?page=1&limit=20',
         method: 'get',
-        params: query,
+        // params: query,
     })
 }
 export function getContentById(id) {
