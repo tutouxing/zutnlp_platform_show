@@ -63,7 +63,8 @@
                     }]
                 },
                 loading: false,
-                showDialog: false
+                showDialog: false,
+                channel:[],//用户返回的一个导航栏目
             }
         },
         methods: {
@@ -101,6 +102,9 @@
                                 this.$store.commit("SET_USERMENUS_STATE",response.data.group.menus);
                                 console.log('得到菜单');
                                 console.log(response.data.group.menus);
+                                this.$store.commit("SET_CHANNEL_STATE",response.data.channel);
+                                this.channel = response.data.channel;
+                                console.log(this.channel.length);
                                 this.$router.push(
                                     {
                                         path:'/welcome'

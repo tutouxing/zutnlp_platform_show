@@ -40,5 +40,10 @@ const mutations = {
     SET_COMP_STATE(state,comp){
         state.comp = comp;
     },
+    SET_CHANNEL_STATE(state,channel){
+        console.log("得到状态的channel");
+        console.log(channel);
+        state.channel=channel;
+    }
 };
 export default mutations;

@@ -177,6 +177,11 @@ export default[
         path:'/404',
         component:()=>import('../views/errorPage/404.vue')
     },
+    {
+        path:'/prostage',
+        component:()=>import('../views/prostage/index/index.vue')
+    },
+
 
 
 ]
