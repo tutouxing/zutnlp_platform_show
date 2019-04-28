@@ -183,7 +183,7 @@ export default[
         component:()=>import('../views/errorPage/404.vue')
     },
     {
-        path:'/prostage',
+        path:'/prostage',//第一套模板
         component:()=>import('../views/prostage/index/index.vue')
     },
 
