@@ -238,7 +238,7 @@
             },//可以使用
             PropertyFindall(){
                 let that=this;
-                let url='http://202.196.37.147:8848/Pros/list';
+                let url='http://127.0.0.1:8848/Pros/list';
                 this.$axios(
                     {
                         method:'get',
@@ -265,7 +265,7 @@
                 });
             },//可以使用
             PropertyDelete(propername) {
-                let url='http://202.196.37.147:8848/Pros/delete';
+                let url='http://127.0.0.1:8848/Pros/delete';
                 this.$axios(
                     {
                         method:'post',
@@ -310,7 +310,7 @@
                 console.log("删除关系"+index);
                 let conname=this.connectionmsg[index].connetcionName;
                 console.log("关系名"+conname);
-                let url='http://202.196.37.147:8848/Connection/delete';
+                let url='http://127.0.0.1:8848/Connection/delete';
                 this.$axios({
                     method:'post',
                     url,
@@ -335,7 +335,7 @@
                 let that=this;
                 this.$axios({
                     method: 'post',
-                    url: 'http://202.196.37.147:8848/TableMessage/delete/',
+                    url: 'http://127.0.0.1:8848/TableMessage/delete/',
                     headers:{
                         'Content-Type':'application/json'
                     },
@@ -349,7 +349,7 @@
             ConnectionList(){
 
                 let that_=this;
-                let url="http://202.196.37.147:8848/Connection/list"
+                let url="http://127.0.0.1:8848/Connection/list"
                 this.$axios.get(url,{}).then(function (res) {
                     for(let i=0;i<res.data.length;i++)
                     {
@@ -387,7 +387,7 @@
      /*   updated()
           {
               var that =this;
-                      let url="http://202.196.37.147:8848/TableMessage/list";
+                      let url="http://127.0.0.1:8848/TableMessage/list";
                       let oobject=this.$axios.get(url, {
                       }).then(function (response) {
                           for(let j in response.data) {
@@ -410,7 +410,7 @@
           {
           {
               let that = this;
-              let url = "http://202.196.37.147:8848/TableMessage/list";
+              let url = "http://127.0.0.1:8848/TableMessage/list";
               that.$axios.get(url, {}).then(function (response) {
                   for (let j in response.data) {
                       that.tablemsg.push(
@@ -444,7 +444,7 @@
                    {
                    {
                 let that =this;
-                let url="http://202.196.37.147:8848/TableMessage/list";
+                let url="http://127.0.0.1:8848/TableMessage/list";
                 that.$axios.get(url, {
                 }).then(function (response) {
                     for(let j in response.data) {
@@ -469,7 +469,7 @@
             /*
 
                 let that =this;
-                let url="http://202.196.37.147:8848/TableMessage/list";
+                let url="http://127.0.0.1:8848/TableMessage/list";
                let oobject=this.$axios.get(url, {
               }).then(function (response) {
                    for(let j in response.data) {

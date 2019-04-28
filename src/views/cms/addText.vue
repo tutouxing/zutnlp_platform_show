@@ -6,40 +6,20 @@
     </el-col>
     <el-col style="width: 30%">
     <el-select v-model="value" placeholder="请选择">
-      <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-      </el-option>
+        <el-option
+                v-for="(item,i) in this.$store.state.userInformation.channel"
+                :key="item.id"
+                :label="item.chName"
+                :value="item.id">
+        </el-option>
     </el-select>
     </el-col>
       <el-col style="width: 20%">
-        <p style="font-size: 18px">关联专题: </p>
+        <p style="font-size: 18px">文章标题: </p>
       </el-col>
       <el-col style="width: 30%">
-        <el-select v-model="value" placeholder="请选择">
-          <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-          </el-option>
-        </el-select>
+          <el-input v-model="contentPass.title" placeholder="请输入标题"></el-input>
     </el-col>
-    </el-row>
-    <el-row >
-      <el-col style="width: 20%">
-        <p style="font-size: 18px">摘要: </p>
-      </el-col>
-      <el-col style="width: 60%">
-      <el-input
-          type="textarea"
-          :rows="2"
-          placeholder="请输入内容"
-          v-model="textarea">
-      </el-input>
-      </el-col>
     </el-row>
     <el-row>
       <el-col style="width: 20%">
@@ -88,65 +68,73 @@
       </el-dialog>
       </el-col>
     </el-row>
+      <el-row >
+          <el-col style="width: 20%">
+              <p style="font-size: 18px">文章内容: </p>
+          </el-col>
+          <el-col style="width: 60%">
+              <el-input
+                      type="textarea"
+                      :rows="7"
+                      placeholder="请输入内容"
+                      v-model="contentPass.text">
+              </el-input>
+          </el-col>
+      </el-row>
     <el-row>
-      <el-button type="primary" style="margin-top: 50px">报存</el-button>
+      <el-button type="primary" style="margin-top: 50px" @click="passContent()">保存</el-button>
       <el-button type="info">重置</el-button>
     </el-row>
   </div>
 </template>
 
 <script>
-    /**
+/**
      * author:wastelands
      * Date:2019-03-31 17:09
      */
-    export default {
-        name: "addText",
-        created(){
-            let self = this
-            self.getParams()
-        },
-        watch(){
-          $route:'getParams'
-        },
-        data() {
-            return {
-                dialogImageUrl: '',
-                dialogVisible: false,
-               radio2:'',
-                input:'',
-                textarea: '',
-                options: [{
-                    value: '选项1',
-                    label: '新闻'
-                }, {
-                    value: '选项2',
-                    label: '视频'
-                }, {
-                    value: '选项3',
-                    label: '文档'
-                }, {
-                    value: '选项4',
-                    label: '下载'
-                },],
-                value: ''
-            }
-        },
-        methods:{
-            getParams(){
-                let id = this.$route.query.id;
-                let detailContent = getContentById(id);
-                let type = this.$route.query.type
-            },
-            handleRemove(file, fileList) {
-                console.log(file, fileList);
-            },
-            handlePictureCardPreview(file) {
-                this.dialogImageUrl = file.url;
-                this.dialogVisible = true;
-            }
-        }
+import {addContent}from '../../api/content/index.js'
+import {getContentById} from "../../api/content";
+export default {
+  name: 'addText',
+  created () {
+    let self = this
+    self.getParams()
+  },
+  watch () {
+    $route:'getParams'
+  },
+  data () {
+    return {
+      contentPass:{
+          title:"",
+          text:"",
+      },
+      dialogImageUrl: '',
+      dialogVisible: false,
+      radio2: '',
+      input: '',
+      value: ''
     }
+  },
+  methods: {
+    getParams () {
+      let id = this.$route.query.id
+      let detailContent = getContentById(id)
+      let type = this.$route.query.type
+    },
+    passContent(){
+      addContent(this.$store.state.userid,this.value,this.contentPass)
+    },
+    handleRemove (file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePictureCardPreview (file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
+    }
+  }
+}
 </script>
 
 <style scoped>

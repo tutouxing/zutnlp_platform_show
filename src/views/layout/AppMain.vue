@@ -132,13 +132,13 @@
                     id: 'clothes',
                     label: '服务1',
                     children: [{
-                        id: 'http://202.196.37.147:8848/echart/2D/176',
+                        id: 'http://127.0.0.1:8848/echart/2D/176',
                         label: '服务1-1',
                     }, {
-                        id: 'http://202.196.37.147:8848/echart/2D/175',
+                        id: 'http://127.0.0.1:8848/echart/2D/175',
                         label: '服务1-2'
                     }, {
-                        id: 'http://202.196.37.147:8848/echart/2D/177',
+                        id: 'http://127.0.0.1:8848/echart/2D/177',
                         label: '服务1-3'
                     }]
                 }, {

@@ -39,13 +39,18 @@ export default[
             name: 'backcms',
         },
         {
+            path:"addContent",
+            component:()=>import("../views/cms/addText.vue"),
+            name:"addContent",
+        },
+        {
             path: 'templatelist',//模板配置
             component:() => import('../views/settings/templates.vue'),
             name: 'templatelist',
         },
         {
             path: 'backcms1',//表单
-            component:() => import('../views/cms/addText.vue'),
+            component:() => import('../views/cms/reviseTheme.vue'),
             name: 'backcms',
         },
         {

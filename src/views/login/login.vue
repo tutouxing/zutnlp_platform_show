@@ -87,15 +87,14 @@
                                /* this.loading=false;*/
                             }else {
                                 console.log(response)
+                                this.$store.commit("SET_USERINFORMATION_STATE", response.data);
                                 if(response.data.group.theme=="主题二") {
                                     this.$store.commit("SET_USERTHEME_STATE", "#66a3e0");
                                 }
                                 if(response.data.group.theme=="主题一") {
                                     this.$store.commit("SET_USERTHEME_STATE", "#545c64");
                                 }
-                                this.$store.commit("SET_USERNAME_STATE",this.loginForm.username);
-                                this.$store.commit("SET_PAGEONE_STATE",response.data.group.page1);
-                                console.log(response.data.page1);
+                                this.$store.commit("SET_USERNAME_STATE",this.loginForm.username)
                                 this.$store.commit("SET_USERID_STATE",response.data.group.userId);
                                 console.log(this.$store.state.userid);
                                 this.loading = false;

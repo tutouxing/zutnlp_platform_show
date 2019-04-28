@@ -20,7 +20,7 @@
             drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 console.log("ok");
-                var db = new MyEcharts("bar_dv",'http://202.196.37.147:8848/echart/2D/177');
+                var db = new MyEcharts("bar_dv",'http://127.0.0.1:8848/echart/2D/177');
                 db.initRadar();
             },
         }
