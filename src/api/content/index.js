@@ -13,9 +13,9 @@ export function putContentById(id,obj) {
 }
 export function getContent(query) {
     return fetch({
-        url: 'http://127.0.0.1:8848/Content/',
+        url: 'http://localhost:8848/Content/?page=1&limit=20',
         method: 'get',
-        params: query,
+        // params: query,
     })
 }
 export function getContentById(id) {
@@ -29,6 +29,13 @@ export function delContentById(id) {
         url:'http://127.0.0.1:8848/Content/'+id,
         method:'delete',
     })
+}
+export function addContent(id1,id2,obj) {
+  return fetch({
+    url:'http://127.0.0.1:8848/Content/add/?channelId='+id2+'&userId='+id1,
+    method:'post',
+    data:obj
+  })
 }
 export function postContent(obj) {
     return fetch({

@@ -41,13 +41,18 @@ export default[
             name: 'backcms',
         },
         {
+            path:"addContent",
+            component:()=>import("../views/cms/addText.vue"),
+            name:"addContent",
+        },
+        {
             path: 'templatelist',//模板配置
             component:() => import('../views/settings/templates.vue'),
             name: 'templatelist',
         },
         {
             path: 'backcms1',//表单
-            component:() => import('../views/cms/addText.vue'),
+            component:() => import('../views/cms/reviseTheme.vue'),
             name: 'backcms',
         },
         {
@@ -171,7 +176,7 @@ export default[
 
 
     ]
-   },
+  },
   {
         path:'/login',
         component:()=>import('../views/login/bgImg.vue')
@@ -180,8 +185,7 @@ export default[
     {
         path:'/404',
         component:()=>import('../views/errorPage/404.vue')
-    },
-    {
+    },{
         path: '/modeCont',//modeDir
         component:()=>import('../components/modeFirst/modeCont.vue'),
         children:[
@@ -191,8 +195,10 @@ export default[
             }
         ]
     }
-
-
-
+,
+  {
+        path:'/prostage',
+        component:()=>import('../views/prostage/index/index.vue')
+    },
 ]
 

@@ -13,6 +13,8 @@ const state = {
     themeColor:'#545c64',
     pageone:'页面1-1',
     userid:'',
-    comp:''
+    comp:'',
+    channel:[],
+    userInformation:'',
 };
 export default state;
