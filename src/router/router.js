@@ -9,6 +9,8 @@ import propertyupdata from '../components/FormConfig/propertyupdata.vue'
 import createproject from '../components/FormConfig/createproject.vue'
 import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
+import modeDir from '../components/modeFirst/modeDir.vue'
+import modeCont from '../components/modeFirst/modeCont.vue'
 export default[
   {
     path: '/',
@@ -166,8 +168,10 @@ export default[
             component:()=>import('../components/Admin/group/index.vue')
         },
 
+
+
     ]
-  },
+   },
   {
         path:'/login',
         component:()=>import('../views/login/bgImg.vue')
@@ -177,6 +181,17 @@ export default[
         path:'/404',
         component:()=>import('../views/errorPage/404.vue')
     },
+    {
+        path: '/modeCont',//modeDir
+        component:()=>import('../components/modeFirst/modeCont.vue'),
+        children:[
+            {
+                path:'modeDir',
+                component:()=>import('../components/modeFirst/modeDir.vue')
+            }
+        ]
+    }
+
 
 
 ]
