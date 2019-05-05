@@ -45,7 +45,7 @@ export default[
         },
         {
             path: 'templatelist',//模板配置
-            component:() => import('../views/settings/templates.vue'),
+            component:() => import('../views/analysis/templates.vue'),
             name: 'templatelist',
         },
         {
@@ -149,6 +149,11 @@ export default[
             //     path:"",
             //     name:"",
             // }
+        },
+        {
+            path:'news_analyse',
+            name:'news_analyse',
+            component:()=>import('../views/analysis/news_analyse.vue'),
         },
         {
             path:"cv",
