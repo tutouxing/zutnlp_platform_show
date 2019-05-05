@@ -12,7 +12,7 @@ export default {
   name: 'app',
     beforeCreate(){
       this.$router.push("/login")
-    },
+    }
 }
 </script>
 

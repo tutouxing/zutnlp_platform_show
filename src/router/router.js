@@ -9,6 +9,8 @@ import propertyupdata from '../components/FormConfig/propertyupdata.vue'
 import createproject from '../components/FormConfig/createproject.vue'
 import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
+import modeDir from '../components/modeFirst/modeDir.vue'
+import modeCont from '../components/modeFirst/modeCont.vue'
 export default[
   {
     path: '/',
@@ -45,7 +47,7 @@ export default[
         },
         {
             path: 'templatelist',//模板配置
-            component:() => import('../views/analysis/templates.vue'),
+            component:() => import('../views/settings/templates.vue'),
             name: 'templatelist',
         },
         {
@@ -186,13 +188,23 @@ export default[
     {
         path:'/404',
         component:()=>import('../views/errorPage/404.vue')
+    },{
+        path: '/modeCont',//modeDir
+        component:()=>import('../components/modeFirst/modeCont.vue'),
+        children:[
+            {
+                path:'modeDir',
+                component:()=>import('../components/modeFirst/modeDir.vue')
+            }
+        ]
+    }
+,
+  {
+        path:'/prostage',
     },
     {
         path:'/prostage',//第一套模板
         component:()=>import('../views/prostage/index/index.vue')
     },
-
-
-
 ]
 
