@@ -45,11 +45,11 @@ export default[
             component:()=>import("../views/cms/addText.vue"),
             name:"addContent",
         },
-        {
-            path: 'templatelist',//模板配置
-            component:() => import('../views/settings/templates.vue'),
-            name: 'templatelist',
-        },
+        // {
+        //     path: 'templatelist',//模板配置
+        //     component:() => import('../views/settings/templates.vue'),
+        //     name: 'templatelist',
+        // },
         {
             path: 'backcms1',//表单
             component:() => import('../views/cms/reviseTheme.vue'),
@@ -199,9 +199,9 @@ export default[
         ]
     }
 ,
-  {
-        path:'/prostage',
-    },
+  // {
+  //       path:'/prostage',
+  //   },
     {
         path:'/prostage',//第一套模板
         component:()=>import('../views/prostage/index/index.vue')
