@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-card>
     <el-row>
     <el-col style="width: 20%">
       <p style="font-size: 18px">*选择栏目: </p>
@@ -7,7 +8,7 @@
     <el-col style="width: 30%">
     <el-select v-model="value" placeholder="请选择">
         <el-option
-                v-for="(item,i) in this.$store.state.userInformation.channel"
+                v-for="(item,i) in channel"
                 :key="item.id"
                 :label="item.chName"
                 :value="item.id">
@@ -85,6 +86,7 @@
       <el-button type="primary" style="margin-top: 50px" @click="passContent()">保存</el-button>
       <el-button type="info">重置</el-button>
     </el-row>
+    </el-card>
   </div>
 </template>
 
@@ -95,11 +97,20 @@
      */
 import {addContent}from '../../api/content/index.js'
 import {getContentById} from "../../api/content";
+import {getChannelById} from "../../api/channel";
 export default {
   name: 'addText',
   created () {
     let self = this
-    self.getParams()
+    self.getParams();
+    getChannelById(this.$store.state.userid).then(res=>{
+      for(let i=0;i<res.data.length;i++){
+        this.channel.push({
+          id:res.data[i].id,
+          chName:res.data[i].chName,
+        })
+      }
+    });
   },
   watch () {
     $route:'getParams'
@@ -110,6 +121,7 @@ export default {
           title:"",
           text:"",
       },
+      channel:[],
       dialogImageUrl: '',
       dialogVisible: false,
       radio2: '',

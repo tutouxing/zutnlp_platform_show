@@ -16,5 +16,6 @@ const state = {
     comp:'',
     channel:[],
     userInformation:'',
+    pageSet:["待添加","待添加","待添加"],
 };
 export default state;

@@ -18,9 +18,15 @@ import fetch from '../../utils/fetch.js'
   })
 }
 export function getChannelById(id) {
-    return fetch({
-        url: 'http://127.0.0.1:8848/Channel/userid?id='+id,
-        method: 'get',
-    })
+  return fetch({
+    url: 'http://127.0.0.1:8848/Channel/userid?id='+id,
+    method: 'get',
+  })
+}
+export function delChannelById(id) {
+  return fetch({
+    url: 'http://127.0.0.1:8848/Channel/'+id,
+    method: 'delete',
+  })
 }
 
