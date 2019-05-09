@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="slidImageDiv">
         <el-carousel :interval="4000" type="card" height="300px">
             <el-carousel-item v-for="item in 6" :key="item">
                 <h3>{{ item }}</h3>
@@ -29,5 +29,9 @@
 
     .el-carousel__item:nth-child(2n+1) {
         background-color: #d3dce6;
+    }
+    .slidImageDiv{
+        margin-left: 5%;
+        margin-right: 5%;
     }
 </style>

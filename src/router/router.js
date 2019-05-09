@@ -10,7 +10,7 @@ import createproject from '../components/FormConfig/createproject.vue'
 import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
 import modeDir from '../components/modeFirst/modeDir.vue'
-import modeCont from '../components/modeFirst/modeCont.vue'
+import modeSecCont from '../components/modeFirst/modeSecCont.vue'
 export default[
   {
     path: '/',
@@ -186,17 +186,25 @@ export default[
         path:'/404',
         component:()=>import('../views/errorPage/404.vue')
     },{
-        path: '/modeCont',//modeDir
+        path: '/modeCont',
+        name:'modeFirstCont',
         component:()=>import('../components/modeFirst/modeCont.vue'),
-        children:[
-            {
-                path:'modeDir',
-                component:()=>import('../components/modeFirst/modeDir.vue')
-            }
-        ]
-    }
-,
-  {
+    },{
+        path: '/modeCont/:title',
+        name: 'modeSecCont',
+        component: modeSecCont
+    },
+    {
+        path: '/:title',
+        name: 'modeSecCont',
+        component: modeSecCont
+    },
+    {
+        path: '/modeCont',
+        name:'modeFirstCont',
+        component:()=>import('../components/modeFirst/modeCont.vue'),
+    },
+   {
         path:'/prostage',
         component:()=>import('../views/prostage/index/index.vue')
     },

@@ -3,7 +3,7 @@
     <el-row class="box-card">
         <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
             <el-card :body-style="{ padding: '0px' }">
-                <img src="src/assets/img/hamburger.png" class="image">
+                <img :src="formData.avatar" alt="">
                 <div style="padding: 14px;">
                     <span>好吃的汉堡</span>
                     <div class="bottom clearfix">
@@ -19,7 +19,10 @@
 
 <script>
     export default {
-        name: "modeImageBox"
+        name: "modeImageBox",
+        formData: {
+            avatar: require('@/assets/img/mo.png'),
+        }
     }
 </script>
 

@@ -2,13 +2,14 @@
 <div bgcolor="#FFE4E1">
     <el-container>
         <el-header>
-            <mode-dir>
-            </mode-dir>
+            <mode-net-name></mode-net-name>
         </el-header>
         <el-main>
-            <mode-slide-image>
+            <mode-dir class="divinter">
+            </mode-dir>
+            <mode-slide-image class="divinter">
             </mode-slide-image>
-            <mode-box v-for="item in this.ChannelsList" :channelItem="item"></mode-box>
+            <mode-box class="divinter" v-for="item in this.ChannelsList" :channelItem="item"></mode-box>
         </el-main>
         <el-footer>
             <mode-foot></mode-foot>
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+    import modeNetName from './modeNetName'
     import modeDir from './modeDir'
     import modeSlideImage from './modeSlideImage'
     import modeBox from './modeBox'
@@ -30,7 +32,8 @@ export default {
         modeDir,
         modeBox,
         modeFoot,
-        modeImageBox
+        modeImageBox,
+        modeNetName
     },
     data(){
         return{
@@ -43,5 +46,7 @@ export default {
 
 
 <style scoped>
-
+    .divinter{
+        margin-top: 30px;
+    }
 </style>
