@@ -45,11 +45,11 @@ export default[
             component:()=>import("../views/cms/addText.vue"),
             name:"addContent",
         },
-        {
-            path: 'templatelist',//模板配置
-            component:() => import('../views/settings/templates.vue'),
-            name: 'templatelist',
-        },
+        // {
+        //     path: 'templatelist',//模板配置
+        //     component:() => import('../views/settings/templates.vue'),
+        //     name: 'templatelist',
+        // },
         {
             path: 'backcms1',//表单
             component:() => import('../views/cms/reviseTheme.vue'),
@@ -153,6 +153,11 @@ export default[
             // }
         },
         {
+            path:'news_analyse',
+            name:'news_analyse',
+            component:()=>import('../views/analysis/news_analyse.vue'),
+        },
+        {
             path:"cv",
             name:"cv",//图像处理
             component:()=>import("../views/cv/index.vue")
@@ -173,8 +178,6 @@ export default[
             component:()=>import('../components/Admin/group/index.vue')
         },
 
-
-
     ]
   },
   {
@@ -186,7 +189,7 @@ export default[
         path:'/404',
         component:()=>import('../views/errorPage/404.vue')
     },{
-        path: '/modeCont',
+        path: '/modeCont',//modeDir
         name:'modeFirstCont',
         component:()=>import('../components/modeFirst/modeCont.vue'),
     },{
@@ -205,8 +208,8 @@ export default[
         component:()=>import('../components/modeFirst/modeCont.vue'),
     },
    {
-        path:'/prostage',
-        component:()=>import('../views/prostage/index/index.vue')
+        path:'/prostage',        
+ 		component:()=>import('../views/prostage/index/index.vue')
     },
 ]
 
