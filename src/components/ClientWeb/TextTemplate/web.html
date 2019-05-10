@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <demo5></demo5>
+</div>
+</body>
+
+<script>
+    Vue.component(
+          'demo5',
+        {
+            template:'    <el-container style="margin-top: 10px">\n' +
+                '    <el-header>\n' +
+                '\n' +
+                '\n' +
+                '              <div>\n' +
+                '                  <el-tabs v-model="activeName" @tab-click="handleClick">\n' +
+                '                                   <el-tab-pane label="体育" name="first">\n' +
+                '                       <div><!--体育-->\n' +
+                '\n' +
+                '                             <el-container>\n' +
+                '                                       <el-aside>\n' +
+                '                                   <h3 style="margin-top: 10px;margin-left: 5px" v-for="item in Allofdata.TextMessage">\n' +
+                '                                       {{item.title}}\n' +
+                '                                       </h3></el-aside>\n' +
+                '                                       <el-main>\n' +
+                '                                    <div class="block">\n' +
+                '                                                                          <!-- <span class="demonstration">默认 Hover 指示器触发</span>     -->\n' +
+                '                                                                           <el-carousel  height="260px" style="width: 525px;">\n' +
+                '                                                                                   <el-carousel-item v-for="item in Allofdata.Pictures" :key="item">\n' +
+                '\n' +
+                '                                                                                           <img :src="item" />\n' +
+                '                                                                                       </el-carousel-item>\n' +
+                '                                                                               </el-carousel>\n' +
+                '                                                                       </div></el-main>\n' +
+                '                                       <div class="tiyuaside">\n' +
+                '                                   <h3 style="margin-top: 10px;margin-left: 5px" v-for="item in Allofdata.TextMessage">\\\n' +
+                '                                                       \\   图片侧栏{{item.title}}\\\n' +
+                '                                                       \\   </h3></div>\n' +
+                '                                  </el-container>\n' +
+                '                             <el-container>\n' +
+                '                                          <el-aside></el-aside>\n' +
+                '                                          <el-main>\n' +
+                '                                   <video width="500" height="255" controls="controls" autoplay="autoplay">\n' +
+                '                                         <source src="/i/movie.ogg" type="video/ogg" />\n' +
+                '                                         <source src="/i/movie.mp4" type="video/mp4" />\n' +
+                '                                         <source src="/i/movie.webm" type="video/webm" />\n' +
+                '                                         <object data="/i/movie.mp4" width="500" height="255">\n' +
+                '                                               <embed width="500" height="255" src="/i/movie.swf" />\n' +
+                '                                             </object>\n' +
+                '                                       </video></el-main>\n' +
+                '                                          <div class="tiyuaside">视频侧栏</div>\n' +
+                '                               </el-container>\n' +
+                '                            <el-container>\n' +
+                '                                          <el-aside></el-aside>\n' +
+                '                                          <el-main></el-main>\n' +
+                '                                          <div class="tiyuaside">文字侧栏</div>\n' +
+                '                               </el-container>\n' +
+                '\n' +
+                '\n' +
+                '\n' +
+                '                               </div></el-tab-pane>\n' +
+                '                                   <el-tab-pane label="科技" name="second">\n' +
+                '                            <div>\n' +
+                '                               <el-carousel :interval="4000" type="card" height="200px">\n' +
+                '                                       <el-carousel-item v-for="item in Allofdata.Pictures" :key="item">\n' +
+                '                                               <img :src="item" />\n' +
+                '                                               <h3>{{ item }}</h3>\n' +
+                '                                           </el-carousel-item>\n' +
+                '                                   </el-carousel>\n' +
+                '                           </div>\n' +
+                '\n' +
+                '                               <div>\n' +
+                '\n' +
+                '                                   <div class="divmain" style="float:left;" v-for="item in Allofdata.TextMessage">\n' +
+                '                                           <img style="margin-top: 15px"  class="photo" :src="item.picture" />\n' +
+                '                                           <p >{{item.title}}</p>\n' +
+                '                                       </div>\n' +
+                '\n' +
+                '                                       <div class="divaside"  width="500px"  v-for="item in Allofdata.OnlyText">\n' +
+                '                                           <p class="div-inline">{{item.introduction}}</p>\n' +
+                '                                           </div >\n' +
+                '                                   </div>\n' +
+                '                       </el-tab-pane>\n' +
+                '                                   <el-tab-pane label="娱乐" name="third">\n' +
+                '                       <div  class="yu">\n' +
+                '\n' +
+                '\n' +
+                '                               <div class="yule" style="float:left;">\n' +
+                '                                                   <video width="548" height="296" controls="controls" autoplay="autoplay">\n' +
+                '                                                                     <source src="/i/movie.ogg" type="video/ogg" />\n' +
+                '                                                                   <source src="/i/movie.mp4" type="video/mp4" />\n' +
+                '                                                                     <source src="/i/movie.webm" type="video/webm" />\n' +
+                '                                                                     <object data="/i/movie.mp4" width="548" height="296">\n' +
+                '                                                                               <embed width="548" height="296" src="/i/movie.swf" />\n' +
+                '                                                                             </object>\n' +
+                '                                                         </video>\n' +
+                '                                    </div>\n' +
+                '                           <div class="yule2">\n' +
+                '                               <div class="yule2-1">\n' +
+                '                                   <div class="block">\n' +
+                '                                                                           <el-carousel  height="150px" style="width: 500px;">\n' +
+                '                                                                                   <el-carousel-item v-for="item in Allofdata.Pictures" :key="item">\n' +
+                '\n' +
+                '                                                                                       <img :src="item" />\n' +
+                '                                                                                       </el-carousel-item>\n' +
+                '                                                                               </el-carousel>\n' +
+                '                                                                       </div>\n' +
+                '\n' +
+                '                                   </div>\n' +
+                '                               <div class="yule2-2">\n' +
+                '                               广告图片\n' +
+                '                               </div>\n' +
+                '                               </div>\n' +
+                '                           </div>\n' +
+                '                       <div class="yu1">\n' +
+                '                           <div class="yule3" style="float: bottom;"  v-for="item in Allofdata.TextMessage">\n' +
+                '\n' +
+                '                                <div>\n' +
+                '                                    <p>{{item.title}}</p>\n' +
+                '                                    <img style="margin-top: 15px"  class="yulephoto" :src="item.picture" />\n' +
+                '                                    <img style="margin-top: 15px"  class="yulephoto" :src="item.picture" />\n' +
+                '                                    <img style="margin-top: 15px"  class="yulephoto" :src="item.picture" />\n' +
+                '\n' +
+                '                                    </div>\n' +
+                '                               </div>\n' +
+                '                           <div class="yule4">\n' +
+                '                           推荐东西\n' +
+                '                           </div>\n' +
+                '                           </div>\n' +
+                '                       </el-tab-pane>\n' +
+                '\n' +
+                '                     </el-tabs>\n' +
+                '\n' +
+                '               </div>\n' +
+                '           </el-header>\n' +
+                '       <el-footer></el-footer>\n' +
+                '           </el-container>',
+
+            methods: {
+                textone() {
+                    this.text.push(   111   );
+                },
+                handleClick(tab, event) {
+                    console.log(tab, event);
+                    this.text.push(   111   );
+                    console.log(this.text[0]);
+                },
+                mounted(){
+
+                    let that=this;
+                    let url=  ''    ;
+                    that.$axios.get(url, {}).then(function (response) {
+
+                        /*   for (let j in response.data)
+                          {
+                              console.log(response.data[j]);
+                          }
+                          that.data().Allofdatae.TextMessage=response.data;
+                           for (let j in response.data) {
+                               that.alltablename.names.push(
+                                    {
+                                        value:response.data[j].tablename,
+                                        label: `${response.data[j].tablename}`,
+                                        key: Date.now()
+                                    }
+                                );
+                            }*/
+
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            },
+        }
+    );
+</script>
+<style>
+    .yu{
+        margin-top: 10%;
+    }
+    .yu1{
+        margin-top: 5%;
+    }
+    .yule{
+        width: 550px;
+        height: 300px;
+        /*background: azure;*/
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+        border-right:1px solid darkgray;
+        border-left:1px solid darkgray;
+        overflow:auto;
+    }
+    .yule2{
+        width: 500px;
+        height: 300px;
+        overflow:auto;
+         margin-left: 50%;
+    }
+
+    .yule2-1{
+          width: 100%;
+          height: 50%;
+          background: blue;
+      }
+    .yule2-2{
+        width: 100%;
+        height: 50%;
+        /*广告的*/
+
+        /*border-bottom:1px solid darkgray;
+        border-right:1px solid darkgray;
+        border-left:1px solid darkgray;
+        background: gold;*/
+    }
+    .yule3{
+        width: 550px;
+        height: 255px;
+        overflow:auto;
+     /*   background: aqua;*/
+        margin-top: 10px;
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+    }
+    .yulephoto{
+        width: 32%;
+        height: 160px;
+    }
+    .yule4{
+        position:absolute;
+        top: 495px;
+        left: 50%;
+        width: 500px;
+        height: 800px;
+   /*     overflow:auto;*/
+/*        margin-left: 50%;*/
+        /*推荐东西的*/
+       /* background: gainsboro;*/
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+        border-right:1px solid darkgray;
+        border-left:1px solid darkgray;
+    }
+    .tiyuaside{
+           width: 300px;
+           height: 300px;
+           margin-top: 5%;
+        /*   background: blue;*/
+           margin-right: 5%;
+        cursor:pointer;/*鼠标放上去是一个手*/
+        border-left:1px solid #000;
+        border-right:1px solid #000;
+        border-top :1px solid #000;
+
+        border-bottom:1px solid #000;
+       }
+   .  el-tab-pane{
+     background: aqua;
+   }
+   p:hover{
+    /*    color: aqua;*/
+        color: aquamarine;
+    }
+    h3:hover{
+            color: aquamarine;
+        }
+     img:hover{
+        transform: scale(1.4);
+        transition: all 0.6s;
+    }
+    .divone{
+        position:absolute;
+        left: 60%;
+        top: 48%;
+        overflow:auto;
+        text-align: center;
+        line-height: 200px;
+
+        border-top :1px solid aliceblue;
+        border-bottom :1px solid aliceblue;
+        border-left :1px solid aliceblue;
+        border-right :1px solid aliceblue;
+    }
+    .divmain{
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);
+        word-wrap:break-word ;
+        border-radius: 4px;
+        cursor:pointer;/*鼠标放上去是一个手*/
+
+        align:center;
+        margin-left: 16% ;
+        height: 150px;
+        width: 500px;
+        overflow:auto;
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+    }
+    .divaside{
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);
+        word-wrap:break-word ;
+        border-radius: 4px;
+        cursor:pointer;/*鼠标放上去是一个手*/
+
+        height: 150px;
+        width:500px;
+        margin-left: 60%;
+
+        overflow:auto;
+
+        text-align: center;
+        line-height: 200px;
+
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+     /*   display:inline-block;不能加   这个和 overflow:auto;冲突*/
+    }
+
+    .photo{
+        float:left;
+        width: 200px;
+        height:100px;
+    }
+    .el-aside{
+       /* box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/
+        word-wrap:break-word ;
+        border-radius: 4px;
+        height: 300px;
+        margin-left: 5%;
+        margin-top: 5%;
+      /*  background-color: #D3DCE6;*/
+      /*  background: black;*/
+        color: #333;
+        cursor:pointer;/*鼠标放上去是一个手*/
+  /*      text-align: center;*/
+        border-left:1px solid #000;
+       border-right:1px solid #000;
+       border-top :1px solid #000;
+
+       border-bottom:1px solid #000;
+    }
+   .el-main{
+       /*   box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/
+          word-wrap:break-word ;
+          border-radius: 4px;
+        /*  background: red;*/
+          margin-top: 5%;
+     /*     display:inline-block;*/
+          height: 300px;
+          width: 300px;
+       cursor:pointer;/*鼠标放上去是一个手*/
+
+      }
+    p{
+       /* margin-left: 20px;
+        font-size:30px*/
+
+    }
+    .boder{
+        border-radius: 4px;
+        border-left:1px solid #000;
+        border-right:1px solid #000;
+        border-top :1px solid #000;
+
+        border-bottom:1px solid #000;
+    }
+
+    .el-carousel{
+      /*  margin-left: 15%;*/
+    }
+    .bg{
+        width: 750px;
+        height: 600px;
+        background:url(   ../Picture/earth.png   );
+    }
+    .el-carousel__item h3 {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 200px;
+        margin: 0;
+    }
+
+    .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+    }
+
+    .el-carousel__item:nth-child(2n +1) {
+        background-color: #d3dce6;
+    }
+</style>
+<script>
+    new Vue({
+        el:' #app  ',
+    })
+</script>
+</html>
