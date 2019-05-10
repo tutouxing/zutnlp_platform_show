@@ -26,29 +26,13 @@
                 </el-col>
             </el-row>
             <el-row style="margin-top:80px ">
-                <el-col style="width: 10%">
-                    <p style="font-size: 18px">栏目一标题: </p>
-                </el-col>
-                <el-col style="width: 15%;">
-                    <el-input v-model="channelStyle1.chName" placeholder="请输入内容"></el-input>
-                </el-col>
-                <el-col style="width: 10%">
-                    <p style="font-size: 18px">栏目二标题: </p>
-                </el-col>
-                <el-col style="width: 15%;">
-                    <el-input v-model="channelStyle2.chName" placeholder="请输入内容"></el-input>
-                </el-col>
-                <el-col style="width: 10%">
-                    <p style="font-size: 18px">栏目三标题: </p>
-                </el-col>
-                <el-col style="width: 15%;">
-                    <el-input v-model="channelStyle3.chName" placeholder="请输入内容"></el-input>
-                </el-col>
-                <el-col style="width: 10%">
-                    <p style="font-size: 18px">栏目四标题: </p>
-                </el-col>
-                <el-col style="width: 15%;">
-                    <el-input v-model="channelStyle4.chName" placeholder="请输入内容"></el-input>
+                <el-col style="width:25%" v-for="(items,i) in this.channelNum">
+                    <el-col style="width:40%">
+                        <p style="font-size: 18px">{{channelStyle[i].label}}</p>
+                    </el-col>
+                    <el-col style="width:60%">
+                        <el-input v-model="channelStyle[i].chName" placeholder="请输入内容"></el-input>
+                    </el-col>
                 </el-col>
             </el-row>
             <el-row>
@@ -65,29 +49,30 @@
   import {setObj,getObj} from '../../api/admin/user/index.js'
 
   export default {
-    name: 'reviseSubpage'
+    name: 'reviseSubpage',
     methods: {
       changeShow(val) {
-        if (val == "主题一")
+        if (val == "/prostage") {
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themeone.png') + ')';
-        if (val == "主题二")
+          this.channelNum=4;
+        }
+        if (val == "主题二"){
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themetwo.png') + ')';
+          this.channelNum=6;
+        }
         if (val == "主题三")
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styleone.png') + ')';
         if (val == "主题四")
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styletwo.png') + ')';
       },
       passTheme() {
-        this.pageSet.push(this.valueOne);
-        this.pageSet.push(this.valueTwo);
-        this.pageSet.push("待添加");
-        console.log(this.valueOne);
-        console.log(this.valueTwo);
-        addChannel(this.$store.state.userid, this.channelStyleOne1)
-        addChannel(this.$store.state.userid, this.channelStyleOne2)
-        addChannel(this.$store.state.userid, this.channelStyleOne3)
-        addChannel(this.$store.state.userid, this.channelStyleOne4)
-        setObj(this.$store.state.userid, this.pageSet);
+        this.$store.commit("SET_FIRSTPAGE_STATE",this.value);//提交一级页面配置信息到Vuex
+        for(let i=0;i<4;i++){//判断提交了几个栏目信息
+          if(this.channelStyle[i].chName!==''){
+            addChannel(this.$store.state.userid, this.channelStyle[i])
+          }
+        }
+        setObj(this.$store.state.userid, this.$store.state.pageSet);
         this.$message({
           message: '设置成功',
           type: 'success'
@@ -104,37 +89,8 @@
     },
     data() {
       return {
-        channelStyleOne1: {
-          chName: ''
-        },
-        channelStyleOne2: {
-          chName: ''
-        },
-        channelStyleOne3: {
-          chName: ''
-        },
-        channelStyleOne4: {
-          chName: ''
-        },
-        channelStyleTwo1: {
-          chName: ''
-        },
-        channelStyleTwo2: {
-          chName: ''
-        },
-        channelStyleTwo3: {
-          chName: ''
-        },
-        channelStyleTwo4: {
-          chName: ''
-        },
-        pageSet: [],
+        channelNum:4,//默认栏目个数为4个，随样式变化而变化
         photoShow: {
-          backgroundImage: 'url(' + require('../../assets/img/welcome.png') + ')',
-          width: '900px',
-          height: '500px',
-        },
-        photoShowTwo: {
           backgroundImage: 'url(' + require('../../assets/img/welcome.png') + ')',
           width: '900px',
           height: '500px',
@@ -152,21 +108,26 @@
           value: '主题四',
           label: '主题四'
         }],
-        optionsTwo: [{
-          value: '主题一',
-          label: '主题一'
+        channelStyle: [{
+          chName: '',
+          label: '栏目一标题：'
         }, {
-          value: '主题二',
-          label: '主题二'
+          chName: '',
+          label: '栏目二标题：'
         }, {
-          value: '主题三',
-          label: '主题三'
+          chName: '',
+          label: '栏目三标题：'
         }, {
-          value: '主题四',
-          label: '主题四'
-        }],
-        valueOne: '',
-        valueTwo: ''
+          chName: '',
+          label: '栏目四标题：'
+        },{
+          chName: '',
+          label: '栏目五标题：'
+        },{
+          chName: '',
+          label: '栏目六标题：'
+        }, ],
+        value: '',
       }
     }
   }

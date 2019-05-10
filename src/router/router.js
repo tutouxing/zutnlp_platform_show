@@ -32,7 +32,7 @@ export default[
         },
         {
             path: 'components',
-           component: () => import('../components/editable/setMode.vue'),
+           component: () => import('../api/admin/setMode.vue'),
             name: 'components',
         },
         {
@@ -51,9 +51,14 @@ export default[
         //     name: 'templatelist',
         // },
         {
-            path: 'backcms1',//表单
+            path: 'reviseTheme',//一级页面
             component:() => import('../views/cms/reviseTheme.vue'),
-            name: 'backcms',
+            name: 'reviseTheme',
+        },
+        {
+        path: 'reviseSubpage',//二级页面
+        component:() => import('../views/cms/reviseSubpage.vue'),
+        name: 'reviseSubpage',
         },
         {
             path: 'twodimensional/pie',
