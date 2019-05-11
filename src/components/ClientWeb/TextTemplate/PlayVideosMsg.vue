@@ -35,7 +35,7 @@
 
         },
         mounted(){
-            this.AllMsg.TextMsg[1]=this.$route.params.items;//接收唯一标识id
+            this.AllMsg.TextMsg[1]=this.$route.params.items;//接收唯一标识
         }
     }
 </script>

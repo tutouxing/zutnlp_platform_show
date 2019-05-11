@@ -665,7 +665,6 @@
         width: 100%;
         height: 50%;
         !*广告的*!
-
         !*border-bottom:1px solid darkgray;
         border-right:1px solid darkgray;
         border-left:1px solid darkgray;
