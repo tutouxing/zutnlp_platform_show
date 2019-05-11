@@ -18,7 +18,7 @@
                 AllMsg:{
                     TextMsg:[
                         {
-                            HeadLine:'标题',///大字标题
+                            HeadLine:'标题',////大字标题
                             TextContent:'sdsadasdasdasdasda',//文本内容
                             Iconographs:[
                                 {

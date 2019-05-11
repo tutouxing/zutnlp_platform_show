@@ -669,7 +669,7 @@
         border-right:1px solid darkgray;
         border-left:1px solid darkgray;
         background: gold;*!
-    }*/
+    }/*/
     .yule3{
         width: 550px;
         height: 255px;
