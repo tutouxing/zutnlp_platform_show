@@ -10,6 +10,20 @@ import createproject from '../components/FormConfig/createproject.vue'
 import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
 import modeSecCont from '../components/modeFirst/modeSecCont.vue'
+
+/*import Framework from '../components/ClientWeb/TextTemplate/FrameWork'
+import PlayContentMsg from '../components/ClientWeb/TextTemplate/PlayContentMsg'
+import PlayNewsMsg from '../components/ClientWeb/TextTemplate/PlayNewsMsg'
+import PlayPictureMsg from '../components/ClientWeb/TextTemplate/PlayPictureMsg'*/
+/*
+*
+*
+*
+*
+* */
+
+
+
 export default[
   {
     path: '/',
@@ -31,7 +45,7 @@ export default[
         },
         {
             path: 'components',
-           component: () => import('../components/editable/setMode.vue'),
+           component: () => import('../api/admin/setMode.vue'),
             name: 'components',
         },
         {
@@ -50,9 +64,16 @@ export default[
         //     name: 'templatelist',
         // },
         {
-            path: 'backcms1',//表单
+            //path: 'backcms1',//表单
+            path: 'reviseTheme',//一级页面
             component:() => import('../views/cms/reviseTheme.vue'),
-            name: 'backcms',
+            //name: 'backcms',
+            name: 'reviseTheme',
+        },
+        {
+        path: 'reviseSubpage',//二级页面
+        component:() => import('../views/cms/reviseSubpage.vue'),
+        name: 'reviseSubpage',
         },
         {
             path: 'twodimensional/pie',

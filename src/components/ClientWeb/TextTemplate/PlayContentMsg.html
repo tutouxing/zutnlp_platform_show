@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <demo5>  </demo5>
+</div>
+</body>
+
+<script>
+    Vue.component(
+        'demo5',
+        {
+           /* template:'<div style="text-align:center; width: 520px; margin-left: 30%" >' +
+                ' <h2>{{AllMsg.TextMsg[0].HeadLine}}</h2>\n' +
+                ' <p>{{AllMsg.TextMsg[0].TextContent}}</p>' +
+                '</div>'  ,*/
+           template:'  <div  style="text-align:center; width: 520px; margin-left: 30%" >\n' +
+               '        <video width="500" height="255" controls="controls" autoplay="autoplay">\n' +
+               '             <source src="../Picture/movie.ogg" type="video/ogg" />\n' +
+               '             <source src="../Picture/videos.mp4" type="video/mp4" /> \n' +
+               '            <object data="../Picture/videos.mp4" width="500" height="255">\\n\' +\n' +
+               '            <embed width="500" height="255" src="../Picture/videos.mp4" />\n' +
+               '            </object>\\n\' +\n' +
+               '        </video>\n' +
+               '        \n' +
+               '    </div>',
+            data(){
+                return {
+                    AllMsg:{
+                        TextMsg:[
+                            {
+                                HeadLine:'标题'    ,////大字标题
+                                TextContent:'文本内容文本内容文本内容文本内容文本内容文本内容文本内容文本内容文本内容文本内容文本内容',//文本内容
+                                Iconograph:'',///插图
+                            }
+                        ],
+
+                    }
+                }
+            },
+            methods: {
+            },
+        }
+    );
+</script>
+<style>
+
+</style>
+<script>
+    new Vue({
+        el:'#app' ,
+    })
+</script>
+</html>
