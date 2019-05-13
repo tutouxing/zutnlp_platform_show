@@ -17,7 +17,8 @@
                 formData: {
                     avatar: require('@/assets/img/mo.png'),
                 },
-                routers: this.$router.options.routes
+                routers: this.$router.options.routes,
+                input5:""
             }
         }
     }

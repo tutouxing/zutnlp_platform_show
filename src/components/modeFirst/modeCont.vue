@@ -9,7 +9,8 @@
             </mode-dir>
             <mode-slide-image class="divinter">
             </mode-slide-image>
-            <mode-box class="divinter" v-for="item in this.ChannelsList" :channelItem="item"></mode-box>
+            <div class="boxCont"><mode-box class="divinter" v-for="item in this.$store.state.channel" :channelItem="item.chName"></mode-box></div>
+
         </el-main>
         <el-footer>
             <mode-foot></mode-foot>
@@ -25,6 +26,8 @@
     import modeBox from './modeBox'
     import modeFoot from './modeFoot'
     import modeImageBox from './modeImageBox'
+    import { state } from '../../store/state'
+    import modeTipList from './modeTipList'
 export default {
     name: 'modeCont',
     components:{
@@ -37,9 +40,16 @@ export default {
     },
     data(){
         return{
-            ChannelsList:['新闻','新闻1','新闻2','新闻3','新闻4','新闻5','新闻6','新闻7','新闻8']
+            state
         }
-    }
+    },
+    methods:{
+
+    },
+    beforeCreate: function () {
+        console.group('beforeCreate 创建前状态===============》');
+        console.log(this.state); //undefined
+    },
     }
 
 </script>
@@ -48,5 +58,10 @@ export default {
 <style scoped>
     .divinter{
         margin-top: 30px;
-    }
+    }.boxCont{
+             width: 100%;
+             margin-left: 5%;
+             margin-right:5%;
+             text-align:center
+         }
 </style>

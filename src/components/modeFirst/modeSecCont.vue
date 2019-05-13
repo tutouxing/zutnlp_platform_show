@@ -7,9 +7,14 @@
                 <modeSecDir ></modeSecDir>
                 <div class="line"></div>
                 <div class="divinline"><mode-sec-slide-image></mode-sec-slide-image></div>
-                <div class="divinline"><mode-tip-list></mode-tip-list></div>
-                <div class="modeImageBoxCss"><mode-image-box>12121212</mode-image-box></div>
+                <div class="divinline"><mode-tip-list :retitle=$route.params.title></mode-tip-list></div>
                 Main+{{$route.params.title}}
+            </div>
+            <div class="splitLine"></div>
+            <div class="secLiList">
+                <div class="secLiLeft">
+                    <mode-Sec-List></mode-Sec-List>
+                </div>
             </div>
         </el-main>
         <el-footer><modeFoot></modeFoot></el-footer>
@@ -24,6 +29,8 @@
     import modeSecSlideImage from './modeSecSlideImage'
     import modeTipList from './modeTipList'
     import modeImageBox from './modeImageBox'
+    import modeSecList from './modeSecList'
+
     export default {
         name: "modeSecCont",
         components:{
@@ -33,7 +40,8 @@
             modeNetName,
             modeSecSlideImage,
             modeTipList,
-            modeImageBox
+            modeImageBox,
+            modeSecList
         }
     }
 </script>
@@ -43,6 +51,7 @@
         margin-left: 6%;
         margin-right: 6%;
         margin-top: 1px;
+        height: 400px;
     }
     .divinter{
         margin-top: 10px;
@@ -68,5 +77,27 @@
         width: 30%;
         height: 30%;
     }
-
+    .grid-content {
+        background-color: rgb(44, 143, 121);
+        border-radius: 4px;
+        min-height: 150px;
+        min-width: 100px;
+    }.secLiList{
+        margin-left: 6%;
+        margin-right: 6%;
+        margin-top: 3%;
+        background: #99a9bf;
+         }
+    .splitLine{
+        background-color: #99a9bf;
+        border-radius: 4px;
+        min-height: 10px;
+        min-width: 90px;
+        margin-right: 6%;
+        margin-left: 6%;
+        margin-top: 2%;
+    }.secLiLeft{
+        width: 63%;
+        background-color: #aaccee;
+         }
 </style>

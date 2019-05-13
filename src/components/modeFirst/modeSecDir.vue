@@ -1,7 +1,7 @@
 <template>
 
     <div class="line">
-        <el-menu  :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu   class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item  class="ziti" v-for="secChannel in secChanneList">{{secChannel.title}}</el-menu-item>
         </el-menu>
     </div>
@@ -25,6 +25,9 @@
                 },{
                     title:'更多'
                 }]
+            }
+        },methods:{
+            handleSelect(){
             }
         }
     }

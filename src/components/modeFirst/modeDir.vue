@@ -1,7 +1,6 @@
 <template>
         <div class="line" >
         <el-menu
-                :default-active="activeIndex2"
                 class="el-menu-demo"
                 mode="horizontal"
                 @select="handleSelect"
@@ -9,15 +8,17 @@
                 text-color="#fff"
                 active-text-color="#ffd04b">
             <el-menu-item ><router-link to="/modeCont">首页</router-link></el-menu-item>
-            <el-submenu v-for="(channel,i) in this.channels" :index="i.toString()">
-                <template slot="title"><router-link v-bind:to="channel.title" >{{channel.title}}</router-link></template>
-                <el-menu-item v-for="subChannel in channel.childrenTitle"><a  v-bind:href=subChannel.href target="_blank">{{subChannel.title}}</a></el-menu-item>
+            <el-submenu v-for="(channel,i) in this.$store.state.channel" :index="i.toString()">
+                <template slot="title"><router-link v-bind:to="channel.chName" >{{channel.chName}}</router-link></template>
+                <!--<el-menu-item v-for="subChannel in channel.childrenTitle"><a  v-bind:href=subChannel.href target="_blank">{{subChannel.title}}</a></el-menu-item>-->
             </el-submenu>
         </el-menu>
         </div>
 </template>
 
 <script>
+    import {getChannelAll} from '../../api/mode/modeChannel.js'
+    import {mapState,mapActions,mapGetters} from 'vuex'
 export default {
     data: function(){
         return {
@@ -57,11 +58,14 @@ export default {
             //alert(key,keyPath)
         },
         getAllChannels(){
-
+            //axios(getChannelAlactiveIndex2l(this.))
         }
-    }, beforeCreate: function(){
-        getALLChannels()
+    },Create: function () {
+        console.group('beforeCreate 打印channel===============》');
+        //console.log(this.$store.state.channel); //undefined
+
     }
+    ,
     }
 
 </script>
