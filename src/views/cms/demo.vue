@@ -3,6 +3,12 @@
     <el-row>
       <el-col style="width: 20%">
         <el-card style="height: 900px">
+            <el-row>
+          <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-folder"></use>
+          </svg>
+                <span style="font-size: 20px; font-weight:bold"> 栏目目录</span>
+            </el-row>
           <el-tree
               class="filter-tree"
               :data="data2"
@@ -10,6 +16,7 @@
               icon-class="el-icon-tickets"
               :filter-node-method="filterNode"
               node-key="id"
+              highlight-current="true"
               @node-click="loadSet()"
               ref="tree2">
                     <span class="custom-tree-node" slot-scope="{ node, data }">
@@ -103,12 +110,18 @@
 
 </template>
 <style>
-
+    .icon {
+        width: 1.8em;
+        height: 1.8em;
+        fill: currentColor;
+        overflow: hidden;
+    }
 </style>
 <script>
     import {getChannelById} from "../../api/channel";
     import {delContentById} from "../../api/content";
     import {delChannelById} from "../../api/channel";
+    import "../../assets/icon/iconfont";
     export default {
         name: 'demo',
         watch: {
@@ -125,7 +138,11 @@
                       data:res.data[i].contents,
                   })
               }
+            this.tableData=this.data2[0].data;
           });
+          this.$nextTick(function(){
+            this.$refs.tree2.setCurrentKey(2);
+          })
 
         },
 
