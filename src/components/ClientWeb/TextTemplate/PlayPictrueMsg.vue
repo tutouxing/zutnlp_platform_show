@@ -21,7 +21,7 @@
 
         },
         mounted(){
-            this.AllMsg.TextMsg.picture=this.$route.params.item;//接收唯一标识/
+            this.AllMsg.TextMsg.picture=this.$route.params.item;///接收唯一标识/
         }
     }
 </script>

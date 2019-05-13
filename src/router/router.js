@@ -11,6 +11,20 @@ import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
 import modeDir from '../components/modeFirst/modeDir.vue'
 import modeCont from '../components/modeFirst/modeCont.vue'
+
+/*import Framework from '../components/ClientWeb/TextTemplate/FrameWork'
+import PlayContentMsg from '../components/ClientWeb/TextTemplate/PlayContentMsg'
+import PlayNewsMsg from '../components/ClientWeb/TextTemplate/PlayNewsMsg'
+import PlayPictureMsg from '../components/ClientWeb/TextTemplate/PlayPictureMsg'*/
+/*
+*
+*
+*
+*
+* */
+
+
+
 export default[
   {
     path: '/',
