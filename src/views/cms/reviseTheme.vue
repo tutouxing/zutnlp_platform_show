@@ -68,7 +68,7 @@
             },
             passTheme() {
                 this.$store.commit("SET_FIRSTPAGE_STATE",this.value);
-                for(let i=0;i<4;i++){
+                for(let i=0;i<this.channelNum;i++){
                   if(this.channelStyle[i].chName!==''){
                     addChannel(this.$store.state.userid, this.channelStyle[i])
                   }
