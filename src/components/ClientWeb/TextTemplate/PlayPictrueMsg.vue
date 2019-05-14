@@ -1,5 +1,7 @@
 <template>
-    
+    <div>
+        <img src="AllMsg.TextMsg.picture"  style="width: 88%; height: 88%"/>
+    </div>
 </template>
 
 <script>
@@ -8,14 +10,18 @@
         data()
         {
             return{
-
+                   AllMsg:{
+                       TextMsg:{
+                           picture:''
+                       }
+                   }
             }
         },
         methods:{
 
         },
         mounted(){
-            this.ProjectName=this.$route.params.toconfigtable;//接收唯一标识id
+            this.AllMsg.TextMsg.picture=this.$route.params.item;///接收唯一标识/
         }
     }
 </script>

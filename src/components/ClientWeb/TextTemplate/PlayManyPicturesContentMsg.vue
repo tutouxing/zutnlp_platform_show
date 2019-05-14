@@ -1,14 +1,18 @@
 <template>
     <div  style="text-align:center; width: 520px; margin-left: 30%" >
         <h2>{{AllMsg.OnlyMsg.HeadLine}}</h2>
-        <p>{{AllMsg.TextMsg[0].FrontText}} </p>
-        <img src="AllMsg.OnlyMsg.Iconograph" style="width: 510px;height: 316px"/>
+        <div v-for="(item ,index) in AllMsg.TextMsg[0].Text" >
+            <p>{{item}}</p>
+            <img src="AllMsg.TextMsg.Iconographs[index].picture" style="width: 510px;height: 316px"/>
+        </div>
+
         <p>{{AllMsg.TextMsg[0].TailText}} </p>
     </div>
 </template>
+
 <script>
     export default {
-        name: "PlayNewsMsg",
+        name: "PlayManyPicturesContentMsg",
         data(){
             return {
                 AllMsg:{
@@ -26,35 +30,26 @@
                                     msg:'',
                                 }
                             ],
-                            Iconograph:'',
-                            FrontText:'',
-                            TailText:''
                         }
                     ],
                     OnlyMsg:{
 
                     }
-                }
+                },
             }
         },
         methods:{
-
         },
         mounted(){
             this.AllMsg.OnlyMsg=this.$route.params.items;//接收唯一标识id
-            for(let i=0;i<this.AllMsg.TextMsg[1].Iconograph.length;i++)
+            this.AllMsg.TextMsg[0].Iconographs =this.AllMsg.OnlyMsg.Iconographs;
+            let that=this;
+            for(let i=0;i<this.AllMsg.TextMsg[0].Iconograph.length;i++)
             {
-
+                this.AllMsg.TextMsg.Text[i].msg=this.AllMsg.OnlyMsg.TextContent.toString().substr(i*that.AllMsg.OnlyMsg.TextContent.length/that.AllMsg.TextMsg[0].Iconograph.length,(i+1)*that.AllMsg.OnlyMsg.TextContent.length/that.AllMsg.TextMsg[0].Iconograph.length);
             }
-                let that=this;
-                this.AllMsg.TextMsg[0].FrontText= this.AllMsg.OnlyMsg.TextContent.toString().substr(0,that.AllMsg.OnlyMsg.TextContent.length/2);
-                this.AllMsg.TextMsg[0].TailText= this.AllMsg.OnlyMsg.TextContent.toString().substr(that.AllMsg.OnlyMsg.TextContent.length/2,that.AllMsg.OnlyMsg.TextContent.length);
-
-
-
 
         }
-
     }
 </script>
 

@@ -9,8 +9,21 @@ import propertyupdata from '../components/FormConfig/propertyupdata.vue'
 import createproject from '../components/FormConfig/createproject.vue'
 import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
-import modeDir from '../components/modeFirst/modeDir.vue'
-import modeCont from '../components/modeFirst/modeCont.vue'
+import modeSecCont from '../components/modeFirst/modeSecCont.vue'
+
+/*import Framework from '../components/ClientWeb/TextTemplate/FrameWork'
+import PlayContentMsg from '../components/ClientWeb/TextTemplate/PlayContentMsg'
+import PlayNewsMsg from '../components/ClientWeb/TextTemplate/PlayNewsMsg'
+import PlayPictureMsg from '../components/ClientWeb/TextTemplate/PlayPictureMsg'*/
+/*
+*
+*
+*
+*
+* */
+
+
+
 export default[
   {
     path: '/',
@@ -51,8 +64,10 @@ export default[
         //     name: 'templatelist',
         // },
         {
+            //path: 'backcms1',//表单
             path: 'reviseTheme',//一级页面
             component:() => import('../views/cms/reviseTheme.vue'),
+            //name: 'backcms',
             name: 'reviseTheme',
         },
         {
@@ -195,21 +210,31 @@ export default[
         component:()=>import('../views/errorPage/404.vue')
     },{
         path: '/modeCont',//modeDir
+        name:'modeFirstCont',
         component:()=>import('../components/modeFirst/modeCont.vue'),
-        children:[
-            {
-                path:'modeDir',
-                component:()=>import('../components/modeFirst/modeDir.vue')
-            }
-        ]
-    }
-,
-  // {
-  //       path:'/prostage',
-  //   },
+    },{
+        path: '/modeCont/:title',
+        name: 'modeSecCont',
+        component: modeSecCont
+    },
     {
-        path:'/prostage',//第一套模板
-        component:()=>import('../views/prostage/index/index.vue')
+        path: '/:title',
+        name: 'modeSecCont',
+        component: modeSecCont
+    },
+    {
+        path: '/modeCont',
+        name:'modeFirstCont',
+        component:()=>import('../components/modeFirst/modeCont.vue'),
+    },
+    {
+        path: '/modethirdCont/:title',
+        name:'modethirdCont',
+        component:()=>import('../components/modeFirst/modethirdCont.vue'),
+    },
+   {
+        path:'/prostage',        
+ 		component:()=>import('../views/prostage/index/index.vue')
     },
 ]
 
