@@ -83,8 +83,8 @@
           </el-col>
       </el-row>
     <el-row>
-      <el-button type="primary" style="margin-top: 50px" @click="passContent()">保存</el-button>
-      <el-button type="info">重置</el-button>
+      <el-button type="primary" style="margin-top: 50px" @click="passContent()"> 保存 </el-button>
+      <el-button type="info" @click="goBack()"> 返回 </el-button>
     </el-row>
     </el-card>
   </div>
@@ -97,6 +97,7 @@
      */
 import {addContent}from '../../api/content/index.js'
 import {getContentById} from "../../api/content";
+import {putContentById} from "../../api/content";
 import {getChannelById} from "../../api/channel";
 export default {
   name: 'addText',
@@ -126,17 +127,40 @@ export default {
       dialogVisible: false,
       radio2: '',
       input: '',
-      value: ''
+      value: '',
+      type:'',
+      contentID:''
     }
   },
   methods: {
     getParams () {
-      let id = this.$route.query.id
-      let detailContent = getContentById(id)
-      let type = this.$route.query.type
+      this.contentID = this.$route.query.id
+       getContentById(this.contentID).then(res=> {
+         let detailContent = res.data
+         this.contentPass.title = detailContent.title;
+         this.contentPass.text = detailContent.text;
+         console.log(detailContent)
+       });
+      this.type = this.$route.query.type
+      console.log("目前的内容:");
+      console.log(this.type);
     },
     passContent(){
-      addContent(this.$store.state.userid,this.value,this.contentPass)
+      if(this.type==='update'){
+       putContentById(this.contentID,this.contentPass).then(() => {
+         this.$message({
+           message: '修改成功',
+           type: 'success',
+         });
+       })
+      }
+      else
+        addContent(this.$store.state.userid,this.value,this.contentPass).then(() => {
+            this.$message({
+              message: '保存成功',
+              type: 'success',
+            });
+    })
     },
     handleRemove (file, fileList) {
       console.log(file, fileList)
@@ -144,6 +168,11 @@ export default {
     handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
+    },
+    goBack(){
+      this.$router.push({
+        path: '/backcms',
+      })
     }
   }
 }

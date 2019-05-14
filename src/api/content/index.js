@@ -5,11 +5,11 @@
  */
 import fetch from '../../utils/fetch.js'
 export function putContentById(id,obj) {
-    return {
+    return fetch({
         url:'http://127.0.0.1:8848/Content/'+id,
         method:'put',
         data:obj,
-    }
+    })
 }
 export function getContent(query) {
     return fetch({

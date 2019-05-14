@@ -6,3 +6,10 @@ export function getChannelById(id) {
         method:'get',
     })
 }
+
+export function getChannelAll(userId) {
+    return fetch({
+        url:'http://127.0.0.1:8848/Channel/'+userId,
+        method:'get',
+    })
+}
