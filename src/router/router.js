@@ -9,6 +9,8 @@ import propertyupdata from '../components/FormConfig/propertyupdata.vue'
 import createproject from '../components/FormConfig/createproject.vue'
 import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
+import second from '../views/prostage/temp/newtemp1/second'
+import detailed from '../views/prostage/temp/newtemp1/detailed1'
 export default[
   {
     path: '/',
@@ -184,7 +186,16 @@ export default[
     },
     {
         path:'/prostage',
-        component:()=>import('../views/prostage/index/index.vue')
+        component:()=>import('../views/prostage/index/index.vue'),
+    },
+    {
+        path:'/prostage/many',
+        component:second,
+    },
+    {
+        path:'/prostage/detailed',
+        name:'detailed1',
+        component:detailed,
     },
 
 

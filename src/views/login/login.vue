@@ -86,7 +86,7 @@
                                 alert('用户不存在，请重新输入');
                                /* this.loading=false;*/
                             }else {
-                                console.log(response)
+                                console.log(response);
                                 this.$store.commit("SET_USERINFORMATION_STATE", response.data);
                                 if(response.data.group.theme=="主题二") {
                                     this.$store.commit("SET_USERTHEME_STATE", "#66a3e0");
@@ -103,7 +103,7 @@
                                 console.log(response.data.group.menus);
                                 this.$store.commit("SET_CHANNEL_STATE",response.data.channel);
                                 this.channel = response.data.channel;
-                                console.log(this.channel.length);
+                                console.log(this.$store.state.channel);
                                 this.$router.push(
                                     {
                                         path:'/welcome'

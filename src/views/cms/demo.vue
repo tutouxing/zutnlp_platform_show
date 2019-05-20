@@ -143,7 +143,7 @@
                 }
             },
             edit (rows) {
-                let id = rows.id
+                let id = rows.id;
                 this.$router.push({
                     path: '/addContent',
                     query: {

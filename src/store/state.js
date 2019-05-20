@@ -16,5 +16,6 @@ const state = {
     comp:'',
     channel:[],
     userInformation:'',
+    components:'',
 };
 export default state;

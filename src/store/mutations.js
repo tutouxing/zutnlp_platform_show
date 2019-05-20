@@ -41,12 +41,13 @@ const mutations = {
         state.comp = comp;
     },
     SET_CHANNEL_STATE(state,channel){
-        console.log("得到状态的channel");
-        console.log(channel);
         state.channel=channel;
     },
     SET_USERINFORMATION_STATE(state,information){
       state.userInformation=information;
-    }
+    },
+    SET_COMPONENTS_STATE(state,components){
+        state.components=components;
+    },
 };
 export default mutations;
