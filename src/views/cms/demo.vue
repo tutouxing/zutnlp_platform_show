@@ -16,7 +16,7 @@
               icon-class="el-icon-tickets"
               :filter-node-method="filterNode"
               node-key="id"
-              highlight-current="true"
+              highlight-current
               @node-click="loadSet()"
               ref="tree2">
                     <span class="custom-tree-node" slot-scope="{ node, data }">
@@ -139,6 +139,7 @@
                   })
               }
             this.tableData=this.data2[0].data;
+              this.channelId=this.data2[0].id;
           });
           this.$nextTick(function(){
             this.$refs.tree2.setCurrentKey(2);
@@ -169,6 +170,7 @@
               path: '/addContent',
               query: {
                 id: id,
+                channel:this.channelId,
                 type: 'update'
               }
             })
