@@ -3,8 +3,8 @@
 </template>
 
 <script>
-    import mainMode from '../../components/editable/mainMode.vue'
-    import Mode1 from '../../components/editable/Mode1.vue'
+    import mainMode from './mainMode.vue'
+    import Mode1 from './Mode1.vue'
     export default {
         name: "setMode",
         data(){
