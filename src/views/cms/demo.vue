@@ -3,6 +3,12 @@
     <el-row>
       <el-col style="width: 20%">
         <el-card style="height: 900px">
+            <el-row>
+          <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-folder"></use>
+          </svg>
+                <span style="font-size: 20px; font-weight:bold"> 栏目目录</span>
+            </el-row>
           <el-tree
               class="filter-tree"
               :data="data2"
@@ -10,6 +16,7 @@
               icon-class="el-icon-tickets"
               :filter-node-method="filterNode"
               node-key="id"
+              highlight-current="true"
               @node-click="loadSet()"
               ref="tree2">
                     <span class="custom-tree-node" slot-scope="{ node, data }">
@@ -143,7 +150,7 @@
                 }
             },
             edit (rows) {
-                let id = rows.id;
+                let id = rows.id
                 this.$router.push({
                     path: '/addContent',
                     query: {

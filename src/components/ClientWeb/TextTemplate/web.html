@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <demo5>  </demo5>
+</div>
+</body>
+
+<script>
+    Vue.component(
+          'demo5',
+        {
+            template:'<el-container style="margin-top: 10px">\n' +
+                '    <el-header>\n' +
+                '\n' +
+                '\n' +
+                '              <div>\n' +
+                '                  <el-tabs v-model="activeName" @tab-click="handleClick">\n' +
+                '                                   <el-tab-pane label="体育" name="first">\n' +
+                '                       <div><!--体育-->\n' +
+                '\n' +
+                '                             <el-container>\n' +
+                '                                       <el-aside>\n' +
+                '                                   <h3 style="margin-top: 10px;margin-left: 5px" v-for="item in Allofdata.TextMessage">\n' +
+                '                                       {{item.title}}\n' +
+                '                                       </h3></el-aside>\n' +
+                '  <el-main >\n' +
+
+                '     <!-- <span class="demonstration">默认 Hover 指示器触发</span>     -->\n' +
+                '      <el-carousel >\n' +
+                ' <el-carousel-item  v-for="item in Allofdata.Pictures" :key="item" >\n' +
+                '     <img :src="item" height="210px"  style="width:525px;" v-on:click="tiyutonext0(item)" />\n' +
+                '           <p>{{item}}</p>' +
+                '</el-carousel-item>\n' +
+                '          </el-carousel>\n' +
+
+                '</el-main>\n' +
+                ' <div class="tiyuaside">\n' +
+                '<h3 style="margin-top: 10px;margin-left: 5px" v-for="item in Allofdata.TextMessage">\\\n' +
+                ' 图片侧栏n{{item.title}}' +
+                '  </h3>' +
+                '' +
+                '</div>\n' +
+                '                                  </el-container>\n' +
+                '                               <el-container>\n' +
+                '<el-aside>' +
+                '<div>' +
+                '<h4></h4>' +
+                '</div>' +
+                '' +
+                '  <embed src=" http://player.youku.com/player.php/sid/XMzI2NTc4NTMy/v.swf"\n' +
+                '                    width="480" height="400"\n' +
+                '                    type="application/x-shockwave-flash">\n' +
+                '                    </embed>' +
+                '</el-aside>\n' +
+                '                                          <el-main>\n' +
+                '                                   <video width="500" height="255" controls="controls" autoplay="autoplay">\n' +
+                '                                         <source src="../Picture/movie.ogg" type="video/ogg" />\n' +
+                '                                         <source src="../Picture/videos.mp4" type="video/mp4" />\n' +
+                '                                         <source src="../Picture/videos.webm" type="video/webm" />\n' +
+                '                                         <object data="../Picture/videos.mp4" width="500" height="255">\n' +
+                '                                          <embed width="500" height="255" src="../Picture/videos.mp4" />\n' +
+                '                                             </object>\n' +
+                '                                       </video></el-main>\n' +
+                ' <div class="tiyuaside">' +
+                '  <p>火勇大战</p>' +
+                ' ' +
+                '<video src="../Picture/movie.ogg"  width="280" height="240" controls="controls" style="border-top :1px solid darkgray;\n' +
+                '        border-bottom:1px solid darkgray;">\n' +
+                '   Your browser does not support the video tag.\n' +
+                '  </video>\n' +
+                '  </div>\n' +
+                '                               </el-container>\n' +
+                '                            <el-container>\n' +
+                                                     '' +
+
+                '                               </el-container>\n' +
+                '\n' +
+                '\n' +
+                '\n' +
+                '                               </div></el-tab-pane>\n' +
+                '                                   <el-tab-pane label="科技" name="second">\n' +
+                '                            <div >\n' +
+                '                               <el-carousel :interval="4000" type="card" height="200px" >\n' +
+                '                                       <el-carousel-item v-for="item in Allofdata.Pictures" :key="item" >\n' +
+                '                                               <img :src="item" v-on:click="kejigonext0(item)" />\n' +
+                '                                               <h3>{{ item }}</h3>\n' +
+                '                                           </el-carousel-item>\n' +
+                '                                   </el-carousel>\n' +
+                '                           </div>\n' +
+                '\n' +
+                '                               <div>\n' +
+                '\n' +
+                '                                   <div class="divmain" style="float:left;" v-for="item in Allofdata.TextMessage" v-on:click="kejigonext1(item)">\n' +
+                '                                           <img style="margin-top: 15px"  class="photo" :src="item.picture" />\n' +
+                '                                           <p >{{item.title}}</p>\n' +
+                '                                       </div>\n' +
+                '\n' +
+                '                                       <div class="divaside"  width="500px"  v-for="item in Allofdata.OnlyText" v-on:click="kejigonext2(item)">\n' +
+                '                                           <p class="div-inline">{{item.introduction}}</p>\n' +
+                '                                           </div >\n' +
+                '                                   </div>\n' +
+                '                       </el-tab-pane>\n' +
+                '                                   <el-tab-pane label="娱乐" name="third">\n' +
+                '                       <div  class="yu">\n' +
+                '\n' +
+                '\n' +
+                '                               <div class="yule" style="float:left;">\n' +
+                '                                                   <video width="548" height="296" controls="controls" autoplay="autoplay">\n' +
+                '                                                                     <source src="D:\\娱乐\\照片和视频\\球队\\videos" type="video/ogg" />\n' +
+                '                                                                   <source src="/i/movie.mp4" type="video/mp4" />\n' +
+                '                                                                     <source src="/i/movie.webm" type="video/webm" />\n' +
+                '                                                                     <object data="/i/movie.mp4" width="548" height="296">\n' +
+                '                                                                               <embed width="548" height="296" src="/i/movie.swf" />\n' +
+                '                                                                             </object>\n' +
+                '                                                         </video>\n' +
+                '                                    </div>\n' +
+                ' <div class="yule2">\n' +
+                ' <div class="yule2-1">\n' +
+                '<div>\n' +
+                ' <el-carousel >\n' +
+                ' <el-carousel-item v-for="item in Allofdata.Pictures" :key="item" >\n' +
+                '\n' +
+                '<img :src="item"  height="210px" style="width: 500px;" />\n' +
+                '<p>{{item}}</p> ' +
+                ' </el-carousel-item>\n' +
+
+                '</el-carousel>\n' +
+                '</div>\n' +
+                '\n' +
+                '</div>\n' +
+                '                               </div>\n' +
+                '                           </div>\n' +
+                '                       <div class="yu1">\n' +
+                '                           <div class="yule3" style="float: bottom;"  v-for="item in Allofdata.TextMessage" v-on:click="yuletonext0(item)">\n' +
+                '\n' +
+                '                                <div>\n' +
+                '                                    <p>{{item.title}}</p>\n' +
+                '                                    <img style="margin-top: 15px"  class="yulephoto" :src="item.picture" />\n' +
+                '                                    <img style="margin-top: 15px"  class="yulephoto" :src="item.picture" />\n' +
+                '                                    <img style="margin-top: 15px"  class="yulephoto" :src="item.picture" />\n' +
+                '\n' +
+                '                                    </div>\n' +
+                '                               </div>\n' +
+                '<div class="yule4">\n' +
+                '<div v-for=" item in Allofdata.TextMessage" style="margin-top: 10px; margin-left: 10px">' +
+                '<h4>{{item.title}}</h4>' +
+                '</div>' +
+                '</div>\n' +
+                '                           </div>\n' +
+                '                       </el-tab-pane>\n' +
+                '\n' +
+                '                     </el-tabs>\n' +
+                '\n' +
+                '               </div>\n' +
+                '           </el-header>\n' +
+                '       <el-footer></el-footer>\n' +
+                '           </el-container>',
+            data(){
+                return {
+                    Allofdata:{
+                        TextMessage:[
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+                            {
+                                content:'',//内容
+                                picture:'../Picture/earth.png  ' ,//插图
+                                type:''  ,//类型
+                                title: '科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+                            },
+
+
+                        ],
+
+
+                        OnlyText:[
+                            {
+                                type: '文本'     ,
+                                title:  '标题'    ,
+                                content:  '内容'    ,
+                                introduction:'内容主旨介绍'
+
+                            }
+                        ],
+                        Pictures:{
+                            HeaderPictureEarth: '../Picture/earth.png '   ,
+                            HeaderPictureMoon: ' ../Picture/moon.png'   ,
+                            HeaderPictureSun: '../Picture/sun.png '   ,
+                        },//图片轮播用
+                    },
+                    activeName:'second' ,
+                }
+            },
+            methods: {
+                kejigonext0(item){
+                    //item是一个对象
+                    console.log(item);
+                    console.log("打印的科技0");//展示图片
+
+                },
+                kejigonext1(item){
+                    console.log(item.title);
+                  console.log("打印的科技1");//展示图片带文字
+                },
+                kejigonext2(item){
+                    console.log(item.introduction);
+                    console.log("打印的科技2");//仅仅展示文字
+                    this.$router.push({name:'PlayContentMsg',params:{items:item}});//用路由传递参数唯一标识
+                },
+                yuletonext0(item){
+                    console.log("打印娱乐0");//展示三张图加文字
+                    this.$router.push({name:'PlayManyPicturesContentMsg',params:{items:item}});
+                },
+                tiyutonext0(item){
+                  console.log("体育");
+
+                },
+                handleClick(tab, event) {
+                    console.log(tab, event);
+                },
+
+            },
+        }
+    );
+</script>
+<style>
+
+    h4:hover{
+        cursor:pointer;
+        text-decoration:underline;color: brown;
+    }
+    p:hover {
+        cursor: pointer;
+    }
+    .yu{
+
+        margin-top: 10%;
+    }
+    .yu1{
+        margin-top: 5%;
+    }
+    .yule{
+        width: 550px;
+        height: 300px;
+        /*background: azure;*/
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+        border-right:1px solid darkgray;
+        border-left:1px solid darkgray;
+        overflow:auto;
+    }
+    .yule2{
+        width: 500px;
+        height: 302px;
+        overflow:auto;
+        margin-left: 50%;
+    }
+
+    .yule2-1{
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+          width: 99%;
+          height: 99%;
+      }
+  /*  .yule2-2{
+        width: 100%;
+        height: 30%;
+        !*广告的*!
+
+        !*border-bottom:1px solid darkgray;
+        border-right:1px solid darkgray;
+        border-left:1px solid darkgray;
+        background: gold;*!
+    }*/
+    .yule3{
+        width: 550px;
+        height: 255px;
+        overflow:auto;
+     /*   background: aqua;*/
+        margin-top: 10px;
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+    }
+    .yulephoto{
+        width: 32%;
+        height: 160px;
+    }
+    .yule4{
+        position:absolute;
+        top: 495px;
+        left: 50%;
+        width: 500px;
+     /*   height: 800px;*/
+        height:auto;
+   /*     overflow:auto;*/
+/*        margin-left: 50%;*/
+        /*推荐东西的*/
+       /* background: gainsboro;*/
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+        border-right:1px solid darkgray;
+        border-left:1px solid darkgray;
+    }
+    .tiyuaside{
+          /*  height:auto;//自动加长*/
+           overflow-y:scroll;/*滚动条*/
+           width: 300px;
+           height: 340px;
+
+           margin-top: 5%;
+        /*  / background: blue;*/
+           margin-right: 5%;
+        cursor:pointer;/*鼠标放上去是一个手*/
+        border-left:1px solid #000;
+        border-right:1px solid #000;
+        border-top :1px solid #000;
+
+        border-bottom:1px solid #000;
+       }
+   .  el-tab-pane{
+     background: aqua;
+   }
+   p:hover{
+    /*    color: aqua;*/
+        color: aquamarine;
+    }
+    h3:hover{
+            color: aquamarine;
+        }
+     img:hover{
+        transform: scale(1.4);
+        transition: all 0.6s;
+    }
+    .divone{
+        position:absolute;
+        left: 60%;
+        top: 48%;
+        overflow:auto;
+        text-align: center;
+        line-height: 200px;
+
+        border-top :1px solid aliceblue;
+        border-bottom :1px solid aliceblue;
+        border-left :1px solid aliceblue;
+        border-right :1px solid aliceblue;
+    }
+    .divmain{
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);
+        word-wrap:break-word ;
+        border-radius: 4px;
+        cursor:pointer;/*鼠标放上去是一个手*/
+
+        align:center;
+        margin-left: 16% ;
+        height: 150px;
+        width: 500px;
+        overflow:auto;
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+    }
+    .divaside{
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);
+        word-wrap:break-word ;
+        border-radius: 4px;
+        cursor:pointer;/*鼠标放上去是一个手*/
+
+        height: 150px;
+        width:500px;
+        margin-left: 60%;
+
+        overflow:auto;
+
+        text-align: center;
+        line-height: 200px;
+
+        border-top :1px solid darkgray;
+        border-bottom:1px solid darkgray;
+     /*   display:inline-block;不能加   这个和 overflow:auto;冲突*/
+    }
+
+    .photo{
+        float:left;
+        width: 200px;
+        height:100px;
+    }
+    .el-aside{
+       /* box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/
+        word-wrap:break-word ;
+        border-radius: 4px;
+        height: 350px;
+        margin-left: 5%;
+        margin-top: 5%;
+      /*  background-color: #D3DCE6;*/
+      /*  background: black;*/
+        color: #333;
+        cursor:pointer;/*鼠标放上去是一个手*/
+  /*      text-align: center;*/
+        border-left:1px solid #000;
+       border-right:1px solid #000;
+       border-top :1px solid #000;
+
+       border-bottom:1px solid #000;
+    }
+   .el-main{
+       /*   box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/
+          word-wrap:break-word ;
+          border-radius: 4px;
+        /*  background: red;*/
+          margin-top: 5%;
+     /*     display:inline-block;*/
+          height: 350px;
+          width: 300px;
+       cursor:pointer;/*鼠标放上去是一个手*/
+
+      }
+    p{
+       /* margin-left: 20px;
+        font-size:30px*/
+
+    }
+    .boder{
+        border-radius: 4px;
+        border-left:1px solid #000;
+        border-right:1px solid #000;
+        border-top :1px solid #000;
+
+        border-bottom:1px solid #000;
+    }
+
+    .el-carousel{
+      /*  margin-left: 15%;*/
+    }
+    .bg{
+        width: 750px;
+        height: 600px;
+        background:url(   ../Picture/earth.png   );
+    }
+    .el-carousel__item h3 {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 200px;
+        margin: 0;
+    }
+
+    .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+    }
+
+    .el-carousel__item:nth-child(2n +1) {
+        background-color: #d3dce6;
+    }
+</style>
+<script>
+    new Vue({
+        el:' #app  ',
+    })
+</script>
+</html>

@@ -11,6 +11,25 @@ import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
 import second from '../views/prostage/temp/newtemp1/second'
 import detailed from '../views/prostage/temp/newtemp1/detailed1'
+import modeSecCont from '../components/modeFirst/modeSecCont.vue'
+
+
+
+import PlayManyPicturesContentMsg from '../components/ClientWeb/TextTemplate/PlayManyPicturesContentMsg.vue'
+import PlayVideosMsg from '../components/ClientWeb/TextTemplate/PlayVideosMsg.vue'
+import FrameWork from '../components/ClientWeb/TextTemplate/FrameWork.vue'
+import PlayContentMsg from '../components/ClientWeb/TextTemplate/PlayContentMsg.vue'
+import PlayNewsMsg from '../components/ClientWeb/TextTemplate/PlayNewsMsg.vue'
+import PlayPictrueMsg from '../components/ClientWeb/TextTemplate/PlayPictrueMsg'
+/*
+*
+*
+*
+*
+* */
+
+
+
 export default[
   {
     path: '/',
@@ -45,15 +64,22 @@ export default[
             component:()=>import("../views/cms/addText.vue"),
             name:"addContent",
         },
+        // {
+        //     path: 'templatelist',//模板配置
+        //     component:() => import('../views/settings/templates.vue'),
+        //     name: 'templatelist',
+        // },
         {
-            path: 'templatelist',//模板配置
-            component:() => import('../views/settings/templates.vue'),
-            name: 'templatelist',
+            //path: 'backcms1',//表单
+            path: 'reviseTheme',//一级页面
+            component:() => import('../views/cms/reviseTheme.vue'),
+            //name: 'backcms',
+            name: 'reviseTheme',
         },
         {
-            path: 'backcms1',//表单
-            component:() => import('../views/cms/reviseTheme.vue'),
-            name: 'backcms',
+        path: 'reviseSubpage',//二级页面
+        component:() => import('../views/cms/reviseSubpage.vue'),
+        name: 'reviseSubpage',
         },
         {
             path: 'twodimensional/pie',
@@ -138,11 +164,50 @@ export default[
             component:createcode,
 
         },
+
+
+
+        {
+            path: 'PlayContentMsg',
+            name: 'PlayContentMsg',
+            component:PlayContentMsg,
+
+        },
+        {
+            path: 'PlayManyPicturesContentMsg',
+            name: 'PlayManyPicturesContentMsg',
+            component:PlayManyPicturesContentMsg,
+
+        },
+        {
+            path: 'PlayNewsMsg',
+            name: 'PlayNewsMsg',
+            component:PlayNewsMsg,
+
+        },
+        {
+            path: 'PlayPictrueMsg',
+            name: 'PlayPictrueMsg',
+            component:PlayPictrueMsg,
+
+        },
+        {
+            path: 'PlayVideosMsg',
+            name: 'PlayVideosMsg',
+            component:PlayVideosMsg,
+
+        },
+
+
+
         {
             path: 'FormConfig/createproject',
             name: 'createproject',
             component: createproject,
         },
+
+
+
         {
             path: 'analysis_word',
             name: 'analysis_word',
@@ -151,6 +216,11 @@ export default[
             //     path:"",
             //     name:"",
             // }
+        },
+        {
+            path:'news_analyse',
+            name:'news_analyse',
+            component:()=>import('../views/analysis/news_analyse.vue'),
         },
         {
             path:"cv",
@@ -183,6 +253,29 @@ export default[
     {
         path:'/404',
         component:()=>import('../views/errorPage/404.vue')
+    },{
+        path: '/modeCont',//modeDir
+        name:'modeFirstCont',
+        component:()=>import('../components/modeFirst/modeCont.vue'),
+    },{
+        path: '/modeCont/:title',
+        name: 'modeSecCont',
+        component: modeSecCont
+    },
+    {
+        path: '/:title',
+        name: 'modeSecCont',
+        component: modeSecCont
+    },
+    {
+        path: '/modeCont',
+        name:'modeFirstCont',
+        component:()=>import('../components/modeFirst/modeCont.vue'),
+    },
+    {
+        path: '/modethirdCont/:title',
+        name:'modethirdCont',
+        component:()=>import('../components/modeFirst/modethirdCont.vue'),
     },
     {
         path:'/prostage',
@@ -198,7 +291,11 @@ export default[
         component:detailed,
     },
 
+    {
+        path: '/ClientWeb/TextTemplate/FrameWork',
+        name: 'FrameWork',
+        component:FrameWork,
 
-
+    },
 ]
 

@@ -99,11 +99,10 @@
                                 console.log(this.$store.state.userid);
                                 this.loading = false;
                                 this.$store.commit("SET_USERMENUS_STATE",response.data.group.menus);
-                                console.log('得到菜单');
-                                console.log(response.data.group.menus);
                                 this.$store.commit("SET_CHANNEL_STATE",response.data.channel);
                                 this.channel = response.data.channel;
-                                console.log(this.$store.state.channel);
+                                this.$store.commit("SET_AllCONTENT_STATE",this.channel);
+                                console.log(this.$store.state.AllContent);
                                 this.$router.push(
                                     {
                                         path:'/welcome'
