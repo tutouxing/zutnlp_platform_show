@@ -1,5 +1,5 @@
 const path = require('path')
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/zutnlp_platform_show' : '/'
+const publicPath = process.env.NODE_ENV === 'production' ? '/zutnlp_platform_show' : '/'
 const resolve = dir => path.join(__dirname, dir)
 // var proEnv = require('./config/prod.env');  // 生产环境
 // var uatEnv = require('./config/sit.env');  // 测试环境
