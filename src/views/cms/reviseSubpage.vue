@@ -2,11 +2,12 @@
     <div>
         <el-card>
             <el-row>
-                <el-col style="width: 15%">
-                    <p style="font-size: 18px "><i class="el-icon-setting">二级页面配置中心</i></p>
-                </el-col>
+                <svg class="icon_set" aria-hidden="true">
+                    <use xlink:href="#icon-setup"></use>
+                </svg>
+                <span style="font-size: 25px; font-weight:bold"> 二级页面配置</span>
             </el-row>
-            <el-row>
+            <el-row style="margin-top: 30px">
                 <el-col style="width: 10%">
                     <p style="font-size: 18px">*选择主题: </p>
                 </el-col>
@@ -36,8 +37,8 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-button type="primary" style="margin-top: 50px" @click="passTheme()">保存</el-button>
-                <el-button type="primary" style="margin-top: 50px" @click="preview">预览</el-button>
+                <el-button type="primary" style="margin-top: 60px;margin-bottom: 50px" @click="passTheme()">保存</el-button>
+                <el-button type="primary" style="margin-top: 60px;margin-bottom: 50px" @click="preview">预览</el-button>
                 <el-button type="info">重置</el-button>
             </el-row>
         </el-card>
@@ -66,8 +67,8 @@
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styletwo.png') + ')';
       },
       passTheme() {
-        this.$store.commit("SET_FIRSTPAGE_STATE",this.value);//提交一级页面配置信息到Vuex
-        for(let i=0;i<4;i++){//判断提交了几个栏目信息
+        this.$store.commit("SET_SECONDPAGE_STATE",this.value);//提交一级页面配置信息到Vuex
+        for(let i=0;i<this.channelNum;i++){//判断提交了几个栏目信息
           if(this.channelStyle[i].chName!==''){
             addChannel(this.$store.state.userid, this.channelStyle[i])
           }
@@ -134,5 +135,9 @@
 </script>
 
 <style scoped>
-
+    .icon_set {
+        width: 2.5em;
+        height: 2.5em;
+        fill: currentColor;
+    }
 </style>

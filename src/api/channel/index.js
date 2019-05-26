@@ -25,8 +25,14 @@ export function getChannelById(id) {
 }
 export function delChannelById(id) {
   return fetch({
-    url: 'http://127.0.0.1:8848/Channel/'+id,
+    url: 'http://127.0.0.1:8848/Channel/' + id,
     method: 'delete',
   })
+}
+  export function alterChannelById(id) {
+    return fetch({
+      url: 'http://127.0.0.1:8848/Channel/' + id,
+      method: 'put',
+    })
 }
 

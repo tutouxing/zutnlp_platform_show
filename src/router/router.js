@@ -9,12 +9,18 @@ import propertyupdata from '../components/FormConfig/propertyupdata.vue'
 import createproject from '../components/FormConfig/createproject.vue'
 import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
+import second from '../views/prostage/temp/newtemp1/second'
+import detailed from '../views/prostage/temp/newtemp1/detailed1'
 import modeSecCont from '../components/modeFirst/modeSecCont.vue'
 
-/*import Framework from '../components/ClientWeb/TextTemplate/FrameWork'
-import PlayContentMsg from '../components/ClientWeb/TextTemplate/PlayContentMsg'
-import PlayNewsMsg from '../components/ClientWeb/TextTemplate/PlayNewsMsg'
-import PlayPictureMsg from '../components/ClientWeb/TextTemplate/PlayPictureMsg'*/
+
+
+import PlayManyPicturesContentMsg from '../components/ClientWeb/TextTemplate/PlayManyPicturesContentMsg.vue'
+import PlayVideosMsg from '../components/ClientWeb/TextTemplate/PlayVideosMsg.vue'
+import FrameWork from '../components/ClientWeb/TextTemplate/FrameWork.vue'
+import PlayContentMsg from '../components/ClientWeb/TextTemplate/PlayContentMsg.vue'
+import PlayNewsMsg from '../components/ClientWeb/TextTemplate/PlayNewsMsg.vue'
+import PlayPictrueMsg from '../components/ClientWeb/TextTemplate/PlayPictrueMsg'
 /*
 *
 *
@@ -45,7 +51,7 @@ export default[
         },
         {
             path: 'components',
-           component: () => import('../api/admin/setMode.vue'),
+         /*  component: () => import('../components/editable/setMode.vue'),*/
             name: 'components',
         },
         {
@@ -156,13 +162,48 @@ export default[
             path: 'createcode',
             name: 'createcode',
             component:createcode,
+        },
+        {
+            path: 'PlayContentMsg',
+            name: 'PlayContentMsg',
+            component:PlayContentMsg,
 
         },
+        {
+            path: 'PlayManyPicturesContentMsg',
+            name: 'PlayManyPicturesContentMsg',
+            component:PlayManyPicturesContentMsg,
+
+        },
+        {
+            path: 'PlayNewsMsg',
+            name: 'PlayNewsMsg',
+            component:PlayNewsMsg,
+
+        },
+        {
+            path: 'PlayPictrueMsg',
+            name: 'PlayPictrueMsg',
+            component:PlayPictrueMsg,
+
+        },
+        {
+            path: 'PlayVideosMsg',
+            name: 'PlayVideosMsg',
+            component:PlayVideosMsg,
+
+        },
+
+
+
         {
             path: 'FormConfig/createproject',
             name: 'createproject',
             component: createproject,
         },
+
+
+
         {
             path: 'analysis_word',
             name: 'analysis_word',
@@ -217,20 +258,32 @@ export default[
         name: 'modeSecCont',
         component: modeSecCont
     },
-
-    {
-        path: '/modeCont',
-        component:()=>import('../components/modeFirst/modeCont.vue'),
-    },
     {
         path: '/modethirdCont/:title',
         name:'modethirdCont',
         component:()=>import('../components/modeFirst/modethirdCont.vue'),
     },
-   {
-        path:'/prostage',        
- 		component:()=>import('../views/prostage/index/index.vue')
+    {
+        path:'/prostage',
+        name:'prostage',
+        component:()=>import('../views/prostage/index/index.vue'),
     },
+{
+        path:'/prostage/many',
+        name:'second',
+        component:second,
+    },
+    {
+        path:'/prostage/detailed',
+        name:'detailed1',
+        component:detailed,
+    },
+    {
+        path: '/ClientWeb/TextTemplate/FrameWork',
+        name: 'FrameWork',
+        component:FrameWork,
+
+    }
 
 ]
 
