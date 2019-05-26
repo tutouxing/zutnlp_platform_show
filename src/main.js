@@ -9,6 +9,11 @@ import echarts from 'echarts'
 import axios from 'axios'
 // import 'echarts-gl';
 import axiosreq from './components/FormConfig/api/AxiosApi.js'
+import  VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor);
 Vue.prototype.$axiosreq = axiosreq;
 Vue.config.productionTip = false;
 Vue.prototype.$echarts = echarts;

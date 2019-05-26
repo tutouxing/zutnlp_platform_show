@@ -16,7 +16,7 @@
               icon-class="el-icon-tickets"
               :filter-node-method="filterNode"
               node-key="id"
-              highlight-current="true"
+              highlight-current
               @node-click="loadSet()"
               ref="tree2">
                     <span class="custom-tree-node" slot-scope="{ node, data }">
@@ -30,13 +30,19 @@
           <el-row>
             <el-col style="width: 20%">
               <el-button type="primary" class="el-icon-circle-plus-outline" style="float: left;margin-bottom:20px; ">
-                添加目录
+                修改栏目名
               </el-button>
             </el-col>
             <el-col style="width: 20%">
               <el-button type="primary" class="el-icon-circle-plus-outline" style="float: left;margin-bottom:20px; "
                          @click="addContent">
-                添加内容
+                添加栏目内容
+              </el-button>
+            </el-col>
+            <el-col style="width: 20%">
+              <el-button type="danger" class="el-icon-delete" style="float: left;margin-bottom:20px; "
+                         @click="deleChannel">
+                删除栏目
               </el-button>
             </el-col>
           </el-row>
@@ -104,12 +110,18 @@
 
 </template>
 <style>
-
+    .icon {
+        width: 1.8em;
+        height: 1.8em;
+        fill: currentColor;
+        overflow: hidden;
+    }
 </style>
 <script>
     import {getChannelById} from "../../api/channel";
     import {delContentById} from "../../api/content";
-
+    import {delChannelById} from "../../api/channel";
+    import "../../assets/icon/iconfont";
     export default {
         name: 'demo',
         watch: {
@@ -125,49 +137,88 @@
                       label:res.data[i].chName,
                       data:res.data[i].contents,
                   })
-                  this.tableData=res.data[i].contents;
               }
-              console.log(this.data2)
+            this.tableData=this.data2[0].data;
+              this.channelId=this.data2[0].id;
           });
+          this.$nextTick(function(){
+            this.$refs.tree2.setCurrentKey(2);
+          })
 
         },
 
         methods: {
-            addContent() {
-                // this.$store.commit('SET_COMP_STATE', add_text)
-                this.$router.push("addContent")
-            },
-            filterNode(value, data) {
-                if (!value) return true
-                return data.label.indexOf(value) !== -1
-            },
-            loadSet() {
-                let id = this.$refs.tree2.getCurrentKey()
-                for(let i =0;i<this.data2.length;i++){
-                    if (id==this.data2[i].id){
-                        this.tableData = this.data2[i].data
-                    }
-                }
-            },
-            edit (rows) {
-                let id = rows.id
-                this.$router.push({
-                    path: '/addContent',
-                    query: {
-                        id: id,
-                        type: 'update'
-                    }})
-            },
-            deleCurrentContent (rows) {
-                delContentById(rows.id)
-                getChannelById('2').then(response => {
-                    this.tableData = response.data.contents
-                })
+          addContent () {
+            // this.$store.commit('SET_COMP_STATE', add_text)
+            this.$router.push("addContent")
+          },
+          filterNode (value, data) {
+            if (!value) return true
+            return data.label.indexOf(value) !== -1
+          },
+          loadSet () {
+             this.channelId = this.$refs.tree2.getCurrentKey()
+            for (let i = 0; i < this.data2.length; i++) {
+              if (this.channelId === this.data2[i].id) {
+                this.tableData = this.data2[i].data
+              }
             }
-        },
+          },
+          edit (rows) {
+            let id = rows.id
+            this.$router.push({
+              path: '/addContent',
+              query: {
+                id: id,
+                channel:this.channelId,
+                type: 'update'
+              }
+            })
+          },
+          deleCurrentContent (rows) {this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }) .then(() => {
+            delContentById(rows.id).then(() => {
+              this.$notify({
+                title: '成功',
+                message: '删除成功',
+                type: 'success',
+                duration: 2000
+              });
+              const index = this.tableData.indexOf(rows);
+              this.tableData.splice(index, 1);
+              this.data2[this.channelId].data.splice(index, 1);
+            });
+          });
+          },
+          deleChannel(node){
+            this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+               delChannelById(this.channelId).then(() => {
+                this.$notify({
+                  title: '成功',
+                  message: '删除成功',
+                  type: 'success',
+                  duration: 2000
+                });
+                 for (let i = 0; i < this.data2.length; i++) {
+                   if (this.channelId === this.data2[i].id) {
+                     this.$refs.tree2.remove(this.data2[i]);
+                   }
+                 }
 
+              });
+            });
+          }
+        },
         data() {
             return {
+                channelId:'',
                 tableData: [],
                 filterText: '',
                 data2: [],

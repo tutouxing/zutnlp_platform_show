@@ -51,6 +51,9 @@
     import "../../assets/icon/iconfont_set";
     export default {
         name: 'reviseTheme',
+      created(){
+        this.getChannel();
+      },
         methods: {
             changeShow(val) {
                 if (val == "/prostage") {
@@ -86,7 +89,20 @@
                     this.$router.push(first_page);
                 })
 
-            }
+            },
+          getChannel() {
+            getObj(this.$store.state.userid).then(res => {
+              this.firstPage = res.data.page1
+              if (this.firstPage != "") {
+                this.value = this.firstPage;
+                let i;
+                for ( i = 0; i < res.data.channels.length; i++) {
+                  this.channelStyle[i].chName=res.data.channels[i].chName
+                }
+              }
+            })
+          }
+
         },
         data() {
             return {
@@ -129,6 +145,7 @@
                   label: '栏目六标题：'
                 }, ],
                 value: '',
+               firstPage:''
             }
         }
     }
