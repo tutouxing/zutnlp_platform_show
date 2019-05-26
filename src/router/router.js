@@ -51,7 +51,7 @@ export default[
         },
         {
             path: 'components',
-           component: () => import('../components/editable/setMode.vue'),
+         /*  component: () => import('../components/editable/setMode.vue'),*/
             name: 'components',
         },
         {
@@ -162,11 +162,7 @@ export default[
             path: 'createcode',
             name: 'createcode',
             component:createcode,
-
         },
-
-
-
         {
             path: 'PlayContentMsg',
             name: 'PlayContentMsg',
@@ -262,11 +258,7 @@ export default[
         name: 'modeSecCont',
         component: modeSecCont
     },
-    {
-        path: '/:title',
-        name: 'modeSecCont',
-        component: modeSecCont
-    },
+
     {
         path: '/modeCont',
         name:'modeFirstCont',
@@ -277,12 +269,17 @@ export default[
         name:'modethirdCont',
         component:()=>import('../components/modeFirst/modethirdCont.vue'),
     },
+    // {
+    //   path:'/'
+    // },
     {
         path:'/prostage',
+        name:'prostage',
         component:()=>import('../views/prostage/index/index.vue'),
     },
     {
         path:'/prostage/many',
+        name:'second',
         component:second,
     },
     {
@@ -290,12 +287,16 @@ export default[
         name:'detailed1',
         component:detailed,
     },
-
     {
         path: '/ClientWeb/TextTemplate/FrameWork',
         name: 'FrameWork',
         component:FrameWork,
 
     },
+    {
+        path: '/:title',
+        name: 'modeSecCont',
+        component: modeSecCont
+    }
 ]
 

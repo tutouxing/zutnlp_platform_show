@@ -45,6 +45,10 @@ const mutations = {
       console.log(channel);
       state.channel = channel;
     },
+    SET_COMPONENTS_STATE(state,components){
+        console.log('得到components');
+        state.components=components;
+    },
     SET_USERINFORMATION_STATE (state, information) {
       state.userInformation = information;
     },
