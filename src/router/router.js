@@ -217,14 +217,9 @@ export default[
         name: 'modeSecCont',
         component: modeSecCont
     },
-    {
-        path: '/:title',
-        name: 'modeSecCont',
-        component: modeSecCont
-    },
+
     {
         path: '/modeCont',
-        name:'modeFirstCont',
         component:()=>import('../components/modeFirst/modeCont.vue'),
     },
     {
@@ -236,5 +231,6 @@ export default[
         path:'/prostage',        
  		component:()=>import('../views/prostage/index/index.vue')
     },
+
 ]
 

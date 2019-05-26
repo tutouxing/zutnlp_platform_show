@@ -15,7 +15,7 @@
         width:90%;
     }
     .exBox{
-        margin-top: 1%;
+        float:left;
     }
     .time {
         font-size: 13px;

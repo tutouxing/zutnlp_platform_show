@@ -7,14 +7,26 @@
                 <modeSecDir ></modeSecDir>
                 <div class="line"></div>
                 <div class="divinline"><mode-sec-slide-image></mode-sec-slide-image></div>
-                <div class="divinline"><mode-tip-list :retitle=$route.params.title></mode-tip-list></div>
+                <div class="divinline"><mode-tip-list :retitle=this.$route.params.title></mode-tip-list></div>
                 Main+{{$route.params.title}}
             </div>
             <div class="splitLine"></div>
-            <div class="secLiList">
+            <!--<div class="secLiList">
                 <div class="secLiLeft">
-                    <mode-Sec-List></mode-Sec-List>
+                    <mode-Sec-List :mytopic=this.$route.params.title></mode-Sec-List>
                 </div>
+                <div class="secLiRight">
+                    <h1>dfdfdf</h1>
+                </div>
+            </div>-->
+            <div class="secLiList">
+            <el-row>
+                <el-col :span="24">
+                    <div class="secLiLeft">
+                    <mode-Sec-List :mytopic=this.$route.params.title></mode-Sec-List>
+                    </div></el-col>
+
+            </el-row>
             </div>
         </el-main>
         <el-footer><modeFoot></modeFoot></el-footer>
@@ -97,7 +109,12 @@
         margin-left: 6%;
         margin-top: 2%;
     }.secLiLeft{
-        width: 63%;
+        width: 70%;
         background-color: #aaccee;
          }
+    .secLiRight{
+        width: 28%;
+        margin-left:5%;
+        background-color: #E9EEF3;
+    }
 </style>

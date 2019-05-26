@@ -68,5 +68,6 @@ const mutations = {
         state.AllContent = contList;
     }
 
+
 };
 export default mutations;

@@ -1,5 +1,5 @@
 <template>
-    <div class="exBox">
+    <!--<div class="exBox">
         <el-table
                 :data="this.$store.state.channel"
                 style="width: 100%"
@@ -10,8 +10,20 @@
                     label="内容列表"
                     width="700px">
                 <mode-image-box></mode-image-box>
+                <h1>{{mytopic}}</h1>
             </el-table-column>
         </el-table>
+    </div>-->
+    <div>
+            <div v-for="items in this.$store.state.channel" v-if="items.chName==mytopic" >
+                <el-card  class="secList" v-for="(content,index) in items.contents" v-if="index <7&&content.title!=null">
+                    <mode-image-box></mode-image-box>
+                    <div class="fontTitle">
+                        <router-link :to="{path:'/modethirdCont/'+content.title,query:{title:content.title}}">{{content.title}}</router-link>
+                        <span class="time">{{content.dateCreated}}</span>
+                    </div>
+                </el-card >
+            </div>
     </div>
 </template>
 
@@ -19,9 +31,10 @@
     import modeImageBox from './modeImageBox'
     export default {
         name: "modeSecList",
-        data() {
-            return {
-            }
+        props:{
+                mytopic:String
+        },
+        data:{
         },
         methods: {
             // 修改table tr行的背景色
@@ -36,7 +49,7 @@
         },
         components:{
             modeImageBox
-        }
+        },
     }
 </script>
 
@@ -44,5 +57,19 @@
     .exBox{
         margin-top: 1%;
 
-    }
+    }.secList{
+             height: 150px;
+             width:100%;
+             float:left;
+         }
+    .fontTitle{
+        width: 90%;
+        line-height:100px;     /*注意这行代码，惹是不写，得不到想要的结果哦*/
+        vertical-align:middle;
+        width: 100%;
+        text-align: left;
+    }.time{
+            float: bottom;
+             float: right;
+         }
 </style>

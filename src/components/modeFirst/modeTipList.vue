@@ -2,7 +2,9 @@
 <div>
         <ul v-for="items in this.$store.state.channel" class="text item">
             <div v-if="items.chName==retitle">
-                <li class="liList" v-for="(content,index) in items.contents" v-if="index <7&&content.title!=null">{{content.title}}</li>
+                <li class="liList" v-for="(content,index) in items.contents" v-if="index <7&&content.title!=null">
+                    <router-link :to="{path:'/modethirdCont/'+content.title,query:{title:content.title}}">{{content.title}}</router-link>
+            </li>
             </div>
         </ul>
 
