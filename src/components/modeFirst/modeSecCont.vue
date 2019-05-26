@@ -8,7 +8,6 @@
                 <div class="line"></div>
                 <div class="divinline"><mode-sec-slide-image></mode-sec-slide-image></div>
                 <div class="divinline"><mode-tip-list :retitle=this.$route.params.title></mode-tip-list></div>
-                Main+{{$route.params.title}}
             </div>
             <div class="splitLine"></div>
             <!--<div class="secLiList">
@@ -117,4 +116,8 @@
         margin-left:5%;
         background-color: #E9EEF3;
     }
+    a:hover{color: #aaccee}
+    a{text-decoration: none;}
+    a:visited{color:#2361b9}
+    a:active{color: #ffffff}
 </style>

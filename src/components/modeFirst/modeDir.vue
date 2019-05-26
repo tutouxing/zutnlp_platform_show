@@ -81,4 +81,8 @@ export default {
 </script>
 
 <style scoped>
+    a:hover{color: #aaccee}
+    a{text-decoration: none;}
+    a:visited{color:#ffffff}
+    a:active{color: #ffffff}
 </style>

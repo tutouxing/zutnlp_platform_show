@@ -103,6 +103,8 @@
                                 this.channel = response.data.channel;
                                 this.$store.commit("SET_AllCONTENT_STATE",this.channel);
                                 console.log(this.$store.state.AllContent);
+                                this.$store.commit("SET_AllTXT_STATE",this.channel);
+                                console.log(this.$store.state.Alltxt);
                                 this.$router.push(
                                     {
                                         path:'/welcome'
