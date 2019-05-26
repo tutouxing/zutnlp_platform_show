@@ -71,26 +71,13 @@
     </el-row>
         <el-row>
             <quill-editor class="editor" style="height: 500px"
-                          v-model="contentPass.text"
+                          v-model="contentPass.textHref"
                           ref="myQuillEditor"
                           :options="editorOption"
                           @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
                           @change="onEditorChange($event)">
                         </quill-editor>
         </el-row>
-      <!--<el-row >-->
-          <!--<el-col style="width: 20%">-->
-              <!--<p style="font-size: 18px">文章内容: </p>-->
-          <!--</el-col>-->
-          <!--<el-col style="width: 60%">-->
-              <!--<el-input-->
-                      <!--type="textarea"-->
-                      <!--:rows="7"-->
-                      <!--placeholder="请输入内容"-->
-                      <!--v-model="contentPass.text">-->
-              <!--</el-input>-->
-          <!--</el-col>-->
-      <!--</el-row>-->
     <el-row>
       <el-button type="primary" style="margin-top: 50px" @click="passContent()"> 保存 </el-button>
       <el-button type="info" @click="goBack()"> 返回 </el-button>
@@ -130,7 +117,7 @@ export default {
     return {
       contentPass:{
           title:"",
-          text:"",
+          textHref:"",
       },
       channel:[],
       dialogImageUrl: '',
@@ -152,8 +139,8 @@ export default {
        getContentById(this.contentID).then(res=> {
          let detailContent = res.data
          this.contentPass.title = detailContent.title;
-         this.contentPass.text = detailContent.text;
-         console.log(detailContent)
+         this.contentPass.textHref = detailContent.textHref;
+         console.log(this.contentPass.textHref)
          this.disable=true
        });
       this.type = this.$route.query.type
