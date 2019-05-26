@@ -60,11 +60,11 @@
                   this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themeone.png') + ')';
                   this.channelNum=4;
                 }
-                if (val == "主题二"){
+                if (val == "/ClientWeb/TextTemplate/FrameWork"){
                   this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themetwo.png') + ')';
                   this.channelNum=6;
                 }
-                if (val == "主题三")
+                if (val == "/modeCont")
                     this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styleone.png') + ')';
                 if (val == "主题四")
                     this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styletwo.png') + ')';
@@ -83,12 +83,7 @@
                 });
             },
             preview(){
-                getObj(this.$store.state.userid).then(res=>{
-                    console.log(res.data.page1);
-                    let first_page = res.data.page1;
-                    this.$router.push(first_page);
-                })
-
+              this.$router.push(this.value);
             },
           getChannel() {
             getObj(this.$store.state.userid).then(res => {
@@ -116,10 +111,10 @@
                     value: '/prostage',
                     label: '主题一'
                 }, {
-                    value: '主题二',
+                    value: '/ClientWeb/TextTemplate/FrameWork',
                     label: '主题二'
                 }, {
-                    value: '主题三',
+                    value: '/modeCont',
                     label: '主题三'
                 }, {
                     value: '主题四',

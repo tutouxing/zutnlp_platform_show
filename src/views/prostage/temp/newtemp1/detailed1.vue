@@ -1,12 +1,8 @@
 <template>
     <div>
         <Header></Header>
-        <el-carousel :interval="4000" type="card" height="200px">
-            <el-carousel-item v-for="item in 6" :key="item">
-                <h3 class="medium">{{ item }}</h3>
-            </el-carousel-item>
-        </el-carousel>
-        <span>{{this.datel[0].title}}</span>
+        <div v-html="this.datas">
+        </div>
     </div>
 
 </template>
@@ -17,7 +13,7 @@
         name: "detailed",
         data(){
             return{
-                datel:[],
+                datas:"",
             }
         },
         components:{
@@ -28,7 +24,8 @@
         },
         methods:{
             getdetailed(){
-                this.datel[0]=this.$route.params.item;
+                this.datas=this.$route.params.item.textHref;
+                console.log(this.$route.params.item);
             },
         },
 

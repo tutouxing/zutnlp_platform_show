@@ -16,7 +16,7 @@
               icon-class="el-icon-tickets"
               :filter-node-method="filterNode"
               node-key="id"
-              highlight-current
+              highlight-current="true"
               @node-click="loadSet()"
               ref="tree2">
                     <span class="custom-tree-node" slot-scope="{ node, data }">
@@ -138,9 +138,12 @@
                       data:res.data[i].contents,
                   })
               }
+              console.log("皇上净水");
+              console.log(this.data2);
             this.tableData=this.data2[0].data;
-              this.channelId=this.data2[0].id;
           });
+            console.log("皇上净水");
+            console.log(this.$store.state.userid)
           this.$nextTick(function(){
             this.$refs.tree2.setCurrentKey(2);
           })
@@ -170,7 +173,6 @@
               path: '/addContent',
               query: {
                 id: id,
-                channel:this.channelId,
                 type: 'update'
               }
             })
