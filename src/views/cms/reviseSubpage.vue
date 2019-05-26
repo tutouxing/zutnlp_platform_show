@@ -57,11 +57,11 @@
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themeone.png') + ')';
           this.channelNum=4;
         }
-        if (val == "主题二"){
+        if (val == "/ClientWeb/TextTemplate/FrameWork"){
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themetwo.png') + ')';
           this.channelNum=6;
         }
-        if (val == "主题三")
+        if (val == "/modeCont")
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styleone.png') + ')';
         if (val == "主题四")
           this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styletwo.png') + ')';

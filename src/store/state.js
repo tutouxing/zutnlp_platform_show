@@ -15,6 +15,7 @@ const state = {
     userid:'',
     comp:'',
     channel:[],
+    components:[],
     userInformation:'',
     pageSet:["待添加","待添加","待添加"],
     AllContent:[],

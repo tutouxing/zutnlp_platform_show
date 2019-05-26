@@ -15,27 +15,24 @@
                 <div>
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
-                            <!--<h4 style="float:left; padding: 3px 0;">{{this.label1[0]}}</h4>-->
                             <el-button style="float:left; padding: 3px 0; color: black" type="text" >{{this.label1[0]}}</el-button>
-                            <!--<span >{{this.label1[0]}}</span>-->
                             <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many()">更多</el-button>
                         </div>
                         <div v-for="(n,index) in vnews1" :key="index" class="title">
-                                <a target="_blank" class="lian" v-on:click="skip(n)">{{n.title}}</a>
-                                <span class="dianji">点击量：{{n.click_count}}</span>
+                        <a target="_blank" class="lian" v-on:click="skip(n)" >{{n.title}}</a>
+                            <span class="dianji">点击量：{{n.click_count}}</span>
                         </div>
                     </el-card>
                 </div>
-
                 <div>
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <el-button style="float:left; padding: 3px 0; color: black" type="text" >{{this.label1[1]}}</el-button>
-                            <!--<span>{{this.label1[1]}}</span>-->
-                            <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many1">更多</el-button>
+                            <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many1()">更多</el-button>
                         </div>
                         <div v-for="(n,index) in vnews2"  :key="index" style="height: 30px">
                             <a v-on:click="skip(n)" class="lian" >{{n.title}}</a>
+                            <span class="dianji">点击量：{{n.click_count}}</span>
                         </div>
                     </el-card>
                 </div>
@@ -63,7 +60,6 @@
                         <div v-for="(n,index) in vnews4" :key="index" style="height: 30px">
                             <a target="_blank" class="lian" v-on:click="skip(n)">{{n.title}}</a>
                         </div>
-
                     </el-card>
                 </div>
             </el-col>
@@ -128,7 +124,7 @@
             },
             many(){
                 this.$store.commit("SET_COMPONENTS_STATE",1);
-                console.log('打印');
+                console.log('打印1');
                 console.log(this.$store.state.components);
                 this.$router.push('/prostage/many');
             },
@@ -138,6 +134,8 @@
             },
             many2(){
                 this.$store.commit('SET_COMPONENTS_STATE',3);
+                console.log('打印3');
+                console.log(this.$store.state.components);
                 this.$router.push('/prostage/many');
             },
             many3(){
@@ -210,5 +208,58 @@
     .dianji{
 
     }
+    *{
+        margin: 0;
+        padding:0;
+    }
+    .wrap{
+        /*width: 600px;
+        margin: 0px auto;*/
+
+    }
+ /*   .menu ul li{
+        float: left;
+        list-style-type: none;
+        padding: 0 40px;
+    }*/
+    .content ul li img:hover{
+        transform: scale(1.2);/*当鼠标移动到图片上时实现放大功能*/
+    }
+    .content ul li{
+       /* height: 100px;*/
+        overflow: hidden;
+        border-bottom: 1px solid lavender;
+        background: white;
+        list-style-type: none;
+        transition-duration: 0.5s;
+        margin: 0px 0px 0px 0;
+
+    }
+    .content ul li:hover{
+        background-color: lavender;
+        transition-duration: 0.5s;
+    }
+    .content .left{
+        overflow: hidden;/*隐藏溢出图片内容*/
+        transition-duration: 0.5s;
+        width: 140px;
+        height:60px;
+        /*background: green;*/
+        float: left;
+        margin-right:20px;
+    }
+    .content .right{
+       /* width:400px ;*/
+       /* float: left;*/
+        /*background: pink;*/
+    }
+
+/*    .right_bottom{
+        margin_top:50px;
+    }
+    .right_bottom_left span{
+        color: darkgray;
+        font-size: 12px;
+    }*/
 
 </style>

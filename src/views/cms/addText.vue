@@ -6,7 +6,7 @@
       <p style="font-size: 18px">*选择栏目: </p>
     </el-col>
     <el-col style="width: 30%">
-    <el-select v-model="value" placeholder="请选择">
+    <el-select v-model="value" :disabled="this.disable" placeholder="请选择">
         <el-option
                 v-for="(item,i) in channel"
                 :key="item.id"
@@ -69,19 +69,15 @@
       </el-dialog>
       </el-col>
     </el-row>
-      <el-row >
-          <el-col style="width: 20%">
-              <p style="font-size: 18px">文章内容: </p>
-          </el-col>
-          <el-col style="width: 60%">
-              <el-input
-                      type="textarea"
-                      :rows="7"
-                      placeholder="请输入内容"
-                      v-model="contentPass.text">
-              </el-input>
-          </el-col>
-      </el-row>
+        <el-row>
+            <quill-editor class="editor" style="height: 500px"
+                          v-model="contentPass.textHref"
+                          ref="myQuillEditor"
+                          :options="editorOption"
+                          @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
+                          @change="onEditorChange($event)">
+                        </quill-editor>
+        </el-row>
     <el-row>
       <el-button type="primary" style="margin-top: 50px" @click="passContent()"> 保存 </el-button>
       <el-button type="info" @click="goBack()"> 返回 </el-button>
@@ -99,6 +95,7 @@ import {addContent}from '../../api/content/index.js'
 import {getContentById} from "../../api/content";
 import {putContentById} from "../../api/content";
 import {getChannelById} from "../../api/channel";
+import { quillEditor } from 'vue-quill-editor'
 export default {
   name: 'addText',
   created () {
@@ -120,7 +117,7 @@ export default {
     return {
       contentPass:{
           title:"",
-          text:"",
+          textHref:"",
       },
       channel:[],
       dialogImageUrl: '',
@@ -129,17 +126,22 @@ export default {
       input: '',
       value: '',
       type:'',
-      contentID:''
+      contentID:'',
+      disable:false,
+      editorOption: {}
     }
   },
   methods: {
     getParams () {
       this.contentID = this.$route.query.id
+      this.value=this.$route.query.channel
+      console.log(this.value)
        getContentById(this.contentID).then(res=> {
          let detailContent = res.data
          this.contentPass.title = detailContent.title;
-         this.contentPass.text = detailContent.text;
-         console.log(detailContent)
+         this.contentPass.textHref = detailContent.textHref;
+         console.log(this.contentPass.textHref)
+         this.disable=true
        });
       this.type = this.$route.query.type
       console.log("目前的内容:");
@@ -173,6 +175,12 @@ export default {
       this.$router.push({
         path: '/backcms',
       })
+    },
+    onEditorBlur () {
+    },
+    onEditorFocus () {//获得焦点事件
+    },
+    onEditorChange () {//内容改变事件
     }
   }
 }
