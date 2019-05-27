@@ -138,17 +138,12 @@
                       data:res.data[i].contents,
                   })
               }
-              console.log("皇上净水");
-              console.log(this.data2);
             this.tableData=this.data2[0].data;
               this.channelId=this.data2[0].id;
           });
-            console.log("皇上净水");
-            console.log(this.$store.state.userid)
           this.$nextTick(function(){
             this.$refs.tree2.setCurrentKey(2);
           })
-
         },
 
         methods: {

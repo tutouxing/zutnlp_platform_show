@@ -70,7 +70,9 @@ const mutations = {
 
         }
         state.AllContent = contList;
+    },
+    SET_MARK_STATE(state,mark) {
+      state.mark=mark;
     }
-
 };
 export default mutations;
