@@ -271,7 +271,7 @@ export default[
 
         ]*/
     },
-    {
+{
         path:'/prostage/many',
         name:'second',
         component:second,
@@ -292,5 +292,6 @@ export default[
         name:'chName',
         component:()=>import('../views/prostage/content/amain.vue'),
     },
+
 ]
 
