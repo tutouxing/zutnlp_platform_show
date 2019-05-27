@@ -276,6 +276,9 @@ export default[
         path:'/prostage',
         name:'prostage',
         component:()=>import('../views/prostage/index/index.vue'),
+        /*children: [
+
+        ]*/
     },
     {
         path:'/prostage/many',
@@ -294,9 +297,14 @@ export default[
 
     },
     {
+        path:'/prostage/chanel/:chName',
+        name:'chName',
+        component:()=>import('../views/prostage/content/amain.vue'),
+    },
+    {
         path: '/:title',
         name: 'modeSecCont',
         component: modeSecCont
-    }
+    },
 ]
 
