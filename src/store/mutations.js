@@ -71,8 +71,21 @@ const mutations = {
         }
         state.AllContent = contList;
     },
-    SET_MARK_STATE(state,mark) {
-      state.mark=mark;
+    SET_AllTXT_STATE (state, channel) {
+        var contList=new Array();
+        var i=0;
+        var title;
+        for (i=0;i<channel.length;i++){
+            for (var m=0;m<channel[i].contents.length;m++) {
+                title=channel[i].contents[m].text
+                contList.push(title)
+            }
+
+        }
+        state.Alltxt = contList;
     }
+
+
+
 };
 export default mutations;

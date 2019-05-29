@@ -258,26 +258,17 @@ export default[
         name: 'modeSecCont',
         component: modeSecCont
     },
-
-    {
-        path: '/modeCont',
-        name:'modeFirstCont',
-        component:()=>import('../components/modeFirst/modeCont.vue'),
-    },
     {
         path: '/modethirdCont/:title',
         name:'modethirdCont',
         component:()=>import('../components/modeFirst/modethirdCont.vue'),
     },
-    // {
-    //   path:'/'
-    // },
     {
         path:'/prostage',
         name:'prostage',
         component:()=>import('../views/prostage/index/index.vue'),
     },
-    {
+{
         path:'/prostage/many',
         name:'second',
         component:second,
@@ -292,11 +283,7 @@ export default[
         name: 'FrameWork',
         component:FrameWork,
 
-    },
-    {
-        path: '/:title',
-        name: 'modeSecCont',
-        component: modeSecCont
     }
+
 ]
 

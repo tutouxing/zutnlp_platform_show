@@ -64,4 +64,8 @@ export default {
              margin-right:5%;
              text-align:center
          }
+    a:hover{color: #aaccee}
+    a{text-decoration: none;}
+    a:visited{color:#ffffff}
+    a:active{color: #ffffff}
 </style>

@@ -28,4 +28,8 @@
     .el-carousel__item:nth-child(2n+1) {
         background-color: #d3dce6;
     }
+    a:hover{color: #aaccee}
+    a{text-decoration: none;}
+    a:visited{color:#2361b9}
+    a:active{color: #ffffff}
 </style>

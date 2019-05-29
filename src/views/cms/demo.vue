@@ -16,7 +16,7 @@
               icon-class="el-icon-tickets"
               :filter-node-method="filterNode"
               node-key="id"
-              highlight-current
+              highlight-current="true"
               @node-click="loadSet()"
               ref="tree2">
                     <span class="custom-tree-node" slot-scope="{ node, data }">
@@ -130,17 +130,7 @@
             }
         },
         created() {
-          getChannelById(this.$store.state.userid).then(res=>{
-              for(let i=0;i<res.data.length;i++){
-                  this.data2.push({
-                      id:res.data[i].id,
-                      label:res.data[i].chName,
-                      data:res.data[i].contents,
-                  })
-              }
-            this.tableData=this.data2[0].data;
-              this.channelId=this.data2[0].id;
-          });
+          this.getChannel();
           this.$nextTick(function(){
             this.$refs.tree2.setCurrentKey(2);
           })
@@ -169,7 +159,6 @@
               path: '/addContent',
               query: {
                 id: id,
-                channel:this.channelId,
                 type: 'update'
               }
             })
@@ -189,8 +178,13 @@
               const index = this.tableData.indexOf(rows);
               this.tableData.splice(index, 1);
               this.data2[this.channelId].data.splice(index, 1);
+            }).then(() => {
+              getChannelById(this.$store.state.userid).then(res=>{
+                this.$store.commit("SET_CHANNEL_STATE", res.data);
+                console.log(this.$store.state.channel)
+              });
             });
-          });
+          })
           },
           deleChannel(node){
             this.$confirm('此操作将永久删除, 是否继续?', '提示', {
@@ -212,7 +206,22 @@
                  }
 
               });
+            }).then(() => {
+              getChannelById(this.$store.state.userid).then(res=>{
+                this.$store.commit("SET_CHANNEL_STATE", res.data);
+                console.log(this.$store.state.channel)
+              });
             });
+          },
+          getChannel(){
+            for(let i=0;i<this.$store.state.channel.length;i++){
+              this.data2.push({
+                id:this.$store.state.channel[i].id,
+                label:this.$store.state.channel[i].chName,
+                data:this.$store.state.channel[i].contents,
+              })
+              this.tableData=this.data2[0].data;
+            }
           }
         },
         data() {

@@ -152,7 +152,12 @@ export default {
            message: '修改成功',
            type: 'success',
          });
-       })
+       }).then(() => {
+          getChannelById(this.$store.state.userid).then(res=>{
+            this.$store.commit("SET_CHANNEL_STATE", res.data);
+            console.log(this.$store.state.channel)
+          });
+        })
       }
       else
         addContent(this.$store.state.userid,this.value,this.contentPass).then(() => {
@@ -160,6 +165,11 @@ export default {
               message: '保存成功',
               type: 'success',
             });
+    }).then(() => {
+      getChannelById(this.$store.state.userid).then(res=>{
+        this.$store.commit("SET_CHANNEL_STATE", res.data);
+        console.log(this.$store.state.channel)
+      });
     })
     },
     handleRemove (file, fileList) {
