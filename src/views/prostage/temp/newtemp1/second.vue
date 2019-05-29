@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="right_bottom">
                                             <div class="right_bottom_left">
-                                                <span class="lian" v-on:click="skip(n)" >{{n.title}}</span>
+                                                <span class="lian1" v-on:click="skip(n)" >{{n.title}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +143,7 @@
                                         </div>
                                         <div class="right_bottom">
                                             <div class="right_bottom_left">
-                                                <span class="lian" v-on:click="skip(n)" >{{n.title}}</span>
+                                                <span class="lian1" v-on:click="skip(n)" >{{n.title}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -173,7 +173,7 @@
                                         </div>
                                         <div class="right_bottom">
                                             <div class="right_bottom_left">
-                                                <span class="lian" v-on:click="skip(n)" >{{n.title}}</span>
+                                                <span class="lian1" v-on:click="skip(n)" >{{n.title}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -194,7 +194,7 @@
                                         </div>
                                         <div class="right_bottom">
                                             <div class="right_bottom_left">
-                                                <span class="lian" v-on:click="skip(n)" >{{n.title}}</span>
+                                                <span class="lian1" v-on:click="skip(n)" >{{n.title}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -209,6 +209,7 @@
 
 <script>
     import Header from '../../index/phead'
+    import {PictureById} from '../../../../api/picture/pt'
     export default {
         name: "second",
         data(){
@@ -225,6 +226,7 @@
         },
         created(){
             this.slice1();
+            this.datachuli();
         },
         methods:{
             slice1(){
@@ -243,6 +245,14 @@
                 this.$router.push({name:'detailed1', params:{item:n}});
                 this.$router.push({path:'/prostage/detailed'})
             },
+            datachuli(){
+                console.log("打印第一个内容返回的图像东西分析")
+                for(let i=0;i<this.vnews1.length;i++){
+                    PictureById(this.vnews1[i].id).then((response)=>{
+                       console.log(response);
+                    })
+                }
+            },
         },
 
     }
@@ -260,6 +270,12 @@
         width: 100%;
         height: 100%;
     }*/
+    .lian{
+        text-align: left;
+    }
+    .lian1{
+        text-align: left;
+    }
     .lian:hover{
         color: red;
     }

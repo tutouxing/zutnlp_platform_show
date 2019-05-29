@@ -18,9 +18,10 @@
                             <el-button style="float:left; padding: 3px 0; color: black" type="text" >{{this.label1[0]}}</el-button>
                             <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many()">更多</el-button>
                         </div>
-                        <div v-for="(n,index) in vnews1" :key="index" class="title">
-                        <a target="_blank" class="lian" v-on:click="skip(n)" >{{n.title}}</a>
-                            <span class="dianji">点击量：{{n.click_count}}</span>
+                        <div v-for="(n,index) in vnews1" :key="index" >
+                            <ul class="title">
+                                <li class="lian" v-on:click="skip(n)">{{n.title}}</li>
+                            </ul>
                         </div>
                     </el-card>
                 </div>
@@ -30,10 +31,15 @@
                             <el-button style="float:left; padding: 3px 0; color: black" type="text" >{{this.label1[1]}}</el-button>
                             <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many1()">更多</el-button>
                         </div>
-                        <div v-for="(n,index) in vnews2"  :key="index" style="height: 30px">
+                        <div v-for="(n,index) in vnews2" :key="index" >
+                            <ul class="title">
+                                <li class="lian" v-on:click="skip(n)">{{n.title}}</li>
+                            </ul>
+                        </div>
+                       <!-- <div v-for="(n,index) in vnews2"  :key="index" style="height: 30px">
                             <a v-on:click="skip(n)" class="lian" >{{n.title}}</a>
                             <span class="dianji">点击量：{{n.click_count}}</span>
-                        </div>
+                        </div>-->
                     </el-card>
                 </div>
             </el-col >
@@ -45,9 +51,14 @@
                             <!--<span>{{this.label1[2]}}</span>-->
                             <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many2()">更多</el-button>
                         </div>
-                        <div v-for="(n,index) in vnews3" :key="index" style="height: 30px">
-                            <a target="_blank" class="lian" v-on:click="skip(n)">{{n.title}}</a>
+                        <div v-for="(n,index) in vnews3" :key="index" >
+                            <ul class="title">
+                                <li class="lian" v-on:click="skip(n)">{{n.title}}</li>
+                            </ul>
                         </div>
+                        <!--<div v-for="(n,index) in vnews3" :key="index" style="height: 30px">
+                            <a target="_blank" class="lian" v-on:click="skip(n)">{{n.title}}</a>
+                        </div>-->
                     </el-card>
                 </div>
                 <div>
@@ -57,9 +68,14 @@
                             <!--<span>{{this.label1[3]}}</span>-->
                             <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many3()">更多</el-button>
                         </div>
-                        <div v-for="(n,index) in vnews4" :key="index" style="height: 30px">
-                            <a target="_blank" class="lian" v-on:click="skip(n)">{{n.title}}</a>
+                        <div v-for="(n,index) in vnews4" :key="index" >
+                            <ul class="title">
+                                <li class="lian" v-on:click="skip(n)">{{n.title}}</li>
+                            </ul>
                         </div>
+                        <!--<div v-for="(n,index) in vnews4" :key="index" style="height: 30px">
+                            <a target="_blank" class="lian" v-on:click="skip(n)">{{n.title}}</a>
+                        </div>-->
                     </el-card>
                 </div>
             </el-col>
@@ -92,7 +108,7 @@
         methods:{
             slice(){
                 let i;
-                for( i = 0 ; i < 2 ; i++){
+                for( i = 0 ; i < 3; i++){
                     this.vnews1.push(this.channels[0].contents[i]);
                 }
                 for( i = 0 ; i < 3 ; i++){
@@ -198,6 +214,9 @@
     }
     .clearfix{
         height: 20px;
+    }
+    .lian{
+        text-align: left;
     }
     .lian:hover{
         color: red;

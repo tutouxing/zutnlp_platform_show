@@ -10,7 +10,7 @@
                 <div class="grid-content bg-purple-light">
                     <el-menu mode="horizontal">
                         <el-menu-item v-for="(items,i) in this.$store.state.channel" :index=i.toString()>
-                            {{items.chName}}
+                            <router-link to="/prostage/chanel/123">{{items.chName}}</router-link>
                         </el-menu-item>
                     </el-menu>
                 </div>
