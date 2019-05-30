@@ -133,19 +133,17 @@ export default {
   },
   methods: {
     getParams () {
-      this.contentID = this.$route.query.id
-      this.value=this.$route.query.channel
-      console.log(this.value)
-       getContentById(this.contentID).then(res=> {
-         let detailContent = res.data
-         this.contentPass.title = detailContent.title;
-         this.contentPass.textHref = detailContent.textHref;
-         console.log(this.contentPass.textHref)
-         this.disable=true
-       });
-      this.type = this.$route.query.type
-      console.log("目前的内容:");
-      console.log(this.type);
+        this.contentID = this.$route.query.id
+        this.value = this.$route.query.channel
+        console.log(this.value)
+        getContentById(this.contentID).then(res => {
+          let detailContent = res.data
+          this.contentPass.title = detailContent.title;
+          this.contentPass.textHref = detailContent.textHref;
+          console.log(this.contentPass.textHref)
+          this.disable = true
+        });
+        this.type = this.$route.query.type
     },
     passContent(){
       if(this.type==='update'){
@@ -154,7 +152,12 @@ export default {
            message: '修改成功',
            type: 'success',
          });
-       })
+       }).then(() => {
+          getChannelById(this.$store.state.userid).then(res=>{
+            this.$store.commit("SET_CHANNEL_STATE", res.data);
+            console.log(this.$store.state.channel)
+          });
+        })
       }
       else
         addContent(this.$store.state.userid,this.value,this.contentPass).then(() => {
@@ -162,6 +165,11 @@ export default {
               message: '保存成功',
               type: 'success',
             });
+    }).then(() => {
+      getChannelById(this.$store.state.userid).then(res=>{
+        this.$store.commit("SET_CHANNEL_STATE", res.data);
+        console.log(this.$store.state.channel)
+      });
     })
     },
     handleRemove (file, fileList) {
