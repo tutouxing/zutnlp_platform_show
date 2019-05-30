@@ -10,7 +10,11 @@
                 <div class="grid-content bg-purple-light">
                     <el-menu mode="horizontal">
                         <el-menu-item v-for="(items,i) in this.$store.state.channel" :index=i.toString()>
-                            <router-link to="/prostage/chanel/123">{{items.chName}}</router-link>
+                            <template slot="chName">
+                            </template>
+                            <router-link v-bind:to="'/prostage/chanel/'+items.chName">
+                                {{items.chName}}
+                            </router-link>
                         </el-menu-item>
                     </el-menu>
                 </div>
