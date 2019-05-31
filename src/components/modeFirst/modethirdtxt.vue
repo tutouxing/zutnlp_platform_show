@@ -26,7 +26,7 @@
                         findtxt=this.$store.state.Alltxt[i]
                     }
                 }
-                console.log("查找到的文章++++++"+findtxt)
+                console.log("查找到的文章++++++"+findtxt);
                 return findtxt
             }
         },methods:{

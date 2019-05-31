@@ -266,10 +266,6 @@
         padding: 18px ;
     }
 
-   /* .box-card {
-        width: 100%;
-        height: 100%;
-    }*/
     .lian{
         text-align: left;
     }
@@ -287,7 +283,6 @@
     .wrap{
         width: 600px;
         margin: 0px auto;
-
     }
     .menu{
         width: 600px;
@@ -315,8 +310,8 @@
 
     }
     .content ul li:hover{
-        background-color: lavender;
-        transition-duration: 0.5s;
+          background-color: lavender;
+          transition-duration: 0.5s;
     }
     .content .left{
         overflow: hidden;/*隐藏溢出图片内容*/
