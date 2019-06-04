@@ -20,4 +20,8 @@
     line-height: 60px;
     height: 60px;
 }
+a:hover{color: #aaccee}
+a{text-decoration: none;}
+a:visited{color:#ffffff}
+a:active{color: #ffffff}
 </style>

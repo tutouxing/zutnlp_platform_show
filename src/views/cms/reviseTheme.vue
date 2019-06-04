@@ -49,6 +49,7 @@
     import {addChannel} from '../../api/channel/index.js'
     import {setObj,getObj} from '../../api/admin/user/index.js'
     import "../../assets/icon/iconfont_set";
+    import {getChannelById} from '../../api/channel'
     export default {
         name: 'reviseTheme',
       created(){
@@ -80,7 +81,11 @@
                 this.$message({
                     message: '设置成功',
                     type: 'success'
+                }).then(() => {
+                getChannelById(this.$store.state.userid).then(res=>{
+                  this.$store.commit("SET_CHANNEL_STATE", res.data);
                 });
+              })
             },
             preview(){
               this.$router.push(this.value);

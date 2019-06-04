@@ -19,5 +19,6 @@ const state = {
     userInformation:'',
     pageSet:["待添加","待添加","待添加"],
     AllContent:[],
+    Alltxt:[],
 };
 export default state;
