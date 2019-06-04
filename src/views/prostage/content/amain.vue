@@ -52,7 +52,7 @@
                                        <div class="rgwapper_title">
                                            <el-row>
                                                <el-col :span="18"><h3 class="rgwapper_title_h4">热点聚焦</h3></el-col>
-                                               <el-col :span="6"><el-button type="text" style="float: right">更多</el-button></el-col>
+                                               <el-col :span="6"><el-button type="text" style="float: right" @click="many()">更多</el-button></el-col>
                                            </el-row>
                                        </div>
                                        <div class="rgwapper_body">
@@ -82,8 +82,8 @@
             <el-col :span="8">
                 <div>
                     <el-carousel indicator-position="outside">
-                        <el-carousel-item v-for="item in 4" :key="item">
-                            <image :src="item" alt=""></image>
+                        <el-carousel-item v-for="item in depictions" :key="item.id">
+                            <image :src="item.idView" alt=""></image>
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -121,19 +121,12 @@
             return {
                 activeName: 'second',
                 items:[],
-             /*   news:[
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                ],
-                news1:[
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                ],*/
+             depictions:[
+                 { id:0, idView:'https://inews.gtimg.com/newsapp_bt/0/9132517236/1000'},
+                 { id:1, idView:'https://img1.gtimg.com/rcdimg/20190528/07/1245425028_273x145.jpg'},
+                 { id:2, idView:'https://inews.gtimg.com/newsapp_ls/0/9153716802_294195/0'},
+                 { id:3, idView:'https://inews.gtimg.com/newsapp_bt/0/9132543707/1000'},
+             ],
                 list:[],//所有栏目列表
                 content:[],
                 content1:[],
@@ -158,8 +151,6 @@
                          break;
                      }
                  }
-                 console.log('打印列表');
-                 console.log(this.content);
                  this.content1=[];
                  for (let j=0;j<5;j++){
                      this.content1.push(this.content[j]);
@@ -177,6 +168,10 @@
                 this.$router.push({name:'detailed1', params:{item:n}});
                 this.$router.push({path:'/prostage/detailed'})
             },
+            many(){
+                this.$store.commit('SET_COMPONENTS_STATE',5);
+                this.$router.push({name:'second',params:this.content});
+            }
         },
         created(){
             this.helloWord();

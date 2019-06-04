@@ -266,12 +266,10 @@ export default[
     {
         path:'/prostage',
         name:'prostage',
-        component:()=>import('../views/prostage/index/index.vue'),
-        /*children: [
-
-        ]*/
+        /*component:()=>import('../views/prostage/index/index.vue'),*/
+        component:()=>import('../views/prostage/content/aindex'),
     },
-{
+    {
         path:'/prostage/many',
         name:'second',
         component:second,

@@ -1,10 +1,6 @@
 <template>
 
         <div class="" v-if="this.$store.state.components=='1'">
-       <!--     <div v-for="(n,index) in vnews1" :key="index" class="text item">
-                <a target="_blank" class="lian" v-on:click="skip(n)" >{{n.title}}</a>
-                <span class="dianji">点击量：{{n.click_count}}</span>
-            </div>-->
             <Header></Header>
             <el-row>
                 <el-col :span="12">
@@ -50,13 +46,8 @@
                     </div>
                 </el-col>
             </el-row>
-
         </div>
         <div class="" v-else-if="this.$store.state.components=='2'" >
-            <!--<div v-for="(n,index) in vnews2" :key="index"  class="text item">
-                <a target="_blank" class="lian" v-on:click="skip(n)" >{{n.title}}</a>
-                <span class="dianji">点击量：{{n.click_count}}</span>
-            </div>-->
             <Header></Header>
             <el-row>
                 <el-col :span="12">
@@ -104,10 +95,6 @@
             </el-row>
         </div>
         <div class="" v-else-if="this.$store.state.components==='3'">
-          <!--  <div v-for="(n,index) in vnews3" :key="index"  class="text item">
-                <a target="_blank" class="lian" v-on:click="skip(n)" >{{n.title}}</a>
-                <span class="dianji">点击量：{{n.click_count}}</span>
-            </div>-->
             <Header></Header>
             <el-row>
                 <el-col :span="12">
@@ -154,11 +141,7 @@
                 </el-col>
             </el-row>
         </div>
-        <div class="" v-else="this.$store.state.components==='4'">
-           <!-- <div v-for="(n,index) in vnews4" :key="index" class="text item">
-                <a target="_blank" class="lian" v-on:click="skip(n)" >{{n.title}}</a>
-                <span class="dianji">点击量：{{n.click_count}}</span>
-            </div>-->
+        <div class="" v-else-if="this.$store.state.components==='4'">
             <Header></Header>
             <el-row>
                 <el-col :span="12">
@@ -205,6 +188,53 @@
                 </el-col>
             </el-row>
         </div>
+    <div v-else="this.$store.state.components==='5'">
+        <Header></Header>
+        <el-row>
+            <el-col :span="12">
+                <div class="wrap">
+                    <div class="content">
+                        <ul v-for="(n,index) in vnews" :key="index" class="text item">
+                            <li>
+                                <div class="left"><img src="" alt=""></div>
+                                <div class="right">
+                                    <div class="right_top">
+                                        <h3 class="lian" v-on:click="skip(n)" >{{n.title}}</h3>
+                                    </div>
+                                    <div class="right_bottom">
+                                        <div class="right_bottom_left">
+                                            <span class="lian1" v-on:click="skip(n)" >{{n.title}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </el-col>
+            <el-col :span="12">
+                <div class="wrap">
+                    <div class="content">
+                        <ul v-for="(n,index) in vnews" :key="index" class="text item">
+                            <li>
+                                <div class="left"><img src="" alt=""></div>
+                                <div class="right">
+                                    <div class="right_top">
+                                        <h3 class="lian" v-on:click="skip(n)"  >{{n.title}}</h3>
+                                    </div>
+                                    <div class="right_bottom">
+                                        <div class="right_bottom_left">
+                                            <span class="lian1" v-on:click="skip(n)" >{{n.title}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </el-col>
+        </el-row>
+    </div>
 </template>
 
 <script>
@@ -219,6 +249,7 @@
                 vnews3:[],
                 vnews4:[],
                 channels:[],
+                vnews:[],
             }
         },
         components:{
@@ -226,20 +257,16 @@
         },
         created(){
             this.slice1();
-            this.datachuli();
+            /*this.datachuli();*/
         },
         methods:{
             slice1(){
-               /* console.log('当前的组件是啥');
-                console.log(this.$store.state.components);*/
                 this.channels = this.$store.state.channel;
                 this.vnews1 = this.channels[0].contents;
                 this.vnews2 =this.channels[1].contents;
                 this.vnews3 =this.channels[2].contents;
-               /* console.log('打印2的chanels[2]');
-                console.log(this.channels[2].contents);
-                console.log(this.vnews3);*/
                 this.vnews4 =this.channels[3].contents;
+                this.vnews=this.$route.params;
             },
             skip(n){
                 this.$router.push({name:'detailed1', params:{item:n}});
