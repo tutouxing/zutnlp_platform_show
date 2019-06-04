@@ -7,42 +7,45 @@ import fetch from '../../utils/fetch'
 export function analysis_wpn(text) {
     if (text.replace(/[^0-9\u4e00-\u9fa5]/g,'')){//中文
         return fetch({
-            url:"http://localhost:19999/nlp_ch/wpn?text="+text,
+            url:"http://202.196.37.144:8898/nlp/nlp_ch/wpn/",
             method:"post",
+            data:text
         });
     }
     else//英文
         return fetch({
-        url:"http://localhost:19999/nlp_en/wpn?text="+text,
+        url:"http://202.196.37.144:8898/nlp/nlp_en/wpn/",
         method:"post",
-        // params:text
+        data:text
     })
 }
 export function analysis_dependence(text) {
     if (text.replace(/[^0-9\u4e00-\u9fa5]/g,'')){//中文
         return fetch({
-            url:"http://localhost:19999/nlp_ch/dependency?text="+text,
+            url:"http://202.196.37.144:8898/nlp/nlp_ch/dependency/",
             method:"post",
+            data:text
         });
     }
     else//英文
         return fetch({
-            url:"http://localhost:19999/nlp_en/dependence?text="+text,
+            url:"http://202.196.37.144:8898/nlp/nlp_en/dependence",
             method:"post",
-            // params:text
+            data:text
         })
 }
 export function analysis_tree(text) {
     if (text.replace(/[^0-9\u4e00-\u9fa5]/g,'')){//中文
         return fetch({
-            url:"http://localhost:19999/nlp_ch/tree?text="+text,
+            url:"http://localhost:19999/nlp_ch/tree/",
             method:"post",
+            data:text
         });
     }
     else//英文
         return fetch({
-            url:"http://localhost:19999/nlp_en/tree?text="+text,
+            url:"http://202.196.37.144:8898/nlp/nlp_en/tree/",
             method:"post",
-            // params:text
+            data:text
         })
 }

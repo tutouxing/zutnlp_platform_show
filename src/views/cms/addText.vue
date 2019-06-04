@@ -53,30 +53,41 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col style="width: 30%">
+     <!-- <el-col style="width: 30%">
         <p style="font-size: 18px">上传图片: </p>
       </el-col>
       <el-col style="width: 30%">
       <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="http://127.0.0.1:8848/upload/fileUpload/"
           list-type="picture-card"
           :on-preview="handlePictureCardPreview"
-          :on-remove="handleRemove">
+          :on-remove="handleRemove"
+          :on-error="error"
+          :on-success="success">
         <i class="el-icon-plus"></i>
       </el-upload>
       <el-dialog :visible.sync="dialogVisible" size="tiny">
         <img width="100%" :src="dialogImageUrl" alt="">
       </el-dialog>
-      </el-col>
+      </el-col>-->
+        <el-upload
+                class="avatar-uploader"
+                action="http://127.0.0.1:8848/upload/fileUpload/"
+                :show-file-list="false"
+                :on-success="success"
+                :on-error="error"
+                :before-upload="beforeUpload">
+            <i class="el-icon-plus"></i>
+        </el-upload>
     </el-row>
-        <el-row>
+        <el-row v-loading="quillUpdateImg">
             <quill-editor class="editor" style="height: 500px"
                           v-model="contentPass.textHref"
                           ref="myQuillEditor"
                           :options="editorOption"
                           @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
                           @change="onEditorChange($event)">
-                        </quill-editor>
+            </quill-editor>
         </el-row>
     <el-row>
       <el-button type="primary" style="margin-top: 50px" @click="passContent()"> 保存 </el-button>
@@ -128,7 +139,24 @@ export default {
       type:'',
       contentID:'',
       disable:false,
-      editorOption: {}
+      quillUpdateImg: false,
+      editorOption: {
+        placeholder: '',
+        theme: 'snow',  // or 'bubble'
+        modules: {
+          toolbar: {
+            container: toolbarOptions,  // 工具栏
+            handlers: {
+              'image': function (value) {
+                if (value) {
+                  document.querySelector('.avatar-uploader input').click()
+                } else {
+                  this.quill.format('image', false);
+                }
+              }
+            }
+          }
+        }},
     }
   },
   methods: {
@@ -175,9 +203,36 @@ export default {
     handleRemove (file, fileList) {
       console.log(file, fileList)
     },
+    error(err, file, fileList){
+      this.quillUpdateImg = false
+      this.$message.error('图片上传失败')
+      console.log('上传失败，请重试！')
+    },
+    success(response, file, fileList){
+      let quill = this.$refs.myQuillEditor.quill
+      // 如果上传成功
+      if (response ==="上传成功") {
+        // 获取光标所在位置
+        let length = quill.getSelection().index;
+        // 插入图片  res.info为服务器返回的图片地址
+        quill.insertEmbed(length, 'image', "http://118.25.191.46:8080/img/pic_1.png")
+        // 调整光标到最后
+        quill.setSelection(length + 1)
+        this.$message.success('图片插入成功')
+      } else {
+        this.$message.error('图片插入失败')
+      }
+      // loading动画消失
+      this.quillUpdateImg = false
+      console.log('上传成功！')
+    },
     handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
+    },
+    beforeUpload(file) {
+      // 显示loading动画
+      this.quillUpdateImg = true
     },
     goBack(){
       this.$router.push({
@@ -192,6 +247,26 @@ export default {
     }
   }
 }
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{'header': 1}, {'header': 2}],               // custom button values
+  [{'list': 'ordered'}, {'list': 'bullet'}],
+  [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
+  [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
+  [{'direction': 'rtl'}],                         // text direction
+
+  [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
+  [{'header': [1, 2, 3, 4, 5, 6, false]}],
+
+  [{'color': []}, {'background': []}],          // dropdown with defaults from theme
+  [{'font': []}],
+  [{'align': []}],
+  ['link', 'image', 'video'],
+  ['clean']                                         // remove formatting button
+]
+
 </script>
 
 <style scoped>
