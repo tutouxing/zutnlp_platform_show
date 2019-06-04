@@ -1,14 +1,14 @@
 <template>
   <div>
-    <el-row>
+    <el-row style="height: 1000px">
       <el-col style="width: 20%">
-        <el-card style="height: 900px">
-            <el-row>
-          <svg class="icon" aria-hidden="true">
+        <el-card >
+          <el-row>
+            <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-folder"></use>
-          </svg>
-                <span style="font-size: 20px; font-weight:bold"> 栏目目录</span>
-            </el-row>
+            </svg>
+            <span style="font-size: 20px; font-weight:bold"> 栏目目录</span>
+          </el-row>
           <el-tree
               class="filter-tree"
               :data="data2"
@@ -26,7 +26,7 @@
         </el-card>
       </el-col>
       <el-col style="width: 80%">
-        <el-card style="height: 900px">
+        <el-card >
           <el-row>
             <el-col style="width: 20%">
               <el-button type="primary" class="el-icon-circle-plus-outline" style="float: left;margin-bottom:20px; ">
@@ -46,82 +46,95 @@
               </el-button>
             </el-col>
           </el-row>
-          <el-table
-              :data="tableData"
-              border
-              style="width: 80%;">
-            <el-table-column
-                fixed
-                prop="id"
-                label="id"
-                width="auto">
-            </el-table-column>
-            <el-table-column
-                prop="title"
-                label="标题"
-                width="150">
-            </el-table-column>
-            <el-table-column
-                prop="rank"
-                label="置顶"
-                width="auto">
-            </el-table-column>
-            <el-table-column
-                prop="type"
-                label="类型"
-                width="120">
-            </el-table-column>
-            <el-table-column
-                prop="publish"
-                label="发布者"
-                width="120">
-            </el-table-column>
-            <el-table-column
-                prop="click_count"
-                label="点击"
-                width="auto">
-            </el-table-column>
-            <el-table-column
-                prop="dateCreated"
-                label="发布时间"
-                width="120">
-            </el-table-column>
-            <el-table-column
-                prop="status"
-                label="状态"
-                width="120">
-            </el-table-column>
-            <el-table-column
-                fixed="right"
-                label="操作"
-                width="200">
-              <template slot-scope="scope">
-                <el-button type="success" size="small" class="el-icon-edit" @click="edit(scope.row)">编辑</el-button>
-                <el-button type="danger" size="small" class="el-icon-delete" @click="deleCurrentContent(scope.row)">删除
-                </el-button>
-              </template>
-            </el-table-column>
-          </el-table>
+          <el-row>
+            <el-table
+                :data="tableData"
+                border
+                max-height="900"
+                style="width: 80%">
+              <el-table-column
+                  fixed
+                  prop="id"
+                  label="id"
+                  width="auto">
+              </el-table-column>
+              <el-table-column
+                  prop="title"
+                  label="标题"
+                  width="150">
+              </el-table-column>
+              <el-table-column
+                  prop="rank"
+                  label="置顶"
+                  width="auto">
+              </el-table-column>
+              <el-table-column
+                  prop="type"
+                  label="类型"
+                  width="120">
+              </el-table-column>
+              <el-table-column
+                  prop="publish"
+                  label="发布者"
+                  width="120">
+              </el-table-column>
+              <el-table-column
+                  prop="click_count"
+                  label="点击"
+                  width="auto">
+              </el-table-column>
+              <el-table-column
+                  prop="dateCreated"
+                  label="发布时间"
+                  width="120">
+              </el-table-column>
+              <el-table-column
+                  prop="status"
+                  label="状态"
+                  width="120">
+              </el-table-column>
+              <el-table-column
+                  fixed="right"
+                  label="操作"
+                  width="200">
+                <template slot-scope="scope">
+                  <el-button type="success" size="small" class="el-icon-edit" @click="edit(scope.row)">编辑</el-button>
+                  <el-button type="danger" size="small" class="el-icon-delete" @click="deleCurrentContent(scope.row)">删除
+                  </el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-row>
+          <el-row>
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="currentPage"
+                :page-size="3"
+                layout="total, prev, pager, next"
+                :total="this.tableData.length">
+            </el-pagination>
+          </el-row>
         </el-card>
       </el-col>
     </el-row>
-
   </div>
 
 </template>
 <style>
-    .icon {
-        width: 1.8em;
-        height: 1.8em;
-        fill: currentColor;
-        overflow: hidden;
-    }
+  .icon {
+    width: 1.8em;
+    height: 1.8em;
+    fill: currentColor;
+    overflow: hidden;
+  }
 </style>
 <script>
     import {getChannelById} from "../../api/channel";
     import {delContentById} from "../../api/content";
     import {delChannelById} from "../../api/channel";
     import "../../assets/icon/iconfont";
+
     export default {
         name: 'demo',
         watch: {
@@ -130,97 +143,104 @@
             }
         },
         created() {
-          getChannelById(this.$store.state.userid).then(res=>{
-              for(let i=0;i<res.data.length;i++){
-                  this.data2.push({
-                      id:res.data[i].id,
-                      label:res.data[i].chName,
-                      data:res.data[i].contents,
-                  })
-              }
-              console.log("皇上净水");
-              console.log(this.data2);
-            this.tableData=this.data2[0].data;
-          });
+            getChannelById(this.$store.state.userid).then(res => {
+                for (let i = 0; i < res.data.length; i++) {
+                    this.data2.push({
+                        id: res.data[i].id,
+                        label: res.data[i].chName,
+                        data: res.data[i].contents,
+                    })
+                }
+                console.log("皇上净水");
+                console.log(this.data2);
+                this.tableData = this.data2[0].data;
+            });
             console.log("皇上净水");
             console.log(this.$store.state.userid)
-          this.$nextTick(function(){
-            this.$refs.tree2.setCurrentKey(2);
-          })
+            this.$nextTick(function () {
+                this.$refs.tree2.setCurrentKey(2);
+            })
 
         },
 
         methods: {
-          addContent () {
-            // this.$store.commit('SET_COMP_STATE', add_text)
-            this.$router.push("addContent")
-          },
-          filterNode (value, data) {
-            if (!value) return true
-            return data.label.indexOf(value) !== -1
-          },
-          loadSet () {
-             this.channelId = this.$refs.tree2.getCurrentKey()
-            for (let i = 0; i < this.data2.length; i++) {
-              if (this.channelId === this.data2[i].id) {
-                this.tableData = this.data2[i].data
-              }
-            }
-          },
-          edit (rows) {
-            let id = rows.id
-            this.$router.push({
-              path: '/addContent',
-              query: {
-                id: id,
-                type: 'update'
-              }
-            })
-          },
-          deleCurrentContent (rows) {this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }) .then(() => {
-            delContentById(rows.id).then(() => {
-              this.$notify({
-                title: '成功',
-                message: '删除成功',
-                type: 'success',
-                duration: 2000
-              });
-              const index = this.tableData.indexOf(rows);
-              this.tableData.splice(index, 1);
-              this.data2[this.channelId].data.splice(index, 1);
-            });
-          });
-          },
-          deleChannel(node){
-            this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(() => {
-               delChannelById(this.channelId).then(() => {
-                this.$notify({
-                  title: '成功',
-                  message: '删除成功',
-                  type: 'success',
-                  duration: 2000
+            addContent() {
+                // this.$store.commit('SET_COMP_STATE', add_text)
+                this.$router.push("addContent")
+            },
+            filterNode(value, data) {
+                if (!value) return true
+                return data.label.indexOf(value) !== -1
+            },
+            loadSet() {
+                this.channelId = this.$refs.tree2.getCurrentKey()
+                for (let i = 0; i < this.data2.length; i++) {
+                    if (this.channelId === this.data2[i].id) {
+                        this.tableData = this.data2[i].data
+                    }
+                }
+            },
+            edit(rows) {
+                let id = rows.id
+                this.$router.push({
+                    path: '/addContent',
+                    query: {
+                        id: id,
+                        type: 'update'
+                    }
+                })
+            },
+            deleCurrentContent(rows) {
+                this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    delContentById(rows.id).then(() => {
+                        this.$notify({
+                            title: '成功',
+                            message: '删除成功',
+                            type: 'success',
+                            duration: 2000
+                        });
+                        const index = this.tableData.indexOf(rows);
+                        this.tableData.splice(index, 1);
+                        this.data2[this.channelId].data.splice(index, 1);
+                    });
                 });
-                 for (let i = 0; i < this.data2.length; i++) {
-                   if (this.channelId === this.data2[i].id) {
-                     this.$refs.tree2.remove(this.data2[i]);
-                   }
-                 }
+            },
+            deleChannel(node) {
+                this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    delChannelById(this.channelId).then(() => {
+                        this.$notify({
+                            title: '成功',
+                            message: '删除成功',
+                            type: 'success',
+                            duration: 2000
+                        });
+                        for (let i = 0; i < this.data2.length; i++) {
+                            if (this.channelId === this.data2[i].id) {
+                                this.$refs.tree2.remove(this.data2[i]);
+                            }
+                        }
 
-              });
-            });
-          }
+                    });
+                });
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            }
         },
         data() {
             return {
-                channelId:'',
+                channelId: '',
                 tableData: [],
                 filterText: '',
                 data2: [],
@@ -228,6 +248,7 @@
                     children: 'children',
                     label: 'label'
                 },
+                currentPage: 4,
             }
         }
     }
