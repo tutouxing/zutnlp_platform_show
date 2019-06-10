@@ -103,10 +103,10 @@
         data(){
             return{
                 picture:[
-                    {url:require('../../../assets/demo1/bg2.jpg')},
-                    {url:require('../../../assets/demo1/bg3.jpg')},
-                    {url:require('../../../assets/demo1/bg4.jpg')},
-                    {url:require('../../../assets/demo1/bg5.jpg')}
+                    {url:'http://www.chinanews.com/2019/06-10/U601P4T8D8860470F107DT20190610144535.jpg'},
+                    {url:'http://www.chinanews.com/tp/2019/06-10/U610P4T8D8860560F107DT20190610155430.jpg'},
+                    {url:'http://www.chinanews.com/2019/06-10/U86P4T8D8860449F107DT20190610142556.jpg'},
+                    {url:'http://www.chinanews.com/2019/06-10/U601P4T8D8860423F107DT20190610140525.jpg'}
                 ],
                 Item:[],
                 content3:[
