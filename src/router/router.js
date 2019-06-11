@@ -238,6 +238,21 @@ export default[
             name:'groupType',
             component:()=>import('../components/Admin/group/index.vue')
         },
+      {
+        path:'data',
+        name:'dataCenter',
+        component:()=>import('../views/dataCenter/dataDemo.vue')
+      },
+      {
+        path:'channelData',
+        name:'dataCenter',
+        component:()=>import('../views/dataCenter/channelDemo.vue')
+      },
+      {
+        path:'fromData',
+        name:'dataCenter',
+        component:()=>import('../views/dataCenter/fromDemo.vue')
+      },
 
     ]
   },
