@@ -44,7 +44,7 @@
 
         },
         mounted(){
-            this.AllMsg.OnlyMsg=this.$route.params.items;//接收唯一标识id
+            this.AllMsg.OnlyMsg=this.$route.params.items;////接收唯一标识id
             for(let i=0;i<this.AllMsg.TextMsg[1].Iconograph.length;i++)
             {
 
