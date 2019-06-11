@@ -1,9 +1,12 @@
 <template>
     <div  style="text-align:center; width: 520px; margin-left: 30%" >
-        <h2>{{AllMsg.OnlyMsg.HeadLine}}</h2>
-        <p>{{AllMsg.TextMsg[0].FrontText}} </p>
+        <h2>{{AllMsg.OnlyMsg.title}}</h2>
+      <!--  <p>{{AllMsg.TextMsg[0].FrontText}} </p>-->
+
+
         <img src="AllMsg.OnlyMsg.Iconograph" style="width: 510px;height: 316px"/>
-        <p>{{AllMsg.TextMsg[0].TailText}} </p>
+        <p>{{   AllMsg.OnlyMsg.text}} </p>
+       <!-- <p>{{AllMsg.TextMsg[0].TailText}} </p>-->
     </div>
 </template>
 <script>
@@ -47,8 +50,8 @@
 
             }
                 let that=this;
-                this.AllMsg.TextMsg[0].FrontText= this.AllMsg.OnlyMsg.TextContent.toString().substr(0,that.AllMsg.OnlyMsg.TextContent.length/2);
-                this.AllMsg.TextMsg[0].TailText= this.AllMsg.OnlyMsg.TextContent.toString().substr(that.AllMsg.OnlyMsg.TextContent.length/2,that.AllMsg.OnlyMsg.TextContent.length);
+                this.AllMsg.TextMsg[0].FrontText= this.AllMsg.OnlyMsg.text.toString().substr(0,that.AllMsg.OnlyMsg.text.length/2);
+                this.AllMsg.TextMsg[0].TailText= this.AllMsg.OnlyMsg.text.toString().substr(that.AllMsg.OnlyMsg.text.length/2,that.AllMsg.OnlyMsg.text.length);
 
 
 

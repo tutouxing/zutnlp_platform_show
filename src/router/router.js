@@ -171,6 +171,7 @@ export default[
             component:PlayContentMsg,
 
         },
+
         {
             path: 'PlayManyPicturesContentMsg',
             name: 'PlayManyPicturesContentMsg',
@@ -279,6 +280,8 @@ export default[
         path:'/prostage',        
  		component:()=>import('../views/prostage/index/index.vue')
     },
+
+
 
     {
         path: '/ClientWeb/TextTemplate/FrameWork',

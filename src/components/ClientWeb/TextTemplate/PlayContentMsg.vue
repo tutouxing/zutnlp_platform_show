@@ -29,7 +29,7 @@
             console.log(this.$route.params.items);
              this.AllMsg.TextMsg[1]=this.$route.params.items;////接收唯一标识
             this.AllMsg.TextMsg[0].HeadLine=this.$route.params.items.title;
-            this.AllMsg.TextMsg[0].TextContent=this.$route.params.items.Content;
+            this.AllMsg.TextMsg[0].TextContent=this.$route.params.items.text;
 
         }
     }
