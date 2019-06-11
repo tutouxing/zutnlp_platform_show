@@ -1,11 +1,149 @@
 
 <template>
-    <el-container style="margin-top: 10px">
-    <el-header>
-              <div>
+   <!-- <el-header>
+    <div  :style ="backs">
+        <img src="../Picture/moon.png" >
+    </div>
+</el-header>-->
+    <el-container style="margin-top: 10px" class="allboder">
+       <!-- <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="1" v-for=" item in Allofdata.gotdata" >
+                {{item.chName}}
+                <div>
+                    &lt;!&ndash;   <div>
+                            <el-carousel :interval="4000" type="card" height="200px">
+                                <el-carousel-item v-for="item in Allofdata.KeJiMsg.Pictures" :key="item">
+                                    <img :src="item.Picture"  v-on:click="kejigonext0(item)" />
+                                    <h3>{{ item .Picture}}</h3>
+                                </el-carousel-item>
+                            </el-carousel>
+                        </div>&ndash;&gt;
+                        <div>
+                            <div class="divmain" style="float:left;" v-for="items in item.contents" v-on:click="kejigonext1(items)">
+                                <img style="margin-top: 15px"  class="photo" :src="items.picture" />
+                                <p >{{items.title}}</p>
+                            </div>
+
+                            <div class="divaside"  width="500px"  v-for="items in item.contents" v-on:click="kejigonext2(items)">
+                                <p class="div-inline">{{items.title}}</p>
+                            </div >
+                        </div>
+
+
+                </div>
+            </el-menu-item>
+        </el-menu>
+-->
+        <el-tabs v-model="activeName" @tab-click="handleClick" style="width: 2000px">
+            <el-tab-pane label="首页" name="first"  >
+                <!-- <div class="pictureboder">
+                 <el-carousel :interval="4000" type="card" height="200px">
+                  <el-carousel-item v-for="item in Allofdata.KeJiMsg.Pictures" :key="item">
+                  <img :src="item.Picture"  v-on:click="kejigonext0(item)" />
+                   <h3>{{ item .Picture}}</h3>
+                    </el-carousel-item>
+                 </el-carousel>
+                 </div>-->
+                <el-container >
+                    <div class="yule2">
+                        <div class="yule2-1">
+                            <div>
+                                <el-carousel >
+                                    <el-carousel-item v-for="item in Allofdata.YuLeMsg.Pictures" :key="item" >
+                                        <img :src="item.Picture"   height="200px" style="width: 500px;" v-on:click="yuletonext2(item)" />
+                                        <p>{{item.Introduction}}</p>
+                                    </el-carousel-item>
+                                </el-carousel>
+                            </div>
+                        </div>
+
+                    </div>
+                    <el-aside style="float: left;margin-left: 70px; height: auto">
+                        <h4 v-for=" (item,index) in  Allofdata.topdata" v-if="index<=4" v-on:click="yuletonext1(item)">{{item.title}} </h4>
+                    </el-aside >
+                    <el-aside style="float: left;margin-left: 30px;height: auto">
+                        <h4 v-for=" (item,index) in  Allofdata.topdata" v-if="index>4&&index<9" v-on:click="yuletonext1(item)">{{item.title}} </h4>
+                    </el-aside >
+                    <el-button type="text" style="margin-top: 99px" v-on:click="change()">换一换</el-button>
+                </el-container >
+                       <!-- <div  v-for="(items,index2) in item.contents "  v-if="index2<=1" style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
+
+
+
+                        </div>-->
+
+
+
+                   <!-- <el-aside v-for=" (item,index) in  Allofdata.gotdata" v-if="index<=2" style="float: left">
+                    <h3>{{item.chName}}</h3>
+                    <div  v-for="items in item.contents " style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
+
+                        <h4>{{items.title}}</h4>
+
+                    </div>
+
+                </el-aside >
+
+                    <el-aside v-for=" (item,index) in  Allofdata.gotdata" v-if="2<index&&index<=5" style="float: left">
+                        <h3>{{item.chName}}</h3>
+                        <div  v-for="items in item.contents " style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
+
+                            <h4>{{items.title}}</h4>
+
+                        </div>
+
+                    </el-aside>
+                    <el-aside v-for=" (item,index) in  Allofdata.gotdata" v-if="index==6" style="float: left">
+                        <h3>{{item.chName}}</h3>
+                        <div  v-for="items in item.contents " style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
+
+                            <h4>{{items.title}}</h4>
+
+                        </div>
+
+                    </el-aside>
+               -->
+
+
+                   <!-- <div style="width: 500px; height: auto;float: left" v-for=" item in  Allofdata.gotdata">
+
+                        <div  v-for="items in item.contents " style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
+
+                            <h4>{{items.title}}</h4>
+
+                        </div>
+
+                    </div>
+
+-->
+            </el-tab-pane>
+
+
+         <el-tab-pane :label="item.chName" :name="second" v-for="item in Allofdata.gotdata" >
+
+             <div>
+
+                 <div>
+                     <div class="divmain" style="float:left;" v-for="items in item.contents" v-on:click="kejigonext1(items)">
+                         <img style="margin-top: 15px"  class="photo" :src="items.picture" />
+                         <p >{{items.title}}</p>
+                     </div>
+
+                     <div class="divaside"  width="500px"  v-for="items in item.contents" v-on:click="kejigonext2(items)">
+                         <p class="div-inline">{{items.title}}</p>
+                     </div >
+                 </div>
+
+
+             </div>
+         </el-tab-pane>
+
+        </el-tabs>
+      <!--  <div>
                  <el-tabs v-model="activeName" @tab-click="handleClick">
+
                                    <el-tab-pane label="体育" name="first">
-                       <div><!--体育-->
+                       <div>
                              <el-container>
                                  <el-aside>
                                    <h3 style="margin-top: 10px;margin-left: 5px" v-for="item in Allofdata.TiYuMsG.Left" v-on:click="tiyutonext1(item)">
@@ -15,7 +153,7 @@
 
                                  <el-main>
                                     <div>
-                                        <!-- <span class="demonstration">默认 Hover 指示器触发</span>     -->
+                                     <span class="demonstration">默认 Hover 指示器触发</span>
                                         <el-carousel>
                                             <el-carousel-item v-for="item in Allofdata.TiYuMsG.Pictures" :key="item"  v-on:click="tiyutonext0(item)">
                                                 <img :src="item.Picture"  height="200px" style="width: 525px;"/>
@@ -51,15 +189,15 @@
                                               <div v-for="item in Allofdata.TiYuMsG.RecommendVideos" v-on:click="tiyutonext3(item)">
                                               <p>{{item.title}}</p>
                                               <video  src="item.videos"  width="280" height="240" controls="controls" style="border-top :1px solid darkgray; border-bottom:1px solid darkgray;">
-                                                 <!-- Your browser does not support the video tag.-->
+                                                 &lt;!&ndash; Your browser does not support the video tag.&ndash;&gt;
                                               </video>
                                               </div>
                                           </div>
                                </el-container>
                            <el-container>
-                                        <!--  <el-aside></el-aside>-->
-                                        <!--  <el-main></el-main>-->
-                                        <!--  <div class="tiyuaside">文字侧栏</div>-->
+                                      <el-aside></el-aside>
+                                      <el-main></el-main>
+                                        <div class="tiyuaside">文字侧栏</div>
 
                            </el-container>
                        </div>
@@ -120,7 +258,7 @@
                                     <img style="margin-top: 15px"  class="yulephoto" :src="item.Pictures[1].Picture" />
                                     <img style="margin-top: 15px"  class="yulephoto" :src="item.Pictures[2].Picture" />
 
-                                    </div>
+                                </div>
                                </div>
                            <div class="yule4">
                                <div v-for=" item in Allofdata.YuLeMsg.Recommend" style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(item)">
@@ -129,9 +267,9 @@
                            </div>
                        </el-tab-pane>
                   </el-tabs>
-               </div>
-           </el-header>
-       <el-footer></el-footer>
+
+
+        </div>sssss-->
            </el-container>
 </template>
 <script>
@@ -142,6 +280,7 @@
         data(){
             return {
                 Allofdata:{
+
                     KeJiMsg:{
                         Pictures:[
                             {
@@ -156,7 +295,7 @@
                         ],
                         PictureAndText:[
                             {
-                                Content:'内容',//内容
+                                text:'内容',//内容
                                 picture:'../Picture/earth.png' ,//插图
                                 type:'类型',//类型
                                 title:' 科技新闻太阳科技新闻太阳科技新闻太阳 '  ,
@@ -164,7 +303,7 @@
                         ],
                         OnlyText:[
                             {
-                                Content:'科技新闻太阳科技新闻太阳科技新闻太阳'      ,//内容
+                                text:'科技新闻太阳科技新闻太阳科技新闻太阳'      ,//内容
                                 type:'类型'  ,//类型
                                 title:' 科技新闻太阳科技新闻太阳科技新闻太阳'  ,
                             }
@@ -191,7 +330,7 @@
                                 Text:{
                                     title:'地球',
                                     Introduction:'这是地球啊',
-                                    Content:'地球好',
+                                    text:'地球好',
                                 }
                             }
                         ],
@@ -209,12 +348,12 @@
                         Recommend:[
                             {
                                 title:'科技新闻太阳科技新闻太阳科技新闻太阳',
-                                Content:'科技新闻太阳科技新闻太阳科技新闻太阳',
+                                text:'科技新闻太阳科技新闻太阳科技新闻太阳',
                                 Author:'w',
                             },
                             {
                                 title:'科技新闻太阳科技新闻太阳科技新闻太阳',
-                                Content:'科技新闻太阳科技新闻太阳科技新闻太阳',
+                                text:'科技新闻太阳科技新闻太阳科技新闻太阳',
                                 Author:'w',
                             }
                         ]
@@ -225,13 +364,13 @@
                         Left:[
                             {
                                 title:'火箭总冠军',
-                                Content:'哈登mvp'
+                                text:'哈登mvp'
                             }
                         ],
                         Right:[
                             {
                                 title:'火箭总冠军',
-                                Content:'哈登mvp'
+                                text:'哈登mvp'
 
                             }
                         ],
@@ -259,9 +398,9 @@
                         ],/*左*/
 
                     },
-
-
-
+                    gotdata:{},
+                    topdata:[],
+                    obj:{}
                   /*  TextMessage:[
                         {
                             content:''      ,//内容
@@ -286,13 +425,48 @@
                          HeaderPictureSun:  '../Picture/sun.png '   ,
                      },*///图片轮播用
                 },
-                activeName:  'second' ,
-                gotdata:{},
+                activeName:  'first' ,
+                activeIndex: '1',
+                backs:{
+                  //  backgroundImage: "url(" + require("../Picture/head.jpg") + ")",
+                    backgroundImage: 'url(' + require('../Picture/moon.png') + ')',
+                    backgroundRepeat:'no-repeat',
+                    backgroundSize:'100% 100%'
+                },
+
             }
       },
-        methods:{
-            kejigonext0(item){
+        watch:{
+          topdata(){
+              //this.change();
 
+    }
+        },
+        computed: {
+
+
+
+        },
+        methods:{
+            change(){
+
+                let that=this;
+                for(let p=0;p<8;p++)
+                {
+                    let first= Math.round(Math.random() * (that.Allofdata.topdata.length - 8)) + 8;
+                    // let second=Math.round(Math.random() * (8 - 0)) + 0;
+                    let ob=that.Allofdata.topdata[first];
+                    that.Allofdata.topdata[first]=that.Allofdata.topdata[p];
+                    that.Allofdata.topdata[p]= ob;
+                    console.log("first"+first);
+                    /* console.log("second"+second);*/
+
+                }
+                console.log("换一换");
+                //   return this.Allofdata.topdata;
+                this.$forceUpdate();//调用本函数会重新渲染页面
+            },
+            kejigonext0(item){
                 //item是一个对象
                 console.log(item);
                 console.log("打印的科技0");//展示图片
@@ -328,7 +502,6 @@
                 this.$router.push({name:'PlayNewsMsg',params:{items:item}});
                 this.$router.push({path:'/PlayNewsMsg'});
             },
-
             tiyutonext0(item){
                 console.log("打印体育0");//展示三张图加文字
                 this.$router.push({name:'PlayNewsMsg',params:{items:item}});
@@ -365,10 +538,73 @@
                     console.log(tab, event);
                 },
 
+
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+
         },
         mounted(){
-           this.gotdata= state.channel;
-                console.log( this.gotdata);
+
+           this.Allofdata.gotdata= state.channel;
+           let j;let i;let w;let that=this;
+            console.log( this.Allofdata.gotdata);
+            console.log( this.Allofdata.gotdata[0].contents[0].text+"输出");
+            console.log( state.channel[0].contents[0].title+"输出1");
+           for(i=0;i<this.Allofdata.gotdata.length;i++)
+           {
+               console.log( "输出2");
+               for(w=0;w<this.Allofdata.gotdata[i].contents.length;w++)
+               {
+                   console.log( "输出3");
+                   this.Allofdata.topdata.push(that.Allofdata.gotdata[i].contents[w]);
+               }
+           }
+
+
+
+
+           for(let p=0;p<that.Allofdata.topdata.length;p++)
+           {
+               let first= Math.round(Math.random() * (that.Allofdata.topdata.length - 8)) + 8;
+               let second=Math.round(Math.random() * (8 - 0)) + 0;
+               this.Allofdata.obj=that.Allofdata.topdata[first];
+               that.Allofdata.topdata[first]=that.Allofdata.topdata[second];
+               that.Allofdata.topdata[second]=this.Allofdata.obj;
+               let ob=that.Allofdata.topdata[first];
+               console.log(ob.title+"title");
+               console.log("first"+first);
+               console.log("second"+second);
+           }
+
+            console.log( this.Allofdata.topdata.length+"长度");
+/*
+
+            this.Allofdata.TiYuMsG.Right.push({
+
+            });
+            this.Allofdata.TiYuMsG.Left
+            this.Allofdata.TiYuMsG.ViodesSide
+            this.Allofdata.TiYuMsG.RecommendVideos
+            this.Allofdata.TiYuMsG.Videos
+
+
+
+            this.Allofdata.YuLeMsg.PicturesAndText
+            this.Allofdata.YuLeMsg.Recommend
+            this.Allofdata.YuLeMsg.Pictures
+            this.Allofdata.YuLeMsg.Vodeos
+
+
+            this.Allofdata.KeJiMsg.PictureAndText
+            this.Allofdata.KeJiMsg.OnlyText
+            this.Allofdata.KeJiMsg.Pictures
+*/
+
+           /* console.log(  this.gotdata[0].contents[0].title+"：：：标题");
+            console.log(  this.gotdata[0].contents[0].text+"：：：内容");
+            console.log(  this.gotdata[0].contents[0].type+"：：：类型");*/
+            console.log( this.gotdata);
         }
       /*  mounted(){
 
@@ -398,6 +634,22 @@
 
 
 <style scoped>
+
+    .allboder{
+        border-top :50px solid deepskyblue;
+        border-bottom:20px solid deepskyblue;
+        border-right:20px solid deepskyblue;
+        border-left:20px solid deepskyblue;
+    }
+    .pictureboder{
+        margin-left: 0px;
+        width: 500px;
+        height: 500px;
+        border-top :20px solid deepskyblue;
+        border-bottom:20px solid deepskyblue;
+        border-right:50px solid deepskyblue;
+        border-left:50px solid deepskyblue;
+    }
     h4:hover{
         cursor:pointer;
         text-decoration:underline;color: brown;
@@ -425,8 +677,10 @@
     .yule2{
         width: 500px;
         height: 301px;
+        height: 301px;
         overflow:auto;
-        margin-left: 50%;
+       /* margin-left: 50%;*/
+        margin-top: 30px;
         cursor:pointer;
     }
 
@@ -561,18 +815,18 @@
         word-wrap:break-word ;
         border-radius: 4px;
         height: 350px;
-        margin-left: 5%;
-        margin-top: 5%;
+    /*    margin-left: 5%;*/
+    /*    margin-top: 5%;*/
         /*  background-color: #D3DCE6;*/
         /*  background: black;*/
         color: #333;
         cursor:pointer;/*鼠标放上去是一个手*/
         /*      text-align: center;*/
-        border-left:1px solid #000;
+       /* border-left:1px solid #000;
         border-right:1px solid #000;
         border-top :1px solid #000;
 
-        border-bottom:1px solid #000;
+        border-bottom:1px solid #000;*/
     }
     .el-main{
         /*   box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/

@@ -52,7 +52,7 @@
                                        <div class="rgwapper_title">
                                            <el-row>
                                                <el-col :span="18"><h3 class="rgwapper_title_h4">热点聚焦</h3></el-col>
-                                               <el-col :span="6"><el-button type="text" style="float: right">更多</el-button></el-col>
+                                               <el-col :span="6"><el-button type="text" style="float: right" @click="many()">更多</el-button></el-col>
                                            </el-row>
                                        </div>
                                        <div class="rgwapper_body">
@@ -71,8 +71,8 @@
                         </div>
                         <div class="word_picture">
                             <el-carousel :interval="4000" type="card" height="200px">
-                                <el-carousel-item v-for="item in 6" :key="item">
-                                    <h3>{{ item }}</h3>
+                                <el-carousel-item v-for="(n,item) in depictions1" :key="item">
+                                   <img :src="n.idView"/>
                                 </el-carousel-item>
                             </el-carousel>
                         </div>
@@ -82,8 +82,8 @@
             <el-col :span="8">
                 <div>
                     <el-carousel indicator-position="outside">
-                        <el-carousel-item v-for="item in 4" :key="item">
-                            <image :src="item" alt=""></image>
+                        <el-carousel-item v-for="(n,item) in depictions" :key="item">
+                            <img :src="n.idView"/>
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -121,19 +121,19 @@
             return {
                 activeName: 'second',
                 items:[],
-             /*   news:[
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
+             depictions:[
+                 {  idView:'http://i2.chinanews.com/simg/2019/190610//100691130.JPG'},
+                 {  idView:'http://www.chinanews.com/tp/2019/06-10/U601P4T8D8860193F107DT20190610100920.jpg'},
+                 {  idView:'http://www.chinanews.com/2019/06-10/U601P4T8D8860261F107DT20190610105043.jpg'},
+                 {  idView:'http://www.chinanews.com/2019/06-10/U610P4T8D8860189F107DT20190610100429.jpg'},
+             ],
+                depictions1:[
+                    {  idView:'http://www.chinanews.com/2019/06-10/U86P4T8D8860159F107DT20190610094908.jpg'},
+                    {  idView:'http://i2.chinanews.com/simg/2019/190610//100661160.jpg'},
+                    {  idView:'http://www.chinanews.com/2019/06-10/U86P4T8D8860061F107DT20190610085705.jpg'},
+                    {  idView:'http://i2.chinanews.com/simg/2019/190610//100664760.jpg'},
+                    {  idView:'http://www.chinanews.com/2019/06-10/U855P4T8D8860804F107DT20190610201243.jpg'},
                 ],
-                news1:[
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                    {title:"信息细腻新年新潟县内"},
-                ],*/
                 list:[],//所有栏目列表
                 content:[],
                 content1:[],
@@ -158,8 +158,6 @@
                          break;
                      }
                  }
-                 console.log('打印列表');
-                 console.log(this.content);
                  this.content1=[];
                  for (let j=0;j<5;j++){
                      this.content1.push(this.content[j]);
@@ -177,6 +175,10 @@
                 this.$router.push({name:'detailed1', params:{item:n}});
                 this.$router.push({path:'/prostage/detailed'})
             },
+            many(){
+                this.$store.commit('SET_COMPONENTS_STATE',5);
+                this.$router.push({name:'second',params:this.content});
+            }
         },
         created(){
             this.helloWord();

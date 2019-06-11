@@ -1,15 +1,5 @@
 <template>
-    <!--<div>
-        <el-row>
-            <el-col :span="4">
-                <div class="grid-content bg-purple"><span>新闻头条</span></div>
-            </el-col>
-            <el-col :span="20">
-                <div class=" grid-content bg-purple-light"><span>头条内容</span></div>
-            </el-col>
-        </el-row>
-    </div>-->
-    <div>
+    <div class="wapper">
         <el-row>
             <el-col :span="12">
                 <div>
@@ -36,10 +26,6 @@
                                 <li class="lian" v-on:click="skip(n)">{{n.title}}</li>
                             </ul>
                         </div>
-                       <!-- <div v-for="(n,index) in vnews2"  :key="index" style="height: 30px">
-                            <a v-on:click="skip(n)" class="lian" >{{n.title}}</a>
-                            <span class="dianji">点击量：{{n.click_count}}</span>
-                        </div>-->
                     </el-card>
                 </div>
             </el-col >
@@ -48,7 +34,6 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <el-button style="float:left; padding: 3px 0; color: black" type="text" >{{this.label1[2]}}</el-button>
-                            <!--<span>{{this.label1[2]}}</span>-->
                             <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many2()">更多</el-button>
                         </div>
                         <div v-for="(n,index) in vnews3" :key="index" >
@@ -56,16 +41,12 @@
                                 <li class="lian" v-on:click="skip(n)">{{n.title}}</li>
                             </ul>
                         </div>
-                        <!--<div v-for="(n,index) in vnews3" :key="index" style="height: 30px">
-                            <a target="_blank" class="lian" v-on:click="skip(n)">{{n.title}}</a>
-                        </div>-->
                     </el-card>
                 </div>
                 <div>
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <el-button style="float:left; padding: 3px 0; color: black" type="text" >{{this.label1[3]}}</el-button>
-                            <!--<span>{{this.label1[3]}}</span>-->
                             <el-button style="float: right; padding: 3px 0" type="text" v-on:click="many3()">更多</el-button>
                         </div>
                         <div v-for="(n,index) in vnews4" :key="index" >
@@ -73,9 +54,6 @@
                                 <li class="lian" v-on:click="skip(n)">{{n.title}}</li>
                             </ul>
                         </div>
-                        <!--<div v-for="(n,index) in vnews4" :key="index" style="height: 30px">
-                            <a target="_blank" class="lian" v-on:click="skip(n)">{{n.title}}</a>
-                        </div>-->
                     </el-card>
                 </div>
             </el-col>
@@ -120,18 +98,10 @@
                 for( i = 0 ; i < 3 ; i++){
                     this.vnews4.push(this.channels[3].contents[i]);
                 }
-                /*this.vnews1 = this.channels[0].contents.splice(0,2);
-                console.log(this.vnews1);
-                this.vnews2 =this.channels[1].contents.splice(0,2);
-                this.vnews3 =this.channels[2].contents.splice(0,2);
-                this.vnews4 =this.channels[3].contents.splice(0,2);*/
             },
             getchannel(){
-                console.log('mmmm');
                 console.log(this.$store.state.channel);
                 this.channels = this.$store.state.channel;
-                console.log('kkkkkkkkkk');
-                console.log(this.channels);
                 let i;
                 for( i = 0 ; i < 6 ; i++){
                     console.log(this.channels[i].chName);
@@ -140,8 +110,6 @@
             },
             many(){
                 this.$store.commit("SET_COMPONENTS_STATE",1);
-                console.log('打印1');
-                console.log(this.$store.state.components);
                 this.$router.push('/prostage/many');
             },
             many1(){
@@ -150,15 +118,13 @@
             },
             many2(){
                 this.$store.commit('SET_COMPONENTS_STATE',3);
-                console.log('打印3');
-                console.log(this.$store.state.components);
                 this.$router.push('/prostage/many');
             },
             many3(){
                 this.$store.commit('SET_COMPONENTS_STATE',4);
                 this.$router.push('/prostage/many');
             },
-            skip(n){
+            skip(n){//跳转到详情页
                 this.$router.push({name:'detailed1', params:{item:n}});
                 this.$router.push({path:'/prostage/detailed'})
             },
@@ -170,6 +136,10 @@
 </script>
 
 <style >
+   /* .wapper{
+        background-image: url("../../../../assets/demo1/bg1.png");
+        height: 600px;
+    }*/
     .el-row {
         margin-bottom: 20px;
     }
