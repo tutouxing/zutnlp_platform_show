@@ -28,6 +28,12 @@
             Header,
             Bottom,
         },
+        methods:{
+          getchanel(){
+              /*this.$store.commit("SET_CHANNEL_STATE",response.data.channel);
+              this.channel = response.data.channel;*/
+          },
+        },
 
     }
 </script>

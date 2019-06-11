@@ -9,6 +9,8 @@ import propertyupdata from '../components/FormConfig/propertyupdata.vue'
 import createproject from '../components/FormConfig/createproject.vue'
 import tempaltenow from '../components/FormConfig/tempaltenow.vue'
 import createcode from '../components/FormConfig/createcode.vue'
+import second from '../views/prostage/temp/newtemp1/second'
+import detailed from '../views/prostage/temp/newtemp1/detailed1'
 import modeSecCont from '../components/modeFirst/modeSecCont.vue'
 
 
@@ -49,7 +51,7 @@ export default[
         },
         {
             path: 'components',
-           component: () => import('../api/admin/setMode.vue'),
+         /*  component: () => import('../components/editable/setMode.vue'),*/
             name: 'components',
         },
         {
@@ -93,10 +95,35 @@ export default[
             component: () => import('../components/Echarts/twodimensional/demo.vue'),
             name: 'echartdemo',
         },
+        //服务管理
         {
           path:'service',
           component:()=> import('../components/Admin/service/index.vue')
         },
+        {
+            path:"backgroundmonitor",
+            component:()=>import('../views/service/backgroundMonitor.vue'),
+            name:"后台监控"
+        },
+        {
+            path:"apimonitor",
+            component:()=>import("../views/service/apiMonitor.vue"),
+            name:"接口监控"
+        },
+        {
+            path:"logincenter",
+            component:()=>import('../views/service/loginCenter.vue'),
+            name:"注册中心"
+        },
+        {
+            path:"serviceAdmin",
+            component:()=>import('../views/service/index.vue'),
+            name:"服务监控"
+        },
+        // {
+        //     path:"",
+        //     component:()=>import()
+        // },
         {
             path:'Admin/user',//用户观念管理
             component:()=>import('../components/Admin/user/index')
@@ -160,18 +187,13 @@ export default[
             path: 'createcode',
             name: 'createcode',
             component:createcode,
-
         },
-
-
-
         {
             path: 'PlayContentMsg',
             name: 'PlayContentMsg',
             component:PlayContentMsg,
 
         },
-
         {
             path: 'PlayManyPicturesContentMsg',
             name: 'PlayManyPicturesContentMsg',
@@ -262,32 +284,37 @@ export default[
         component: modeSecCont
     },
     {
-        path: '/:title',
-        name: 'modeSecCont',
-        component: modeSecCont
-    },
-    {
-        path: '/modeCont',
-        name:'modeFirstCont',
-        component:()=>import('../components/modeFirst/modeCont.vue'),
-    },
-    {
         path: '/modethirdCont/:title',
         name:'modethirdCont',
         component:()=>import('../components/modeFirst/modethirdCont.vue'),
     },
-   {
-        path:'/prostage',        
- 		component:()=>import('../views/prostage/index/index.vue')
+    {
+        path:'/prostage',
+        name:'prostage',
+        /*component:()=>import('../views/prostage/index/index.vue'),*/
+        component:()=>import('../views/prostage/content/aindex'),
     },
-
-
-
+    {
+        path:'/prostage/many',
+        name:'second',
+        component:second,
+    },
+    {
+        path:'/prostage/detailed',
+        name:'detailed1',
+        component:detailed,
+    },
     {
         path: '/ClientWeb/TextTemplate/FrameWork',
         name: 'FrameWork',
         component:FrameWork,
 
     },
+    {
+        path:'/prostage/chanel/:chName',
+        name:'chName',
+        component:()=>import('../views/prostage/content/amain.vue'),
+    },
+
 ]
 

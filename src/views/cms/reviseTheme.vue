@@ -49,19 +49,23 @@
     import {addChannel} from '../../api/channel/index.js'
     import {setObj,getObj} from '../../api/admin/user/index.js'
     import "../../assets/icon/iconfont_set";
+    import {getChannelById} from '../../api/channel'
     export default {
         name: 'reviseTheme',
+      created(){
+        this.getChannel();
+      },
         methods: {
             changeShow(val) {
                 if (val == "/prostage") {
                   this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themeone.png') + ')';
                   this.channelNum=4;
                 }
-                if (val == "主题二"){
+                if (val == "/ClientWeb/TextTemplate/FrameWork"){
                   this.photoShow.backgroundImage = 'url(' + require('../../assets/img/themetwo.png') + ')';
                   this.channelNum=6;
                 }
-                if (val == "主题三")
+                if (val == "/modeCont")
                     this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styleone.png') + ')';
                 if (val == "主题四")
                     this.photoShow.backgroundImage = 'url(' + require('../../assets/img/styletwo.png') + ')';
@@ -77,16 +81,28 @@
                 this.$message({
                     message: '设置成功',
                     type: 'success'
+                }).then(() => {
+                getChannelById(this.$store.state.userid).then(res=>{
+                  this.$store.commit("SET_CHANNEL_STATE", res.data);
                 });
+              })
             },
             preview(){
-                getObj(this.$store.state.userid).then(res=>{
-                    console.log(res.data.page1);
-                    let first_page = res.data.page1;
-                    this.$router.push(first_page);
-                })
+              this.$router.push(this.value);
+            },
+          getChannel() {
+            getObj(this.$store.state.userid).then(res => {
+              this.firstPage = res.data.page1
+              if (this.firstPage != "") {
+                this.value = this.firstPage;
+                let i;
+                for ( i = 0; i < res.data.channels.length; i++) {
+                  this.channelStyle[i].chName=res.data.channels[i].chName
+                }
+              }
+            })
+          }
 
-            }
         },
         data() {
             return {
@@ -100,10 +116,10 @@
                     value: '/prostage',
                     label: '主题一'
                 }, {
-                    value: '主题二',
+                    value: '/ClientWeb/TextTemplate/FrameWork',
                     label: '主题二'
                 }, {
-                    value: '主题三',
+                    value: '/modeCont',
                     label: '主题三'
                 }, {
                     value: '主题四',
@@ -129,6 +145,7 @@
                   label: '栏目六标题：'
                 }, ],
                 value: '',
+               firstPage:''
             }
         }
     }
