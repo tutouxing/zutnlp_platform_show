@@ -6,7 +6,7 @@
 <script>
     let echarts = require('echarts')
     export default {
-        name: 'tt',
+        name: 'DBar',
         mounted() {
             this.drawLine();
         },
@@ -109,7 +109,7 @@
                 },
                 series: [{
                     type: 'bar3D',
-                    data: data.map(function (item) {
+                    data: this.data.map(function (item) {
                         return {
                             value: [item[1], item[0], item[2]],
                         }
