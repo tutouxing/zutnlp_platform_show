@@ -1,7 +1,7 @@
 <template>
     <div  style="text-align:center; width: 520px; margin-left: 30%" >
     <h2>{{AllMsg.TextMsg[0].HeadLine}}</h2>
-    <p>{{AllMsg.TextMsg[0].TextContent}} </p>
+    <p style="margin-top: 100px">{{AllMsg.TextMsg[0].TextContent}} </p>
     </div>
 </template>
 
