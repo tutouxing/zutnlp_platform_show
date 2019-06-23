@@ -194,12 +194,12 @@ export default[
             component:PlayContentMsg,
 
         },*/
-        {
+       /* {
             path: 'PlayManyPicturesContentMsg',
             name: 'PlayManyPicturesContentMsg',
             component:PlayManyPicturesContentMsg,
 
-        },
+        },*/
         /*{
             path: 'PlayNewsMsg',
             name: 'PlayNewsMsg',
@@ -340,6 +340,12 @@ export default[
         path: '/PlayPhoto',
         name: 'PlayPhoto',
         component:PlayPhoto,
+    },
+    {
+        path: '/PlayManyPicturesContentMsg',
+        name: 'PlayManyPicturesContentMsg',
+        component:PlayManyPicturesContentMsg,
+
     },
     {
         path:'/prostage/chanel/:chName',

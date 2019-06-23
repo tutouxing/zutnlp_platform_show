@@ -136,38 +136,47 @@
                          </object>
                      </video>-->
 
-
-
-                    <video v-if="isshow" width="500" height="255" controls="controls" ><!--autoplay="autoplay" //默认自动播放-->
+                     <video v-if="isshow" width="500" height="255" controls="controls" muted="muted" autoplay="autoplay" ><!--autoplay="autoplay" //默认自动播放-->
                         <source :src="mainvideo" type="video/mp4" />
                         <source src="/i/movie.webm" type="video/webm" />
                         <object data="/i/movie.mp4" width="500" height="255">
                             <embed width="500" height="255" src="/i/movie.swf" />
                         </object>
                     </video>
-                    <div style="float: right; height: auto; margin-left: 100px;width: 500px;margin-top: 20px">
+                     <div style="float: right; height: auto; margin-left: 100px;width: 500px;margin-top: 20px">
                         <h4 v-for=" (item,index) in  item.contents" v-if="index<4" v-on:click="yuletonext1(item)">{{item.title}} </h4>
                     </div >
 
-
-                       <div style="float: left" v-for="mv in videos">
+                     <div style="float: left" v-for="mv in videos">
                            <h4  style="margin-top: 30px">{{mv.name}}</h4>
-                           <video  width="255" height="255" controls="controls" poster="加载中..." v-on:click="playvideo(mv)">
-                               <source :src="mv.url" type="video/mp4" />
+                           <video  width="255" height="255" controls="controls" preload="auto" muted="muted" v-on:click="playvideo(mv)">
+                               <source :src="mv.url" type="video/mp4" /><!--:poster="" -->
                                <object data="/i/movie.mp4" width="500" height="255">
                                    <embed width="500" height="255" src="/i/movie.swf" />
                                </object>
                            </video>
                        </div>
-                </div>
 
-                 <div style="height: auto">
+                 </div>
+             <!--当两个容器嵌套时,如果外层容器和内层容器之间没有别的元素,firefox会把内层元素的margin-top作用与父元素。-->
+             <div v-show="true" style=" width: 90%; margin: auto; border-top :5px dashed  darkgray;clear: both">
+
+                 <div style="margin-top:30px;float: left;" class="showpicture" v-for="item in Allofdata.YuLeMsg.Photos" v-on:click="yuletonext0(item)"><!-- clear: both清除上一个浮动对下一个的影响显示图片-->
+                     <a><img style="width: 230px;height: 200px;":src="item[0].url"/><label>{{item[0].Introduction}}</label>{{item.length}}张</a>
+                 </div>
+             </div>
+
+
+                 <div style="height: auto;">
                  <div style="float: left" v-if="num>=4" class="divmain" v-for="(items,num) in item.contents" v-on:click="kejigonext1(items)">
                      <img style="margin-top: 15px"   class="photo"  :src="url" />
 
                      <p >{{items.title}}</p>
                  </div>
                  </div>
+
+
+
          </el-tab-pane>
 
         </el-tabs>
@@ -312,6 +321,14 @@
     import movie from '../Picture/movie.ogg'
     import sun from '../Picture/sun.png'
     import head from  '../Picture/head.jpg'
+    import  kobe1 from '../Picture/kobe1.jpg'
+    import  kobe2 from '../Picture/kobe2.jpg'
+    import  ai1 from '../Picture/ai1.jpg'
+    import  ai2 from '../Picture/ai2.jpg'
+    import  ai3 from '../Picture/ai3.jpg'
+    import  zine1 from '../Picture/zine1.jpg'
+    import  zine2 from '../Picture/zine2.jpg'
+
     export default {
         name: "FrameWork",
 
@@ -319,14 +336,8 @@
             return {
                 Allofdata:{
 
-                    KeJiMsg:{
+                    /*KeJiMsg:{
                         Pictures:[
-                            {
-                                Picture:'../Picture/earth.png ',
-                            },
-                            {
-                                Picture:'../Picture/earth.png ',
-                            },
                             {
                                 Picture:'../Picture/earth.png ',
                             },
@@ -347,9 +358,71 @@
                             }
                         ]
                     },
+                    TiYuMsG:{
+
+                       Left:[
+                           {
+                               title:'火箭总冠军',
+                               text:'哈登mvp'
+                           }
+                       ],
+                       Right:[
+                           {
+                               title:'火箭总冠军',
+                               text:'哈登mvp'
+
+                           }
+                       ],
+                       Pictures:[
+                           {
+                               Picture:'../Picture/earth.png ',
+                               Introduction:'earth',
+                           }
+                       ],
+                       Videos:{
+                           Video:'../Picture/movie.ogg',
+                           title:'熊吃鱼',
+                       },
+                       RecommendVideos:[
+                           {
+                               Video:'../Picture/movie.ogg',
+                               title:'熊吃鱼',
+                           }
+                       ],/!*又*!/
+                       ViodesSide :[
+                           {
+                               Video:'../Picture/movie.ogg',
+                               Introduction:'熊吃鱼',
+                           }
+                       ],/!*左*!/
+
+                   },*/
+                    /*  TextMessage:[
+                      {
+                          content:''      ,//内容
+                          picture:  ' ../Picture/earth.png  ' ,//插图
+                          type:    ''  ,//类型
+                          title:  ' 科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+
+                      }
+                  ],
+                  OnlyText:[
+                      {
+                          type: '文本'     ,
+                          title:  '标题'    ,
+                          content:  '内容'    ,
+                          introduction:'内容主旨介绍'
+
+                      }
+                  ],
+                   Pictures:{
+                       HeaderPictureEarth:  '../Picture/earth.png '   ,
+                       HeaderPictureMoon:  ' ../Picture/moon.png'   ,
+                       HeaderPictureSun:  '../Picture/sun.png '   ,
+                   },*///图片轮播用
                     YuLeMsg:{
 
-                        Vodeos:{
+                       /* Vodeos:{
                             Video:'../Picture/movie.ogg',
                         },
                         PicturesAndText:[
@@ -358,12 +431,6 @@
                                     {
                                         Picture:'../Picture/earth.png '
                                     },
-                                    {
-                                        Picture:'../Picture/earth.png '
-                                    },
-                                    {
-                                        Picture:'../Picture/earth.png '
-                                    }
                                 ],
                                 Text:{
                                     title:'地球',
@@ -372,6 +439,18 @@
                                 }
                             }
                         ],
+                        Recommend:[
+                            {
+                                title:'科技新闻太阳科技新闻太阳科技新闻太阳',
+                                text:'科技新闻太阳科技新闻太阳科技新闻太阳',
+                                Author:'w',
+                            },
+                            {
+                                title:'科技新闻太阳科技新闻太阳科技新闻太阳',
+                                text:'科技新闻太阳科技新闻太阳科技新闻太阳',
+                                Author:'w',
+                            }
+                        ],*/
                         Pictures:[
                             {
                                 Picture:earth,
@@ -387,94 +466,69 @@
                                 Introduction:'sun',
                             }
                         ],
-                        Recommend:[
-                            {
-                                title:'科技新闻太阳科技新闻太阳科技新闻太阳',
-                                text:'科技新闻太阳科技新闻太阳科技新闻太阳',
-                                Author:'w',
+                        Photos:[
+                            [
+                                {
+                                    Introduction:'kobe',
+                                    url:kobe1
+                                },
+                                {
+                                    Introduction:'kobe',
+                                    url:kobe2
+                                }
+                            ],
+                            [
+                                {
+                            Introduction:'zine',
+                                url:zine1
+                            },{
+                                Introduction:'zine',
+                                url:zine2
+                            }],
+                            [
+                                {
+                                Introduction:'Ai',
+                                url:ai1
                             },
-                            {
-                                title:'科技新闻太阳科技新闻太阳科技新闻太阳',
-                                text:'科技新闻太阳科技新闻太阳科技新闻太阳',
-                                Author:'w',
-                            }
+                                {
+                                    Introduction:'Ai',
+                                    url:ai2
+                                },
+                                {
+                                    Introduction:'Ai',
+                                    url:ai3
+                                },
+                            ],
+                            [
+                                {
+                                    Introduction:'Ai',
+                                    url:ai1
+                                },
+                                {
+                                    Introduction:'Ai',
+                                    url:ai2
+                                },
+                                {
+                                    Introduction:'Ai',
+                                    url:ai3
+                                },
+                            ]
                         ]
-
                     },
-                  /*  TiYuMsG:{
 
-                        Left:[
-                            {
-                                title:'火箭总冠军',
-                                text:'哈登mvp'
-                            }
-                        ],
-                        Right:[
-                            {
-                                title:'火箭总冠军',
-                                text:'哈登mvp'
-
-                            }
-                        ],
-                        Pictures:[
-                            {
-                                Picture:'../Picture/earth.png ',
-                                Introduction:'earth',
-                            }
-                        ],
-                        Videos:{
-                            Video:'../Picture/movie.ogg',
-                            title:'熊吃鱼',
-                        },
-                        RecommendVideos:[
-                            {
-                                Video:'../Picture/movie.ogg',
-                                title:'熊吃鱼',
-                            }
-                        ],/!*又*!/
-                        ViodesSide :[
-                            {
-                                Video:'../Picture/movie.ogg',
-                                Introduction:'熊吃鱼',
-                            }
-                        ],/!*左*!/
-
-                    },*/
                     gotdata:{},
                     topdata:[],
                     obj:{}
-                  /*  TextMessage:[
-                        {
-                            content:''      ,//内容
-                            picture:  ' ../Picture/earth.png  ' ,//插图
-                            type:    ''  ,//类型
-                            title:  ' 科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
 
-                        }
-                    ],
-                    OnlyText:[
-                        {
-                            type: '文本'     ,
-                            title:  '标题'    ,
-                            content:  '内容'    ,
-                            introduction:'内容主旨介绍'
-
-                        }
-                    ],
-                     Pictures:{
-                         HeaderPictureEarth:  '../Picture/earth.png '   ,
-                         HeaderPictureMoon:  ' ../Picture/moon.png'   ,
-                         HeaderPictureSun:  '../Picture/sun.png '   ,
-                     },*///图片轮播用
                 },
                 activeName:  'first' ,
                 activeIndex: '1',
-                backs:{
+           /*     backs:{
                   //  backgroundImage: "url(" + require("../Picture/head.jpg") + ")",
                     backgroundImage: 'url(' + require('../Picture/moon.png') + ')',
                     backgroundRepeat:'no-repeat',
                     backgroundSize:'100% 100%'
-                },
+                },*/
                 web:[
                     {
                         name:"百度",
@@ -512,7 +566,7 @@
                 ],
                 mainvideo:'http://vjs.zencdn.net/v/oceans.mp4',
                 isshow:true,//用来更新视频
-                 url:earth,
+                url:earth,
                 video:movie,
                 head:head,
                 
@@ -609,7 +663,7 @@
                 this.$router.push({name:'PlayContentMsg',params:{items:item}});
                 this.$router.push({path:'/PlayContentMsg'});
             },
-            tiyutonext2(item){
+          /*  tiyutonext2(item){
                 console.log("打印体育2");
                 this.$router.push({name:'PlayVideosMsg',params:{items:item}});
                 this.$router.push({path:'/PlayVideosMsg'});
@@ -620,7 +674,7 @@
                 this.$router.push({name:'PlayVideosMsg',params:{items:item}});
                 this.$router.push({path:'/PlayVideosMsg'});
                 //点击视频跳转
-            },
+            },*/
               /*  sparamtocontent(item){
                     this.$router.push({name:'PlayContentMsg',params:{id:id}});//用路由传递参数唯一标识
                 },
@@ -731,7 +785,21 @@
 
 
 <style scoped>
+    .showpicture{
+        width: 230px;
+        height: 230px;
+        cursor: pointer;
+       /* clear: both;clear: both清除上一个浮动对下一个的影响显示图片 也不许当前浮动*/
+      /*  clear: both;*/
+        margin-left: 25px;
+     /*   padding-top:200px;*/
 
+
+        border-top :10px solid darkgray;
+        border-bottom:10px solid darkgray;
+        border-right:10px solid darkgray;
+        border-left:10px solid darkgray;
+    }
     .allboder{
       /*  border-top :50px solid deepskyblue;*/
         height: auto;
