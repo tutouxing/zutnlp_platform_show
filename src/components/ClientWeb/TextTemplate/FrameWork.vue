@@ -1,11 +1,13 @@
 
 <template>
-   <!-- <el-header>
-    <div  :style ="backs">
-        <img src="../Picture/moon.png" >
-    </div>
-</el-header>-->
     <el-container style="margin-top: 10px" class="allboder">
+<el-header>
+    <img   style="width: 100%; height: 230px"  :src="head" />
+</el-header>
+
+<el-main>
+
+
        <!-- <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1" v-for=" item in Allofdata.gotdata" >
                 {{item.chName}}
@@ -34,7 +36,7 @@
             </el-menu-item>
         </el-menu>
 -->
-        <el-tabs v-model="activeName" @tab-click="handleClick" style="width: 2000px">
+        <el-tabs v-model="activeName" @tab-click="handleClick" style="width: 100%">
             <el-tab-pane label="首页" name="first"  >
                 <!-- <div class="pictureboder">
                  <el-carousel :interval="4000" type="card" height="200px">
@@ -58,22 +60,24 @@
                         </div>
 
                     </div>
-                    <el-aside style="float: left;margin-left: 70px; height: auto">
+                    <el-aside style="float: left;margin-left: 70px; height: auto;margin-top: 150px">
                         <h4 v-for=" (item,index) in  Allofdata.topdata" v-if="index<=4" v-on:click="yuletonext1(item)">{{item.title}} </h4>
                     </el-aside >
-                    <el-aside style="float: left;margin-left: 30px;height: auto">
+                    <el-aside style="float: left;margin-left: 30px;height: auto;margin-top: 150px">
                         <h4 v-for=" (item,index) in  Allofdata.topdata" v-if="index>4&&index<9" v-on:click="yuletonext1(item)">{{item.title}} </h4>
                     </el-aside >
-                    <el-button type="text" style="margin-top: 99px" v-on:click="change()">换一换</el-button>
+                    <el-button type="text" style="margin-top: 300px" v-on:click="change()">换一换</el-button>
+
                 </el-container >
+                <div  style="margin-top: 100px">
+                    <el-button v-for="item in web" type="text"  v-on:click="go(item.url)">{{item.name}}</el-button>
+                 <!--  <a href="https://news.qq.com">腾讯新闻</a>-->
+                </div>
                        <!-- <div  v-for="(items,index2) in item.contents "  v-if="index2<=1" style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
 
 
 
                         </div>-->
-
-
-
                    <!-- <el-aside v-for=" (item,index) in  Allofdata.gotdata" v-if="index<=2" style="float: left">
                     <h3>{{item.chName}}</h3>
                     <div  v-for="items in item.contents " style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
@@ -103,8 +107,6 @@
 
                     </el-aside>
                -->
-
-
                    <!-- <div style="width: 500px; height: auto;float: left" v-for=" item in  Allofdata.gotdata">
 
                         <div  v-for="items in item.contents " style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
@@ -116,29 +118,69 @@
                     </div>
 
 -->
+              <!--  <div  class="yule4"    v-for="(items,num) in item.contents " style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
+                    <h4>{{items.title}}</h4>
+                </div>-->
             </el-tab-pane>
 
 
          <el-tab-pane :label="item.chName" :name="second" v-for="item in Allofdata.gotdata" >
+                 <div v-show="true" class="tiyuaside"  >
 
-             <div>
+<!--
+                     <video width="500" height="255" controls="controls" autoplay="autoplay">
+                         <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" />
+                         <source src="/i/movie.webm" type="video/webm" />
+                         <object data="/i/movie.mp4" width="500" height="255">
+                             <embed width="500" height="255" src="/i/movie.swf" />
+                         </object>
+                     </video>-->
 
-                 <div>
-                     <div class="divmain" style="float:left;" v-for="items in item.contents" v-on:click="kejigonext1(items)">
-                         <img style="margin-top: 15px"  class="photo" :src="items.picture" />
-                         <p >{{items.title}}</p>
-                     </div>
+                     <video v-if="isshow" width="500" height="255" controls="controls" muted="muted" autoplay="autoplay" ><!--autoplay="autoplay" //默认自动播放-->
+                        <source :src="mainvideo" type="video/mp4" />
+                        <source src="/i/movie.webm" type="video/webm" />
+                        <object data="/i/movie.mp4" width="500" height="255">
+                            <embed width="500" height="255" src="/i/movie.swf" />
+                        </object>
+                    </video>
+                     <div style="float: right; height: auto; margin-left: 100px;width: 500px;margin-top: 20px">
+                        <h4 v-for=" (item,index) in  item.contents" v-if="index<4" v-on:click="yuletonext1(item)">{{item.title}} </h4>
+                    </div >
 
-                     <div class="divaside"  width="500px"  v-for="items in item.contents" v-on:click="kejigonext2(items)">
-                         <p class="div-inline">{{items.title}}</p>
-                     </div >
+                     <div style="float: left" v-for="mv in videos">
+                           <h4  style="margin-top: 30px">{{mv.name}}</h4>
+                           <video  width="255" height="255" controls="controls" preload="auto" muted="muted" v-on:click="playvideo(mv)">
+                               <source :src="mv.url" type="video/mp4" /><!--:poster="" -->
+                               <object data="/i/movie.mp4" width="500" height="255">
+                                   <embed width="500" height="255" src="/i/movie.swf" />
+                               </object>
+                           </video>
+                       </div>
+
+                 </div>
+             <!--当两个容器嵌套时,如果外层容器和内层容器之间没有别的元素,firefox会把内层元素的margin-top作用与父元素。-->
+             <div v-show="true" style=" width: 90%; margin: auto; border-top :5px dashed  darkgray;clear: both">
+
+                 <div style="margin-top:30px;float: left;" class="showpicture" v-for="item in Allofdata.YuLeMsg.Photos" v-on:click="yuletonext0(item)"><!-- clear: both清除上一个浮动对下一个的影响显示图片-->
+                     <a><img style="width: 230px;height: 200px;":src="item[0].url"/><label>{{item[0].Introduction}}</label>{{item.length}}张</a>
+                 </div>
+             </div>
+
+
+                 <div style="height: auto;">
+                 <div style="float: left" v-if="num>=4" class="divmain" v-for="(items,num) in item.contents" v-on:click="kejigonext1(items)">
+                     <img style="margin-top: 15px"   class="photo"  :src="url" />
+
+                     <p >{{items.title}}</p>
+                 </div>
                  </div>
 
 
-             </div>
+
          </el-tab-pane>
 
         </el-tabs>
+</el-main>
       <!--  <div>
                  <el-tabs v-model="activeName" @tab-click="handleClick">
 
@@ -274,6 +316,19 @@
 </template>
 <script>
     import state from '../../../store/state.js'
+    import earth from '../Picture/earth.png'
+    import moon from '../Picture/moon.png'
+    import movie from '../Picture/movie.ogg'
+    import sun from '../Picture/sun.png'
+    import head from  '../Picture/head.jpg'
+    import  kobe1 from '../Picture/kobe1.jpg'
+    import  kobe2 from '../Picture/kobe2.jpg'
+    import  ai1 from '../Picture/ai1.jpg'
+    import  ai2 from '../Picture/ai2.jpg'
+    import  ai3 from '../Picture/ai3.jpg'
+    import  zine1 from '../Picture/zine1.jpg'
+    import  zine2 from '../Picture/zine2.jpg'
+
     export default {
         name: "FrameWork",
 
@@ -281,14 +336,8 @@
             return {
                 Allofdata:{
 
-                    KeJiMsg:{
+                    /*KeJiMsg:{
                         Pictures:[
-                            {
-                                Picture:'../Picture/earth.png ',
-                            },
-                            {
-                                Picture:'../Picture/earth.png ',
-                            },
                             {
                                 Picture:'../Picture/earth.png ',
                             },
@@ -309,9 +358,71 @@
                             }
                         ]
                     },
+                    TiYuMsG:{
+
+                       Left:[
+                           {
+                               title:'火箭总冠军',
+                               text:'哈登mvp'
+                           }
+                       ],
+                       Right:[
+                           {
+                               title:'火箭总冠军',
+                               text:'哈登mvp'
+
+                           }
+                       ],
+                       Pictures:[
+                           {
+                               Picture:'../Picture/earth.png ',
+                               Introduction:'earth',
+                           }
+                       ],
+                       Videos:{
+                           Video:'../Picture/movie.ogg',
+                           title:'熊吃鱼',
+                       },
+                       RecommendVideos:[
+                           {
+                               Video:'../Picture/movie.ogg',
+                               title:'熊吃鱼',
+                           }
+                       ],/!*又*!/
+                       ViodesSide :[
+                           {
+                               Video:'../Picture/movie.ogg',
+                               Introduction:'熊吃鱼',
+                           }
+                       ],/!*左*!/
+
+                   },*/
+                    /*  TextMessage:[
+                      {
+                          content:''      ,//内容
+                          picture:  ' ../Picture/earth.png  ' ,//插图
+                          type:    ''  ,//类型
+                          title:  ' 科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
+
+                      }
+                  ],
+                  OnlyText:[
+                      {
+                          type: '文本'     ,
+                          title:  '标题'    ,
+                          content:  '内容'    ,
+                          introduction:'内容主旨介绍'
+
+                      }
+                  ],
+                   Pictures:{
+                       HeaderPictureEarth:  '../Picture/earth.png '   ,
+                       HeaderPictureMoon:  ' ../Picture/moon.png'   ,
+                       HeaderPictureSun:  '../Picture/sun.png '   ,
+                   },*///图片轮播用
                     YuLeMsg:{
 
-                        Vodeos:{
+                       /* Vodeos:{
                             Video:'../Picture/movie.ogg',
                         },
                         PicturesAndText:[
@@ -320,29 +431,12 @@
                                     {
                                         Picture:'../Picture/earth.png '
                                     },
-                                    {
-                                        Picture:'../Picture/earth.png '
-                                    },
-                                    {
-                                        Picture:'../Picture/earth.png '
-                                    }
                                 ],
                                 Text:{
                                     title:'地球',
                                     Introduction:'这是地球啊',
                                     text:'地球好',
                                 }
-                            }
-                        ],
-                        Pictures:[
-                            {
-                                Picture:'../Picture/earth.png ',
-                                Introduction:'earth',
-                            },
-                            {
-                                Picture:'  ../Picture/moon.png',
-                                Introduction:'moon',
-
                             }
                         ],
                         Recommend:[
@@ -356,83 +450,126 @@
                                 text:'科技新闻太阳科技新闻太阳科技新闻太阳',
                                 Author:'w',
                             }
-                        ]
-
-                    },
-                    TiYuMsG:{
-
-                        Left:[
-                            {
-                                title:'火箭总冠军',
-                                text:'哈登mvp'
-                            }
-                        ],
-                        Right:[
-                            {
-                                title:'火箭总冠军',
-                                text:'哈登mvp'
-
-                            }
-                        ],
+                        ],*/
                         Pictures:[
                             {
-                                Picture:'../Picture/earth.png ',
+                                Picture:earth,
                                 Introduction:'earth',
+                            },
+                            {
+                                Picture:moon,
+                                Introduction:'moon',
+
+                            },
+                            {
+                                Picture:sun,
+                                Introduction:'sun',
                             }
                         ],
-                        Videos:{
-                            Video:'../Picture/movie.ogg',
-                            title:'熊吃鱼',
-                        },
-                        RecommendVideos:[
-                            {
-                                Video:'../Picture/movie.ogg',
-                                title:'熊吃鱼',
-                            }
-                        ],/*又*/
-                        ViodesSide :[
-                            {
-                                Video:'../Picture/movie.ogg',
-                                Introduction:'熊吃鱼',
-                            }
-                        ],/*左*/
-
+                        Photos:[
+                            [
+                                {
+                                    Introduction:'kobe',
+                                    url:kobe1
+                                },
+                                {
+                                    Introduction:'kobe',
+                                    url:kobe2
+                                }
+                            ],
+                            [
+                                {
+                            Introduction:'zine',
+                                url:zine1
+                            },{
+                                Introduction:'zine',
+                                url:zine2
+                            }],
+                            [
+                                {
+                                Introduction:'Ai',
+                                url:ai1
+                            },
+                                {
+                                    Introduction:'Ai',
+                                    url:ai2
+                                },
+                                {
+                                    Introduction:'Ai',
+                                    url:ai3
+                                },
+                            ],
+                            [
+                                {
+                                    Introduction:'Ai',
+                                    url:ai1
+                                },
+                                {
+                                    Introduction:'Ai',
+                                    url:ai2
+                                },
+                                {
+                                    Introduction:'Ai',
+                                    url:ai3
+                                },
+                            ]
+                        ]
                     },
+
                     gotdata:{},
                     topdata:[],
                     obj:{}
-                  /*  TextMessage:[
-                        {
-                            content:''      ,//内容
-                            picture:  ' ../Picture/earth.png  ' ,//插图
-                            type:    ''  ,//类型
-                            title:  ' 科技新闻太阳科技新闻太阳科技新闻太阳 '  ,//标题
 
-                        }
-                    ],
-                    OnlyText:[
-                        {
-                            type: '文本'     ,
-                            title:  '标题'    ,
-                            content:  '内容'    ,
-                            introduction:'内容主旨介绍'
-
-                        }
-                    ],
-                     Pictures:{
-                         HeaderPictureEarth:  '../Picture/earth.png '   ,
-                         HeaderPictureMoon:  ' ../Picture/moon.png'   ,
-                         HeaderPictureSun:  '../Picture/sun.png '   ,
-                     },*///图片轮播用
                 },
                 activeName:  'first' ,
                 activeIndex: '1',
-                backs:{
+           /*     backs:{
                   //  backgroundImage: "url(" + require("../Picture/head.jpg") + ")",
                     backgroundImage: 'url(' + require('../Picture/moon.png') + ')',
                     backgroundRepeat:'no-repeat',
                     backgroundSize:'100% 100%'
+                },*/
+                web:[
+                    {
+                        name:"百度",
+                        url:'http://www.baidu.com'
+                    },
+                    {
+                        name:"腾讯新闻",
+                        url:'https://news.qq.com'
+                    },
+                    {
+                        name:"今日头条",
+                        url:'https://www.toutiao.com'
+                    },
+                    {
+                        name:"bbc中文网",
+                        url:'http://www.businessnews.cn'
+                    },
+
+
+                ],
+                videos:[
+                    {
+                    name:'鸟',
+                    url:'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
                 },
+                    {
+                        name:'沙漠',
+                        url:'https://media.w3.org/2010/05/sintel/trailer.mp4'
+                    },
+                    {
+                        name:'人',
+                        url:'http://mirror.aarnet.edu.au/pub/TED-talks/911Mothers_2010W-480p.mp4'
+                    },
+
+                ],
+                mainvideo:'http://vjs.zencdn.net/v/oceans.mp4',
+                isshow:true,//用来更新视频
+                url:earth,
+                video:movie,
+                head:head,
+                
 
             }
       },
@@ -447,7 +584,21 @@
 
 
         },
+        provide(){
+            playvideo:this.playvideo
+        },//用来更新视频
         methods:{
+            playvideo(mv){
+                //用来更新视频
+              this.mainvideo= mv.url;
+                this.isshow = false
+                this.$nextTick(() => (this.isshow = true))
+            },
+            go(url){
+                window.open(url);
+           /*window.open("http://www.baidu.com");*/
+            /*    window.location.href = 'http://www.baidu.com';*/
+            },
             change(){
 
                 let that=this;
@@ -476,13 +627,13 @@
             },
             kejigonext1(item){
 
-                console.log(item.title);
+               /* console.log(item.title);*/
                 this.$router.push({name:'PlayNewsMsg',params:{items:item}});//用路由传递参数唯一标识
                 this.$router.push({path:'/PlayNewsMsg'});
                 console.log("打印的科技1");//展示图片带文字
             },
             kejigonext2(item){
-                console.log(item.title);
+               /* console.log(item.title);*/
                 console.log("打印的科技2");//仅仅展示文字
                 this.$router.push({name:'PlayContentMsg',params:{items:item}});//用路由传递参数唯一标识
                 this.$router.push({path:'/PlayContentMsg'});
@@ -499,8 +650,8 @@
             },
             yuletonext2(item){
                 console.log("打印娱乐2");//展示1张图加文字
-                this.$router.push({name:'PlayNewsMsg',params:{items:item}});
-                this.$router.push({path:'/PlayNewsMsg'});
+                this.$router.push({name:'PlayPhoto',params:{items:item}});
+                this.$router.push({path:'/PlayPhoto'});
             },
             tiyutonext0(item){
                 console.log("打印体育0");//展示三张图加文字
@@ -512,7 +663,7 @@
                 this.$router.push({name:'PlayContentMsg',params:{items:item}});
                 this.$router.push({path:'/PlayContentMsg'});
             },
-            tiyutonext2(item){
+          /*  tiyutonext2(item){
                 console.log("打印体育2");
                 this.$router.push({name:'PlayVideosMsg',params:{items:item}});
                 this.$router.push({path:'/PlayVideosMsg'});
@@ -523,7 +674,7 @@
                 this.$router.push({name:'PlayVideosMsg',params:{items:item}});
                 this.$router.push({path:'/PlayVideosMsg'});
                 //点击视频跳转
-            },
+            },*/
               /*  sparamtocontent(item){
                     this.$router.push({name:'PlayContentMsg',params:{id:id}});//用路由传递参数唯一标识
                 },
@@ -549,8 +700,8 @@
            this.Allofdata.gotdata= state.channel;
            let j;let i;let w;let that=this;
             console.log( this.Allofdata.gotdata);
-            console.log( this.Allofdata.gotdata[0].contents[0].text+"输出");
-            console.log( state.channel[0].contents[0].title+"输出1");
+         /*   console.log( this.Allofdata.gotdata[0].contents[0].text+"输出");*/
+          /*  console.log( state.channel[0].contents[0].title+"输出1");*/
            for(i=0;i<this.Allofdata.gotdata.length;i++)
            {
                console.log( "输出2");
@@ -572,9 +723,9 @@
                that.Allofdata.topdata[first]=that.Allofdata.topdata[second];
                that.Allofdata.topdata[second]=this.Allofdata.obj;
                let ob=that.Allofdata.topdata[first];
-               console.log(ob.title+"title");
+              /* console.log(ob.title+"title");
                console.log("first"+first);
-               console.log("second"+second);
+               console.log("second"+second);*/
            }
 
             console.log( this.Allofdata.topdata.length+"长度");
@@ -634,9 +785,24 @@
 
 
 <style scoped>
+    .showpicture{
+        width: 230px;
+        height: 230px;
+        cursor: pointer;
+       /* clear: both;clear: both清除上一个浮动对下一个的影响显示图片 也不许当前浮动*/
+      /*  clear: both;*/
+        margin-left: 25px;
+     /*   padding-top:200px;*/
 
+
+        border-top :10px solid darkgray;
+        border-bottom:10px solid darkgray;
+        border-right:10px solid darkgray;
+        border-left:10px solid darkgray;
+    }
     .allboder{
-        border-top :50px solid deepskyblue;
+      /*  border-top :50px solid deepskyblue;*/
+        height: auto;
         border-bottom:20px solid deepskyblue;
         border-right:20px solid deepskyblue;
         border-left:20px solid deepskyblue;
@@ -680,7 +846,7 @@
         height: 301px;
         overflow:auto;
        /* margin-left: 50%;*/
-        margin-top: 30px;
+        margin-top: 130px;
         cursor:pointer;
     }
 
@@ -732,17 +898,18 @@
         border-left:1px solid darkgray;
     }
     .tiyuaside{
-        width: 300px;
-        height: 340px;
-        margin-top: 5%;
+        width: auto;
+        height: auto;
+        margin-top: 4%;
         /*   background: blue;*/
-        margin-right: 5%;
+     /*   margin-right: 5%;*/
         cursor:pointer;/*鼠标放上去是一个手*/
-        border-left:1px solid #000;
-        border-right:1px solid #000;
-        border-top :1px solid #000;
+        margin-left: 10px;
+        border-left:20px solid #99a9bf;
+        border-right:20px solid #99a9bf;
+        border-top :30px solid #99a9bf;
 
-        border-bottom:1px solid #000;
+        border-bottom:20px solid #99a9bf;
     }
     .  el-tab-pane{
         background: aqua;
@@ -777,11 +944,17 @@
         border-radius: 4px;
         cursor:pointer;/*鼠标放上去是一个手*/
 
-        align:center;
-        margin-left: 16% ;
+        margin-left: 100px;
+        margin-top: 10px;
+
         height: 150px;
         width: 500px;
+
+        align:center;
+
         overflow:auto;
+
+
         border-top :1px solid darkgray;
         border-bottom:1px solid darkgray;
     }
@@ -794,6 +967,7 @@
         height: 150px;
         width:500px;
         margin-left: 60%;
+        margin-top: 10px;
 
        /* overflow:auto;*/
 
@@ -811,16 +985,18 @@
         height:100px;
     }
     .el-aside{
-        /* box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/
-        word-wrap:break-word ;
+       /* word-wrap:break-word ;
         border-radius: 4px;
         height: 350px;
+        color: #333;
+        cursor:pointer;*//*鼠标放上去是一个手*/
+        /* box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/
+
     /*    margin-left: 5%;*/
     /*    margin-top: 5%;*/
         /*  background-color: #D3DCE6;*/
         /*  background: black;*/
-        color: #333;
-        cursor:pointer;/*鼠标放上去是一个手*/
+
         /*      text-align: center;*/
        /* border-left:1px solid #000;
         border-right:1px solid #000;
@@ -829,15 +1005,21 @@
         border-bottom:1px solid #000;*/
     }
     .el-main{
-        /*   box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/
-        word-wrap:break-word ;
+
+
+
+      /*  word-wrap:break-word ;
         border-radius: 4px;
-        /*  background: red;*/
         margin-top: 5%;
-        /*     display:inline-block;360*/
         height: 350px;
         width: 300px;
-        cursor:pointer;/*鼠标放上去是一个手*/
+        cursor:pointer;*//*鼠标放上去是一个手*/
+        /*   box-shadow: 0 10px 10px rgba(0, 0, 0, .12), 0 0 60px rgba(0, 0, 0, .04);*/
+
+        /*  background: red;*/
+
+        /*     display:inline-block;360*/
+
 
     }
     p{
