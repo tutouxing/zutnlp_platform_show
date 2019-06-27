@@ -729,7 +729,7 @@
             },
             getfather(){
                 let that = this;
-                let url = "http://127.0.0.1:8848/TableMessage/list";
+                let url = "http://202.196.37.147:8848/TableMessage/list";
                 that.$axios.get(url, {}).then(function (response) {
                     for (let j in response.data) {
                         that.fathernamechose.name.push(
@@ -790,7 +790,7 @@
                     })
                     this.$axios.defaults.headers.post["Content-Type"]='application/json;charset=UTF-8';*!/
 
-                    let url='http://127.0.0.1:8848/GenCode/GetEntiredProjectZip';
+                    let url='http://202.196.37.147:8848/GenCode/GetEntiredProjectZip';
                      this.$axios({
                          method:'get',
                          url,
@@ -967,7 +967,7 @@
                 {
                     this.$axios({
                         method: 'post',
-                        url: 'http://127.0.0.1:8848/TableMessage/add/',
+                        url: 'http://202.196.37.147:8848/TableMessage/add/',
                         headers:{
                             'Content-Type':'application/json'
                         },
@@ -999,7 +999,7 @@
             },
           /*  PropertyFindall(){
                 let that=this;
-                let url='http://127.0.0.1:8848/Connection/list';
+                let url='http://202.196.37.147:8848/Connection/list';
                 this.$axios(
                     {
                         method:'get',
@@ -1028,7 +1028,7 @@
             },*/
             PropertyAdd(go){
                 let that_=this;
-                let url='http://127.0.0.1:8848/Pros/add';
+                let url='http://202.196.37.147:8848/Pros/add';
                 console.log("这里是添加属性的");
                        for(let i in that_.dataone)
                        {
@@ -1105,7 +1105,7 @@
 
             },*/
           /*  PropertyCheck() {
-                let url='http://127.0.0.1:8848/Pros/check';
+                let url='http://202.196.37.147:8848/Pros/check';
                 this.$axios({
                     method:'post',
                     url,
@@ -1151,7 +1151,7 @@
                     that_.ConnectionAddfun();
                     console.log("打印第二个接口的时候调用"+that_.message.Tablename);
                     that_.fathernamechose.valuetwo=that_.message.Tablename;
-                    let url='http://127.0.0.1:8848/Connection/add';
+                    let url='http://202.196.37.147:8848/Connection/add';
                     console.log("打印参数名表明"+that_.message.Tablename);
                     this.$axios({
                         method:'post',
@@ -1199,7 +1199,7 @@
                 console.log("tableConnectionType::"+thats.ConnectionType.SonToFather);
                 console.log("Tablename::"+thats.message.Tablename);*/
 
-                let url='http://127.0.0.1:8848/Connection/add';
+                let url='http://202.196.37.147:8848/Connection/add';
                 this.$axios({
                     method:'post',
                     url,
@@ -1240,7 +1240,7 @@
             },
          /*   ConnectionCheck(){
                 let that_=this;
-                let url='http://127.0.0.1:8848/Connection/check/Department';
+                let url='http://202.196.37.147:8848/Connection/check/Department';
                 this.$axios({
                     method:'post',
                     url,
@@ -1268,7 +1268,7 @@
             },*/
         /*    ConnectionUpdata(){
                 let that_=this;
-                let url='http://127.0.0.1:8848/Connection/updata';
+                let url='http://202.196.37.147:8848/Connection/updata';
                 this.$axios({
                     method:'post',
                     url,
@@ -1292,7 +1292,7 @@
             },*/
         /*    ConnectionDelete(){
 
-                let url='http://127.0.0.1:8848/Connection/delete';
+                let url='http://202.196.37.147:8848/Connection/delete';
                 this.$axios({
                     method:'post',
                     url,
@@ -1315,7 +1315,7 @@
                 })
             },*/
           /*  ConnectionList(){
-                let url="http://127.0.0.1:8848/Connection/list"
+                let url="http://202.196.37.147:8848/Connection/list"
                 this.$axios.get(url,{}).then(function (res) {
 
                 })
@@ -1323,7 +1323,7 @@
             },*/
             examineproname(){
                 let that=this;
-                let url='http://127.0.0.1:8848/Pros/list';
+                let url='http://202.196.37.147:8848/Pros/list';
                 this.$axios(
                     {
                         method:'get',
@@ -1350,7 +1350,7 @@
                 });
             },
             getalltablemsg(){
-                let url = "http://127.0.0.1:8848/TableMessage/list";
+                let url = "http://202.196.37.147:8848/TableMessage/list";
                 let that=this;
                 that.$axios.get(url, {}).then(function (response) {
                     for (let j in response.data)
