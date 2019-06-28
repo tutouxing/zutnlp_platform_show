@@ -8,8 +8,8 @@
                         <el-row>
                             <el-col :span="14">
                                 <el-carousel indicator-position="outside">
-                                    <el-carousel-item v-for="item in 4" :key="item">
-                                        <h3>{{ item }}</h3>
+                                    <el-carousel-item v-for="(n,item) in picture" :key="item">
+                                        <img :src="n.url"/>
                                     </el-carousel-item>
                                 </el-carousel>
                             </el-col >
@@ -17,9 +17,9 @@
                                 <div class="pwapper">
                                     <div v-for="(n,index) in text" :key="index">
                                         <div class="pwapper_title">
-                                            <h3>{{n.title}}</h3>
+                                            <h3 @click="skip(n)">{{n.title}}</h3>
                                         </div>
-                                        <div class="pwapper_main">{{n.text}}</div>
+                                        <div class="pwapper_main" @click="skip(n)">{{n.title}}</div>
                                         <div class="pwapper_foot"><span>点击量：</span>{{n.click}}</div>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="foot_span_src_h">
                                 <div class="foot_span_head">
-                                    <h4>{{n.text}}</h4>
+                                    <h4 @click="skip(n)">{{n.title}}</h4>
                                 </div>
                                 <div class="foot_span_foot">
                                     <span>点击量：</span>{{n.click}}
@@ -55,18 +55,18 @@
                             <div class="head_body">
                                 <el-row>
                                     <el-col :span="8">
-                                        <div v-for="(n,index) in Item" :key="index"  >
-                                            <el-button type="info" style="width: 100px;margin-bottom: 5px;color: #a4a7e6" >{{n.title}}</el-button>
+                                        <div v-for="(n,index) in Item11" :key="index"  >
+                                            <el-button type="info" style="width: 100px;margin-bottom: 5px;color: #a4a7e6" >{{n}}</el-button>
                                         </div>
                                     </el-col>
                                     <el-col :span="8">
-                                        <div v-for="(n,index) in Item" :key="index">
-                                            <el-button type="info" style="width: 100px;margin-bottom: 5px" >{{n.title}}</el-button>
+                                        <div v-for="(n,index) in Item22" :key="index">
+                                            <el-button type="info" style="width: 100px;margin-bottom: 5px" >{{n}}</el-button>
                                         </div>
                                     </el-col>
                                     <el-col :span="8">
-                                        <div v-for="(n,index) in Item" :key="index">
-                                            <el-button type="info" style="width: 100px;margin-bottom: 5px" >{{n.title}}</el-button>
+                                        <div v-for="(n,index) in Item33" :key="index">
+                                            <el-button type="info" style="width: 100px;margin-bottom: 5px" >{{n}}</el-button>
                                         </div>
                                     </el-col>
                                 </el-row>
@@ -95,6 +95,7 @@
 
 <script>
     import Ahead from '../index/phead'
+    import {PicturePage} from '../../../api/picture/pt'
     export default {
         name: "aindex",
         components:{
@@ -102,30 +103,81 @@
         },
         data(){
             return{
-                Item:[
-                    { title:'辛西娅嘻嘻'},
-                    {title:'辛西娅嘻嘻'},
-                    {title:'辛西娅嘻嘻'},
-                    {title:'辛西娅嘻嘻'},
-                ],
+                picture:[],
+                Item:[],
                 content3:[
-                    { title:'辛西娅嘻嘻'},
-                    {title:'辛西娅嘻嘻'},
-                    {title:'辛西娅嘻嘻'},
-                    {title:'辛西娅嘻嘻'},
                 ],
                 text:[
-                    { title:'呵呵呵呵',
-                      text:'你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀',
-                      click:12},
-                    {title:'呵呵呵呵', text:'你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀',
-                        click:12},
-                    {title:'呵呵呵呵',
-                        text:'你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀',
-                        click:12},
-                ]
+                ],
+                list:[],
+                list1:[],
+                list2:[],
+                list3:[],
+                Item11:[],
+                Item2:[],
+                Item22:[],
+                Item3:[],
+                Item33:[]
             }
+
         },
+       methods:{
+            getPicture(){//得到图像列表
+                PicturePage().then((response)=>{
+                    this.picture=response.data.content;
+                    console.log('得到picture内容');
+                    console.log(this.picture);
+                })
+            },
+            getChannel(){
+                this.list=this.$store.state.channel;//得到数据列表
+                this.list1=this.list[0].contents;
+                this.list2=this.list[1].contents;
+                this.list3=this.list[2].contents;
+                for (let i=0;i<this.list1.length;i++){
+                    this.Item.push(this.list1[i].title);
+                }
+                for (let j=0;j<5;j++){
+                    this.Item11.push(this.Item[j].substr(0,5));
+                }
+                for (let a=0;a<this.list2.length;a++) {
+                    this.Item2.push(this.list2[a].title);
+                }
+                for (let b=0;b<5;b++){
+                    this.Item22.push(this.Item2[b].substr(0,5))
+                }
+                for (let d=0;d<this.list3.length;d++){
+                    this.Item3.push(this.list3[d].title);
+                }
+                for (let m=0;m<5;m++){
+                    this.Item33.push(this.Item3[m].substr(0,5))
+                }
+                this.getContent();
+                this.getText();
+            },
+           skipButton(n){
+           },
+           getContent(){
+                for(let i=0;i<4;i++){
+                    this.content3.push(this.list1[i]);
+                }
+           },
+           getText(){
+                for(let j=0;j<3;j++){
+                    this.text.push(this.list2[j]);
+                }
+           },
+           skip(n){
+               this.$router.push({name:'detailed1', params:{item:n}});
+               this.$router.push({path:'/prostage/detailed'})
+           }
+
+       },
+        created(){
+            this.getPicture();
+            this.getChannel();
+
+        }
     }
 </script>
 
@@ -231,6 +283,11 @@
     .pwapper_main{
         margin-bottom: 5px;
         font-size: 13px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;      /* 可以显示的行数，超出部分用...表示*/
+    -webkit-box-orient: vertical;
     }
     .pwapper_main:hover{
         color: red;
@@ -258,7 +315,7 @@
         padding-bottom: 10px;
     }
     .foot_span:hover{
-       background-color: #dae4ee;
+        background-color: #dae4ee;
     }
     .foot_span_head{
         margin-bottom: 50px;

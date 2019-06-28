@@ -71,8 +71,8 @@
                         </div>
                         <div class="word_picture">
                             <el-carousel :interval="4000" type="card" height="200px">
-                                <el-carousel-item v-for="item in 6" :key="item">
-                                    <h3>{{ item }}</h3>
+                                <el-carousel-item v-for="(n,item) in depictions1" :key="item">
+                                   <img :src="n.idView"/>
                                 </el-carousel-item>
                             </el-carousel>
                         </div>
@@ -82,8 +82,8 @@
             <el-col :span="8">
                 <div>
                     <el-carousel indicator-position="outside">
-                        <el-carousel-item v-for="item in depictions" :key="item.id">
-                            <image :src="item.idView" alt=""></image>
+                        <el-carousel-item v-for="(n,item) in depictions" :key="item">
+                            <img :src="n.idView"/>
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -122,11 +122,18 @@
                 activeName: 'second',
                 items:[],
              depictions:[
-                 { id:0, idView:'https://inews.gtimg.com/newsapp_bt/0/9132517236/1000'},
-                 { id:1, idView:'https://img1.gtimg.com/rcdimg/20190528/07/1245425028_273x145.jpg'},
-                 { id:2, idView:'https://inews.gtimg.com/newsapp_ls/0/9153716802_294195/0'},
-                 { id:3, idView:'https://inews.gtimg.com/newsapp_bt/0/9132543707/1000'},
+                 {  idView:'http://i2.chinanews.com/simg/2019/190610//100691130.JPG'},
+                 {  idView:'http://www.chinanews.com/tp/2019/06-10/U601P4T8D8860193F107DT20190610100920.jpg'},
+                 {  idView:'http://www.chinanews.com/2019/06-10/U601P4T8D8860261F107DT20190610105043.jpg'},
+                 {  idView:'http://www.chinanews.com/2019/06-10/U610P4T8D8860189F107DT20190610100429.jpg'},
              ],
+                depictions1:[
+                    {  idView:'http://www.chinanews.com/2019/06-10/U86P4T8D8860159F107DT20190610094908.jpg'},
+                    {  idView:'http://i2.chinanews.com/simg/2019/190610//100661160.jpg'},
+                    {  idView:'http://www.chinanews.com/2019/06-10/U86P4T8D8860061F107DT20190610085705.jpg'},
+                    {  idView:'http://i2.chinanews.com/simg/2019/190610//100664760.jpg'},
+                    {  idView:'http://www.chinanews.com/2019/06-10/U855P4T8D8860804F107DT20190610201243.jpg'},
+                ],
                 list:[],//所有栏目列表
                 content:[],
                 content1:[],

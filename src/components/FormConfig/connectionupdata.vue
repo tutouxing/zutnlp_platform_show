@@ -95,7 +95,7 @@
                 let name=this.$route.params.conname;
                 console.log("获取的名字"+this.receivename);
                 let that_=this;
-                let url="http://127.0.0.1:8848/Connection/check/Department";
+                let url="http://202.196.37.147:8848/Connection/check/Department";
                 this.$axios({
                     method:'post',
                     url,
@@ -114,7 +114,7 @@
                     that_.idone=res.data.id;
                     console.log("获取的id"+res.data.id);
                     console.log("获取的name"+that_.receivename);
-                    let url='http://127.0.0.1:8848/Connection/updata';
+                    let url='http://202.196.37.147:8848/Connection/updata';
                     that_.$axios({
                         method:'post',
                         url,
@@ -139,7 +139,7 @@
                         }
                     })
                 });
-               /* let url2='http://127.0.0.1:8848/Connection/updata';
+               /* let url2='http://202.196.37.147:8848/Connection/updata';
                 this.$axios({
                     method:'post',
                     url,
@@ -168,7 +168,7 @@
             let name=this.$route.params.conname;
             console.log("获取的名字"+this.receivename);
             let that_=this;
-            let url="http://127.0.0.1:8848/Connection/check/Department";
+            let url="http://202.196.37.147:8848/Connection/check/Department";
             this.$axios({
                 method:'post',
                 url,

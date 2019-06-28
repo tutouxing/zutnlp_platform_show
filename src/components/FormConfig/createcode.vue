@@ -41,7 +41,7 @@
             Findprojectname(){
                 console.log("掉获取工程名接口Project");
                 let that=this;
-                let url='http://127.0.0.1:8848/TableMessage/GenALLProjectName';
+                let url='http://202.196.37.147:8848/TableMessage/GenALLProjectName';
                 this.$axios(
                     {
                         method:'get',
@@ -76,7 +76,7 @@
 
                     })
                     this.$axios.defaults.headers.post["Content-Type"]='application/json;charset=UTF-8';*!/
-                    let url='http://127.0.0.1:8848/GenCode/GetEntiredProjectZip';
+                    let url='http://202.196.37.147:8848/GenCode/GetEntiredProjectZip';
                     this.$axios({
                         method:'get',
                         url,
@@ -94,7 +94,7 @@
                this.$router.push({path:"formconfig/formoperate"});
             },//调用创建代码*/
           LastcreCode(){
-              let url="http://127.0.0.1:8848/GenCode/GetEntiredProjectZip?ProjectName="+this.ProjectNames.values;
+              let url="http://202.196.37.147:8848/GenCode/GetEntiredProjectZip?ProjectName="+this.ProjectNames.values;
              /* this.$http({
                   method:"get",
                   url:url+"?data="+encodeURI(JSON.stringify(this.value)),
