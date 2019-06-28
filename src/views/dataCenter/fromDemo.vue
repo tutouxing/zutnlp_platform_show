@@ -1,4 +1,5 @@
 <template>
+    <div>
     <el-card>
         <el-col>
             <el-row  style="width: 20%">
@@ -9,27 +10,34 @@
                 </el-radio-group>
             </el-row>
             <el-row>
-                <!--<el-col span="12">-->
-                    <!--<el-card :body-style="{ padding: '40px' }">-->
-                        <!--<div id="channel_dv" style="width: 650px; height: 580px"></div>-->
-                    <!--</el-card>-->
-                <!--</el-col>-->
                 <el-col>
                     <el-card :body-style="{ padding: '40px' }">
-                        <div ref="channel2_dv" style="width: 1500px; height: 580px"></div>
+                        <div id="channel2_dv" style="width: 1500px; height: 580px"></div>
                     </el-card>
                 </el-col>
             </el-row>
         </el-col>
     </el-card>
+        <el-card>
+            <el-col>
+                <el-row>
+                    <el-col>
+                        <component :is="mode"></component>
+                    </el-col>
+                </el-row>
+            </el-col>
+        </el-card>
+    </div>
 </template>
 
 <script>
+  import fromData from './fromChart/fromData'
   let echarts = require('echarts')
   export default {
     name: 'fromDemo',
     data () {
       return{
+        mode:fromData,
         radio: '今日',
         dottedBase:'',
       option: {
@@ -185,7 +193,7 @@
           this.Data2();
         else
           this.Data1();
-        let myChart2 = echarts.init(this.$refs.channel2_dv);
+        let myChart2 = echarts.init(document.getElementById('channel2_dv'));
         myChart2.setOption(this.option);
       },
     }
