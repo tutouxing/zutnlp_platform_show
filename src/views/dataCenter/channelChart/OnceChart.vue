@@ -40,7 +40,7 @@
             containLabel: true
           },
           legend: {
-            data: ['1', '2', '3'],
+            data: ['1', '2', '3','4','5','6'],
             right: 10,
             top: 12,
             textStyle: {
@@ -52,7 +52,7 @@
           },
           xAxis: {
             type: 'category',
-            data: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'],
+            data: ['四月', '五月','六月'],
             axisLine: {
               lineStyle: {
                 color: 'white'
@@ -114,7 +114,7 @@
           series: [{
             name: '1',
             type: 'bar',
-            barWidth: '15%',
+            barWidth: '8%',
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -127,12 +127,12 @@
                 barBorderRadius: 12,
               },
             },
-            data: [400, 400, 300, 300, 300, 400, 400, 400, 300]
+            data: [620, 800,1000]
           },
             {
               name: '2',
               type: 'bar',
-              barWidth: '15%',
+              barWidth: '8%',
               itemStyle: {
                 normal: {
                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -146,12 +146,12 @@
                 }
 
               },
-              data: [400, 500, 500, 500, 500, 400, 400, 500, 500]
+              data: [430, 820,1100]
             },
             {
               name: '3',
               type: 'bar',
-              barWidth: '15%',
+              barWidth: '8%',
               itemStyle: {
                 normal: {
                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -164,8 +164,59 @@
                   barBorderRadius: 11,
                 }
               },
-              data: [400, 600, 700, 700, 1000, 400, 400, 600, 700]
-            }]
+              data: [680,1000, 800]
+            }, {
+              name: '4',
+              type: 'bar',
+              barWidth: '8%',
+              itemStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: '#57eabf'
+                  }, {
+                    offset: 1,
+                    color: '#2563f9'
+                  }]),
+                  barBorderRadius: 11,
+                }
+              },
+              data: [710, 1000,900]
+            },{
+              name: '5',
+              type: 'bar',
+              barWidth: '8%',
+              itemStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: '#00df93'
+                  }, {
+                    offset: 1,
+                    color: '#8e49ff'
+                  }]),
+                  barBorderRadius: 11,
+                }
+              },
+              data: [760,1020,860]
+            },{
+              name: '6',
+              type: 'bar',
+              barWidth: '8%',
+              itemStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: '#8e49ff'
+                  }, {
+                    offset: 1,
+                    color: '#ff49f9'
+                  }]),
+                  barBorderRadius: 11,
+                }
+              },
+              data: [850,900,750]
+            },]
         },
       }
     },
