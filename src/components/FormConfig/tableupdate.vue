@@ -62,7 +62,7 @@
                                 this.tabname=this.$route.params.userId;
                                 console.log("这是message方法");
                let that_=this;
-                    let url="http://127.0.0.1:8848/TableMessage/check/task";
+                    let url="http://202.196.37.147:8848/TableMessage/check/task";
                     this.$axios({
                         method: 'post',
                         url: url,
@@ -87,7 +87,7 @@
                         console.log(that_.tabname+'这是tablename第一个axios');
                         that_.$axios({
                             method: 'post',
-                            url: 'http://127.0.0.1:8848/TableMessage/updata',
+                            url: 'http://202.196.37.147:8848/TableMessage/updata',
                             headers:{
                                 'Content-Type':'application/json'
                             },
@@ -127,7 +127,7 @@
                     this.tabname=this.$route.params.userId;
                     console.log("这是message方法");
                     let that_=this;
-                    let url="http://127.0.0.1:8848/TableMessage/check/task";
+                    let url="http://202.196.37.147:8848/TableMessage/check/task";
                     this.$axios({
                         method: 'post',
                         url: url,
