@@ -29,7 +29,7 @@ export function analysis_dependence(text) {
     }
     else//英文
         return fetch({
-            url:"http://202.196.37.144:8898/nlp/nlp_en/dependence",
+            url:"http://202.196.37.144:8898/nlp/nlp_en/dependency/",
             method:"post",
             data:text
         })
