@@ -1,6 +1,7 @@
 <template>
     <div>
-        <img src="AllMsg.TextMsg.picture"  style="width: 88%; height: 88%"/>
+        <h1>{{obj.Introduction}}</h1>
+        <img style="margin-top: 100px" :src="obj.Picture"/>
     </div>
 </template>
 
@@ -10,18 +11,18 @@
         data()
         {
             return{
-                   AllMsg:{
-                       TextMsg:{
-                           picture:''
-                       }
-                   }
+                  obj:{},
+                   url:''
             }
         },
         methods:{
 
         },
-        mounted(){
-            this.AllMsg.TextMsg.picture=this.$route.params.item;///接收唯一标识/
+        created(){
+            this.obj=this.$route.params.items;/////接收唯一标识/
+
+            this.url=this.obj.Picture;
+            console.log(  this.url);
         }
     }
 </script>

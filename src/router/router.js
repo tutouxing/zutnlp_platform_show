@@ -20,7 +20,7 @@ import PlayVideosMsg from '../components/ClientWeb/TextTemplate/PlayVideosMsg.vu
 import FrameWork from '../components/ClientWeb/TextTemplate/FrameWork.vue'
 import PlayContentMsg from '../components/ClientWeb/TextTemplate/PlayContentMsg.vue'
 import PlayNewsMsg from '../components/ClientWeb/TextTemplate/PlayNewsMsg.vue'
-import PlayPictrueMsg from '../components/ClientWeb/TextTemplate/PlayPictrueMsg'
+import PlayPhoto from '../components/ClientWeb/TextTemplate/PlayPictrueMsg.vue'
 /*
 *
 *
@@ -188,30 +188,30 @@ export default[
             name: 'createcode',
             component:createcode,
         },
-        {
+       /* {
             path: 'PlayContentMsg',
             name: 'PlayContentMsg',
             component:PlayContentMsg,
 
-        },
-        {
+        },*/
+       /* {
             path: 'PlayManyPicturesContentMsg',
             name: 'PlayManyPicturesContentMsg',
             component:PlayManyPicturesContentMsg,
 
-        },
-        {
+        },*/
+        /*{
             path: 'PlayNewsMsg',
             name: 'PlayNewsMsg',
             component:PlayNewsMsg,
 
-        },
-        {
+        },*/
+       /* {
             path: 'PlayPictrueMsg',
             name: 'PlayPictrueMsg',
             component:PlayPictrueMsg,
 
-        },
+        },*/
         {
             path: 'PlayVideosMsg',
             name: 'PlayVideosMsg',
@@ -263,6 +263,21 @@ export default[
             name:'groupType',
             component:()=>import('../components/Admin/group/index.vue')
         },
+      {
+        path:'data',
+        name:'dataCenter',
+        component:()=>import('../views/dataCenter/dataDemo.vue')
+      },
+      {
+        path:'channelData',
+        name:'dataCenter',
+        component:()=>import('../views/dataCenter/channelDemo.vue')
+      },
+      {
+        path:'fromData',
+        name:'dataCenter',
+        component:()=>import('../views/dataCenter/fromDemo.vue')
+      },
 
     ]
   },
@@ -308,6 +323,28 @@ export default[
         path: '/ClientWeb/TextTemplate/FrameWork',
         name: 'FrameWork',
         component:FrameWork,
+
+    },
+    {
+        path: '/PlayNewsMsg',
+        name: 'PlayNewsMsg',
+        component:PlayNewsMsg,
+    },
+    {
+        path: '/PlayContentMsg',
+        name: 'PlayContentMsg',
+        component:PlayContentMsg,
+
+    },
+    {
+        path: '/PlayPhoto',
+        name: 'PlayPhoto',
+        component:PlayPhoto,
+    },
+    {
+        path: '/PlayManyPicturesContentMsg',
+        name: 'PlayManyPicturesContentMsg',
+        component:PlayManyPicturesContentMsg,
 
     },
     {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import fetch from "../../../utils/fetch";
 export function PropertyFindall(){
     let datas;
-    let url='http://localhost:8848/Pros/list';
+    let url='http://202.196.37.147:8848/Pros/list';
     this.$axios(
         {
             method:'get',

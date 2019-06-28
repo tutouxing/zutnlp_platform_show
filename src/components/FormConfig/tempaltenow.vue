@@ -216,7 +216,7 @@
             },
             PropertyFindall() {
                 let that = this;
-                let url = 'http://localhost:8848/Pros/list';
+                let url = 'http://202.196.37.147:8848/Pros/list';
                 this.$axios(
                     {
                         method: 'get',
@@ -264,7 +264,7 @@
                            console.log("输出id"+p);
                 }
 
-                let url="http://localhost:8848/"+gettablename+"/deleteById";
+                let url="http://202.196.37.147:8848/"+gettablename+"/deleteById";
                 this.$axios(
                     {
                         method:'post',
@@ -301,7 +301,7 @@
                     this.$alert("请填写全部信息");
                 }else
                 {
-                    let url="http://localhost:8848/"+gettablename+"/updataById";
+                    let url="http://202.196.37.147:8848/"+gettablename+"/updataById";
                     let obj=that.posts;
                     this.$set(obj,"id",id);
                     console.log(id+"这是updata的id");
@@ -355,7 +355,7 @@
                     {
                         console.log("这是调用前遍历post:"+info+that.posts[info])
                     }
-                    let url="http://localhost:8848/"+gettablename+"/add";
+                    let url="http://202.196.37.147:8848/"+gettablename+"/add";
                     that.$axios({
                         method: 'post',
                         url,
@@ -443,7 +443,7 @@
                 console.log("调用了getmsg()");let that = this;
                 for (let i=1;i<this.TableMsgs.TableNames.length;i++)
                 {
-                    let url = "http://localhost:8848/"+this.TableMsgs.TableNames[i].name+"/list";
+                    let url = "http://202.196.37.147:8848/"+this.TableMsgs.TableNames[i].name+"/list";
                     that.$axios.get(url, {}).then(function (response) {
                         if(response.data.length!=0)
                         {
