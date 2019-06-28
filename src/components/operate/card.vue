@@ -23,10 +23,10 @@
         </el-input>
       </el-col>
       <el-col :span="2">
-        <el-button type="primary" @click="commit()">回复</el-button>
+        <el-button type="primary" @click="commit">回复</el-button>
       </el-col>
       <el-col :span="2">
-        <el-button @click="cancel()">取消</el-button>
+        <el-button @click="cancel">取消</el-button>
       </el-col>
     </el-row>
     <el-row>
@@ -39,10 +39,10 @@
         <el-button @click="refuseCom(content_data.id)">审核不通过</el-button>
       </el-col>
       <el-col :span="2">
-        <el-button @click="replay()">回复</el-button>
+        <el-button @click="replay">回复</el-button>
       </el-col>
       <el-col :span="2">
-        <el-button @click="del()">删除</el-button>
+        <el-button @click="del">删除</el-button>
       </el-col>
     </el-row>
   </el-card>
