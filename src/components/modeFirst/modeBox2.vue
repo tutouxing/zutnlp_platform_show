@@ -1,20 +1,19 @@
 <template>
     <div class="exBox">
         <div class="modeBoxslide">
-            <mode-sec-slide-image></mode-sec-slide-image>
+            <el-card class="box-card" shadow="never">
+                <div slot="header" class="clearfix">
+                    <span style="color:#ba2636">{{channelItem}}</span>
+                    <el-button style="float: right; padding: 3px 0" type="text" >
+                        <router-link v-bind:to="'/modeCont/'+channelItem">更多>></router-link></el-button>
+                </div>
+                <div v-for="(item,index) in this.TitleList "v-if="index <5">
+                    <li class="liList"><router-link :to="{path:'/modethirdCont/'+oldTitleList[index].title}" type="li">{{item}}</router-link></li>
+                </div>
+            </el-card>
         </div>
         <div class="modeBoxslide">
-        <el-card class="box-card" shadow="never">
-        <div slot="header" class="clearfix">
-           <span style="color:#ba2636">{{channelItem}}</span>
-
-            <el-button style="float: right; padding: 3px 0" type="text" >
-                <router-link v-bind:to="'/modeCont/'+channelItem">更多>></router-link></el-button>
-        </div>
-        <div v-for="(item,index) in this.TitleList "v-if="index <5">
-            <li class="liList"><router-link :to="{path:'/modethirdCont/'+oldTitleList[index].title}" type="li">{{item}}</router-link></li>
-        </div>
-        </el-card>
+            <mode-sec-slide-image></mode-sec-slide-image>
         </div>
     </div>
 </template>
@@ -23,7 +22,7 @@
     import modeSlideImage from './modeSlideImage'
     import ModeSecSlideImage from "./modeSecSlideImage";
     export default {
-        name: "modeBox",
+        name: "modeBox2",
         props: {
             channelItem: String,
             required: true
@@ -43,9 +42,9 @@
                         var m=0;
                         for (;m<AllChennel[i].contents.length;m++) {
                             var split=''
-                                if (AllChennel[i].contents[m].title.length<=15)
+                            if (AllChennel[i].contents[m].title.length<=15)
                             {
-                               split=AllChennel[i].contents[m].title
+                                split=AllChennel[i].contents[m].title
                             }
                             if (AllChennel[i].contents[m].title.length>15){
                                 split=AllChennel[i].contents[m].title.toString().substring(0,15)+"..."
@@ -74,7 +73,7 @@
                 console.log(title)
                 return title
             }
-            }
+        }
         ,methods:{
         },
         components:{

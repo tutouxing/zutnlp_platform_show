@@ -52,8 +52,8 @@
     .clearfix:after {
         clear: both
     }
-    a:hover{color: #aaccee}
-    a{text-decoration: none;}
-    a:visited{color:#2361b9}
-    a:active{color: #ffffff}
+    a {color:#252525; text-decoration:none;}
+    a:visited {text-decoration:none;}
+    a:hover {color:#ba2636;text-decoration:underline;}
+    a:active {color:#ba2636;}
 </style>

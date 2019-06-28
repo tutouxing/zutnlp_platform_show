@@ -6,11 +6,6 @@
     </el-carousel>
 </template>
 
-<script>
-    export default {
-        name: "modeSecSlideImage"
-    }
-</script>
 
 <style scoped>
     .el-carousel__item h3 {
@@ -28,8 +23,8 @@
     .el-carousel__item:nth-child(2n+1) {
         background-color: #d3dce6;
     }
-    a:hover{color: #aaccee}
-    a{text-decoration: none;}
-    a:visited{color:#2361b9}
-    a:active{color: #ffffff}
+    a {color:#252525; text-decoration:none;}
+    a:visited {text-decoration:none;}
+    a:hover {color:#ba2636;text-decoration:underline;}
+    a:active {color:#ba2636;}
 </style>
