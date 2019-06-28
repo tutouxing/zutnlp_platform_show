@@ -57,7 +57,7 @@ export default {
                 let text = this.text_area;
                 this.flag = 1;
                 analysis_wpn(text).then(res=>{
-                    this.result = res.data;
+                    this.wpn_result = res.data;
                     for(let i=0;i<this.result.length;i++){
                         if (this.result[i].pos==="NN"){
                             this.$set(this.result[i],"type","primary");
