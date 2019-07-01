@@ -227,7 +227,11 @@ export default[
             component: createproject,
         },
 
-
+        {
+            path:"/comment",
+            name:"评论管理",
+            component:()=>import("../views/operate/comment.vue")
+        },
 
         {
             path: 'analysis_word',
