@@ -20,5 +20,10 @@ const state = {
     pageSet:["待添加","待添加","待添加"],
     AllContent:[],
     Alltxt:[],
+    today:'2',
+    todayData:{
+      todayContentNum:0,
+      todayChannelNum:[]
+    }
 };
 export default state;
