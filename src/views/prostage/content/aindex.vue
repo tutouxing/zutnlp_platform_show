@@ -95,6 +95,7 @@
 
 <script>
     import Ahead from '../index/phead'
+    import {PicturePage} from '../../../api/picture/pt'
     export default {
         name: "aindex",
         components:{
@@ -102,12 +103,7 @@
         },
         data(){
             return{
-                picture:[
-                    {url:'http://www.chinanews.com/2019/06-10/U601P4T8D8860470F107DT20190610144535.jpg'},
-                    {url:'http://www.chinanews.com/tp/2019/06-10/U610P4T8D8860560F107DT20190610155430.jpg'},
-                    {url:'http://www.chinanews.com/2019/06-10/U86P4T8D8860449F107DT20190610142556.jpg'},
-                    {url:'http://www.chinanews.com/2019/06-10/U601P4T8D8860423F107DT20190610140525.jpg'}
-                ],
+                picture:[],
                 Item:[],
                 content3:[
                 ],
@@ -126,6 +122,13 @@
 
         },
        methods:{
+            getPicture(){//得到图像列表
+                PicturePage().then((response)=>{
+                    this.picture=response.data.content;
+                    console.log('得到picture内容');
+                    console.log(this.picture);
+                })
+            },
             getChannel(){
                 this.list=this.$store.state.channel;//得到数据列表
                 this.list1=this.list[0].contents;
@@ -171,7 +174,9 @@
 
        },
         created(){
+            this.getPicture();
             this.getChannel();
+
         }
     }
 </script>
@@ -278,6 +283,11 @@
     .pwapper_main{
         margin-bottom: 5px;
         font-size: 13px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;      /* 可以显示的行数，超出部分用...表示*/
+    -webkit-box-orient: vertical;
     }
     .pwapper_main:hover{
         color: red;
@@ -305,7 +315,7 @@
         padding-bottom: 10px;
     }
     .foot_span:hover{
-       background-color: #dae4ee;
+        background-color: #dae4ee;
     }
     .foot_span_head{
         margin-bottom: 50px;

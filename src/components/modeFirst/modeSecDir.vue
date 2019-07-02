@@ -13,15 +13,15 @@
         data: function(){
             return {
                 secChanneList:[{
-                    title:'标题二一'
+                    title:'新闻岛屿'
                 },{
-                    title:'标题二一'
+                    title:'国内要闻'
                 },{
-                    title:'标题二一'
+                    title:'军事资讯'
                 },{
-                    title:'标题二一'
+                    title:'学习强国'
                 },{
-                    title:'标题二一'
+                    title:'阅读文章'
                 },{
                     title:'更多'
                 }]
@@ -34,17 +34,15 @@
 </script>
 
 <style scoped>
-    .ziti{
+    .el-menu-item{
         font-family: "Arial";
         font-size:18px;
         font-weight:bold;
-        text-color:#022445;
-        active-text-color:#b491f6;
         width: 15%
 
     }
-    a:hover{color: #aaccee}
-    a{text-decoration: none;}
-    a:visited{color:#2361b9}
-    a:active{color: #ffffff}
+    a {color:#252525; text-decoration:none;}
+    a:visited {text-decoration:none;}
+    a:hover {color:#ba2636;text-decoration:underline;}
+    a:active {color:#ba2636;}
 </style>

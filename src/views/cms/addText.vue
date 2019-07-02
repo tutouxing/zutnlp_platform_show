@@ -58,7 +58,7 @@
       </el-col>
       <el-col style="width: 30%">
       <el-upload
-          action="http://127.0.0.1:8848/upload/fileUpload/"
+          action="http://202.196.37.147:8848/upload/fileUpload/"
           list-type="picture-card"
           :on-preview="handlePictureCardPreview"
           :on-remove="handleRemove"
@@ -72,7 +72,7 @@
       </el-col>-->
         <el-upload
                 class="avatar-uploader"
-                action="http://127.0.0.1:8848/upload/fileUpload/"
+                action="http://202.196.37.147:8848/upload/fileUpload/"
                 :show-file-list="false"
                 :on-success="success"
                 :on-error="error"
@@ -183,7 +183,6 @@ export default {
        }).then(() => {
           getChannelById(this.$store.state.userid).then(res=>{
             this.$store.commit("SET_CHANNEL_STATE", res.data);
-            console.log(this.$store.state.channel)
           });
         })
       }
@@ -195,8 +194,10 @@ export default {
             });
     }).then(() => {
       getChannelById(this.$store.state.userid).then(res=>{
-        this.$store.commit("SET_CHANNEL_STATE", res.data);
-        console.log(this.$store.state.channel)
+        this.$store.commit("SET_CHANNEL_STATE", res.data);//得到内容
+        var i=this.$store.state.todayData.todayContentNum
+        i++;
+        this.$store.commit("SET_TODAYDATA_CONTENT_STATE",i);
       });
     })
     },

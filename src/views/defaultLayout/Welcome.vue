@@ -165,6 +165,16 @@
           }
         },
         methods:{
+             DataInit(){
+               var today=new Date();
+               if(today.getDate()!==this.$store.state.today){
+                 for(var i=0;i<this.$store.state.channel.length;i++) {
+                   this.$store.state.channel[i].enName = this.$store.state.channel[i].enName + this.$store.state.channel[i].entityName;
+
+                 }
+
+               }
+             },
             drawBar(){
                 let bar_1 = echarts.init(this.$refs.bar_1);
                 bar_1.setOption(this.dataSet_Bar1);
@@ -939,6 +949,7 @@
     // },
         },
         mounted(){
+            this.DataInit();
             this.drawBar();
             this.drawAQI();
             this.drawParallel();
