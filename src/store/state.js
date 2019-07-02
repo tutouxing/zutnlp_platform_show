@@ -23,7 +23,8 @@ const state = {
     today:'2',
     todayData:{
       todayContentNum:0,
-      todayChannelNum:[]
+      todayChannelNum:[],
+      onceChannelNum:[]
     }
 };
 export default state;
