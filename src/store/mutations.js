@@ -83,7 +83,17 @@ const mutations = {
 
         }
         state.Alltxt = contList;
+    },
+    SET_TODAY_STATE(state,today){
+      state.today=today;
+    },
+    SET_TODAYDATA_CONTENT_STATE(state,todaydata){
+      state.todayData.todayContentNum=todaydata;
+    },
+    SET_TODAYDATA_CHANNEL_STATE(state,todaydata){
+    state.todayData.todayChannelNum=todaydata;
     }
+
 
 
 

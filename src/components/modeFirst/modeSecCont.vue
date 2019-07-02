@@ -10,14 +10,6 @@
                 <div class="divinline"><mode-tip-list :retitle=this.$route.params.title></mode-tip-list></div>
             </div>
             <div class="splitLine"></div>
-            <!--<div class="secLiList">
-                <div class="secLiLeft">
-                    <mode-Sec-List :mytopic=this.$route.params.title></mode-Sec-List>
-                </div>
-                <div class="secLiRight">
-                    <h1>dfdfdf</h1>
-                </div>
-            </div>-->
             <div class="secLiList">
             <el-row>
                 <el-col :span="24">
@@ -100,7 +92,7 @@
         background: #99a9bf;
          }
     .splitLine{
-        background-color: #99a9bf;
+        background-color: #ba2636;
         border-radius: 4px;
         min-height: 10px;
         min-width: 90px;
@@ -116,8 +108,8 @@
         margin-left:5%;
         background-color: #E9EEF3;
     }
-    a:hover{color: #aaccee}
-    a{text-decoration: none;}
-    a:visited{color:#2361b9}
-    a:active{color: #ffffff}
+    a {color:#252525; text-decoration:none;}
+    a:visited {text-decoration:none;}
+    a:hover {color:#ba2636;text-decoration:underline;}
+    a:active {color:#ba2636;}
 </style>
