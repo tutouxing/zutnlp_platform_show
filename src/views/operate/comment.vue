@@ -64,11 +64,11 @@
     </el-row>-->
     <!--默认显示每篇内容首评-->
     <div v-for="o in content_data" :key="o.id" v-show="showType===''">
-      <card :content_data="o" ></card>
+      <card :content_data="o" @sendComments="recieveComments"></card>
     </div>
     <!--查看本文所有评论-->
     <div v-show="showType=='allComments'">
-      <detail-comment></detail-comment>
+      <detail-comment :content="content"></detail-comment>
     </div>
     <!--根据id查找对应评论-->
     <div v-show="showType=='referenceId'"></div>
@@ -83,7 +83,7 @@
      */
     import {getContent} from "../../api/content";
     import Card from "../../components/operate/card";
-    import detailComment from "detailComment";
+    import detailComment from "./detailComment";
 
     export default {
         name: "comment",
@@ -111,6 +111,7 @@
                 input: '',//搜索内容
                 content_data: [],
                 showType:'',
+                content:{},
             }
         },
         components:{
@@ -157,6 +158,10 @@
         },
         created() {
             this.getContent();
+        },
+        recieveComments(content){
+            this.content = content;
+            this.showType = 'allComments';
         }
     }
 </script>
