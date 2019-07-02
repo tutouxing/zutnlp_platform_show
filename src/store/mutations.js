@@ -88,11 +88,18 @@ const mutations = {
       state.today=today;
     },
     SET_TODAYDATA_CONTENT_STATE(state,todaydata){
-      state.todayData.todayContentNum=todaydata;
+      state.Data.todayContentNum=todaydata;
     },
-    SET_TODAYDATA_CHANNEL_STATE(state,todaydata){
-    state.todayData.todayChannelNum=todaydata;
-    }
+    SET_ONCEDATA_STATE(state,todaydata){
+      state.Data.todayData.shift();
+      state.Data.todayData.push(todaydata)
+    },
+    SET_TODAYDATA_STATE(state,oncedata){
+      state.Data.onceData.shift();
+      state.Data.onceData.push(oncedata)
+  }
+
+
 
 
 
