@@ -7,8 +7,12 @@
     </el-row>
     <div v-for="comment in content.comments" :key="comment.id">
       <el-row>
-        <el-col :span="15" style="text-align: left">评论内容:测试内容</el-col>
-        <el-col :span="4">审核状态:<b style="color: forestgreen">等待审核</b></el-col>
+        <el-col :span="15" style="text-align: left">评论内容:{{comment.details}}</el-col>
+        <el-col :span="4">审核状态:
+          <b style="color: forestgreen">
+          {{comment.status==0? "等待审核" : comment.status==1? "审核通过" : "审核不通过"}}
+          </b>
+        </el-col>
       </el-row>
       <el-row v-show="replay_show===1">
         <el-col :span="2" style="text-align: left;color: darkgoldenrod">回复</el-col>
@@ -28,7 +32,7 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="2" style="color: #999;text-align: left">评论者:</el-col>
+        <el-col :span="2" style="color: #999;text-align: left">评论者:{{comment.publisher}}</el-col>
         <el-col :span="2" style="color:#999;">评论时间:{{comment.dateCreated}}</el-col>
         <el-col :span="2" :offset="8">
           <el-button @click="passCom(comment)">审核通过</el-button>
@@ -49,13 +53,14 @@
 <script>
     import Card from "../../components/operate/card";
     import {failReview, passReview} from "../../components/operate/event";
+    import {delComment} from "../../api/operate";
 
     export default {
         name: 'detailComment',
         components: {Card},
         props: {
             content: {
-                type: Array,
+                type: Object,
                 required: true,
             },
             replay_show: {
@@ -85,8 +90,8 @@
                     showClose:true,
                     type:'error',
                     message:"删除成功",
-
                 })
+                delComment(comment.id);
             },
         }
     }

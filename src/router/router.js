@@ -53,7 +53,7 @@ export default[
         },
         {
             path: 'components',
-         /*  component: () => import('../components/editable/setMode.vue'),*/
+            component: () => import('../components/editable/setMode.vue'),
             name: 'components',
         },
         {

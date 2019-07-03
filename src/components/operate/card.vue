@@ -9,8 +9,8 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="15" style="text-align: left">评论内容:测试内容</el-col>
-      <el-col :span="4">审核状态:<b style="color: forestgreen">等待审核</b></el-col>
+      <el-col :span="15" style="text-align: left">评论内容:{{content_data.comments[0].details}}</el-col>
+      <el-col :span="4">审核状态:<b style="color: forestgreen">{{content_data.comments[0].status==0? "等待审核" : content_data.comments[0].status==1? "审核通过" : "审核不通过"}}</b></el-col>
     </el-row>
     <el-row v-show="replay_show===1">
       <el-col :span="2" style="text-align: left;color: darkgoldenrod">回复</el-col>
@@ -30,8 +30,8 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="2" style="color: #999;text-align: left">评论者:</el-col>
-      <el-col :span="2" style="color:#999;">评论时间:{{content_data.dateCreated}}</el-col>
+      <el-col :span="2" style="color: #999;text-align: left">评论者:{{content_data.comments[0].publisher}}</el-col>
+      <el-col :span="2" style="color:#999;">评论时间:{{content_data.comments[0].dateCreated}}</el-col>
       <el-col :span="2" :offset="8">
         <el-button @click="passCom(content_data.comments[0])">审核通过</el-button>
       </el-col>
@@ -42,7 +42,7 @@
         <el-button @click="replay">回复</el-button>
       </el-col>
       <el-col :span="2">
-        <el-button @click="del">删除</el-button>
+        <el-button @click="del(content_data.comments[0])">删除</el-button>
       </el-col>
     </el-row>
   </el-card>
@@ -95,18 +95,17 @@ export default {
             cancel(){
                 this.replay_show = -this.replay_show;
             },
-            del(){
+            del(comment){
                 //删除第一条评论
                 this.$message({
                     showClose:true,
                     type:'error',
                     message:"删除成功",
-
                 })
+                delComment(comment.id);
             },
             reviewAllResponse(content){
                 this.$emit('sendComments',content);
-                console.log("111")
             },
         }
     }
