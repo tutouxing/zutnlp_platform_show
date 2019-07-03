@@ -55,7 +55,7 @@
         components: {Card},
         props: {
             content: {
-                type: Object,
+                type: Array,
                 required: true,
             },
             replay_show: {

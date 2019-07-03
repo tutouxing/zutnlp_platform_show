@@ -63,16 +63,23 @@
       </el-card>
     </el-row>-->
     <!--默认显示每篇内容首评-->
-    <div v-for="o in content_data" :key="o.id" v-show="showType===''">
+    <div v-for="o in content_data | $options.filters.paginate(content_data,pageNo,pageSize)" :key="o.id" v-show="showType===''">
       <card :content_data="o" @sendComments="recieveComments"></card>
     </div>
     <!--查看本文所有评论-->
     <div v-show="showType=='allComments'">
-      <detail-comment :content="content"></detail-comment>
+      <detail-comment :content="content_data | $options.filters.paginate(content_data,pageNo,pageSize)"></detail-comment>
     </div>
     <!--根据id查找对应评论-->
     <div v-show="showType=='referenceId'"></div>
-
+    <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="pageNo"
+        :page-size="pageSize"
+        layout=" prev, pager, next, sizes, jumper"
+        :total="content_data.length">
+    </el-pagination>
   </div>
 </template>
 
@@ -112,6 +119,8 @@
                 content_data: [],
                 showType:'',
                 content:{},
+                pageNo: 1,
+                pageSize:10
             }
         },
         components:{
@@ -155,14 +164,29 @@
                     }
                 }
             },
+            recieveComments(content){
+                this.content = content;
+                this.showType = 'allComments';
+            },
+            handleSizeChange(val) {
+                this.pageSize=val;
+            },
+            handleCurrentChange(val) {
+                this.pageNo = val;
+            },
+        },
+        filters:{
+            paginate(array,pageNo,pageSize){
+                let offset = (pageNo - 1) * pageSize;
+                let data=(offset + pageSize >= array.length) ? array.slice(offset, array.length) : array.slice(offset, offset + pageSize);
+                return data
+            }
         },
         created() {
             this.getContent();
         },
-        recieveComments(content){
-            this.content = content;
-            this.showType = 'allComments';
-        }
+
+
     }
 </script>
 

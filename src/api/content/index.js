@@ -47,7 +47,7 @@ export function postContent(obj) {
 }
 export function getChannelById(id) {
     return fetch({
-        url:'http://202.196.37.147:8848/Channel/'+id,
+        url:'/Channel/'+id,
         method:'get',
     })
 }

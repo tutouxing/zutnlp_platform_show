@@ -76,6 +76,9 @@ export default {
                 replay_show:-1,
             }
         },*/
+        created(){
+            console.log(this.content_data)
+        },
         methods: {
             passCom(comment) {//审核通过  首评状态改为1（-1不通过 0等待审核）
                 passReview(comment)
