@@ -24,12 +24,12 @@
             return {
                 dataimg: [
                     {
-                        src: require('@/assets/img/school1.jpg'),
+                        src: require('@/assets/img/school1.png'),
                     },{
-                        src: require('@/assets/img/hg.jpg'),
+                        src: require('@/assets/img/hg.png'),
                     },
                     {
-                        src: require('@/assets/img/banner2.jpg'),
+                        src: require('@/assets/img/banner2.png'),
                     }
 
                 ],

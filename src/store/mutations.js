@@ -59,18 +59,44 @@ const mutations = {
       state.pageSet[1] = two;
     },
     SET_AllCONTENT_STATE (state, channel) {
-        var contList=new Array();
+        var contList=new Array;
+        var cont=new Object()
+        cont.title="";
+        cont.pichrefs=[];
         var i=0;
         var title;
         for (i=0;i<channel.length;i++){
             for (var m=0;m<channel[i].contents.length;m++) {
-                title=channel[i].contents[m].title
-                contList.push(title)
+                title=channel[i].contents[m].title;
+                cont.title=title;
+                cont.pichrefs=[];
+                for(var j=0;j<channel[i].contents[m].pictures.length;j++)
+                {
+                    // console.log("这是第"+j+"的长度"+channel[i].contents[m].pictures.length);
+                     cont.pichrefs.push(channel[i].contents[m].pictures[j].url);
+                    // console.log("填充以后第"+j+"的长度"+cont.pichrefs.length);
+                }
+                contList.push(cont)
             }
 
         }
+        console.log("得到的打印的带pic的channel");
+        console.log(contList)
         state.AllContent = contList;
     },
+    // SET_AllCONTENT_STATE (state, channel) {
+    //     var contList=new Array();
+    //     var i=0;
+    //     var title;
+    //     for (i=0;i<channel.length;i++){
+    //         for (var m=0;m<channel[i].contents.length;m++) {
+    //             title=channel[i].contents[m].title
+    //             contList.push(title)
+    //         }
+    //
+    //     }
+    //     state.AllContent = contList;
+    // },
     SET_AllTXT_STATE (state, channel) {
         var contList=new Array();
         var i=0;

@@ -83,7 +83,7 @@
      */
     import {getContent} from "../../api/content";
     import Card from "../../components/operate/card";
-    import detailComment from "detailComment";
+    import detailComment from "./detailComment";
 
     export default {
         name: "comment",

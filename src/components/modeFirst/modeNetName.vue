@@ -39,9 +39,11 @@
                 var arrayList = [];
                 var i
                 var restaurants=[]
+                // console.log("这是netName"+AllContList)
                 for (i = 0; i < AllContList.length; i++) {
-                    if (this.$store.state.AllContent[i].search(queryString) != -1) {
-                        restaurants.push(this.$store.state.AllContent[i])
+                    console.log("这是netName"+this.$store.state.AllContent[i].cont.title)
+                    if (this.$store.state.AllContent[i].cont.title.search(queryString) != -1) {
+                        restaurants.push(this.$store.state.AllContList[i].cont.title)
                     }
                 }
                 let newArr = restaurants.map(val => {

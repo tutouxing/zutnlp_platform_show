@@ -22,7 +22,7 @@
                 var findtxt=''
                 for (;i<this.$store.state.AllContent.length;i++){
                     console.log("文章开头"+this.$route.params.title)
-                    if (this.$store.state.AllContent[i].search(this.$route.params.title) != -1) {
+                    if (this.$store.state.AllContent[i].cont.title.search(this.$route.params.title) != -1) {
                         findtxt=this.$store.state.Alltxt[i]
                     }
                 }
