@@ -57,7 +57,7 @@
                                        </div>
                                        <div class="rgwapper_body">
                                            <div class="mode1" v-for="(n,index) in content3" :key="index">
-                                               <img src=""/>
+                                               <img :src="n.pictures[0].url"/>
                                                <span v-on:click="skip(n)">{{n.title}}</span>
                                            </div>
                                        </div>
@@ -72,7 +72,7 @@
                         <div class="word_picture">
                             <el-carousel :interval="4000" type="card" height="200px">
                                 <el-carousel-item v-for="(n,item) in depictions1" :key="item">
-                                   <img :src="n.idView"/>
+                                    <div @click="picSkip(n)" class="pictures"><img :src="n.url"/></div>
                                 </el-carousel-item>
                             </el-carousel>
                         </div>
@@ -83,7 +83,7 @@
                 <div>
                     <el-carousel indicator-position="outside">
                         <el-carousel-item v-for="(n,item) in depictions" :key="item">
-                            <img :src="n.idView"/>
+                            <div @click="picSkip(n)" class="pictures"><img :src="n.url"/></div>
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -112,6 +112,7 @@
 
 <script>
     import Phead from '../index/phead'
+    import {PicturePage} from '../../../api/picture/pt'
     export default {
         name: "amain",
         components:{
@@ -122,17 +123,8 @@
                 activeName: 'second',
                 items:[],
              depictions:[
-                 {  idView:'http://i2.chinanews.com/simg/2019/190610//100691130.JPG'},
-                 {  idView:'http://www.chinanews.com/tp/2019/06-10/U601P4T8D8860193F107DT20190610100920.jpg'},
-                 {  idView:'http://www.chinanews.com/2019/06-10/U601P4T8D8860261F107DT20190610105043.jpg'},
-                 {  idView:'http://www.chinanews.com/2019/06-10/U610P4T8D8860189F107DT20190610100429.jpg'},
              ],
                 depictions1:[
-                    {  idView:'http://www.chinanews.com/2019/06-10/U86P4T8D8860159F107DT20190610094908.jpg'},
-                    {  idView:'http://i2.chinanews.com/simg/2019/190610//100661160.jpg'},
-                    {  idView:'http://www.chinanews.com/2019/06-10/U86P4T8D8860061F107DT20190610085705.jpg'},
-                    {  idView:'http://i2.chinanews.com/simg/2019/190610//100664760.jpg'},
-                    {  idView:'http://www.chinanews.com/2019/06-10/U855P4T8D8860804F107DT20190610201243.jpg'},
                 ],
                 list:[],//所有栏目列表
                 content:[],
@@ -170,6 +162,7 @@
                     for (let j=0;j<5;j++){
                         this.content3.push(this.content[j]);
                     }
+                    this.getPicture();//初始图片列表
             },
             skip(n){
                 this.$router.push({name:'detailed1', params:{item:n}});
@@ -178,6 +171,20 @@
             many(){
                 this.$store.commit('SET_COMPONENTS_STATE',5);
                 this.$router.push({name:'second',params:this.content});
+            },
+            getPicture(){//得到图像列表
+                PicturePage().then((response)=>{
+                    for(let i=5;i<10;i++){
+                        this.depictions.push(response.data.content[i]);
+                    };
+                    for(let i=15;i<20;i++){
+                        this.depictions1.push(response.data.content[i]);
+                    };
+                })
+            },
+            picSkip(n){//图片跳转页面
+                this.$router.push({name:'picDetailed',params:{item:n}});
+                this.$router.push({path:'/prostage/picDetailed'});
             }
         },
         created(){
@@ -439,5 +446,15 @@
         font-weight: inherit;
         margin-bottom: 10px;
 
+    }
+    .pictures{
+        transition-duration:0.5s; /*过度的时间为0，5秒*/
+    }
+    .pictures:hover{
+        transform: scale(1.2);
+        -webkit-transform: scale(1.2); /*Safari 和 Chrome*/
+        -moz-transform: scale(1.2); /*Firefox*/
+        -ms-transform: scale(1.2); /*IE9*/
+        -o-transform: scale(1.2); /*Opera*/
     }
 </style>

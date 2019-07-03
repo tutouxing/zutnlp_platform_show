@@ -101,7 +101,7 @@
 
             this.ProjectName=this.$route.params.toconfigtable;
          console.log("toconfigtable工程名"+this.$route.params.toconfigtable);
-            let url = "http://202.196.37.147:8848/TableMessage/list";
+            let url = "http://127.0.0.1:8848/TableMessage/list";
             let that=this;
             that.$axios.get(url, {}).then(function (response) {
                /* for (let j in response.data)

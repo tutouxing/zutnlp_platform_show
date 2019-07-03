@@ -12,6 +12,8 @@ import createcode from '../components/FormConfig/createcode.vue'
 import second from '../views/prostage/temp/newtemp1/second'
 import detailed from '../views/prostage/temp/newtemp1/detailed1'
 import modeSecCont from '../components/modeFirst/modeSecCont.vue'
+import picDetailed from '../views/prostage/content/picDetailed'
+import comments from '../views/prostage/content/comments'
 
 
 
@@ -181,7 +183,6 @@ export default[
             path: 'goback',
             name: 'goback',
             component: goback,
-
         },
         {
             path: 'createcode',
@@ -322,6 +323,16 @@ export default[
         path:'/prostage/detailed',
         name:'detailed1',
         component:detailed,
+    },
+    {
+        path:'/prostage/picDetailed',
+        name:'picDetailed',
+        component:picDetailed,
+    },
+    {
+        path:'/prostage/comments',
+        name:'comments',
+        component:comments
     },
     {
         path: '/ClientWeb/TextTemplate/FrameWork',

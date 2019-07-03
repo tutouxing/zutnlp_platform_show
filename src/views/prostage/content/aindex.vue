@@ -9,7 +9,7 @@
                             <el-col :span="14">
                                 <el-carousel indicator-position="outside">
                                     <el-carousel-item v-for="(n,item) in picture" :key="item">
-                                        <img :src="n.url"/>
+                                      <div @click="picSkip(n)"><img :src="n.url" /></div>
                                     </el-carousel-item>
                                 </el-carousel>
                             </el-col >
@@ -19,8 +19,8 @@
                                         <div class="pwapper_title">
                                             <h3 @click="skip(n)">{{n.title}}</h3>
                                         </div>
-                                        <div class="pwapper_main" @click="skip(n)">{{n.title}}</div>
-                                        <div class="pwapper_foot"><span>点击量：</span>{{n.click}}</div>
+                                        <div class="pwapper_main" @click="skip(n)">{{n.text}}</div>
+                                        <div class="pwapper_foot"><span>点击量：</span>{{n.click_count}}</div>
                                     </div>
                                 </div>
                             </el-col>
@@ -32,17 +32,16 @@
                         </div>
                         <div class="foot_span" v-for="(n,index) in text" :key="index">
                             <div class="foot_span_src">
-                                <img src=""/>
+                                <img :src="n.pictures.url"/>
                             </div>
                             <div class="foot_span_src_h">
                                 <div class="foot_span_head">
                                     <h4 @click="skip(n)">{{n.title}}</h4>
                                 </div>
                                 <div class="foot_span_foot">
-                                    <span>点击量：</span>{{n.click}}
+                                    <span>点击量：</span>{{n.click_count}}
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </el-col>
@@ -79,18 +78,32 @@
                             <div class="body1">
                                 <div class="rgwapper_body">
                                     <div class="mode1" v-for="(n,index) in content3" :key="index">
-                                        <img src=""/>
+                                        <img :src="n.pictures[0].url"/>
                                         <span v-on:click="skip(n)">{{n.title}}</span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="foot_foot">
+                            <div class="foot_main">
+                                <div class="foot_title">
+                                    <div class="foot_title_feedback"><span >最新留言     </span><i class="el-icon-edit-outline" style="color: red"></i></div>
+                                </div>
+                                <div class="foot_body">
+                                    <div class="foot_body_title"></div>
+                                    <div class="foot_body_content"></div>
+                                </div>
+                                <div class="c_button">
+                                    <el-button @click="feedback">我要留言....</el-button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </el-col>
             </el-row>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -124,9 +137,9 @@
        methods:{
             getPicture(){//得到图像列表
                 PicturePage().then((response)=>{
-                    this.picture=response.data.content;
-                    console.log('得到picture内容');
-                    console.log(this.picture);
+                    for(let i=0;i<5;i++){
+                        this.picture.push(response.data.content[i]);
+                    };
                 })
             },
             getChannel(){
@@ -166,34 +179,30 @@
                 for(let j=0;j<3;j++){
                     this.text.push(this.list2[j]);
                 }
+                console.log('得到text的东西');
+                console.log(this.text);
+
            },
            skip(n){
                this.$router.push({name:'detailed1', params:{item:n}});
                this.$router.push({path:'/prostage/detailed'})
+           },
+           picSkip(n){
+                this.$router.push({name:'picDetailed',params:{item:n}});
+                this.$router.push({path:'/prostage/picDetailed'});
+           },
+           feedback(){//留言
+                this.$router.push('/prostage/comments');
            }
-
        },
         created(){
             this.getPicture();
             this.getChannel();
-
         }
     }
 </script>
 
 <style scoped>
-    .el-row {
-        margin-bottom: 20px;
-    }
-    .el-col {
-        border-radius: 4px;
-    }
-    .bg-purple-dark {
-        /*background: #99a9bf;*/
-    }
-    .bg-purple {
-      /*  background: #d3dce6;*/
-    }
     .bg-purple-light {
        /* background: #e5e9f2;*/
     }
@@ -283,11 +292,11 @@
     .pwapper_main{
         margin-bottom: 5px;
         font-size: 13px;
-    overflow : hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;      /* 可以显示的行数，超出部分用...表示*/
-    -webkit-box-orient: vertical;
+        overflow : hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;      /* 可以显示的行数，超出部分用...表示*/
+        -webkit-box-orient: vertical;
     }
     .pwapper_main:hover{
         color: red;
@@ -322,6 +331,7 @@
     }
     .foot_span_head:hover{
         color: red;
+
     }
     .foot_span_foot{
 
@@ -341,5 +351,20 @@
     }
     .foot_span_src_h{
       width:100%;
+    }
+    .foot_foot{
+        margin-top: 20px;
+        border:  1px solid #d3dce6;
+    }
+    .foot_main{
+        padding: 15px;
+    }
+    .foot_title{
+        margin-bottom: 20px;
+    }
+    .foot_title_feedback{
+        text-align: left;
+        font-size: 15px;
+
     }
 </style>
