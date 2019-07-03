@@ -63,12 +63,12 @@
       </el-card>
     </el-row>-->
     <!--默认显示每篇内容首评-->
-    <div v-for="o in content_data | $options.filters.paginate(content_data,pageNo,pageSize)" :key="o.id" v-show="showType===''">
+    <div v-for="o in content_data | paginate(pageNo,pageSize)" :key="o.id" v-show="showType===''">
       <card :content_data="o" @sendComments="recieveComments"></card>
     </div>
     <!--查看本文所有评论-->
     <div v-show="showType=='allComments'">
-      <detail-comment :content="content_data | $options.filters.paginate(content_data,pageNo,pageSize)"></detail-comment>
+      <detail-comment :content="content_data | paginate(pageNo,pageSize)"></detail-comment>
     </div>
     <!--根据id查找对应评论-->
     <div v-show="showType=='referenceId'"></div>
@@ -175,7 +175,7 @@
                 this.pageNo = val;
             },
         },
-        filters:{
+        computed:{
             paginate(array,pageNo,pageSize){
                 let offset = (pageNo - 1) * pageSize;
                 let data=(offset + pageSize >= array.length) ? array.slice(offset, array.length) : array.slice(offset, offset + pageSize);
