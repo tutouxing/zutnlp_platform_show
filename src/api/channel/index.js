@@ -35,4 +35,10 @@ export function delChannelById(id) {
       method: 'put',
     })
 }
-
+export function putChannelById(id2,id1,obj) {
+  return fetch({
+    url: 'http://202.196.37.147:8848/Channel/update/?channelId='+id2+'&userId='+id1,
+    method: 'put',
+    data:obj,
+  })
+}

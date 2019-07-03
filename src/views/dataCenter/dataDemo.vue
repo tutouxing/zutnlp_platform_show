@@ -5,7 +5,7 @@
             <el-card :body-style="{ padding: '0px' }" style="width: 300px">
                 <div  class="transition-box"><i class="el-icon-tickets"> 内容发布数</i></div>
                 <div style="padding: 10px;">
-                    <span>今日：{{this.$store.state.todayData.todayContentNum}}</span>
+                    <span>今日：{{this.$store.state.Data.todayContentNum}}</span>
                 </div>
                 <div style="padding: 10px;">
                     <span>累计：{{this.contentNum}}</span>
