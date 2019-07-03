@@ -5,10 +5,10 @@
             <el-card :body-style="{ padding: '0px' }" style="width: 300px">
                 <div  class="transition-box"><i class="el-icon-tickets"> 内容发布数</i></div>
                 <div style="padding: 10px;">
-                    <span>今日：0</span>
+                    <span>今日：{{this.$store.state.Data.todayContentNum}}</span>
                 </div>
                 <div style="padding: 10px;">
-                    <span>累计：123</span>
+                    <span>累计：{{this.contentNum}}</span>
                 </div>
             </el-card>
         </el-col>
@@ -65,6 +65,18 @@
     components: {dema,demo},
     data(){
       return{
+        contentNum:0,
+      }
+    },
+    mounted(){
+      this.Num();
+    },
+    methods:{
+      Num(){
+        for(var i=0;i<this.$store.state.channel.length;i++){
+          this.contentNum+=this.$store.state.channel[i].contents.length
+          console.log(this.$store.state.channel[i].contents[i])
+        }
       }
     }
   }

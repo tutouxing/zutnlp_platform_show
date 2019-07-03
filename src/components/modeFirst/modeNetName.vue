@@ -1,20 +1,20 @@
 <template>
-    <div class="exImg"><img class="imgClass" :src="formData.avatar" alt="">
+    <div class="exImg">
+        <img class="imgClass" :src="formData.avatar" alt="">
         <!--<div class="tx"><h1>人民网-----网上的人民日报</h1></div></div>-->
         <div class="tx">
 <!--            <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">-->
 <!--            <el-button slot="append" icon="el-icon-search" v-on:click="search"></el-button>-->
 <!--        </el-input>-->
-            <el-autocomplete placeholder="请输入城市名"
+            <el-autocomplete placeholder="请输入搜索内容"
                              class="inline-input"
-                             v-model="input5"
+                             el-autocomplete            v-model="input5"
                              :fetch-suggestions="queryS"
                              @select="handClick"
                              >
                 <el-button slot="append" icon="el-icon-search"></el-button>
             </el-autocomplete>
         </div>
-
 </div>
 </template>
 
@@ -64,6 +64,14 @@
                 this.$router.push("/modethirdCont/"+this.input5)
             }
         },
+        beforeRouteEnter(to,from,next){
+            window.document.body.style.backgroundColor="#CD2626";
+            next();
+        },
+        beforeRouteLeave(to,from,next){
+            window.document.body.style.backgroundColor="";
+            next();
+        }
     }
 </script>
 
@@ -73,7 +81,6 @@
         float: left;
         height: 60px;
         width: 150px;
-        margin-bottom: 2%;
 
     }
     .exImg{
@@ -82,7 +89,9 @@
         line-height:50px;
         border: 1px ;
         margin-left: 15%;
-        font-size:20px
+        margin-top: 30px;
+        font-size:20px;
+
     }
     .tx{
         font-family: "Helvetica Neue";
@@ -92,9 +101,11 @@
         width: 500px;
         in-left: 5%;
     }
-    a:hover{color: #aaccee}
-    a{text-decoration: none;}
-    a:visited{color:#2361b9}
-    a:active{color: #ffffff}
-
+    a {color:#252525; text-decoration:none;}
+    a:visited {text-decoration:none;}
+    a:hover {color:#ba2636;text-decoration:underline;}
+    a:active {color:#ba2636;}
+    .el-autocomplete{
+        width: 500px;
+    }
 </style>

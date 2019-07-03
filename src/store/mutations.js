@@ -83,7 +83,24 @@ const mutations = {
 
         }
         state.Alltxt = contList;
-    }
+    },
+    SET_TODAY_STATE(state,today){
+      state.today=today;
+    },
+    SET_TODAYDATA_CONTENT_STATE(state,todaydata){
+      state.Data.todayContentNum=todaydata;
+    },
+    SET_ONCEDATA_STATE(state,todaydata){
+      state.Data.todayData.shift();
+      state.Data.todayData.push(todaydata)
+    },
+    SET_TODAYDATA_STATE(state,oncedata){
+      state.Data.onceData.shift();
+      state.Data.onceData.push(oncedata)
+  }
+
+
+
 
 
 
