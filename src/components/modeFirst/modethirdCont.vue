@@ -5,17 +5,6 @@
         <mode-third-text></mode-third-text>
         <modethirdtxt></modethirdtxt>
     </el-main>
-        <div class="modeBoxslide" >
-            <el-card shadow="never" >
-                <div slot="header" class="clearfix">
-                    <span>友情链接</span>
-
-                </div>
-                <div v-for="item in 15" class="Link">
-                    <router-link to="/welcome">外部链接</router-link>
-                </div>
-            </el-card>
-        </div>
     <el-footer><modeFoot></modeFoot></el-footer>
     </div>
 </template>
@@ -47,15 +36,9 @@
     a:active {color:#ba2636; font-family: "Helvetica Neue"}
     .modeBoxslide{
         margin-top: 2%;
-        margin-left: 5%;
-        margin-right: 5%;
+        margin-left: 6%;
+        margin-right: 6%;
         height: 300px;
         float:left;
-    }
-    .Link{
-        width: 20%;
-        height: 25px;
-        float: left;
-        ;
     }
 </style>
