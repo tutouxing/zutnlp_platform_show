@@ -295,7 +295,7 @@
                         console.log(this.total);
                         this.listLoading=false
                     })
-                /*  this.$axios.get("http://202.196.37.147:8848/admin/user/?page="+this.listQuery.page+"&limit="+this.listQuery.limit).then(response=>{
+                /*  this.$axios.get("http://127.0.0.1:8848/admin/user/?page="+this.listQuery.page+"&limit="+this.listQuery.limit).then(response=>{
                       this.list=response.data['content'];
                       console.log(this.list);
                   })*/

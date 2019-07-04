@@ -61,7 +61,7 @@ module.exports = {
     // productionSourceMap: false,
     // 跨域配置
     devServer: {
-        // proxy: 'http://202.196.37.147:8088'
+        // proxy: 'http://127.0.0.1:8088'
         port:8845,
         host:"127.0.0.1",
         // https: false,
