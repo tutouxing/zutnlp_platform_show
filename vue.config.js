@@ -63,7 +63,7 @@ module.exports = {
     devServer: {
         // proxy: 'http://127.0.0.1:8088'
         port:8845,
-        host:"http://127.0.0.1:8848",
+        host:"127.0.0.1",
         // https: false,
         // hotOnly: false,
         // disableHostCheck: true,
