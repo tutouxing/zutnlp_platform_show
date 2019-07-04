@@ -10,9 +10,23 @@
     </div>-->
 
 
+<el-container>
+
 
     <div v-html="this.AllMsg.OnlyMsg.textHref">
+
+
+
+
     </div>
+
+    <el-footer style="margin: auto">
+        <div style="margin-top: 50px">
+            <el-input  v-model="comment" style="float: left;width: 350px" placeholder="请输入评论" ></el-input><el-button type="primary" style="display:inline-block; margin-left: 30px" v-on:click="send()">确定</el-button>
+        </div>
+    </el-footer>
+</el-container>
+
 </template>
 <script>
     export default {
@@ -42,11 +56,31 @@
                     OnlyMsg:{
 
                     }
-                }
+                },
+                comment:''
             }
         },
         methods:{
+            send(){
+                let url='http://127.0.0.1:8848/Pros/delete';
+                this.$axios(
+                    {
+                        method:'post',
+                        url,
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        //withCredentials:true,
+                        params:{
+                            comment:comment
+                        },
+                        data:{
+                            //未知
+                        }
 
+                    }
+                );
+            }
         },
         mounted(){
             this.AllMsg.OnlyMsg=this.$route.params.items;////接收唯一标识id

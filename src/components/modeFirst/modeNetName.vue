@@ -35,15 +35,16 @@
         methods:{
             queryS(queryString,cb){
                 var input5 = this.input5;
-                var AllContList = this.$store.state.AllContent
+                var AllContList= this.$store.state.AllContent
                 var arrayList = [];
                 var i
                 var restaurants=[]
                 // console.log("这是netName"+AllContList)
                 for (i = 0; i < AllContList.length; i++) {
-                    console.log("这是netName"+this.$store.state.AllContent[i].cont.title)
-                    if (this.$store.state.AllContent[i].cont.title.search(queryString) != -1) {
-                        restaurants.push(this.$store.state.AllContList[i].cont.title)
+                    console.log("这是netName"+this.$store.state.AllContent[i].title)
+                    console.log(queryString)
+                    if (this.$store.state.AllContent[i].title.search(queryString) != -1) {
+                        restaurants.push(this.$store.state.AllContent[i].title)
                     }
                 }
                 let newArr = restaurants.map(val => {
@@ -103,10 +104,10 @@
         width: 500px;
         in-left: 5%;
     }
-    a {color:#252525; text-decoration:none;}
-    a:visited {text-decoration:none;}
-    a:hover {color:#ba2636;text-decoration:underline;}
-    a:active {color:#ba2636;}
+    a {color:#252525; text-decoration:none; font-family: "Helvetica Neue"}
+    a:visited {text-decoration:none; font-family: "Helvetica Neue"}
+    a:hover {color:#ba2636;text-decoration:underline;font-family: "Helvetica Neue"}
+    a:active {color:#ba2636; font-family: "Helvetica Neue"}
     .el-autocomplete{
         width: 500px;
     }

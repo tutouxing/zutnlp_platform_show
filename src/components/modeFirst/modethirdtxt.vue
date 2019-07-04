@@ -20,13 +20,18 @@
             txt:function () {
                 var i=0;
                 var findtxt=''
+                var j=0;
                 for (;i<this.$store.state.AllContent.length;i++){
-                    console.log("文章开头"+this.$route.params.title)
-                    if (this.$store.state.AllContent[i].cont.title.search(this.$route.params.title) != -1) {
+                    // console.log("文章开头"+this.$route.params.title)
+                    // console.log("这是匹配的"+this.$store.state.AllContent[i].title)
+                    if (this.$store.state.AllContent[i].title.search(this.$route.params.title) != -1) {
                         findtxt=this.$store.state.Alltxt[i]
                     }
+                    else{
+                        // console.log("没找到")
+                    }
                 }
-                console.log("查找到的文章++++++"+findtxt);
+                // console.log("查找到的文章++++++"+findtxt);
                 return findtxt
             }
         },methods:{
@@ -49,8 +54,8 @@
     margin-right: 6%;
     margin-top: 5%;
 }
-a {color:#252525; text-decoration:none;}
-a:visited {text-decoration:none;}
-a:hover {color:#ba2636;text-decoration:underline;}
-a:active {color:#ba2636;}
+a {color:#252525; text-decoration:none; font-family: "Helvetica Neue"}
+a:visited {text-decoration:none; font-family: "Helvetica Neue"}
+a:hover {color:#ba2636;text-decoration:underline;font-family: "Helvetica Neue"}
+a:active {color:#ba2636; font-family: "Helvetica Neue"}
 </style>

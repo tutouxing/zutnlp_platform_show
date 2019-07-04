@@ -38,14 +38,19 @@
 -->
         <el-tabs v-model="activeName" @tab-click="handleClick" style="width: 100%">
             <el-tab-pane label="首页" name="first"  >
-                <!-- <div class="pictureboder">
-                 <el-carousel :interval="4000" type="card" height="200px">
-                  <el-carousel-item v-for="item in Allofdata.KeJiMsg.Pictures" :key="item">
-                  <img :src="item.Picture"  v-on:click="kejigonext0(item)" />
-                   <h3>{{ item .Picture}}</h3>
+
+
+
+                 <div class="pictureboder">
+                <el-carousel :interval="4000" type="card" height="250px">
+                    <el-carousel-item v-for="item in Allofdata.YuLeMsg.Pictures" :key="item">
+                        <img :src="item.Picture"  v-on:click="yuletonext2(item)" />
+                        <h3>{{ item .Picture}}</h3>
                     </el-carousel-item>
-                 </el-carousel>
-                 </div>-->
+                </el-carousel>
+
+                 </div>
+
                 <el-container >
                     <div class="yule2">
                         <div class="yule2-1">
@@ -69,10 +74,19 @@
                     <el-button type="text" style="margin-top: 300px" v-on:click="change()">换一换</el-button>
 
                 </el-container >
+
+                <div style="margin-top: 50px;margin-left:75%" v-for="item in advertisements" v-on:click="ads(item.url)">
+                    <img style="width: 300px;height: 200px; cursor: pointer"  :src="item.imgurl" >
+                    <br/>
+                    <el-button type="text" >{{item.Introduction}}</el-button>
+                </div>
+
                 <div  style="margin-top: 100px">
                     <el-button v-for="item in web" type="text"  v-on:click="go(item.url)">{{item.name}}</el-button>
                  <!--  <a href="https://news.qq.com">腾讯新闻</a>-->
                 </div>
+
+
                        <!-- <div  v-for="(items,index2) in item.contents "  v-if="index2<=1" style="margin-top: 10px; margin-left: 10px" v-on:click="yuletonext1(items)">
 
 
@@ -565,6 +579,14 @@
 
                 ],
                 mainvideo:'http://vjs.zencdn.net/v/oceans.mp4',
+                advertisements:[
+                    {
+
+                        url:'https://m.tb.cn/h.eTvsdS6?sm=616b6a',
+                        imgurl:'https://img.alicdn.com/imgextra/i1/2200614154414/O1CN01Plq9sO1iTelMdPWF0_!!2200614154414.jpg_430x430q90.jpg',
+                        Introduction:'折叠遥控迷你无人机航模高清专业飞行航拍器'
+                    }
+                ],
                 isshow:true,//用来更新视频
                 url:earth,
                 video:movie,
@@ -588,6 +610,9 @@
             playvideo:this.playvideo
         },//用来更新视频
         methods:{
+            ads(url){
+                window.open(url);
+            },
             playvideo(mv){
                 //用来更新视频
               this.mainvideo= mv.url;
@@ -808,13 +833,12 @@
         border-left:20px solid deepskyblue;
     }
     .pictureboder{
-        margin-left: 0px;
-        width: 500px;
-        height: 500px;
-        border-top :20px solid deepskyblue;
-        border-bottom:20px solid deepskyblue;
-        border-right:50px solid deepskyblue;
-        border-left:50px solid deepskyblue;
+        margin-top: 85px;
+        width: 100%;
+        /*border-top :10px solid deepskyblue;
+        border-bottom:10px solid deepskyblue;
+        border-right:10px solid deepskyblue;
+        border-left:10px solid deepskyblue;*/
     }
     h4:hover{
         cursor:pointer;

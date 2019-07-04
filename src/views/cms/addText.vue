@@ -183,7 +183,6 @@ export default {
        }).then(() => {
           getChannelById(this.$store.state.userid).then(res=>{
             this.$store.commit("SET_CHANNEL_STATE", res.data);
-            console.log(this.$store.state.channel)
           });
         })
       }
@@ -195,8 +194,10 @@ export default {
             });
     }).then(() => {
       getChannelById(this.$store.state.userid).then(res=>{
-        this.$store.commit("SET_CHANNEL_STATE", res.data);
-        console.log(this.$store.state.channel)
+        this.$store.commit("SET_CHANNEL_STATE", res.data);//得到内容
+        var i=this.$store.state.todayData.todayContentNum
+        i++;
+        this.$store.commit("SET_TODAYDATA_CONTENT_STATE",i);
       });
     })
     },

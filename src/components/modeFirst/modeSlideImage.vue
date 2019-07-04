@@ -1,13 +1,5 @@
 <template>
     <div >
-<!--        <el-carousel :interval="4000" type="card" height="300px" width="200px" >-->
-<!--            <el-carousel-item v-for="item in dataimg" :key="item">-->
-<!--                <div style="color: #000000;text-align: center;overflow: hidden;width: 100%;">-->
-<!--                    <img style="width: 100%; height: auto;" class="bannertt" :src="item.src" >-->
-<!--                    <h3>{{ item }}</h3>-->
-<!--                </div>-->
-<!--            </el-carousel-item>-->
-<!--        </el-carousel>-->
         <el-carousel indicator-position="outside"  height="400px" :autoplay="true">
             <el-carousel-item v-for="item in dataimg" :key="item">
                     <img  :src="item.src" height="400px" width="1400px">
@@ -53,8 +45,8 @@
 </script>
 
 <style scoped>
-    a {color:#252525; text-decoration:none;}
-    a:visited {text-decoration:none;}
-    a:hover {color:#ba2636;text-decoration:underline;}
-    a:active {color:#ba2636;}
+    a {color:#252525; text-decoration:none; font-family: "Helvetica Neue"}
+    a:visited {text-decoration:none; font-family: "Helvetica Neue"}
+    a:hover {color:#ba2636;text-decoration:underline;font-family: "Helvetica Neue"}
+    a:active {color:#ba2636; font-family: "Helvetica Neue"}
 </style>

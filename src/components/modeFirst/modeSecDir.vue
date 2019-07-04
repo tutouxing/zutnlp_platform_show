@@ -1,7 +1,11 @@
 <template>
 
     <div class="line">
-        <el-menu   class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu   class="el-menu-demo" mode="horizontal" @select="handleSelect"
+                   background-color="#8B0000"
+                   text-color="#fff"
+                   active-text-color="#ffd04b"
+                   width="100%">
             <el-menu-item  class="ziti" v-for="secChannel in secChanneList">{{secChannel.title}}</el-menu-item>
         </el-menu>
     </div>
@@ -38,11 +42,12 @@
         font-family: "Arial";
         font-size:18px;
         font-weight:bold;
-        width: 15%
+        width: 15%;
+        background-color:#8B0000 ;
 
     }
-    a {color:#252525; text-decoration:none;}
-    a:visited {text-decoration:none;}
-    a:hover {color:#ba2636;text-decoration:underline;}
-    a:active {color:#ba2636;}
+    a {color:#252525; text-decoration:none; font-family: "Helvetica Neue"}
+    a:visited {text-decoration:none; font-family: "Helvetica Neue"}
+    a:hover {color:#ba2636;text-decoration:underline;font-family: "Helvetica Neue"}
+    a:active {color:#ba2636; font-family: "Helvetica Neue"}
 </style>

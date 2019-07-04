@@ -25,6 +25,8 @@
 </template>
 
 <script>
+    import {putChannelById} from '../../api/channel'
+
     let echarts = require('echarts');
 
     var upColor = '#ec0000';
@@ -39,6 +41,10 @@
         name: "Welcome",
         data(){
           return{
+              channelInform:{
+                entityName:"",
+                enName:"",
+              },
               dataSet_Bar1:{
                   title:{text:"堆叠柱状图"},
                   angleAxis: {
@@ -165,6 +171,18 @@
           }
         },
         methods:{
+             DataInit(){
+               var today=new Date();
+              /* if(today.getDate()!==this.$store.state.today){
+                 for(var i=0;i<this.$store.state.channel.length;i++) {
+                   this.channelInform.enName = this.$store.state.channel[i].enName + this.$store.state.channel[i].entityName;
+                   this.channelInform.entityName =0
+                   putChannelById(this.$store.state.channel[i].id,this.$store.state.userid, this.channelInform)
+                   console.log("ok")
+                 }
+                 console.log("ok")
+                 }*/
+             },
             drawBar(){
                 let bar_1 = echarts.init(this.$refs.bar_1);
                 bar_1.setOption(this.dataSet_Bar1);
@@ -939,6 +957,7 @@
     // },
         },
         mounted(){
+            this.DataInit();
             this.drawBar();
             this.drawAQI();
             this.drawParallel();
