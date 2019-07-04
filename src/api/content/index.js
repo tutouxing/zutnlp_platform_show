@@ -39,7 +39,7 @@ export function addContent(id1,id2,obj) {
 }
 export function postContent(obj) {
     return fetch({
-        url:'http://127.0.0.1:8848/Content',
+        url:'/Content',
         method:'post',
         data:obj
 
@@ -47,7 +47,7 @@ export function postContent(obj) {
 }
 export function getChannelById(id) {
     return fetch({
-        url:'http://127.0.0.1:8848/Channel/'+id,
+        url:'/Channel/'+id,
         method:'get',
     })
 }

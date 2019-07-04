@@ -31,13 +31,13 @@ export function delChannelById(id) {
 }
   export function alterChannelById(id) {
     return fetch({
-      url: 'http://127.0.0.1:8848/Channel/' + id,
+      url: '/Channel/' + id,
       method: 'put',
     })
 }
 export function putChannelById(id2,id1,obj) {
   return fetch({
-    url: 'http://127.0.0.1:8848/Channel/update/?channelId='+id2+'&userId='+id1,
+    url: '/Channel/update/?channelId='+id2+'&userId='+id1,
     method: 'put',
     data:obj,
   })
