@@ -1,7 +1,7 @@
 import fetch from '../../utils/fetch.js'
 export function login(obj) {
     return fetch({
-        url:'login',
+        url:'http://127.0.0.1:8848/login',
         method:'post',
         data:obj
     })

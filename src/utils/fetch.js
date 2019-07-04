@@ -2,7 +2,7 @@ import axios from 'axios'
 import {getToken} from "./auth";
 //创建axios实例
 const service = axios.create({
-    baseURL: 'http://127.0.0.1:8848',
+   /* baseURL: 'http://127.0.0.1:8848',*/
     // timeout:500,
     headers: {'Content-Type': 'application/json','Accept':'application/json'}
 })

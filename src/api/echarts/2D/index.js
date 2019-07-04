@@ -6,7 +6,7 @@ export const getjson = (url) =>{
 };
 export const getCV = () =>{
     return fetch({
-        url:'/image/?page=1&limit=8',
+        url:'http://127.0.0.1:8848/image/?page=1&limit=8',
         method:'get',
     })
 };
