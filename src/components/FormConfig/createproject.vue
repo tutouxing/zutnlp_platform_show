@@ -145,7 +145,7 @@
                Findprojectname(){
                    console.log("掉获取工程名接口Project");
                    let that=this;
-                   let url='http://202.196.37.147:8848/TableMessage/GenALLProjectName';
+                   let url='http://127.0.0.1:8848/TableMessage/GenALLProjectName';
                    this.$axios(
                        {
                            method:'get',
@@ -261,7 +261,7 @@
             },
             tablelist() {
                 let that = this;
-                let url = "http://202.196.37.147:8848/TableMessage/list";
+                let url = "http://127.0.0.1:8848/TableMessage/list";
                 that.$axios.get(url, {}).then(function (response) {
 
                     for (let j in response.data) {
@@ -281,7 +281,7 @@
                         for (let i = 1; i < that.TableMsgs.TableNames.length; i++) {
                             that.$axios({
                                 method: 'post',
-                                url: 'http://202.196.37.147:8848/TableMessage/findMyProps',
+                                url: 'http://127.0.0.1:8848/TableMessage/findMyProps',
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
@@ -307,7 +307,7 @@
             },
             PropertyFindall() {
                 let that = this;
-                let url = 'http://202.196.37.147:8848/Pros/list';
+                let url = 'http://127.0.0.1:8848/Pros/list';
                 this.$axios(
                     {
                         method: 'get',
@@ -350,7 +350,7 @@
                 for (let i = 1; i < that.TableMsgs.TableNames.length; i++) {
                     that.$axios({
                         method: 'post',
-                        url: 'http://202.196.37.147:8848/TableMessage/findMyProps',
+                        url: 'http://127.0.0.1:8848/TableMessage/findMyProps',
                         headers: {
                             'Content-Type': 'application/json'
                         },
@@ -401,7 +401,7 @@
                 console.log("调用 FindProps()");
                 let that = this;
                 for (let i = 1; i < that.TableMsgs.TableNames.length; i++) {
-                    let url="http://202.196.37.147:8848/"+that.TableMsgs.TableNames[i].name+"/list";
+                    let url="http://127.0.0.1:8848/"+that.TableMsgs.TableNames[i].name+"/list";
                     that.$axios({
                         method: 'get',
                         url,
@@ -439,7 +439,7 @@
                     }
                 }
                 rows.splice(index, 1);
-                let url='http://202.196.37.147:8848/Pros/delete';
+                let url='http://127.0.0.1:8848/Pros/delete';
                 this.$axios(
                     {
                         method:'post',
@@ -480,7 +480,7 @@
                     this.$alert("请填写全部信息");
                 }else
                 {
-                    let url="http://202.196.37.147:8848/"+gettablename+"/updata";
+                    let url="http://127.0.0.1:8848/"+gettablename+"/updata";
                     that.$axios({
                         method: 'post',
                         url,
@@ -521,7 +521,7 @@
                     this.$alert("请填写全部信息");
                 }else
                 {
-                        let url="http://202.196.37.147:8848/"+gettablename+"/add";
+                        let url="http://127.0.0.1:8848/"+gettablename+"/add";
                         that.$axios({
                             method: 'post',
                             url,
