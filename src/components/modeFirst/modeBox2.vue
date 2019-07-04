@@ -13,7 +13,7 @@
             </el-card>
         </div>
         <div class="modeBoxslide">
-            <mode-sec-slide-image></mode-sec-slide-image>
+            <mode-sec-slide-image :mytopic=channelItem></mode-sec-slide-image>
         </div>
     </div>
 </template>
@@ -42,12 +42,12 @@
                         var m=0;
                         for (;m<AllChennel[i].contents.length;m++) {
                             var split=''
-                            if (AllChennel[i].contents[m].title.length<=15)
+                            if (AllChennel[i].contents[m].title.length<=35)
                             {
                                 split=AllChennel[i].contents[m].title
                             }
-                            if (AllChennel[i].contents[m].title.length>15){
-                                split=AllChennel[i].contents[m].title.toString().substring(0,15)+"..."
+                            if (AllChennel[i].contents[m].title.length>35){
+                                split=AllChennel[i].contents[m].title.toString().substring(0,35)+"..."
                             }
 
                             title.push(split)
