@@ -58,7 +58,7 @@
       </el-col>
       <el-col style="width: 30%">
       <el-upload
-          action="http://202.196.37.147:8848/upload/fileUpload/"
+          action="http://127.0.0.1:8848/upload/fileUpload/"
           list-type="picture-card"
           :on-preview="handlePictureCardPreview"
           :on-remove="handleRemove"
@@ -72,7 +72,7 @@
       </el-col>-->
         <el-upload
                 class="avatar-uploader"
-                action="http://202.196.37.147:8848/upload/fileUpload/"
+                action="http://127.0.0.1:8848/upload/fileUpload/"
                 :show-file-list="false"
                 :on-success="success"
                 :on-error="error"

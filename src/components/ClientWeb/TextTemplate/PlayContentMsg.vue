@@ -9,6 +9,12 @@
             <el-input  v-model="comment" style="float: left;width: 350px" placeholder="请输入评论" ></el-input><el-button type="primary" style="display:inline-block;" v-on:click="send()">确定</el-button>
 
         </div>
+
+        <div>
+            <p v-for="item in comments">
+                {{item.details}}
+            </p>
+        </div>
     </div>
 
 
@@ -29,12 +35,14 @@
                     ],
 
                 },
-                comment:''
+                comment:'',
+                comments:'',
             }
         },
         methods:{
             send(){
-                let url='http://127.0.0.1:8848/Pros/delete';
+                let url='http://localhost:8848/comment/add';
+                let that=this;
                 this.$axios(
                     {
                         method:'post',
@@ -44,20 +52,46 @@
                         },
                         //withCredentials:true,
                         params:{
-                            comment:comment
+                            contentId:that.AllMsg.TextMsg[1].id
                         },
                         data:{
-                            //未知
+
+                            details:that.comment ,
+
                         }
 
                     }
                 );
+                this.comment='';
+                this.$forceUpdate();
+                this.$router.push({path:'/PlayContentMsg'});
+
+
             }
 
         },
         mounted(){
+
+
+            let url='http://localhost:8848/comment/?page=1&limit=20';
+            let that=this;
+            this.$axios.get(url, {}).then(function (response) {
+
+                that.comments=response.data;
+
+
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            console.log(this.comments);
+
+
+
+
             console.log(this.$route.params.items);
              this.AllMsg.TextMsg[1]=this.$route.params.items;////接收唯一标识
+            console.log( this.AllMsg.TextMsg[1].id+"ididid");
             this.AllMsg.TextMsg[0].HeadLine=this.$route.params.items.title;
             this.AllMsg.TextMsg[0].TextContent=this.$route.params.items.text;
 

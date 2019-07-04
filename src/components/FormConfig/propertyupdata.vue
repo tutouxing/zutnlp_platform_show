@@ -121,7 +121,7 @@
                 this.$router.push({path:'/formconfig/formoperate'});
             },
             PropertyCheck() {
-                let url='http://202.196.37.147:8848/Pros/check';
+                let url='http://127.0.0.1:8848/Pros/check';
                 this.$axios({
                     method:'post',
                     url,
@@ -154,7 +154,7 @@
                 let that_=this;
                 that_.receivename=that_.$route.params.nameone;
                 console.log("这是路由传递的表名"+this.$route.params.nameone);
-                let url='http://202.196.37.147:8848/Pros/check/'+that_.$route.params.nameone.toString();
+                let url='http://127.0.0.1:8848/Pros/check/'+that_.$route.params.nameone.toString();
                 this.$axios({
                     method:'post',
                     url,
@@ -169,11 +169,11 @@
 
                     that_.idone=res.data.id;
                     console.log( res.data.id+'这是查询获取的id');
-                    let url2='http://202.196.37.147:8848/Pros/updata';
+                    let url2='http://127.0.0.1:8848/Pros/updata';
                             console.log(  that_.receivename+'获取的参数');
                     that_.$axios({
                         method:'post',
-                        url:'http://202.196.37.147:8848/Pros/updata',
+                        url:'http://127.0.0.1:8848/Pros/updata',
                         headers:{
                             'Content-Type':'application/json'
                         },
