@@ -71,8 +71,17 @@
       <detail-comment :content="content"></detail-comment>
     </div>
     <!--根据id查找对应评论-->
-    <div v-show="showType=='referenceId'"></div>
-
+    <div v-show="showType=='referenceId'">
+      <detail-comment :content="content"></detail-comment>
+    </div>
+    <!--<el-pagination-->
+        <!--@size-change="handleSizeChange"-->
+        <!--@current-change="handleCurrentChange"-->
+        <!--:current-page="pageNo"-->
+        <!--:page-size="pageSize"-->
+        <!--layout=" prev, pager, next, sizes, jumper"-->
+        <!--:total="content_data.length">-->
+    <!--</el-pagination>-->
   </div>
 </template>
 
@@ -112,6 +121,8 @@
                 content_data: [],
                 showType:'',
                 content:{},
+                pageNo: 1,
+                pageSize:10
             }
         },
         components:{
@@ -121,6 +132,7 @@
             getContent() {
                 getContent().then((res) => {
                     this.content_data = res.data.content;
+                    console.log(this.content_data)
                 });
 
             },
@@ -149,20 +161,50 @@
                 });
             },*/
             searchId(input){
+                console.log(input)
                 for (let content in this.content_data) {
-                    if (content.id === input) {
-                        return content;
+                    if (content.id+'' == input) {
+                        this.content = content;
+                        break;
                     }
                 }
+                console.log(this.content)
+                this.showType="referenceId";
             },
+            recieveComments(content){
+                this.content = content;
+                this.showType = 'allComments';
+                console.log(content)
+            },
+            handleSizeChange(val) {
+                this.pageSize=val;
+            },
+            handleCurrentChange(val) {
+                this.pageNo = val;
+            },
+        },
+        computed:{
+            paginate(array,pageNo,pageSize){
+                let offset = (pageNo - 1) * pageSize;
+                let data = [];
+                if (offset + pageSize >= array.length) {
+                    for (let i = offset;i<array.length;i++){
+                        data.push(array[i]);
+                    }
+                }else {
+                    for (let i = offset;i<offset + pageSize;i++){
+                        data.push(array[i]);
+                    }
+                }
+                //let data=() ? array.slice(offset, array.length) : array.slice(offset, offset + pageSize);
+                return data
+            }
         },
         created() {
             this.getContent();
         },
-        recieveComments(content){
-            this.content = content;
-            this.showType = 'allComments';
-        }
+
+
     }
 </script>
 

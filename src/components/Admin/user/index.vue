@@ -167,7 +167,7 @@
                         // response=response.body;
                         this.list=response.data['content'];//后台响应的数据，返回给前台的列表
                         this.total=response.data['totalElements'];
-                        console.log(this.total);
+                        // console.log(this.total);
                         this.listLoading=false
                     })
             /*  this.$axios.get("http://127.0.0.1:8848/admin/user/?page="+this.listQuery.page+"&limit="+this.listQuery.limit).then(response=>{
@@ -178,9 +178,9 @@
             handleFilter(){
                 this.listLoading=true;
               getName(this.input).then((response)=>{//后台查找账号的名字
-                  console.log(this.input);
-                  console.log('kkkkkk');
-                  console.log(response.data);
+                  // console.log(this.input);
+                  // console.log('kkkkkk');
+                  // console.log(response.data);
                   this.list=response.data;
                   // this.total=response.data['totalElements'];data
                   this.listLoading=false;

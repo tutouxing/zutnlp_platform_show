@@ -24,6 +24,7 @@
     "sass-loader": "^7.1.0",
     "video.js": "^7.5.5",
     "vue": "^2.5.17",
+    "vue-paginate": "^3.6.0",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
     "vue-virtual-scroll-list": "^1.2.8",
