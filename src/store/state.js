@@ -17,14 +17,16 @@ const state = {
     channel:[],
     components:[],
     userInformation:'',
-    pageSet:["待添加","待添加","待添加"],
+    pageSet:["待添加","待添加","0"],
     AllContent:[],
     Alltxt:[],
     today:'3',
+    todayData:0,
+    hours:0,
     Data:{
       todayContentNum:0,
-      todayData:[],
-      onceData:[]
+      todayData:[100,220,215,182,196,202,236,307,320,150,112,120,150,182,260,250,226,320,350,210,250,260,185,169,220],
+      onceData:[1000,2200,2150,1520,1960,2020,2360,3070,3700,1800,1220,1000,1500,1820,2600,2900,2260,3200,3500,2800]
     }
 };
 export default state;

@@ -162,10 +162,8 @@
             date.getMonth() + 1,
             date.getDate()
           ].join('-'));
-          var b = Math.random() * 200;
-          var d = Math.random() * 200;
-          this.option.series[1].data.push(b + d)
-          this.option.series[0].data.push(d + b);
+          this.option.series[1].data.push(this.$store.state.Data.onceData[i])
+          this.option.series[0].data.push(this.$store.state.Data.onceData[i]);
         }
       },
       Data2(){
@@ -181,10 +179,8 @@
             date.getDate(),
             date.getHours()+"点"
           ].join('日'));
-          var b = Math.random() * 200;
-          var d = Math.random() * 200;
-          this.option.series[1].data.push(b + d)
-          this.option.series[0].data.push(d + b);
+          this.option.series[1].data.push(this.$store.state.Data.todayData[i])
+          this.option.series[0].data.push(this.$store.state.Data.todayData[i]);
         }
       },
       drawLine () {

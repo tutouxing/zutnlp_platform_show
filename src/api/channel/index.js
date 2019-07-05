@@ -42,3 +42,11 @@ export function putChannelById(id2,id1,obj) {
     data:obj,
   })
 }
+export function putTodayChannel(obj) {
+  return fetch({
+    url: '/Channel/update/today',
+    method: 'put',
+    data:obj,
+  })
+}
+
