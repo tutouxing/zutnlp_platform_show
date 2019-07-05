@@ -144,11 +144,12 @@
         padding-left: 20px;
     }
     .waPer head{
-        border-bottom: 1px dotted #99a9bf;
+        border-bottom: 1px solid red;
     }
     .waPer h1{
         margin-top: 10px;
         margin-bottom: 10px;
+        text-align: left;
     }
     .wapper{
         width: 400px;

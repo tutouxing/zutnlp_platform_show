@@ -1,12 +1,19 @@
 <template>
     <div class="exBox">
-        <img src="../../assets/img/mo.png">
+        <el-image
+                style="width: 150px; height: 100px"
+                :src="hr"
+                :fit="fill">
+        </el-image>
     </div>
 </template>
 
 <script>
     export default {
         name: "modeImageBox",
+        props:{
+            hr:String
+        }
     }
 </script>
 
@@ -52,8 +59,8 @@
     .clearfix:after {
         clear: both
     }
-    a {color:#252525; text-decoration:none;}
-    a:visited {text-decoration:none;}
-    a:hover {color:#ba2636;text-decoration:underline;}
-    a:active {color:#ba2636;}
+    a {color:#252525; text-decoration:none; font-family: "Helvetica Neue"}
+    a:visited {text-decoration:none; font-family: "Helvetica Neue"}
+    a:hover {color:#ba2636;text-decoration:underline;font-family: "Helvetica Neue"}
+    a:active {color:#ba2636; font-family: "Helvetica Neue"}
 </style>

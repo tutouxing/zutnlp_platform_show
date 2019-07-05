@@ -1,23 +1,8 @@
 <template>
-    <!--<div class="exBox">
-        <el-table
-                :data="this.$store.state.channel"
-                style="width: 100%"
-                :header-cell-style="tableHeaderColor"
-                :row-style="tableRowStyle">
-            <el-table-column
-                    prop="date"
-                    label="内容列表"
-                    width="700px">
-                <mode-image-box></mode-image-box>
-                <h1>{{mytopic}}</h1>
-            </el-table-column>
-        </el-table>
-    </div>-->
     <div>
             <div v-for="items in this.$store.state.channel" v-if="items.chName==mytopic" >
                 <el-card  class="secList" v-for="(content,index) in items.contents" v-if="index <7&&content.title!=null">
-                    <mode-image-box></mode-image-box>
+                    <mode-image-box :hr="content.pictures[0].url"></mode-image-box>
                     <div class="fontTitle">
                         <router-link :to="{path:'/modethirdCont/'+content.title,query:{title:content.title}}">{{content.title}}</router-link>
                         <span class="time">{{content.dateCreated}}</span>
@@ -58,7 +43,7 @@
         margin-top: 1%;
 
     }.secList{
-             height: 150px;
+             height: 100px;
              width:100%;
              float:left;
          }
@@ -72,8 +57,8 @@
             float: bottom;
              float: right;
          }
-    a {color:#252525; text-decoration:none;}
-    a:visited {text-decoration:none;}
-    a:hover {color:#ba2636;text-decoration:underline;}
-    a:active {color:#ba2636;}
+    a {color:#252525; text-decoration:none; font-family: "Arial"}
+    a:visited {text-decoration:none; font-family: "Arial"}
+    a:hover {color:#ba2636;text-decoration:underline;font-family: "Arial"}
+    a:active {color:#ba2636; font-family: "Arial"}
 </style>

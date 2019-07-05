@@ -196,7 +196,6 @@
                     if(valid){
                         console.log('为请求前');
                         addObj(this.form).then(()=>{
-                            console.log('请求后');
                             this.dialogFormVisible=false;
                             this.getList();
                             this.$notify({

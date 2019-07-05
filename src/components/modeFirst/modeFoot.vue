@@ -19,9 +19,10 @@
     text-align:center;
     line-height: 60px;
     height: 60px;
+    margin-top: 30px;
 }
-a {color:#252525; text-decoration:none;}
-a:visited {text-decoration:none;}
-a:hover {color:#ba2636;text-decoration:underline;}
-a:active {color:#ba2636;}
+a {color:#252525; text-decoration:none; font-family: "Helvetica Neue"}
+a:visited {text-decoration:none; font-family: "Helvetica Neue"}
+a:hover {color:#ba2636;text-decoration:underline;font-family: "Helvetica Neue"}
+a:active {color:#ba2636; font-family: "Helvetica Neue"}
 </style>

@@ -17,3 +17,10 @@ export function delComment(comment) {
         method:"delete"
     })
 }
+export function addComment(body,id) {
+    return fetch({
+        url:'/comment/add?contentId='+id,
+        method:'post',
+        data:body
+    })
+}
