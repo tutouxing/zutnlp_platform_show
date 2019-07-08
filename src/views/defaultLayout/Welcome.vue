@@ -168,6 +168,7 @@
         },
         methods:{
              DataInit(){
+
              /*  var today=new Date();
                if(today.getDate()!==this.$store.state.today){
                  for(var i=0;i<this.$store.state.channel.length;i++) {

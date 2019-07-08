@@ -138,14 +138,7 @@ const mutations = {
     },
     SET_HOURSPAGE_STATE(state,hours){
     state.hoursData=hours;
-    }
-
-
-
-
-
-
-
+    },
 
 };
 export default mutations;
