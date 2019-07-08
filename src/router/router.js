@@ -227,13 +227,23 @@ export default[
             name: 'createproject',
             component: createproject,
         },
-
+        //评论模块
         {
             path:"/comment",
             name:"评论管理",
-            component:()=>import("../views/operate/comment.vue")
+            component:()=>import("../views/operate/comment.vue"),
+            // children: {
+            //     path:"detail/:id",
+            //     name:"detail",
+            //     component:()=>import("../views/operate/detail_mode.vue")
+            // }
         },
-
+        {
+            path:"/comment/detail/:content",
+            name:"detail",
+            component:()=>import("../views/operate/detail_mode.vue")
+        },
+        //文本分析
         {
             path: 'analysis_word',
             name: 'analysis_word',

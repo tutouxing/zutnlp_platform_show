@@ -161,14 +161,15 @@
                 });
             },*/
             searchId(input){
-                console.log(input)
-                for (let content in this.content_data) {
-                    if (content.id+'' == input) {
-                        this.content = content;
+                console.log(this.content_data)
+                for (let i=0;i<this.content_data.length;i++) {
+                    console.log(this.content_data[i]);
+                    if (this.content_data[i].id == input) {
+                        this.content = this.content_data[i];
                         break;
                     }
                 }
-                console.log(this.content)
+                console.log(this.content);
                 this.showType="referenceId";
             },
             recieveComments(content){
@@ -200,7 +201,7 @@
                 return data
             }
         },
-        created() {
+        mounted() {
             this.getContent();
         },
 

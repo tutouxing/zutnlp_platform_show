@@ -1,7 +1,8 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="10" style="text-align: left"><a href="www.baidu.com" style="text-underline-style: none">{{content.title}}</a>
+      <el-col :span="10" style="text-align: left">
+        <router-link :to="{name:'detail',params: {content:content}}">{{content.title}}</router-link>
       </el-col>
       <el-col :span="2" style="text-align: center;">文章ID:{{content.id}}</el-col>
     </el-row>
