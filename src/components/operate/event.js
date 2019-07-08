@@ -19,12 +19,13 @@ export function passReview(comment) {//审核通过  首评状态改为1（-1不
     return comment;
 }
 export function failReview(comment) {//审核通过  首评状态改为1（-1不通过 0等待审核）
-    comment.state = -1;
+    comment.status = -1;
     // Vue.$message({
     //     showClose: true,
     //     message: '修改成功',
     //     type: 'success'
     // });
     updateComment(comment);
+    console.log(comment)
     return comment;
 }

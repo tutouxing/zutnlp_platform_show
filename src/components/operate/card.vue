@@ -1,7 +1,8 @@
 <template>
   <el-card>
     <el-row>
-      <el-col :span="10" style="text-align: left"><a href="www.baidu.com" style="text-underline-style: none">{{this.content_data.title}}</a>
+      <el-col :span="10" style="text-align: left;color: blue" >
+        <router-link :to="{name:'detail',params: {content:content_data}}">{{this.content_data.title}}</router-link>
       </el-col>
       <el-col :span="2" style="text-align: center;">文章ID:{{content_data.id}}</el-col>
       <el-col :span="2" style="text-align: right">
@@ -107,6 +108,15 @@ export default {
             reviewAllResponse(content){
                 this.$emit('sendComments',content);
             },
+            go2Detail(content){
+                console.log(content)
+                this.$router.push({
+                    path: "/comment/detail/",
+                    params: {
+                        content:content
+                    }
+                })
+            }
         }
     }
 </script>
