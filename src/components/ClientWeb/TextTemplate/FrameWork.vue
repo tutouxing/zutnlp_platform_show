@@ -65,6 +65,7 @@
                         </div>
 
                     </div>
+
                     <el-aside style="float: left;margin-left: 70px; height: auto;margin-top: 150px">
                         <h4 v-for=" (item,index) in  Allofdata.topdata" v-if="index<=4" v-on:click="yuletonext1(item)">{{item.title}} </h4>
                     </el-aside >
@@ -726,9 +727,9 @@
            this.Allofdata.gotdata= state.channel;
 
            let j;let i;let w;let that=this;
-            console.log( this.Allofdata.gotdata+"：：整体数据");
-            console.log("整体数据输出完毕");
-            console.log(this.Allofdata.gotdata[0].contents[0].pictures[0].url+'图片');
+           // console.log( this.Allofdata.gotdata+"：：整体数据");
+           // console.log("整体数据输出完毕");
+           // console.log(this.Allofdata.gotdata[0].contents[0].pictures[0].url+'图片');
          //   console.log( this.Allofdata.gotdata.contents[0]+"图片");
 
          /*   console.log( this.Allofdata.gotdata[0].contents[0].text+"输出");*/
@@ -744,9 +745,9 @@
            }
 
 
+           this.change();
 
-
-           for(let p=0;p<that.Allofdata.topdata.length;p++)
+         /*  for(let p=0;p<that.Allofdata.topdata.length;p++)
            {
                let first= Math.round(Math.random() * (that.Allofdata.topdata.length - 8)) + 8;
                let second=Math.round(Math.random() * (8 - 0)) + 0;
@@ -754,11 +755,11 @@
                that.Allofdata.topdata[first]=that.Allofdata.topdata[second];
                that.Allofdata.topdata[second]=this.Allofdata.obj;
                let ob=that.Allofdata.topdata[first];
-              /* console.log(ob.title+"title");
+              /!* console.log(ob.title+"title");
                console.log("first"+first);
-               console.log("second"+second);*/
+               console.log("second"+second);*!/
            }
-
+*/
             console.log( this.Allofdata.topdata.length+"长度");
 /*
 
