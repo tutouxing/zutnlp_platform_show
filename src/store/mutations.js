@@ -122,14 +122,25 @@ const mutations = {
     SET_TODAYDATA_CONTENT_STATE(state,todaydata){
       state.Data.todayContentNum=todaydata;
     },
-    SET_ONCEDATA_STATE(state,todaydata){
+    SET_TODAYDATA_STATE(state,todaydata){
       state.Data.todayData.shift();
       state.Data.todayData.push(todaydata)
     },
-    SET_TODAYDATA_STATE(state,oncedata){
+    SET_ONCEDATA_STATE(state,oncedata){
       state.Data.onceData.shift();
       state.Data.onceData.push(oncedata)
-  }
+    },
+    SET_TODAYPAGE_STATE(state,hours){
+      state.todayData=hours+state.todayData;
+    },
+    SET_TODAYPAGEINIT_STATE(state,hours){
+    state.todayData=hours;
+    },
+    SET_HOURSPAGE_STATE(state,hours){
+    state.hoursData=hours;
+    }
+
+
 
 
 
