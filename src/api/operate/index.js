@@ -6,14 +6,21 @@
 import fetch from '../../utils/fetch.js'
 export function updateComment(comment) {
     return fetch({
-        url:"comment/"+comment.id,
+        url:"/comment/"+comment.id,
         data:comment,
         method:"put"
     })
 }
 export function delComment(comment) {
     return fetch({
-        url:"comment/"+comment.id,
+        url:"/comment/"+comment.id,
         method:"delete"
+    })
+}
+export function addComment(body,id) {
+    return fetch({
+        url:'/comment/add?contentId='+id,
+        method:'post',
+        data:body
     })
 }
