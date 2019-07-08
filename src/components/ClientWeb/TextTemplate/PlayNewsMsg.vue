@@ -11,15 +11,10 @@
 
 
 <el-container>
-
-
     <div v-html="this.AllMsg.OnlyMsg.textHref">
 
 
-
-
     </div>
-
     <el-footer style="margin: auto">
         <div style="margin-top: 50px">
             <el-input  v-model="comment" style="float: left;width: 350px" placeholder="请输入评论" ></el-input><el-button type="primary" style="display:inline-block; margin-left: 30px" v-on:click="send()">确定</el-button>
@@ -27,7 +22,7 @@
         <div v-if="isshow" style="margin-top: 20px">
 
             <h4>评论区</h4>
-            <p  style="margin-top: 10px" v-if="comments.comments.length>0" v-for="item in comments.comments">
+            <p v-show="item.status==1" style="margin-top: 10px" v-if="comments.comments.length>0" v-for="item in comments.comments">
                 {{item.details}}
             </p>
         </div>
@@ -138,8 +133,6 @@
 
             },
         },
-
-
         mounted(){
 
 

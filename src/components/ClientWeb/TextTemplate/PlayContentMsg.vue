@@ -14,7 +14,7 @@
 
 <div v-if="isshow" style="margin-top: 20px">
     <h4>评论区</h4>
-            <p  style="margin-top: 10px" v-if="comments.comments.length>0" v-for="item in comments.comments">
+            <p v-show="item.status==1" style="margin-top: 10px" v-if="comments.comments.length>0" v-for="item in comments.comments">
                 {{item.details}}
             </p>
 </div>
