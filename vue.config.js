@@ -1,4 +1,4 @@
-﻿const path = require('path')
+const path = require('path')
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/zutnlp_platform_show' : '/'
 const resolve = dir => path.join(__dirname, dir)
 // var proEnv = require('./config/prod.env');  // 生产环境
@@ -62,7 +62,7 @@ module.exports = {
     // 跨域配置
     devServer: {
         // proxy: 'http://127.0.0.1:8088'
-        port:8848,
+        port:8845,
         host:"127.0.0.1",
         // https: false,
         // hotOnly: false,

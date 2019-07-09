@@ -1,5 +1,4 @@
 <template>
-
         <div class="" v-if="this.$store.state.components=='1'">
             <Header></Header>
             <el-row>
@@ -190,7 +189,17 @@
         </div>
     <div v-else="this.$store.state.components==='5'">
         <Header></Header>
-        <el-row>
+        <div class="H_body">
+            <el-table :data="vnews"  style="width: 100% ;" :row-style="style">
+                <el-table-column prop="date" label="" width="350" >
+                    <template scope="scope" ><img :src="scope.row.pictures[0].url"/></template>
+                </el-table-column>
+                <el-table-column prop="name" label="" width="450">
+                    <template scope="scope" ><span span class="lian1" v-on:click="skip(scope.row.id)">{{scope.row.title}}</span></template>
+                </el-table-column>
+            </el-table>
+        </div>
+      <!--  <el-row>
             <el-col :span="12">
                 <div class="wrap">
                     <div class="content">
@@ -233,13 +242,14 @@
                     </div>
                 </div>
             </el-col>
-        </el-row>
+        </el-row>-->
     </div>
 </template>
 
 <script>
     import Header from '../../index/phead'
     import {PictureById} from '../../../../api/picture/pt'
+    import {getContentById} from '../../../../api/content/index'
     export default {
         name: "second",
         data(){
@@ -250,6 +260,17 @@
                 vnews4:[],
                 channels:[],
                 vnews:[],
+                content:'',//得到内容
+                style:{
+                    height: '100px',
+                   padding:'0',
+                },
+              /*  listLoading:'true',//列表是否加载
+                listQuery: {//列表的限制
+                    page: 1,
+                    limit: 5,
+                },
+                total:null,//一共多少页*/
             }
         },
         components:{
@@ -262,15 +283,19 @@
         methods:{
             slice1(){
                 this.channels = this.$store.state.channel;
-                this.vnews1 = this.channels[0].contents;
+                /*this.vnews1 = this.channels[0].contents;
                 this.vnews2 =this.channels[1].contents;
                 this.vnews3 =this.channels[2].contents;
-                this.vnews4 =this.channels[3].contents;
+                this.vnews4 =this.channels[3].contents;*/
                 this.vnews=this.$route.params;
             },
             skip(n){
-                this.$router.push({name:'detailed1', params:{item:n}});
-                this.$router.push({path:'/prostage/detailed'})
+                getContentById(n).then((response)=>{
+                    this.content=response.data;
+                    this.$router.push({name:'detailed1', params:{item:this.content}});
+                    this.$router.push({path:'/prostage/detailed'})
+                })
+
             },
             datachuli(){
                 console.log("打印第一个内容返回的图像东西分析")
@@ -286,6 +311,12 @@
 </script>
 
 <style type="text/css" >
+    .el-table__header th, .el-table__header tr{
+        line-height: 10px;
+    }
+    .H_body{
+        margin-left: 200px;
+    }
     .text {
         font-size: 14px;
     }

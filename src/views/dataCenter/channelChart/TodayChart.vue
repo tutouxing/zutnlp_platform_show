@@ -106,7 +106,7 @@
       drawLine() {
         for (let i = 0;i<this.$store.state.channel.length;i++) {
           this.option.xAxis.data.push(this.$store.state.channel[i].chName);
-          this.option.series[0].data.push(this.$store.state.channel[i].enName);
+          this.option.series[0].data.push(this.$store.state.channel[i].today);
         }
         let myChart = echarts.init(document.getElementById('channel3_dv'));
         myChart.setOption(this.option);

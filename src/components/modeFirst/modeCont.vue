@@ -18,6 +18,18 @@
             <mode-box v-if="i%2==0" class="divinter"  :channelItem="item.chName"></mode-box>
             <mode-box2 v-if="i%2==1" class="divinter"  :channelItem="item.chName"></mode-box2>
         </div>
+        <div class="splitLine"></div>
+        <div class="modeBoxslide" >
+            <el-card shadow="never" >
+                <div slot="header" class="clearfix">
+                    <span>友情链接</span>
+
+                </div>
+                <div v-for="item in 15" class="Link">
+                    <router-link to="/welcome">外部链接</router-link>
+                </div>
+            </el-card>
+        </div>
 
         <el-footer>
             <mode-foot></mode-foot>
@@ -56,8 +68,8 @@ export default {
 
     },
     beforeCreate: function () {
-        console.group('beforeCreate 创建前状态===============》');
-        console.log(this.state); //undefined
+        // console.group('beforeCreate 创建前状态===============》');
+        // console.log(this.state); //undefined
     },
     beforeRouteEnter(to,from,next){
         window.document.body.style.backgroundColor="#FFFFFF";
@@ -88,4 +100,26 @@ export default {
     a:visited {text-decoration:none;}
     a:hover {color:#ba2636;text-decoration:underline;}
     a:active {color:#ba2636;}
+    .splitLine{
+        background-color: #ba2636;
+        border-radius: 4px;
+        min-height: 10px;
+        min-width: 90px;
+        margin-right: 5%;
+        margin-left: 5%;
+        margin-top: 2%;
+    }
+    .modeBoxslide{
+        margin-top: 2%;
+        margin-left: 5%;
+        margin-right: 5%;
+        height: 300px;
+        float:left;
+    }
+    .Link{
+        width: 20%;
+        height: 25px;
+        float: left;
+        font-family: "Helvetica Neue";
+    }
 </style>

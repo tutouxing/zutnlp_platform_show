@@ -12,6 +12,8 @@ import createcode from '../components/FormConfig/createcode.vue'
 import second from '../views/prostage/temp/newtemp1/second'
 import detailed from '../views/prostage/temp/newtemp1/detailed1'
 import modeSecCont from '../components/modeFirst/modeSecCont.vue'
+import picDetailed from '../views/prostage/content/picDetailed'
+import comments from '../views/prostage/content/comments'
 
 
 
@@ -51,7 +53,7 @@ export default[
         },
         {
             path: 'components',
-         /*  component: () => import('../components/editable/setMode.vue'),*/
+            component: () => import('../components/editable/setMode.vue'),
             name: 'components',
         },
         {
@@ -181,7 +183,6 @@ export default[
             path: 'goback',
             name: 'goback',
             component: goback,
-
         },
         {
             path: 'createcode',
@@ -226,13 +227,23 @@ export default[
             name: 'createproject',
             component: createproject,
         },
-
+        //评论模块
         {
             path:"/comment",
             name:"评论管理",
-            component:()=>import("../views/operate/comment.vue")
+            component:()=>import("../views/operate/comment.vue"),
+            // children: {
+            //     path:"detail/:id",
+            //     name:"detail",
+            //     component:()=>import("../views/operate/detail_mode.vue")
+            // }
         },
-
+        {
+            path:"/comment/detail/:content",
+            name:"detail",
+            component:()=>import("../views/operate/detail_mode.vue")
+        },
+        //文本分析
         {
             path: 'analysis_word',
             name: 'analysis_word',
@@ -322,6 +333,16 @@ export default[
         path:'/prostage/detailed',
         name:'detailed1',
         component:detailed,
+    },
+    {
+        path:'/prostage/picDetailed',
+        name:'picDetailed',
+        component:picDetailed,
+    },
+    {
+        path:'/prostage/comments',
+        name:'comments',
+        component:comments
     },
     {
         path: '/ClientWeb/TextTemplate/FrameWork',

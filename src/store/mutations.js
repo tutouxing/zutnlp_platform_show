@@ -41,12 +41,12 @@ const mutations = {
       state.comp = comp;
     },
     SET_CHANNEL_STATE (state, channel) {
-      console.log("得到状态的channel");
-      console.log(channel);
+      // console.log("得到状态的channel");
+      // console.log(channel);
       state.channel = channel;
     },
     SET_COMPONENTS_STATE(state,components){
-        console.log('得到components');
+        // console.log('得到components');
         state.components=components;
     },
     SET_USERINFORMATION_STATE (state, information) {
@@ -59,18 +59,50 @@ const mutations = {
       state.pageSet[1] = two;
     },
     SET_AllCONTENT_STATE (state, channel) {
-        var contList=new Array();
+        var contList=new Array;
         var i=0;
         var title;
-        for (i=0;i<channel.length;i++){
+        console.log("------------------------------------------channel.length------------------------------------------")
+        console.log(channel.length)
+        for (;i<channel.length;i++){
             for (var m=0;m<channel[i].contents.length;m++) {
-                title=channel[i].contents[m].title
-                contList.push(title)
+                var cont=new Object()
+                cont.title="";
+                cont.pichrefs=[];
+                title=channel[i].contents[m].title;
+                cont.title=title;
+                // console.log("------------------------------------------塞入的cont的title------------------------------------------")
+                // console.log( cont.title)
+                cont.pichrefs=[];
+                for(var j=0;j<channel[i].contents[m].pictures.length;j++)
+                {
+                     cont.pichrefs.push(channel[i].contents[m].pictures[j].url);
+                }
+                // console.log("------------------------------------------塞入的cont------------------------------------------")
+                // console.log(cont)
+                contList.push(cont)
+                // console.log("------------------------------------------塞入之前的从chennel中拿到的title------------------------------------------")
+                // console.log(contList)
             }
 
         }
+        // console.log("得到的打印的带pic的channel");
+        // console.log(contList)
         state.AllContent = contList;
     },
+    // SET_AllCONTENT_STATE (state, channel) {
+    //     var contList=new Array();
+    //     var i=0;
+    //     var title;
+    //     for (i=0;i<channel.length;i++){
+    //         for (var m=0;m<channel[i].contents.length;m++) {
+    //             title=channel[i].contents[m].title
+    //             contList.push(title)
+    //         }
+    //
+    //     }
+    //     state.AllContent = contList;
+    // },
     SET_AllTXT_STATE (state, channel) {
         var contList=new Array();
         var i=0;
@@ -88,11 +120,29 @@ const mutations = {
       state.today=today;
     },
     SET_TODAYDATA_CONTENT_STATE(state,todaydata){
-      state.todayData.todayContentNum=todaydata;
+      state.Data.todayContentNum=todaydata;
     },
-    SET_TODAYDATA_CHANNEL_STATE(state,todaydata){
-    state.todayData.todayChannelNum=todaydata;
+    SET_TODAYDATA_STATE(state,todaydata){
+      state.Data.todayData.shift();
+      state.Data.todayData.push(todaydata)
+    },
+    SET_ONCEDATA_STATE(state,oncedata){
+      state.Data.onceData.shift();
+      state.Data.onceData.push(oncedata)
+    },
+    SET_TODAYPAGE_STATE(state,hours){
+      state.todayData=hours+state.todayData;
+    },
+    SET_TODAYPAGEINIT_STATE(state,hours){
+    state.todayData=hours;
+    },
+    SET_HOURSPAGE_STATE(state,hours){
+    state.hoursData=hours;
     }
+
+
+
+
 
 
 

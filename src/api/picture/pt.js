@@ -1,13 +1,13 @@
 import fetch from '../../utils/fetch.js'
 export function PictureById(id) {
     return fetch({
-        url:'http://127.0.0.1:8848/picture/content_id/'+id,
+        url:'/picture/content_id/'+id,
         method:'get',
     })
 }
 export function PicturePage() {
     return fetch({
-        url:'http://127.0.0.1:8848/picture/?page='+1+'&'+'limit='+20,
+        url:'/picture/?page='+1+'&'+'limit='+20,
         method: 'get',
     })
 }

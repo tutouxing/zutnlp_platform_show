@@ -1,82 +1,91 @@
 <template>
     <div>
-        <el-row>
-            <el-col :span="16">
-                <div class="waPer">
-                    <div class="head">
-                        <h1>发表留言</h1>
-                    </div>
-                    <div class="body">
-                        <div class="body-head">
-                            <div>
-                                <el-form>
-                                    <el-form-item label="类别" :label-width="120px" prop="classed">
-                                        <el-select v-model="userForm.classed" clearable placeholder="请选择">
-                                            <el-option
-                                                    v-for="item in options"
-                                                    :key="item.value"
-                                                    :label="item.label"
-                                                    :value="item.value">
-                                            </el-option>
-                                        </el-select>
-                                    </el-form-item>
-                                    <el-form-item label="邮箱" :label-width="120px" prop="email">
-                                        <el-input v-model="userForm.email" placeholder="请输入邮箱"></el-input>
-                                    </el-form-item>
-                                    <el-form-item label="电话" :label-width="120px" prop="phoneNum">
-                                        <el-input v-model="userForm.phoneNum" placeholder="请输入电话"></el-input>
-                                    </el-form-item>
-                                    <el-form-item label="QQ" :label-width="120px" prop="QQ">
-                                        <el-input v-model="userForm.QQ" placeholder="请输入QQ"></el-input>
-                                    </el-form-item>
-                                    <el-form-item label="标题" :label-width="120px" prop="title">
-                                        <el-input type="text" v-model="userForm.title"></el-input>
-                                    </el-form-item>
-                                    <el-form-item label="内容" :label-width="120px" prop="title">
-                                        <el-input type="text" v-model="userForm.text"></el-input>
-                                    </el-form-item>
-                                    <el-form-item>
-                                        <el-button type="primary" @click="submit()">提交</el-button>
-                                    </el-form-item>
-                                </el-form>
+        <Head></Head>
+        <div>
+            <el-row>
+                <el-col :span="16">
+                    <div class="waPer">
+                        <div class="head">
+                            <h1>发表留言</h1>
+                        </div>
+                        <div class="body">
+                            <div class="body-head">
+                                <div>
+                                    <el-form>
+                                        <el-form-item label="类别" label-width="120px" prop="classed">
+                                            <el-select v-model="userForm.classed" clearable placeholder="请选择">
+                                                <el-option
+                                                        v-for="item in options"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="邮箱" label-width="120px" prop="email">
+                                            <el-input v-model="userForm.email" placeholder="请输入邮箱"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="电话" label-width="120px" prop="phoneNum">
+                                            <el-input v-model="userForm.phoneNum" placeholder="请输入电话"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="QQ" label-width="120px" prop="QQ">
+                                            <el-input v-model="userForm.QQ" placeholder="请输入QQ"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="标题" label-width="120px" prop="title">
+                                            <el-input type="text" v-model="userForm.title"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="内容" label-width="120px" prop="title">
+                                            <el-input type="text" v-model="userForm.text"></el-input>
+                                        </el-form-item>
+                                        <el-form-item>
+                                            <el-button type="primary" @click="submit()">提交</el-button>
+                                        </el-form-item>
+                                    </el-form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </el-col>
-            <el-col :span="8">
-                <div>
-                    <el-carousel indicator-position="outside">
-                        <el-carousel-item v-for="(n,item) in depictions" :key="item">
-                            <img :src="n.idView"/>
-                        </el-carousel-item>
-                    </el-carousel>
-                </div>
-                <div class="wapper">
-                    <div class="title">
-                        <h3>大家都在搜</h3>
+                </el-col>
+                <el-col :span="8">
+                    <div>
+                        <el-carousel indicator-position="outside">
+                            <el-carousel-item v-for="(n,item) in depictions" :key="item">
+                                <img :src="n.idView"/>
+                            </el-carousel-item>
+                        </el-carousel>
                     </div>
-                    <div class="newscontent" >
-                        <div class="mode1">
-                            <img src=""/>
-                            <span>图像内容图像内容图像内容图像内容图像内哦让那个图像内容图像</span>
+                    <div class="wapper">
+                        <div class="title">
+                            <h3>大家都在搜</h3>
                         </div>
-                        <div class="libiao">
-                            <ul class="model2" v-for="(n,index) in content1" :key="index">
-                                <li v-on:click="skip(n)">{{n.title}}</li>
-                            </ul>
+                        <div class="newscontent" >
+                            <div class="mode1">
+                                <img src=""/>
+                                <span>图像内容图像内容图像内容图像内容图像内哦让那个图像内容图像</span>
+                            </div>
+                            <div class="libiao">
+                                <ul class="model2" v-for="(n,index) in content1" :key="index">
+                                    <li v-on:click="skip(n)">{{n.title}}</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </el-col>
-        </el-row>
+                </el-col>
+            </el-row>
+        </div>
     </div>
+
+
 
 </template>
 
 <script>
+    import Head from '../index/phead'
     export default {
         name: "comments",
+        components:{
+            Head,
+        },
         data() {
         return {
             options: [{
@@ -135,11 +144,12 @@
         padding-left: 20px;
     }
     .waPer head{
-        border-bottom: 1px dotted #99a9bf;
+        border-bottom: 1px solid red;
     }
     .waPer h1{
         margin-top: 10px;
         margin-bottom: 10px;
+        text-align: left;
     }
     .wapper{
         width: 400px;

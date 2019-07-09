@@ -33,7 +33,7 @@ export function delObj(id) {
 }
 export function putObj(id,obj) {
     return fetch({
-        url:'http://127.0.0.1:8848/user/'+id,
+        url:'/user/'+id,
         method:'put',
         data:obj,
     })
@@ -41,7 +41,7 @@ export function putObj(id,obj) {
 
 export function getName(username) {
     return fetch({
-        url:'http://127.0.0.1:8848/user/getByName',
+        url:'/user/getByName',
         method:'get',
         params: username
     })
