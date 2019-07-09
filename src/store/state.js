@@ -22,7 +22,8 @@ const state = {
     Alltxt:[],
     today:'3',
     todayData:0,
-    hours:0,
+    hoursData:0,
+    todayChannel:[],
     Data:{
       todayContentNum:0,
       todayData:[100,220,215,182,196,202,236,307,320,150,112,120,150,182,260,250,226,320,350,210,250,260,185,169,220],

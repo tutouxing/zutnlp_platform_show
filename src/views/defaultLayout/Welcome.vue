@@ -37,8 +37,9 @@
         name: "Welcome",
         data(){
           return{
+               channelNum:[],
               channelInform:{
-                history:0,
+                id:0,
                 today:0,
               },
               dataSet_Bar1:{
@@ -169,15 +170,14 @@
         methods:{
              DataInit(){
 
-             /*  var today=new Date();
-               if(today.getDate()!==this.$store.state.today){
-                 for(var i=0;i<this.$store.state.channel.length;i++) {
-                   this.channelInform.history = this.$store.state.channel[i].today + this.$store.state.channel[i].history;
-                   console.log(this.$store.state.channel[i].id);
-                   var ID = this.$store.state.channel[i].id
-                     putChannelById(ID,this.$store.state.userid, this.channelInform);
+               /*  for(let i=0;i<this.$store.state.channel.length;i++) {
+                   this.channelNum.push(this.channelInform);
+                   this.channelNum[i].id = this.$store.state.channel[i].id;
+                     /!*putChannelById(ID,this.$store.state.userid, this.channelInform);*!/
+                   console.log(this.channelNum[i])
                  }
-                 }*/
+                 this.$store.commit("SET_TODAYCHANNEL_STATE",this.channelNum)
+*/
              //页面浏览量统计
              /*  putTodayChannel(this.i)*/
 
