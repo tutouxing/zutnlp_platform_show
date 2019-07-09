@@ -97,12 +97,12 @@
                                     <el-button @click="feedback">我要留言....</el-button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </el-col>
             </el-row>
         </div>
+        <remote-js src="http://pv.sohu.com/cityjson?ie=utf-8"></remote-js>
     </div>
 </template>
 
@@ -112,10 +112,24 @@
     export default {
         name: "aindex",
         components:{
-            Ahead
+            Ahead,
+            'remote-js':{
+                render(createElement) {
+                    return createElement('script', {attrs: {type:'text/javascript', src: this.src}});
+                },
+                props:{
+                    src:{type: String,required:true},
+                },
+            }
         },
+
+        beforeDestroy(){
+                   console.log(returnCitySN["cname"])
+        },
+
         data(){
             return{
+                ip:'',
                 picture:[],
                 Item:[],
                 content3:[
