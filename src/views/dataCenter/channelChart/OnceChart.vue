@@ -40,7 +40,7 @@
             containLabel: true
           },
           legend: {
-            data: ['1', '2', '3','4','5','6'],
+            data: [],
             right: 10,
             top: 12,
             textStyle: {
@@ -231,6 +231,12 @@
     methods: {
       drawLine() {
         let myChart = echarts.init(document.getElementById('channel4_dv'));
+        for(var i=0;i<this.$store.state.channel.length-1;i++){
+          this.option.series[i].name=this.$store.state.channel[i].chName;
+          this.option.series[i].data[0]=this.$store.state.channel[i].history;
+          this.option.legend.data.push(this.$store.state.channel[i].chName)
+        }
+
         myChart.setOption(this.option);
       },
        Show() {

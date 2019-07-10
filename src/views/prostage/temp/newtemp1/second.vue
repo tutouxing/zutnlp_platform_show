@@ -190,7 +190,7 @@
     <div v-else="this.$store.state.components==='5'">
         <Header></Header>
         <div class="H_body">
-            <el-table :data="vnews"  style="width: 100% ;" :row-style="style">
+            <el-table :data="vnews.slice((currentPage-1)*pageSize,currentPage*pageSize)"  style="width: 100% ;" :row-style="style">
                 <el-table-column prop="date" label="" width="350" >
                     <template scope="scope" ><img :src="scope.row.pictures[0].url"/></template>
                 </el-table-column>
@@ -199,50 +199,10 @@
                 </el-table-column>
             </el-table>
         </div>
-      <!--  <el-row>
-            <el-col :span="12">
-                <div class="wrap">
-                    <div class="content">
-                        <ul v-for="(n,index) in vnews" :key="index" class="text item">
-                            <li>
-                                <div class="left"><img src="" alt=""></div>
-                                <div class="right">
-                                    <div class="right_top">
-                                        <h3 class="lian" v-on:click="skip(n)" >{{n.title}}</h3>
-                                    </div>
-                                    <div class="right_bottom">
-                                        <div class="right_bottom_left">
-                                            <span class="lian1" v-on:click="skip(n)" >{{n.title}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </el-col>
-            <el-col :span="12">
-                <div class="wrap">
-                    <div class="content">
-                        <ul v-for="(n,index) in vnews" :key="index" class="text item">
-                            <li>
-                                <div class="left"><img src="" alt=""></div>
-                                <div class="right">
-                                    <div class="right_top">
-                                        <h3 class="lian" v-on:click="skip(n)"  >{{n.title}}</h3>
-                                    </div>
-                                    <div class="right_bottom">
-                                        <div class="right_bottom_left">
-                                            <span class="lian1" v-on:click="skip(n)" >{{n.title}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </el-col>
-        </el-row>-->
+        <div>
+            <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[1,5,10,20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="vnews.length">
+            </el-pagination>
+        </div>
     </div>
 </template>
 
@@ -254,6 +214,9 @@
         name: "second",
         data(){
             return{
+                currentPage: 1, // 当前页码
+                total: 20, // 总条数
+                pageSize: 10, // 每页的数据条数
                 vnews1:[],
                 vnews2:[],
                 vnews3:[],
@@ -301,10 +264,16 @@
                 console.log("打印第一个内容返回的图像东西分析")
                 for(let i=0;i<this.vnews1.length;i++){
                     PictureById(this.vnews1[i].id).then((response)=>{
-                       console.log(response);
                     })
                 }
             },
+            handleSizeChange(val){//改变分页大小
+                this.currentPage = 1;
+                this.pageSize = val;
+            },
+            handleCurrentChange(val){//改变当前页
+                this.currentPage = val;
+            }
         },
 
     }
