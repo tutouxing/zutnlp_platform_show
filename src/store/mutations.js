@@ -138,14 +138,10 @@ const mutations = {
     },
     SET_HOURSPAGE_STATE(state,hours){
     state.hoursData=hours;
-    }
-
-
-
-
-
-
-
+    },
+    SET_TODAYCHANNEL_STATE(state,channel){
+    state.todayChannel=channel;
+  },
 
 };
 export default mutations;

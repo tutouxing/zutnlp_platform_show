@@ -24,3 +24,10 @@ export function addComment(body,id) {
         data:body
     })
 }
+export function addPage(list) {
+    return fetch({
+        url:'/comment/',
+        method:'get',
+        params:list,
+    })
+}

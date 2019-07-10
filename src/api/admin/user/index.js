@@ -41,7 +41,7 @@ export function putObj(id,obj) {
 
 export function getName(username) {
     return fetch({
-        url:'/user/getByName',
+        url:'  /user/getByName',
         method:'get',
         params: username
     })

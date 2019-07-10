@@ -54,6 +54,7 @@
               <demo></demo>
         </el-col>
     </el-row>
+        <remote-js src="http://pv.sohu.com/cityjson?ie=utf-8"></remote-js>
     </div>
 </template>
 
@@ -62,22 +63,37 @@
     import demo from '../../components/Echarts/DataChart/dema1.vue'
   export default {
     name: 'dataDemo',
-    components: {dema,demo},
+    components: {
+      dema,
+      demo,
+      'remote-js':{
+      render(createElement) {
+        return createElement('script', {attrs: {type:'text/javascript', src: this.src}});
+      },
+        props:{
+        src:{type: String,required:true},
+      },
+      }
+    },
     data(){
       return{
         contentNum:0,
+        ip:''
       }
     },
     mounted(){
       this.Num();
     },
+    beforeDestroy(){
+      this.ip=returnCitySN["cname"];
+      console.log(this.ip)
+    },
     methods:{
       Num(){
         for(var i=0;i<this.$store.state.channel.length;i++){
           this.contentNum+=this.$store.state.channel[i].contents.length
-          console.log(this.$store.state.channel[i].contents[i])
         }
-      }
+     }
     }
   }
 </script>
