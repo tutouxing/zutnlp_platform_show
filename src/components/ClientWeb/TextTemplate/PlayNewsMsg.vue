@@ -35,7 +35,7 @@
         name: "PlayNewsMsg",
         provide(){
             return{
-               // send:this.send
+               // //send:this.send
             }
         },
         data(){

@@ -142,7 +142,7 @@
          <el-tab-pane :label="item.chName" :name="second" v-for="item in Allofdata.gotdata" >
                  <div v-show="true" class="tiyuaside"  >
 
-<!--
+<!--//
                      <video width="500" height="255" controls="controls" autoplay="autoplay">
                          <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" />
                          <source src="/i/movie.webm" type="video/webm" />
