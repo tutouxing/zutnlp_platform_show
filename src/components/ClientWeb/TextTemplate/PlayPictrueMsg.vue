@@ -19,7 +19,7 @@
 
         },
         created(){
-            this.obj=this.$route.params.items;/////接收唯一标识/
+            this.obj=this.$route.params.items;///////接收唯一标识/
 
             this.url=this.obj.Picture;
             console.log(  this.url);
