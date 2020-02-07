@@ -243,15 +243,22 @@ export default[
             name:"detail",
             component:()=>import("../views/operate/detail_mode.vue")
         },
+        //文本标注
+        {
+            path:"/docsManage",
+            name:"文档管理",
+            component:()=>import("../components/textAnnotation/docsManage/index.vue"),
+        },
+        {
+            path:"/annotationTask",
+            name:"标注任务",
+            component:()=>import("../components/textAnnotation/annotationTask/index.vue"),
+        },
         //文本分析
         {
             path: 'analysis_word',
             name: 'analysis_word',
             component:()=>import('../views/analysisWord/nlp.vue'),
-            // children: {
-            //     path:"",
-            //     name:"",
-            // }
         },
         {
             path:'news_analyse',
