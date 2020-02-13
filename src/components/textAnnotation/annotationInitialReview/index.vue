@@ -2,13 +2,10 @@
   <div>
     <el-row style="margin-top: 40px;margin-left: 50px">
       <el-col :span="5">
-        <el-input v-model="task_id" placeholder="任务号"></el-input>
-      </el-col>
-      <el-col :span="5">
-        <el-input v-model="doc_id" placeholder="档案编号"></el-input>
+        <el-input v-model="task_id" placeholder="档案编号"></el-input>
       </el-col>
       <el-col :span="5"><!--任务类型-->
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="value" placeholder="标注类型">
           <el-option
               v-for="item in task_types"
               :key="item.value"
@@ -18,7 +15,7 @@
         </el-select>
       </el-col>
       <el-col :span="5"><!--任务状态-->
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="value" placeholder="状态">
           <el-option
               v-for="item in status"
               :key="item.value"
@@ -29,14 +26,8 @@
       </el-col>
     </el-row>
     <el-row style="margin-left: 50px;margin-top: 40px">
-      <el-col :span="5">
-        <el-input v-model="keyword" placeholder="所有"></el-input>
-      </el-col>
       <el-col :span="2"><el-button type="primary" @click="handleSearch()">查询</el-button></el-col>
       <el-col :span="2"><el-button @click="handleReset()">重置</el-button></el-col>
-    </el-row>
-    <el-row style="margin-top: 40px;margin-left: 50px">
-      <el-col :span="6"><el-button @click="handleMarkedStatus()">导出已标注状态</el-button></el-col>
     </el-row>
     <el-row style="margin-top: 40px;margin-left: 50px">
       <el-table
@@ -61,8 +52,13 @@
             width="120">
         </el-table-column>
         <el-table-column
-            prop="update_time"
-            label="上传时间"
+            prop="status"
+            label="状态"
+            show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+            prop="annotator"
+            label="审核者"
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
@@ -76,15 +72,24 @@
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-            label="标注者"
             prop="annotator"
+            label="审核者"
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
             label="操作"
             show-overflow-tooltip>
           <template slot-scope="scope">
-            <el-button @click="handleDetail(scope.row)" type="text" size="small">详情</el-button>
+            <el-button @click="handleReview(scope.row)" type="text" size="small">审核</el-button>
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                更多<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item @click="handlePass(scope.row)">通过</el-dropdown-item>
+                <el-dropdown-item @click="refuseReview(scope.row)">拒绝</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
@@ -95,70 +100,18 @@
 <script>
     /**
      * author:wastelands
-     * Date:2020-02-01 02:35
+     * Date:2020-02-13 04:25
      */
     export default {
         name: "index",
-        data(){
-            return{
-                task_id:"",
-                doc_id:"",
-                docsData: [{}],
-                status:[{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                task_types:[{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                keyword:"",
-            }
-        },
         methods:{
-            handleSearch(){
-
-            },
-            handleReset(){
-
-            },
-            handleMarkedStatus(){
-
-            },
-            handleAnnotation(){
-
-            },
-        }
+            refuseReview(row){},
+            handleReview(){},
+            handlePass(){},
+        },
     }
 </script>
 
 <style scoped>
-  div .el-row{
-    margin-top: 50px;
-    margin-left: 40px;
-  }
+
 </style>
