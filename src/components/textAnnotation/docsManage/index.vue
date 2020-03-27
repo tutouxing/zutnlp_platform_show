@@ -44,9 +44,9 @@
             <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
           </span>
         </el-dialog>
-
       </el-col>
     </el-row>
+
     <el-row style="margin-top: 40px;margin-left: 50px">
       <el-table
           ref="multipleTable"
@@ -89,8 +89,8 @@
                 更多<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click="handleDetail(scope.row)">详情</el-dropdown-item>
-                <el-dropdown-item @click="deleteDoc(scope.row)">删除</el-dropdown-item>
+                <el-dropdown-item @click.native="handleDetail(scope.row)">详情</el-dropdown-item>
+                <el-dropdown-item @click.native="deleteDoc(scope.row)">删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
@@ -104,7 +104,7 @@
  * author:wastelands
  * Date:2020-01-31 23:57
  */
-import {getAllDocs, postDocs} from "../../../api/annotation";
+import {deleteDoc, getAllDocs, paragraphProcess, postDocs, publishTask, updateDoc} from "../../../api/annotation";
 
 export default {
     name: "index",
@@ -168,17 +168,36 @@ export default {
             this.multipleSelection = val;
         },
         //查看详情
-        handleDetail(index, row) {
-            this.$alert(index.content, '详情', {
+        handleDetail(row) {
+            console.log(row)
+            this.$alert(row.content, '详情', {
                 confirmButtonText: '确定',
             });
-            console.log(index, row)
+            // console.log(index.content)
         },
         //发布
-        handlePublish() {
+        handlePublish(row) {
+            console.log(row)
+            publishTask(row).then(res => {
+                console.log(res);
+            });
+            paragraphProcess(row).then(res=>{
+                if (res.data==true){
+                    this.$notify({
+                        title: '成功',
+                        message: '词性分析成功',
+                        type: 'success',
+                        duration: 2000
+                    })
+                }
+            })
         },
         //删除
-        deleteDoc() {
+        deleteDoc(row) {
+            console.log(row);
+            deleteDoc(row).then(res => {
+                console.log(res)
+            })
         },
         handleClose(done) {
             this.$confirm('确认关闭？')

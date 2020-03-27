@@ -18,3 +18,41 @@ export function postDocs(docs) {
         data: docs
     })
 }
+export function deleteDoc(doc) {
+    return fetch({
+        url:"http://localhost:8848/doc/delDoc",
+        method:"delete",
+        data:doc
+    })
+}
+export function updateDoc(doc) {
+    return fetch({
+        url:"http://localhost:8848/doc/updateDoc",
+        method:"put",
+        data:doc
+    })
+}
+
+export function findTasks() {
+    return fetch({
+        url:"http://localhost:8848/doc/findTask",
+        method:"get"
+    })
+}
+
+export function publishTask(task) {
+    return fetch({
+        url:"http://localhost:8848/doc/publishTask",
+        method:"put",
+        data:task
+    })
+}
+
+//词性分析接口
+export function paragraphProcess(doc) {
+    return fetch({
+        url:"http://localhost:8848/doc/segmentWord",
+        method:"put",
+        data:doc
+    })
+}

@@ -254,6 +254,27 @@ export default[
             name:"标注任务",
             component:()=>import("../components/textAnnotation/annotationTask/index.vue"),
         },
+        {
+            path:"/myAnnotation",
+            name:"我的标注",
+            component:()=>import("../components/textAnnotation/myAnnotation/index.vue"),
+        },
+        {
+            path:"/annotationInitialReview",
+            name:"标注初审",
+            component:()=>import("../components/textAnnotation/annotationInitialReview/index.vue"),
+        },
+        {
+            path:"/annotationFinalReview",
+            name:"标注终审",
+            component:()=>import("../components/textAnnotation/annotationFinalReview/index.vue"),
+        },
+        {
+            path:"/help",
+            name:"帮助",
+            component:()=>import("../components/textAnnotation/help/index.vue"),
+        },
+
         //文本分析
         {
             path: 'analysis_word',

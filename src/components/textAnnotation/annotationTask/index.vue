@@ -8,7 +8,7 @@
         <el-input v-model="doc_id" placeholder="档案编号"></el-input>
       </el-col>
       <el-col :span="5"><!--任务类型-->
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="value_task_type" placeholder="标注类型">
           <el-option
               v-for="item in task_types"
               :key="item.value"
@@ -18,7 +18,7 @@
         </el-select>
       </el-col>
       <el-col :span="5"><!--任务状态-->
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="value_status" placeholder="标注阶段">
           <el-option
               v-for="item in status"
               :key="item.value"
@@ -41,16 +41,15 @@
     <el-row style="margin-top: 40px;margin-left: 50px">
       <el-table
           ref="multipleTable"
-          :data="docsData"
+          :data="taskData"
           tooltip-effect="dark"
-          style="width: 100%"
-          @selection-change="handleSelectionChange">
+          style="width: 100%">
         <el-table-column
             type="selection"
             width="55">
         </el-table-column>
         <el-table-column
-            prop="doc_id"
+            prop="task_id"
             label="任务号"
             width="120">
           <!--<template slot-scope="scope">{{ scope.row.date }}</template>-->
@@ -84,7 +83,7 @@
             label="操作"
             show-overflow-tooltip>
           <template slot-scope="scope">
-            <el-button @click="handleDetail(scope.row)" type="text" size="small">详情</el-button>
+            <el-button @click.native="handleDetail(scope.row)" type="text" size="small">详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -92,54 +91,60 @@
   </div>
 </template>
 
-<script>
-    /**
-     * author:wastelands
-     * Date:2020-02-01 02:35
-     */
-    export default {
+<script>/**
+ * author:wastelands
+ * Date:2020-02-01 02:35
+ */
+import {findTasks} from "../../../api/annotation";
+
+export default {
         name: "index",
+        created(){
+             this.getTask();
+        },
+    // {
+    //   this.getTask();
+    // },
+        mounted(){
+            this.getTask();
+        },
         data(){
             return{
                 task_id:"",
                 doc_id:"",
-                docsData: [{}],
+                taskData: [{}],
+                value_status:"",
+                value_task_type:"",
                 status:[{
                     value: '选项1',
-                    label: '黄金糕'
+                    label: '待初审'
                 }, {
                     value: '选项2',
-                    label: '双皮奶'
+                    label: '待终审'
                 }, {
                     value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
+                    label: '待标注'
                 }],
                 task_types:[{
                     value: '选项1',
-                    label: '黄金糕'
+                    label: '词性标注'
                 }, {
                     value: '选项2',
-                    label: '双皮奶'
+                    label: '中文分词'
                 }, {
                     value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
+                    label: '专业术语'
                 }],
                 keyword:"",
             }
         },
         methods:{
+            getTask(){
+                findTasks().then((res)=>{
+                    this.taskData=res.data;
+                    console.log(this.taskData);
+                })
+            },
             handleSearch(){
 
             },
@@ -151,6 +156,17 @@
             },
             handleAnnotation(){
 
+            },
+            //查看详情
+            handleDetail(row) {
+                let resultWord="";
+                for(let i=0;i<row.word.length;i++){
+                    resultWord+=(row.word[i]+' &nbsp;&nbsp;&nbsp;&nbsp; ');
+                }
+                this.$alert(resultWord, '词性标注结果', {
+                    confirmButtonText: '确定',
+                    dangerouslyUseHTMLString:true
+                });
             },
         }
     }
