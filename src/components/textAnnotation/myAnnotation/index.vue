@@ -57,19 +57,13 @@
             width="55">
         </el-table-column>
         <el-table-column
-            prop="doc_id"
-            label="任务号"
-            width="120">
-          <!--<template slot-scope="scope">{{ scope.row.date }}</template>-->
-        </el-table-column>
-        <el-table-column
             prop="name"
-            label="文档名称"
+            label="档案名称"
             width="120">
         </el-table-column>
         <el-table-column
-            prop="update_time"
-            label="上传时间"
+            prop="annotation_type"
+            label="标注任务类型"
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
@@ -78,10 +72,21 @@
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-            prop="annotation_type"
-            label="标注类型"
+            prop="status"
+            label="状态"
             show-overflow-tooltip>
         </el-table-column>
+        <el-table-column
+            prop="update_time"
+            label="更新时间"
+            show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+            prop="created_time"
+            label="创建时间"
+            show-overflow-tooltip>
+        </el-table-column>
+
         <el-table-column
             label="操作"
             show-overflow-tooltip>

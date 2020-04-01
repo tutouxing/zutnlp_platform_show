@@ -56,27 +56,27 @@
         </el-table-column>
         <el-table-column
             prop="name"
-            label="文档名称"
+            label="档案名称"
             width="120">
         </el-table-column>
         <el-table-column
-            prop="update_time"
-            label="上传时间"
-            show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column
-            prop="phrase"
-            label="阶段"
-            show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column
             prop="annotation_type"
-            label="标注类型"
+            label="任务类型"
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-            label="标注者"
+            prop="statuse"
+            label="状态"
+            show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+            label="发布者"
             prop="annotator"
+            show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+            prop="created_time"
+            label="发布时间"
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column

@@ -49,10 +49,20 @@ export function publishTask(task) {
 }
 
 //词性分析接口
-export function paragraphProcess(doc) {
+export function paragraphProcess(doc,annotation_type) {
     return fetch({
         url:"http://localhost:8848/doc/segmentWord",
-        method:"put",
-        data:doc
+        method:"post",
+        data:doc,
+        params:annotation_type
+    })
+}
+
+export function recallPublish(doc,annotation_type) {
+    return fetch({
+        url:"http://localhost:8848/doc/cancelPublishTask",
+        method:"post",
+        data:doc,
+        params: annotation_type
     })
 }
