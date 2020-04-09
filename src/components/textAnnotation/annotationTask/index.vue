@@ -55,7 +55,7 @@
           <!--<template slot-scope="scope">{{ scope.row.date }}</template>-->
         </el-table-column>
         <el-table-column
-            prop="name"
+            prop="task_name"
             label="档案名称"
             width="120">
         </el-table-column>
@@ -65,7 +65,7 @@
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-            prop="statuse"
+            prop="status"
             label="状态"
             show-overflow-tooltip>
         </el-table-column>
@@ -83,7 +83,32 @@
             label="操作"
             show-overflow-tooltip>
           <template slot-scope="scope">
-            <el-button @click.native="handleDetail(scope.row)" type="text" size="small">详情</el-button>
+            <el-button @click="goAnnotate(scope.row)" type="text" size="small">标注</el-button>
+            <el-dropdown>
+              <span class="el-dropdown-link" style="color: cornflowerblue">
+                更多<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item @click.native="displayScore(scope.row)">实绩</el-dropdown-item>
+                <el-dialog title="标注任务实绩" :visible.sync="dialogTableVisibleAnnotate">
+                  <el-table :data="annotateData">
+                    <el-table-column property="task_id" label="#" width="150"></el-table-column>
+                    <el-table-column property="annotation_type" label="标注类型" width="200"></el-table-column>
+                    <el-table-column property="status" label="状态" width="200"></el-table-column>
+                    <el-table-column property="phrase" label="阶段" width="200"></el-table-column>
+                    <el-table-column property="annotator" label="标注者" width="200"></el-table-column>
+                    <el-table-column property="update_time" label="最后标注时间" width="200"></el-table-column>
+                    <el-table-column label="操作">
+                      <template slot-scope="scope">
+                        <el-button @click="this.$router.push({path:'/annotate_detail'})" type="text" size="small">详情</el-button>
+                        <!--<el-button @click="changeStatus(scope.row)" type="text" size="small" v-if="scope1.row.operation=='撤回'">撤回</el-button>-->
+                      </template>
+                    </el-table-column>
+                  </el-table>
+                </el-dialog>
+                <el-dropdown-item @click.native="handleConnect(scope.row)">合并</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
@@ -102,9 +127,6 @@ export default {
         created(){
              this.getTask();
         },
-    // {
-    //   this.getTask();
-    // },
         mounted(){
             this.getTask();
         },
@@ -115,6 +137,7 @@ export default {
                 taskData: [{}],
                 value_status:"",
                 value_task_type:"",
+                dialogTableVisibleAnnotate:false,
                 status:[{
                     value: '选项1',
                     label: '待初审'
@@ -136,6 +159,7 @@ export default {
                     label: '专业术语'
                 }],
                 keyword:"",
+                annotateData:[],
             }
         },
         methods:{
@@ -154,20 +178,26 @@ export default {
             handleMarkedStatus(){
 
             },
-            handleAnnotation(){
-
+            goAnnotate(row){
+                this.bus.$emit('task',row);
+                this.$router.push("/annotate_detail")
             },
-            //查看详情
-            handleDetail(row) {
+            //展示实绩
+            displayScore(row) {
+                this.dialogTableVisibleAnnotate=true;
                 let resultWord="";
                 for(let i=0;i<row.word.length;i++){
                     resultWord+=(row.word[i]+' &nbsp;&nbsp;&nbsp;&nbsp; ');
                 }
-                this.$alert(resultWord, '词性标注结果', {
-                    confirmButtonText: '确定',
-                    dangerouslyUseHTMLString:true
-                });
+                // this.$alert(resultWord, '词性标注结果', {
+                //     confirmButtonText: '确定',
+                //     dangerouslyUseHTMLString:true
+                // });
             },
+            //合并
+            handleConnect(row){
+
+            }
         }
     }
 </script>

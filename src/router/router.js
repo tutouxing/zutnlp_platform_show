@@ -255,6 +255,11 @@ export default[
             component:()=>import("../components/textAnnotation/annotationTask/index.vue"),
         },
         {
+            path:"/annotate_detail",
+            name:"文本标注",
+            component:()=>import("../components/textAnnotation/annotationTask/annotateDetail.vue"),
+        },
+        {
             path:"/myAnnotation",
             name:"我的标注",
             component:()=>import("../components/textAnnotation/myAnnotation/index.vue"),

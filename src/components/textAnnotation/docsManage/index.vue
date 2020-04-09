@@ -75,9 +75,13 @@
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-            prop="annotator"
-            label="发布者"
+            prop="done"
+            label="已完成"
             show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+            prop="publisher"
+            label="发布者">
         </el-table-column>
         <el-table-column
             prop="created_time"
@@ -85,33 +89,43 @@
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-            prop="done"
-            label="已完成"
-            show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column
             label="操作"
             show-overflow-tooltip>
           <template slot-scope="scope">
             <el-button @click="handlePublish(scope.row)" type="text" size="small">发布</el-button>
+            <!--发布任务对话框begin-->
             <el-dialog title="发布标注任务" :visible.sync="dialogTableVisiblePublish">
               <el-table :data="gridData">
                 <el-table-column property="annotation_type" label="标注类型" width="150"></el-table-column>
                 <el-table-column property="status" label="状态" width="200"></el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
-                    <el-button @click="changeStatus(scope.row)" type="text" size="small">{{scope.row.operation}}</el-button>
+                    <el-button @click="changeStatus(scope.row)" type="text" size="small">{{scope.row.opera}}</el-button>
                     <!--<el-button @click="changeStatus(scope.row)" type="text" size="small" v-if="scope1.row.operation=='撤回'">撤回</el-button>-->
                   </template>
                 </el-table-column>
               </el-table>
             </el-dialog>
+            <!--发布任务对话框end-->
             <el-dropdown>
-              <span class="el-dropdown-link">
+              <span class="el-dropdown-link" style="color: cornflowerblue">
                 更多<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item @click.native="handleDetail(scope.row)">详情</el-dropdown-item>
+                <!--详情对话框-->
+                <el-dialog
+                    title="文档详情"
+                    :visible.sync="docDetailVisible"
+                    :append-to-body="true">
+                  <div v-html="docContent"></div>
+                  <!--<el-input
+                      type="text"
+                      :rows="15"
+                      :disabled="true"
+                      v-model="docContent">
+                  </el-input>-->
+                </el-dialog>
                 <el-dropdown-item @click.native="deleteDoc(scope.row)">删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -135,6 +149,7 @@ import {
     recallPublish,
     updateDoc
 } from "../../../api/annotation";
+import * as Vue from "vue";
 
 export default {
     name: "index",
@@ -146,19 +161,20 @@ export default {
             docsData: [{}],
             multipleSelection: [],
             dialogVisible: false,
-            dialogTableVisiblePublish:false,
-            publishDialog:false,//发布对话框
+            dialogTableVisiblePublish: false,//发布对话框
+            docDetailVisible:false,//文档详情对话框
+            docContent:"",
             //发布对话框中的表单数据
             gridData: [{
                 annotation_type: '中文分词',
                 status: '',
-                operation: ''
+                opera: ''
             }, {
                 annotation_type: '词性标注',
                 status: '',
-                operation: ''
+                opera: ''
             }],
-            doc:null,//准备发布的id
+            doc: null,//准备发布的id
         }
     },
     created() {
@@ -169,7 +185,6 @@ export default {
         getAllDocs() {
             getAllDocs().then(response => {
                 this.docsData = response.data;//后台响应的数据，返回给前台的列表
-                console.log(this.docsData)
             })
         },
         //文件上传
@@ -186,7 +201,7 @@ export default {
             return this.$confirm(`确定移除 ${ file.name }？`);
         },
         handleProgress(event, file, fileList) {
-            postDocs(fileList).then(() => {
+            postDocs(fileList).then((res) => {
                 this.getAllDocs();
                 this.$notify({
                     title: '成功',
@@ -194,6 +209,8 @@ export default {
                     type: 'success',
                     duration: 2000
                 })
+            }, err => {
+                this.getAllDocs();
             })
         },
         //表格方法
@@ -211,60 +228,63 @@ export default {
         },
         //查看详情
         handleDetail(row) {
-            console.log(row)
-            this.$alert(row.content, '详情', {
-                confirmButtonText: '确定',
+            this.docContent=row.content.replace(/\n/g,"<br/>");
+            this.$nextTick(()=>{
             });
-            // console.log(index.content)
+            this.docDetailVisible=true;
         },
         //发布
         handlePublish(row) {
-            //显示对话框
-            this.publishDialog=true;
-            this.dialogTableVisiblePublish=true;
             //保存当前选中的文档
-            this.doc=row;
-            if(row.word!=null){
-                this.gridData[0].status='已发布';
-                this.gridData[0].operation='撤回';
-                this.gridData[1].status='已发布';
-                this.gridData[1].operation='撤回';
-            }else {
-                this.gridData[0].status='未发布';
-                this.gridData[0].operation='发布';
-                this.gridData[1].status='未发布';
-                this.gridData[1].operation='发布';
-            }
-            // publishTask(row).then(res => {
-            //     // console.log(res);
-            // });
+            this.doc = row;
+            let tasks = this.doc.tasks;
+            this.$nextTick(() => {
+                for (let i = 0; i < this.gridData.length; i++) {
+                    this.$set(this.gridData[i], 'status', "未发布");
+                    this.$set(this.gridData[i], 'opera', "发布");
+                }
+                if (tasks != null) {
+                    for (let i = 0; i < this.gridData.length; i++) {
+                        for (let j = 0; j < tasks.length; j++) {
+                            if (this.gridData[i].annotation_type === tasks[j].annotation_type) {
+                                this.$set(this.gridData[i], 'status', "已发布");
+                                this.$set(this.gridData[i], 'opera', "撤销");
+                            }
+                        }
+                    }
+                }
+            });
+            //显示对话框
+            this.dialogTableVisiblePublish = true;
 
         },
         //更改发布对话框中的状态
-        changeStatus(row){
-            if(row.annotation_type=='中文分词'){
-                console.log(row.annotation_type)
-                console.log(row.operation)
-                if(row.operation=='发布'){//即本来未发布改为已发布，撤回
-                    paragraphProcess(this.doc,row.annotation_type).then(res=>{
-                        this.getAllDocs();
-                        if (res.data==true){
+        changeStatus(row) {
+            if (row.annotation_type == '中文分词') {
+                if (row.opera == '发布') {//即本来未发布改为已发布，撤回
+                    console.log("changStatus");
+                    console.log(row.annotation_type);
+                    console.log(this.doc.doc_id);
+                    publishTask(row.annotation_type, this.doc.doc_id).then(res => {
+                        if (res.data == true) {
                             this.$notify({
                                 title: '成功',
                                 message: '分词成功',
                                 type: 'success',
                                 duration: 2000
-                            })
-                            this.gridData[0].status='已发布';
-                            this.gridData[0].operation='撤回';
+                            });
+                            this.getAllDocs();
+                            this.$set(this.gridData[0], 'status', '已发布')
+                            this.$set(this.gridData[0], 'opera', '撤回')
+                            // this.$router.push({path:"/annotationTask"});
                         }
                     })
-                }else{//改为未发布，发布
-                    recallPublish(this.doc,row.annotation_type).then(res=>{
+                } else {//改为未发布，发布
+                    recallPublish(row.annotation_type, this.doc.doc_id).then(res => {
                         this.getAllDocs();
-                        this.gridData[0].status='未发布';
-                        this.gridData[0].operation='发布';
-                    },err=>{
+                        this.$set(this.gridData[0], 'status', '未发布')
+                        this.$set(this.gridData[0], 'opera', '发布')
+                    }, err => {
                         console.log(err);
                         this.$notify({
                             title: '失败',
@@ -276,21 +296,21 @@ export default {
 
                 }
 
-            }else if(row.annotation_type=='词性标注'){
-                if (row.operation=='发布'){//同上
-                    paragraphProcess(this.doc,row.annotation_type).then(res=>{
+            } else if (row.annotation_type === '词性标注') {
+                if (row.opera === '发布') {//同上
+                    publishTask(row.annotation_type, this.doc.doc_id).then(res => {
                         this.getAllDocs();
-                        if (res.data==true){
+                        if (res.data == true) {
                             this.$notify({
                                 title: '成功',
                                 message: '词性标注成功',
                                 type: 'success',
                                 duration: 2000
                             });
-                            this.gridData[1].status='已发布';
-                            this.gridData[1].operation='撤回';
+                            this.$set(this.gridData[0], 'status', '已发布')
+                            this.$set(this.gridData[0], 'opera', '撤回')
                         }
-                    },err=>{
+                    }, err => {
                         console.log(err);
                         this.$notify({
                             title: '失败',
@@ -300,11 +320,11 @@ export default {
                         });
                     })
                 } else {
-                    recallPublish(this.doc,row.annotation_type).then(res=>{
+                    recallPublish(row.annotation_type, this.doc.doc_id).then(res => {
                         console.log(res);
-                        this.gridData[1].status='未发布';
-                        this.gridData[1].operation='发布';
-                    },err=>{
+                        this.$set(this.gridData[0], 'status', '未发布')
+                        this.$set(this.gridData[0], 'opera', '发布')
+                    }, err => {
                         console.log(err);
                         this.$notify({
                             title: '失败',
@@ -320,8 +340,8 @@ export default {
         //删除
         deleteDoc(row) {
             console.log(row);
-            deleteDoc(row).then(res => {
-                console.log(res)
+            deleteDoc(row.doc_id).then(res => {
+                this.getAllDocs();
             })
         },
         handleClose(done) {

@@ -15,14 +15,13 @@ export function postDocs(docs) {
     return fetch({
         url: "http://localhost:8848/doc/uploadDoc",
         method: "post",
-        data: docs
+        data: docs,
     })
 }
-export function deleteDoc(doc) {
+export function deleteDoc(id) {
     return fetch({
-        url:"http://localhost:8848/doc/delDoc",
-        method:"delete",
-        data:doc
+        url:"http://localhost:8848/doc/delDoc/"+id,
+        method:"delete"
     })
 }
 export function updateDoc(doc) {
@@ -35,26 +34,25 @@ export function updateDoc(doc) {
 
 export function findTasks() {
     return fetch({
-        url:"http://localhost:8848/doc/findTask",
+        url:"http://localhost:8848/doc/getAllTasks",
         method:"get"
     })
 }
 
-export function publishTask(task) {
+export function publishTask(annotate_type,doc_id) {
     return fetch({
         url:"http://localhost:8848/doc/publishTask",
-        method:"put",
-        data:task
+        method:"post",
+        params:{annotate_type,doc_id}
     })
 }
 
 //词性分析接口
-export function paragraphProcess(doc,annotation_type) {
+export function paragraphProcess(annotation_type,doc_id) {
     return fetch({
         url:"http://localhost:8848/doc/segmentWord",
-        method:"post",
-        data:doc,
-        params:annotation_type
+        method:"put",
+        params:annotation_type,doc_id,
     })
 }
 
