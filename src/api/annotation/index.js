@@ -11,6 +11,14 @@ export function getAllDocs() {
         method: "get",
     });
 }
+
+export function getDocById(doc_id) {
+    return fetch({
+        url:"http://localhost:8848/doc/"+doc_id,
+        method:"get",
+    })
+}
+
 export function postDocs(docs) {
     return fetch({
         url: "http://localhost:8848/doc/uploadDoc",
@@ -56,11 +64,10 @@ export function paragraphProcess(annotation_type,doc_id) {
     })
 }
 
-export function recallPublish(doc,annotation_type) {
+export function recallPublish(doc_id,annotation_type) {
     return fetch({
         url:"http://localhost:8848/doc/cancelPublishTask",
         method:"post",
-        data:doc,
-        params: annotation_type
+        params:doc_id, annotation_type
     })
 }

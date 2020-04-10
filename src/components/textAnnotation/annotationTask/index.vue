@@ -127,9 +127,6 @@ export default {
         created(){
              this.getTask();
         },
-        mounted(){
-            this.getTask();
-        },
         data(){
             return{
                 task_id:"",
@@ -138,6 +135,8 @@ export default {
                 value_status:"",
                 value_task_type:"",
                 dialogTableVisibleAnnotate:false,
+                annotation_type:"",
+                task:{},
                 status:[{
                     value: '选项1',
                     label: '待初审'
@@ -179,7 +178,15 @@ export default {
 
             },
             goAnnotate(row){
-                this.bus.$emit('task',row,row.annotation_type);
+                // destroyed();
+                // this.annotation_type=row.annotation_type;
+                // this.task=row;
+                this.$store.commit("SET_ANNOTATIONTYPE_STATE",row.annotation_type);
+                this.$store.commit("SET_TASK_STATE",row);
+                // console.log(this.$store.state.annotationType);
+                // console.log(this.$store.state.task);
+                // console.log("----")
+                // this.bus.$emit('task',row,row.annotation_type);
                 this.$router.push("/annotate_detail")
             },
             //展示实绩
@@ -198,7 +205,10 @@ export default {
             handleConnect(row){
 
             }
-        }
+        },
+        beforeDestroy(){
+            // this.bus.$emit("task",(this.task,this.annotation_type));
+        },
     }
 </script>
 

@@ -70,7 +70,7 @@
             width="120">
         </el-table-column>
         <el-table-column
-            prop="annotation_type"
+            prop="publish"
             label="已发布"
             show-overflow-tooltip>
         </el-table-column>
@@ -280,10 +280,17 @@ export default {
                         }
                     })
                 } else {//改为未发布，发布
-                    recallPublish(row.annotation_type, this.doc.doc_id).then(res => {
-                        this.getAllDocs();
-                        this.$set(this.gridData[0], 'status', '未发布')
-                        this.$set(this.gridData[0], 'opera', '发布')
+                    console.log(this.doc.doc_id)
+                    console.log(row.annotation_type)
+                    console.log("stop")
+
+                    recallPublish(this.doc.doc_id,row.annotation_type).then(res => {
+                        console.log(res.data)
+                        if(res.data){
+                            this.getAllDocs();
+                            this.$set(this.gridData[0], 'status', '未发布')
+                            this.$set(this.gridData[0], 'opera', '发布')
+                        }
                     }, err => {
                         console.log(err);
                         this.$notify({
@@ -307,8 +314,8 @@ export default {
                                 type: 'success',
                                 duration: 2000
                             });
-                            this.$set(this.gridData[0], 'status', '已发布')
-                            this.$set(this.gridData[0], 'opera', '撤回')
+                            this.$set(this.gridData[1], 'status', '已发布')
+                            this.$set(this.gridData[1], 'opera', '撤回')
                         }
                     }, err => {
                         console.log(err);
@@ -320,10 +327,14 @@ export default {
                         });
                     })
                 } else {
-                    recallPublish(row.annotation_type, this.doc.doc_id).then(res => {
+                    recallPublish(this.doc.doc_id,row.annotation_type).then(res => {
                         console.log(res);
-                        this.$set(this.gridData[0], 'status', '未发布')
-                        this.$set(this.gridData[0], 'opera', '发布')
+                        if (res.data){
+                            this.getAllDocs();
+                            this.$set(this.gridData[1], 'status', '未发布')
+                            this.$set(this.gridData[1], 'opera', '发布')
+                        }
+
                     }, err => {
                         console.log(err);
                         this.$notify({

@@ -142,6 +142,12 @@ const mutations = {
     SET_TODAYCHANNEL_STATE(state,channel){
     state.todayChannel=channel;
   },
+    SET_ANNOTATIONTYPE_STATE(state,annotation_type){
+        state.annotationType=annotation_type;
+    },
+    SET_TASK_STATE(state,task){
+        state.task=task;
+    }
 
 };
 export default mutations;
