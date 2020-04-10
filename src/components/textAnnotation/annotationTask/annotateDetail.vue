@@ -11,12 +11,14 @@
         name: "annotateDetail",
         data(){
             return{
-                task:{}
+                task:{},
+                annotation_type:""
             }
         },
         mounted(){
-            this.bus.$on('task',task=>{
+            this.bus.$on('task',(task,annotation_type)=>{
                 this.task=task;
+                this.annotation_type=annotation_type;
                 console.log(this.task)
             })
         },

@@ -179,7 +179,7 @@ export default {
 
             },
             goAnnotate(row){
-                this.bus.$emit('task',row);
+                this.bus.$emit('task',row,row.annotation_type);
                 this.$router.push("/annotate_detail")
             },
             //展示实绩
