@@ -17,7 +17,7 @@
       <el-col :span="5"><!--阶段-->
         <el-select v-model="value" placeholder="标注阶段">
           <el-option
-              v-for="item in task_types"
+              v-for="item in status"
               :key="item.value"
               :label="item.label"
               :value="item.value">
@@ -48,16 +48,19 @@
     <el-row style="margin-top: 40px;margin-left: 50px">
       <el-table
           ref="multipleTable"
-          :data="docsData"
+          :data="taskData"
           tooltip-effect="dark"
-          style="width: 100%"
-          @selection-change="handleSelectionChange">
+          style="width: 100%">
         <el-table-column
             type="selection"
             width="55">
         </el-table-column>
         <el-table-column
-            prop="name"
+            type="index"
+            width="50">
+        </el-table-column>
+        <el-table-column
+            prop="task_name"
             label="档案名称"
             width="120">
         </el-table-column>
@@ -91,9 +94,9 @@
             label="操作"
             show-overflow-tooltip>
           <template slot-scope="scope">
-            <el-button @click="handleAnnotate(scope.row)" type="text" size="small">标注</el-button>
+            <el-button @click="handleAnnotation(scope.row)" type="text" size="small">标注</el-button>
             <el-dropdown>
-              <span class="el-dropdown-link">
+              <span class="el-dropdown-link" style="color: cornflowerblue">
                 更多<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
@@ -109,18 +112,20 @@
   </div>
 </template>
 
-<script>
-    /**
-     * author:wastelands
-     * Date:2020-02-01 03:32
-     */
-    export default {
+<script>/**
+ * author:wastelands
+ * Date:2020-02-01 03:32
+ */
+import {findTasks} from "../../../api/annotation";
+
+export default {
         name: "index",
         data(){
             return{
                 task_id:"",
                 doc_id:"",
-                docsData: [{}],
+                value:"",
+                taskData: [],
                 status:[{
                     value: '选项1',
                     label: '黄金糕'
@@ -156,7 +161,20 @@
                 keyword:"",
             }
         },
+        mounted(){
+          this.getTasks();
+        },
         methods:{
+            getTasks(){
+                this.taskData=[];
+                findTasks().then((res)=>{
+                    for (let task of res.data){
+                        if (task.annotator===this.$store.state.username){
+                            this.taskData.push(task)
+                        }
+                    }
+                })
+            },
             handleSearch(){
 
             },
@@ -167,6 +185,11 @@
 
             },
             handleAnnotation(){
+                this.$store.commit("SET_ANNOTATIONTYPE_STATE",row.annotation_type);
+                this.$store.commit("SET_TASK_STATE",row);
+                this.$router.push("/annotate_detail")
+            },
+            cancelReview(){
 
             },
         }

@@ -84,6 +84,10 @@
             label="发布者">
         </el-table-column>
         <el-table-column
+            prop="len"
+            label="长度">
+        </el-table-column>
+        <el-table-column
             prop="created_time"
             label="发布时间"
             show-overflow-tooltip>
@@ -119,12 +123,6 @@
                     :visible.sync="docDetailVisible"
                     :append-to-body="true">
                   <div v-html="docContent"></div>
-                  <!--<el-input
-                      type="text"
-                      :rows="15"
-                      :disabled="true"
-                      v-model="docContent">
-                  </el-input>-->
                 </el-dialog>
                 <el-dropdown-item @click.native="deleteDoc(scope.row)">删除</el-dropdown-item>
               </el-dropdown-menu>
@@ -200,8 +198,9 @@ export default {
         beforeRemove(file, fileList) {
             return this.$confirm(`确定移除 ${ file.name }？`);
         },
+        //批量上传
         handleProgress(event, file, fileList) {
-            postDocs(fileList).then((res) => {
+            postDocs(fileList,this.$store.state.username).then((res) => {
                 this.getAllDocs();
                 this.$notify({
                     title: '成功',
@@ -285,8 +284,14 @@ export default {
                     console.log("stop")
 
                     recallPublish(this.doc.doc_id,row.annotation_type).then(res => {
-                        console.log(res.data)
+                        // console.log(res.data)
                         if(res.data){
+                            this.$notify({
+                                title: '成功',
+                                message: '撤销成功',
+                                type: 'success',
+                                duration: 2000
+                            });
                             this.getAllDocs();
                             this.$set(this.gridData[0], 'status', '未发布')
                             this.$set(this.gridData[0], 'opera', '发布')
@@ -328,8 +333,13 @@ export default {
                     })
                 } else {
                     recallPublish(this.doc.doc_id,row.annotation_type).then(res => {
-                        console.log(res);
                         if (res.data){
+                            this.$notify({
+                                title: '成功',
+                                message: '撤销成功',
+                                type: 'success',
+                                duration: 2000
+                            });
                             this.getAllDocs();
                             this.$set(this.gridData[1], 'status', '未发布')
                             this.$set(this.gridData[1], 'opera', '发布')

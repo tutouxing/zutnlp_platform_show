@@ -32,32 +32,26 @@
     <el-row style="margin-top: 40px;margin-left: 50px">
       <el-table
           ref="multipleTable"
-          :data="docsData"
+          :data="taskData"
           tooltip-effect="dark"
-          style="width: 100%"
-          @selection-change="handleSelectionChange">
+          style="width: 100%">
         <el-table-column
             type="selection"
             width="55">
         </el-table-column>
         <el-table-column
-            prop="doc_id"
+            prop="task_id"
             label="任务号"
             width="120">
           <!--<template slot-scope="scope">{{ scope.row.date }}</template>-->
         </el-table-column>
         <el-table-column
-            prop="name"
-            label="文档名称"
+            prop="task_name"
+            label="档案名称"
             width="120">
         </el-table-column>
         <el-table-column
-            prop="status"
-            label="状态"
-            show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column
-            prop="annotator"
+            prop="reviewer"
             label="审核者"
             show-overflow-tooltip>
         </el-table-column>
@@ -73,7 +67,12 @@
         </el-table-column>
         <el-table-column
             prop="annotator"
-            label="审核者"
+            label="标注者"
+            show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+            prop="created_time"
+            label="提交时间"
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column
@@ -82,12 +81,12 @@
           <template slot-scope="scope">
             <el-button @click="handleReview(scope.row)" type="text" size="small">审核</el-button>
             <el-dropdown>
-              <span class="el-dropdown-link">
+              <span class="el-dropdown-link" style="color: cornflowerblue;">
                 更多<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click="handlePass(scope.row)">通过</el-dropdown-item>
-                <el-dropdown-item @click="refuseReview(scope.row)">拒绝</el-dropdown-item>
+                <el-dropdown-item @click.native="handlePass(scope.row)">通过</el-dropdown-item>
+                <el-dropdown-item @click.native="refuseReview(scope.row)">拒绝</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
@@ -97,17 +96,94 @@
   </div>
 </template>
 
-<script>
-    /**
-     * author:wastelands
-     * Date:2020-02-13 04:25
-     */
-    export default {
+<script>/**
+ * author:wastelands
+ * Date:2020-02-13 04:25
+ */
+import {findTasks, passInitial} from "../../../api/annotation";
+
+export default {
         name: "index",
+        data(){
+            return{
+                doc_id:"",
+                task_id:"",
+                value:"",
+                status:[{
+                    value: '选项1',
+                    label: '待初审'
+                }, {
+                    value: '选项2',
+                    label: '待终审'
+                }, {
+                    value: '选项3',
+                    label: '待标注'
+                }],
+                task_types:[{
+                    value: '选项1',
+                    label: '词性标注'
+                }, {
+                    value: '选项2',
+                    label: '中文分词'
+                }, {
+                    value: '选项3',
+                    label: '专业术语'
+                }],
+                taskData:[],
+            }
+        },
+        mounted(){
+            this.getTasks()
+        },
         methods:{
-            refuseReview(row){},
-            handleReview(){},
-            handlePass(){},
+            getTasks(){
+                this.taskData=[];
+                findTasks().then((res)=>{
+                    for (let task of res.data){
+                        if (task.phrase==="一标"){
+                            this.taskData.push(task)
+                        }
+                    }
+                    console.log(this.taskData)
+                })
+            },
+            refuseReview(row){
+                this.handleReview(row)
+            },
+            handleReview(row){
+                this.$store.commit("SET_ANNOTATIONTYPE_STATE",row.annotation_type);
+                this.$store.commit("SET_TASK_STATE",row);
+                this.$router.push("/annotate_detail")
+            },
+            handlePass(row){
+                passInitial(row.doc_id,row.task_id).then(res=>{
+                    if (res.data===true){
+                        this.$notify({
+                            title: '成功',
+                            message: '保存成功',
+                            type: 'success',
+                            duration: 2000
+                        });
+                    } else {
+                        this.$notify({
+                            title: '失败',
+                            message: '保存失败',
+                            type: 'failure',
+                            duration: 2000
+                        });
+                    }
+                    this.getTasks();
+                },err=>{
+                    this.$notify({
+                        title: '失败',
+                        message: '保存失败',
+                        type: 'failure',
+                        duration: 2000
+                    });
+                })
+            },
+            handleSearch(){},
+            handleReset(){},
         },
     }
 </script>

@@ -19,11 +19,12 @@ export function getDocById(doc_id) {
     })
 }
 
-export function postDocs(docs) {
+export function postDocs(docs,user) {
     return fetch({
         url: "http://localhost:8848/doc/uploadDoc",
         method: "post",
         data: docs,
+        params:user
     })
 }
 export function deleteDoc(id) {
@@ -68,6 +69,40 @@ export function recallPublish(doc_id,annotation_type) {
     return fetch({
         url:"http://localhost:8848/doc/cancelPublishTask",
         method:"post",
-        params:doc_id, annotation_type
+        params:{doc_id, annotation_type}
     })
 }
+
+export function reAnnotate(str,annotation_type) {
+    return fetch({
+        url:"http://localhost:8848/doc/reAnnotate",
+        method:"post",
+        params:{str,annotation_type}
+    })
+}
+
+export function saveReAnnotateByUser(user,data,doc_id,task_id) {
+    return fetch({
+        url:"http://localhost:8848/doc/saveReAnnotateByUser",
+        method:"post",
+        params:{user,doc_id,task_id},
+        data:data
+    })
+}
+
+export function passInitial(doc_id,task_id) {
+    return fetch({
+        url:"http://localhost:8848/doc/passInitialReview",
+        method:"post",
+        params:{doc_id,task_id},
+    })
+}
+
+export function passFinal(doc_id,task_id) {
+    return fetch({
+        url:"http://localhost:8848/doc/passFinalReview",
+        method:"post",
+        params:{doc_id,task_id},
+    })
+}
+

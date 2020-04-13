@@ -90,18 +90,20 @@
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item @click.native="displayScore(scope.row)">实绩</el-dropdown-item>
-                <el-dialog title="标注任务实绩" :visible.sync="dialogTableVisibleAnnotate">
+                <el-dialog title="标注任务实绩"
+                           :visible.sync="dialogTableVisibleAnnotate"
+                           :append-to-body="true"
+                           :before-close="handleClose">
                   <el-table :data="annotateData">
                     <el-table-column property="task_id" label="#" width="150"></el-table-column>
-                    <el-table-column property="annotation_type" label="标注类型" width="200"></el-table-column>
-                    <el-table-column property="status" label="状态" width="200"></el-table-column>
-                    <el-table-column property="phrase" label="阶段" width="200"></el-table-column>
-                    <el-table-column property="annotator" label="标注者" width="200"></el-table-column>
-                    <el-table-column property="update_time" label="最后标注时间" width="200"></el-table-column>
-                    <el-table-column label="操作">
+                    <el-table-column property="annotation_type" label="标注类型" width="250"></el-table-column>
+                    <el-table-column property="status" label="状态" width="150"></el-table-column>
+                    <el-table-column property="phrase" label="阶段" width="150"></el-table-column>
+                    <el-table-column property="annotator" label="标注者" width="150"></el-table-column>
+                    <el-table-column property="update_time" label="最后标注时间" width="150"></el-table-column>
+                    <el-table-column label="操作" fixed="right">
                       <template slot-scope="scope">
-                        <el-button @click="this.$router.push({path:'/annotate_detail'})" type="text" size="small">详情</el-button>
-                        <!--<el-button @click="changeStatus(scope.row)" type="text" size="small" v-if="scope1.row.operation=='撤回'">撤回</el-button>-->
+                        <el-button @click="goAnnotate(scope.row)" type="text" size="small">详情</el-button>
                       </template>
                     </el-table-column>
                   </el-table>
@@ -120,7 +122,7 @@
  * author:wastelands
  * Date:2020-02-01 02:35
  */
-import {findTasks} from "../../../api/annotation";
+import {findTasks, getDocById} from "../../../api/annotation";
 
 export default {
         name: "index",
@@ -131,7 +133,7 @@ export default {
             return{
                 task_id:"",
                 doc_id:"",
-                taskData: [{}],
+                taskData: [],
                 value_status:"",
                 value_task_type:"",
                 dialogTableVisibleAnnotate:false,
@@ -165,8 +167,11 @@ export default {
             getTask(){
                 findTasks().then((res)=>{
                     this.taskData=res.data;
-                    console.log(this.taskData);
                 })
+            },
+            handleClose(done){
+              this.annotateData=[];
+              done();
             },
             handleSearch(){
 
@@ -178,36 +183,33 @@ export default {
 
             },
             goAnnotate(row){
-                // destroyed();
-                // this.annotation_type=row.annotation_type;
-                // this.task=row;
                 this.$store.commit("SET_ANNOTATIONTYPE_STATE",row.annotation_type);
                 this.$store.commit("SET_TASK_STATE",row);
-                // console.log(this.$store.state.annotationType);
-                // console.log(this.$store.state.task);
-                // console.log("----")
-                // this.bus.$emit('task',row,row.annotation_type);
                 this.$router.push("/annotate_detail")
             },
             //展示实绩
             displayScore(row) {
                 this.dialogTableVisibleAnnotate=true;
-                let resultWord="";
-                for(let i=0;i<row.word.length;i++){
-                    resultWord+=(row.word[i]+' &nbsp;&nbsp;&nbsp;&nbsp; ');
-                }
-                // this.$alert(resultWord, '词性标注结果', {
-                //     confirmButtonText: '确定',
-                //     dangerouslyUseHTMLString:true
-                // });
+                this.doc_id=row.doc_id;
+                    getDocById(this.doc_id).then(res=>{
+                        for (let task of res.data.tasks){
+                            console.log(task.annotation_type);
+                            console.log(row.annotation_type);
+                            if (task.annotation_type===row.annotation_type){
+                                this.annotateData.push(task);
+                            }
+                        }
+                        console.log(this.annotateData)
+
+                    },err=>{
+                        console.log(err)
+                    });
+
             },
             //合并
             handleConnect(row){
 
             }
-        },
-        beforeDestroy(){
-            // this.bus.$emit("task",(this.task,this.annotation_type));
         },
     }
 </script>
