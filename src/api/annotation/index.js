@@ -4,6 +4,7 @@
  * introduce:
  */
 import fetch from '../../utils/fetch'
+import axios from 'axios'
 
 export function getAllDocs() {
     return fetch({
@@ -20,11 +21,21 @@ export function getDocById(doc_id) {
 }
 
 export function postDocs(docs,user) {
+    /*return axios.create({
+        url:"",
+        method:"post",
+        // data: docs,
+        params:{docs,user}
+    })*/
     return fetch({
         url: "http://localhost:8848/doc/uploadDoc",
         method: "post",
-        data: docs,
-        params:user
+        params:user,
+        data:docs
+        /*headers:{
+            "Content-Type":"multipart/form-data"
+        },*/
+
     })
 }
 export function deleteDoc(id) {
@@ -48,11 +59,11 @@ export function findTasks() {
     })
 }
 
-export function publishTask(annotate_type,doc_id) {
+export function publishTask(annotate_type,doc_id,username) {
     return fetch({
         url:"http://localhost:8848/doc/publishTask",
         method:"post",
-        params:{annotate_type,doc_id}
+        params:{annotate_type,doc_id,username}
     })
 }
 
@@ -81,11 +92,11 @@ export function reAnnotate(str,annotation_type) {
     })
 }
 
-export function saveReAnnotateByUser(user,data,doc_id,task_id) {
+export function saveReAnnotateByUser(data,annotator,doc_id,task_id) {
     return fetch({
         url:"http://localhost:8848/doc/saveReAnnotateByUser",
         method:"post",
-        params:{user,doc_id,task_id},
+        params:{annotator,doc_id,task_id},
         data:data
     })
 }

@@ -4,7 +4,7 @@ import {getToken} from "./auth";
 const service = axios.create({
     baseURL: 'http://127.0.0.1:8848',
     // timeout:500,
-    headers: {'Accept':'application/json'}
+    // headers: {'Accept':'application/json'}
 })
 //http request拦截器
 // service.interceptors.request.use(config => {

@@ -71,7 +71,7 @@
         </el-table-column>
         <el-table-column
             label="发布者"
-            prop="annotator"
+            prop="publisher"
             show-overflow-tooltip>
         </el-table-column>
         <el-table-column

@@ -33,6 +33,7 @@
               :on-progress="handleProgress"
               multiple
               :limit="3"
+              :data="{user:this.$store.state.username}"
               :on-exceed="handleExceed"
               :file-list="fileList">
             <el-button size="small" type="primary">添加</el-button>
@@ -200,14 +201,39 @@ export default {
         },
         //批量上传
         handleProgress(event, file, fileList) {
-            postDocs(fileList,this.$store.state.username).then((res) => {
+            console.log(this.$store.state.username);
+            let username=this.$store.state.username;
+            /*this.$axios({
+                url:"http://localhost:8848/doc/uploadDoc",
+                method:"post",
+                // data: {fileList,username},
+                params:{fileList,username},
+                contentType: false,
+            }).then(res=>{
+                if ((res.data===true)){
+                    this.$notify({
+                        title: '成功',
+                        message: '上传成功',
+                        type: 'success',
+                        duration: 2000
+                    });
+                    this.getAllDocs();
+                }
+            },err=>{
+                console.log(err);
                 this.getAllDocs();
-                this.$notify({
-                    title: '成功',
-                    message: '上传成功',
-                    type: 'success',
-                    duration: 2000
-                })
+            });*/
+            postDocs(fileList,this.$store.state.username).then((res) => {
+                if (res.data===true){
+                    this.getAllDocs();
+                    this.$notify({
+                        title: '成功',
+                        message: '上传成功',
+                        type: 'success',
+                        duration: 2000
+                    })
+                }
+
             }, err => {
                 this.getAllDocs();
             })
@@ -245,7 +271,8 @@ export default {
                 if (tasks != null) {
                     for (let i = 0; i < this.gridData.length; i++) {
                         for (let j = 0; j < tasks.length; j++) {
-                            if (this.gridData[i].annotation_type === tasks[j].annotation_type) {
+                            if (this.gridData[i].annotation_type === tasks[j].annotation_type &&
+                                tasks[j].publisher===this.$store.state.username) {
                                 this.$set(this.gridData[i], 'status', "已发布");
                                 this.$set(this.gridData[i], 'opera', "撤销");
                             }
@@ -264,7 +291,7 @@ export default {
                     console.log("changStatus");
                     console.log(row.annotation_type);
                     console.log(this.doc.doc_id);
-                    publishTask(row.annotation_type, this.doc.doc_id).then(res => {
+                    publishTask(row.annotation_type, this.doc.doc_id,this.$store.state.username).then(res => {
                         if (res.data == true) {
                             this.$notify({
                                 title: '成功',
@@ -310,7 +337,7 @@ export default {
 
             } else if (row.annotation_type === '词性标注') {
                 if (row.opera === '发布') {//同上
-                    publishTask(row.annotation_type, this.doc.doc_id).then(res => {
+                    publishTask(row.annotation_type, this.doc.doc_id,this.$store.state.username).then(res => {
                         this.getAllDocs();
                         if (res.data == true) {
                             this.$notify({

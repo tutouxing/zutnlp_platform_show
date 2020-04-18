@@ -72,7 +72,6 @@ export default {
             this.task=this.$store.state.task;
             this.annotation_type=this.$store.state.annotationType;
             if(this.annotation_type==="中文分词"){
-                console.log(this.task)
                 for (let words of this.task.segmentWord){
                     let s="#";
                     for (let word of words){
@@ -86,7 +85,7 @@ export default {
                 for (let words of this.task.propertyWord){
                     let s="#";
                     for (let word of words){
-                        s+=(word+"#");//(word.replace(/\//g,"") +"#");
+                        s+=(word.replace(/\//g,"") +"#");
                     }
                     if (s.length===2||s.length===1){
                         continue;
@@ -158,8 +157,8 @@ export default {
             save(){
                 let reqData;
                 if (this.annotation_type==="中文分词")reqData=this.newSegmentWord;
-                else if (this.annotation_type==="词性标注")reqData=this.newPropertyWord
-                saveReAnnotateByUser(this.$store.state.username,reqData,this.task.doc_id,this.task.task_id).then(()=>{
+                else if (this.annotation_type==="词性标注")reqData=this.newPropertyWord;
+                saveReAnnotateByUser(reqData,this.$store.state.username,this.task.doc_id,this.task.task_id).then(()=>{
                     this.$notify({
                         title: '成功',
                         message: '保存成功',
