@@ -7,7 +7,7 @@
           <div v-html="content" style="font-size: 25px;text-align: left"></div>
         </el-tab-pane>
         <el-tab-pane>
-          <span slot="label" v-if="annotation_type!=''" style="font-size: 25px;height: 40px"><i class="el-icon-date"></i> {{this.annotation_type}}</span>
+          <span slot="label" v-if="annotation_type!==''" style="font-size: 25px;height: 40px"><i class="el-icon-date"></i> {{this.annotation_type}}</span>
           <div v-if="annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of newSegmentWord" ><p @click="getSelect($event,word,index)"> {{word}} </p><br/></div>
           <div v-if="annotation_type==='词性标注'" style="font-size: 25px;text-align: left" v-for="(word,index) of newPropertyWord"><p @click="getSelect($event,word,index)">{{word}}</p><br/></div>
         </el-tab-pane>
@@ -34,7 +34,55 @@
         </el-tab-pane>
         <el-tab-pane>
           <span slot="label" style="font-size: 25px;height: 40px"><i class="el-icon-date"></i> 标注对比</span>
-          标注对比
+          <el-col :span="10">
+            <el-row>
+              <el-select
+                  v-model="record1"
+                  value-key="annotator"
+                  placeholder="请选择用户标注"
+                  clearable
+                  @change="getSelectedLeft">
+                <el-option
+                    v-for="(item,index) in annotateRecord"
+                    :key="index"
+                    :label="item.annotator"
+                    :value="item">
+                  <span style="float: left">{{ item.annotator }}</span>
+                </el-option>
+              </el-select>
+            </el-row>
+            <el-row>
+              <div v-if="record1.annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of record1.newsegmentWord" >
+                <p> {{word}} </p><br/>
+                <!--<p v-if="record1.newsegmentWord[index].length!==record2.newsegmentWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>-->
+              </div>
+            </el-row>
+          </el-col>
+          <el-col :span="2"/>
+          <el-col :span="10">
+            <el-row>
+              <el-select
+                  v-model="record2"
+                  value-key="annotator"
+                  placeholder="请选择用户标注"
+                  @change="getSelectedRight">
+                <el-option
+                    v-for="(item,index) in annotateRecord"
+                    :key="index"
+                    :label="item.annotator"
+                    :value="item">
+                  <span style="float: left">{{ item.annotator }}</span>
+                </el-option>
+              </el-select>
+            </el-row>
+            <el-row>
+              <div v-if="record2.annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newsegmentWord" >
+                <!--<p>{{word}}</p><br/>-->
+                <p v-if="record1.newsegmentWord[index].length===record2.newsegmentWord[index].length"> {{word}} </p>
+                <p v-if="record1.newsegmentWord[index].length!==record2.newsegmentWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
+              </div>
+            </el-row>
+          </el-col>
         </el-tab-pane>
       </el-tabs>
     </el-row>
@@ -51,7 +99,7 @@
  * author:wastelands
  * Date:2020-04-07 02:28
  */
-import {getDocById, saveReAnnotateByUser, saveReannotateByUser} from "../../../api/annotation";
+import {getDocById, saveReAnnotateByUser, } from "../../../api/annotation";
 
 export default {
         name: "annotateDetail",
@@ -66,6 +114,8 @@ export default {
                 newSegmentWord:[],
                 propertyWord:[],
                 newPropertyWord:[],
+                record1:{},
+                record2:{},
             }
         },
         mounted(){
@@ -175,6 +225,66 @@ export default {
                     console.log(err)
                 })
             },
+            getSelectedLeft(){
+                console.log(this.record1);
+                if(this.record1.annotation_type==="中文分词"){
+                    let segWord=[];
+                    for (let words of this.record1.segmentWord){
+                        let s="#";
+                        for (let word of words){
+                            if (word.length===0)continue;
+                            s+=word+"#";
+                        }
+                        // if (s.length===2||s.length===1)continue;
+                        segWord.push(s);
+                    }
+                    this.$set(this.record1,"newsegmentWord",segWord);
+                    // this.record1.segmentWord=segWord;
+                }else if(this.record1.annotation_type==="词性标注"){
+                    let proWord=[];
+                    for (let words of this.record1.propertyWord){
+                        let s="#";
+                        for (let word of words){
+                            if (word.length===0)continue;
+                            s+=(word.replace(/\//g,"") +"#");
+                        }
+                        proWord.push(s);
+                    }
+                    // this.record1.propertyWord=proWord;
+                    this.$set(this.record1,"newpropertyWord",proWord);
+                }
+            },
+            getSelectedRight(){
+                console.log(this.record2)
+                if(this.record2.annotation_type==="中文分词"){
+                    let segWord=[];
+                    for (let words of this.record2.segmentWord){
+                        let s="#";
+                        for (let word of words){
+                            if (word.length===0)continue;
+                            s+=word+"#";
+                        }
+                        // if (s.length===2||s.length===1)continue;
+                        segWord.push(s);
+                    }
+                    // this.record1.segmentWord=segWord;
+                    this.$set(this.record2,"newsegmentWord",segWord);
+                }else if(this.record2.annotation_type==="词性标注"){
+                    let proWord=[];
+                    for (let words of this.record2.propertyWord){
+                        let s="#";
+                        for (let word of words){
+                            s+=(word.replace(/\//g,"") +"#");
+                        }
+                        if (s.length===2||s.length===1){
+                            continue;
+                        }
+                        proWord.push(s);
+                    }
+                    // this.record1.propertyWord=proWord;
+                    this.$set(this.record2,"newpropertyWord",proWord);
+                }
+            }
         },
     }
 </script>
