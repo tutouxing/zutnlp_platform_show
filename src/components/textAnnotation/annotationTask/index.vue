@@ -108,7 +108,7 @@
                     </el-table-column>
                   </el-table>
                 </el-dialog>
-                <el-dropdown-item @click.native="handleConnect(scope.row)">合并</el-dropdown-item>
+                <el-dropdown-item @click.native="handleMerge(scope.row)">合并</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
@@ -191,6 +191,7 @@ export default {
             displayScore(row) {
                 this.dialogTableVisibleAnnotate=true;
                 this.doc_id=row.doc_id;
+                this.annotateData=[];
                     getDocById(this.doc_id).then(res=>{
                         for (let task of res.data.tasks){
                             console.log(task.annotation_type);
@@ -207,8 +208,29 @@ export default {
 
             },
             //合并
-            handleConnect(row){
-
+            handleMerge(row){
+                this.annotateData=[];
+                getDocById(row.doc_id).then(res=>{
+                    for (let task of res.data.tasks){
+                        // console.log(task.annotation_type);
+                        // console.log(row.annotation_type);
+                        if (task.annotation_type===row.annotation_type){
+                            this.annotateData.push(task);
+                        }
+                    }
+                    console.log(this.annotateData)
+                },err=>{
+                    console.log(err)
+                });
+                //row本条标注记录
+                //annotateData同类型标注记录
+                this.$store.commit("SET_MERGE_DATA_STATE",row);
+                this.$store.commit("SET_ANNOTATE_DATA_STATE",this.annotateData);
+                console.log("_______")
+                console.log(row);
+                console.log(this.annotateData);
+                console.log("_______")
+                this.$router.push("/annotate_merge");
             }
         },
     }

@@ -81,6 +81,11 @@
                 <p v-if="record1.newsegmentWord[index].length===record2.newsegmentWord[index].length"> {{word}} </p>
                 <p v-if="record1.newsegmentWord[index].length!==record2.newsegmentWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
               </div>
+              <div v-if="record2.annotation_type==='词性标注'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newpropertyWord" >
+                <!--<p>{{word}}</p><br/>-->
+                <p v-if="record1.newpropertyWord[index].length===record2.newpropertyWord[index].length"> {{word}} </p>
+                <p v-if="record1.newpropertyWord[index].length!==record2.newpropertyWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
+              </div>
             </el-row>
           </el-col>
         </el-tab-pane>

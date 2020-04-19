@@ -260,6 +260,11 @@ export default[
             component:()=>import("../components/textAnnotation/annotationTask/annotateDetail.vue"),
         },
         {
+            path:"/annotate_merge",
+            name:"标注合并",
+            component:()=>import("../components/textAnnotation/annotationTask/annotateMerge.vue"),
+        },
+        {
             path:"/myAnnotation",
             name:"我的标注",
             component:()=>import("../components/textAnnotation/myAnnotation/index.vue"),

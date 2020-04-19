@@ -117,3 +117,12 @@ export function passFinal(doc_id,task_id) {
     })
 }
 
+export function mergeAnnotate(words,doc_id,task1_id,task2_id,annotator){
+    return fetch({
+        url:"http://localhost:8848/doc/mergeAnnotation",
+        method:"post",
+        params:{doc_id,task1_id,task2_id,annotator},
+        data:words
+    })
+}
+

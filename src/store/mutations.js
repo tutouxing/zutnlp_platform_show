@@ -147,6 +147,12 @@ const mutations = {
     },
     SET_TASK_STATE(state,task){
         state.task=task;
+    },
+    SET_MERGE_DATA_STATE(state,mergeTask){
+        state.mergeTask=mergeTask;
+    },
+    SET_ANNOTATE_DATA_STATE(state,annotateData){
+        state.annotateData=annotateData;
     }
 
 };
