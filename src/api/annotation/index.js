@@ -72,7 +72,7 @@ export function paragraphProcess(annotation_type,doc_id) {
     return fetch({
         url:"http://localhost:8848/doc/segmentWord",
         method:"put",
-        params:annotation_type,doc_id,
+        params:{annotation_type,doc_id},
     })
 }
 
@@ -126,3 +126,26 @@ export function mergeAnnotate(words,doc_id,task1_id,task2_id,annotator){
     })
 }
 
+export function getDocClassify(doc_id) {
+    return fetch({
+        url:"http://localhost:8848/doc/textClassify",
+        method:"get",
+        params:{doc_id},
+    })
+}
+
+export function saveClassifyResult(doc_id,classifyResult) {
+    return fetch({
+        url:"http://localhost:8848/doc/saveClassifyResult",
+        method:"post",
+        params:{doc_id,classifyResult}
+    })
+}
+
+export function recallClassify(doc_id) {
+    return fetch({
+        url:"http://localhost:8848/doc/recallClassifyResult",
+        method:"put",
+        params:{doc_id}
+    })
+}

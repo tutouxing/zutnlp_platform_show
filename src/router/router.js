@@ -284,6 +284,12 @@ export default[
             name:"帮助",
             component:()=>import("../components/textAnnotation/help/index.vue"),
         },
+        //文本分类
+        {
+            path:"/docClassify",
+            name:"文本分类",
+            component:()=>import("../components/docClassify/index.vue"),
+        },
 
         //文本分析
         {
