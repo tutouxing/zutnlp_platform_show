@@ -290,6 +290,12 @@ export default[
             name:"文本分类",
             component:()=>import("../components/docClassify/index.vue"),
         },
+        //机器翻译
+        {
+            path:"/docMachineTranslate",
+            name:"机器翻译",
+            component:()=>import("../components/docClassify/textTranslate.vue"),
+        },
 
         //文本分析
         {

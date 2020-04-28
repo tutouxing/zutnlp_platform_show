@@ -172,6 +172,10 @@ export default {
                 annotation_type: '词性标注',
                 status: '',
                 opera: ''
+            },{
+                annotation_type: '命名实体',
+                status: '',
+                opera: ''
             }],
             doc: null,//准备发布的id
         }
@@ -202,27 +206,6 @@ export default {
         //批量上传
         handleProgress(event, file, fileList) {
             console.log(this.$store.state.username);
-            let username=this.$store.state.username;
-            /*this.$axios({
-                url:"http://localhost:8848/doc/uploadDoc",
-                method:"post",
-                // data: {fileList,username},
-                params:{fileList,username},
-                contentType: false,
-            }).then(res=>{
-                if ((res.data===true)){
-                    this.$notify({
-                        title: '成功',
-                        message: '上传成功',
-                        type: 'success',
-                        duration: 2000
-                    });
-                    this.getAllDocs();
-                }
-            },err=>{
-                console.log(err);
-                this.getAllDocs();
-            });*/
             postDocs(fileList,this.$store.state.username).then((res) => {
                 if (res.data===true){
                     this.getAllDocs();
@@ -306,10 +289,6 @@ export default {
                         }
                     })
                 } else {//改为未发布，发布
-                    console.log(this.doc.doc_id)
-                    console.log(row.annotation_type)
-                    console.log("stop")
-
                     recallPublish(this.doc.doc_id,row.annotation_type).then(res => {
                         // console.log(res.data)
                         if(res.data){
@@ -354,6 +333,53 @@ export default {
                         this.$notify({
                             title: '失败',
                             message: '未能成功进行词性标注',
+                            type: 'failure',
+                            duration: 2000
+                        });
+                    })
+                } else {
+                    recallPublish(this.doc.doc_id,row.annotation_type).then(res => {
+                        if (res.data){
+                            this.$notify({
+                                title: '成功',
+                                message: '撤销成功',
+                                type: 'success',
+                                duration: 2000
+                            });
+                            this.getAllDocs();
+                            this.$set(this.gridData[1], 'status', '未发布')
+                            this.$set(this.gridData[1], 'opera', '发布')
+                        }
+
+                    }, err => {
+                        console.log(err);
+                        this.$notify({
+                            title: '失败',
+                            message: '撤回失败',
+                            type: 'failure',
+                            duration: 2000
+                        });
+                    });
+                }
+            }else if (row.annotation_type === '命名实体') {
+                if (row.opera === '发布') {//同上
+                    publishTask(row.annotation_type, this.doc.doc_id,this.$store.state.username).then(res => {
+                        this.getAllDocs();
+                        if (res.data == true) {
+                            this.$notify({
+                                title: '成功',
+                                message: '命名实体识别成功',
+                                type: 'success',
+                                duration: 2000
+                            });
+                            this.$set(this.gridData[1], 'status', '已发布')
+                            this.$set(this.gridData[1], 'opera', '撤回')
+                        }
+                    }, err => {
+                        console.log(err);
+                        this.$notify({
+                            title: '失败',
+                            message: '未能成功进行命名实体识别',
                             type: 'failure',
                             duration: 2000
                         });

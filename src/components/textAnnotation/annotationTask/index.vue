@@ -226,10 +226,6 @@ export default {
                 //annotateData同类型标注记录
                 this.$store.commit("SET_MERGE_DATA_STATE",row);
                 this.$store.commit("SET_ANNOTATE_DATA_STATE",this.annotateData);
-                console.log("_______")
-                console.log(row);
-                console.log(this.annotateData);
-                console.log("_______")
                 this.$router.push("/annotate_merge");
             }
         },

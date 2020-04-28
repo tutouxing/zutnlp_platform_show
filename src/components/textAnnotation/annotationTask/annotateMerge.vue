@@ -34,6 +34,10 @@
           <p>{{word}}</p>
           <br/>
         </div>
+        <div v-if="annotateTask.annotation_type==='命名实体'" style="font-size: 25px;text-align: left" v-for="(word,index) of annotateTask.newNerTokens">
+          <p>{{word}}</p>
+          <br/>
+        </div>
       </el-col>
       <el-col :span="10" style="margin-right: auto">
         <div v-if="record.annotation_type==='中文分词'" style="font-size: 25px;text-align: left;line-height: 1.5" v-for="(word,index) of record.newSegmentWord" >
@@ -48,6 +52,14 @@
           <p v-if="record.newPropertyWord[index].length!==annotateTask.newPropertyWord[index].length" style="background-color: darkgoldenrod">
             {{word}}
             <el-button type="success" icon="el-icon-check" circle @click="handleMerge(index,1)"/>
+          </p>
+          <br/>
+        </div>
+        <div v-if="record.annotation_type==='命名实体'" style="font-size: 25px;text-align: left" v-for="(word,index) of record.newNerTokens">
+          <p v-if="record.newNerTokens[index].length===annotateTask.newNerTokens[index].length">{{word}}</p>
+          <p v-if="record.newNerTokens[index].length!==annotateTask.newNerTokens[index].length" style="background-color: darkgoldenrod">
+            {{word}}
+            <el-button type="success" icon="el-icon-check" circle @click="handleMerge(index,2)"/>
           </p>
           <br/>
         </div>
@@ -106,6 +118,15 @@ export default {
                 // this.record1.propertyWord=proWord;
                 this.$set(this.annotateTask,"newPropertyWord",proWord);
                 this.annotateResult=this.annotateTask.newPropertyWord;
+            }else if(this.annotateTask.annotation_type==="命名实体"){
+                let token=[];
+                for (let words of this.annotateTask.propertyWord){
+                    let s="#"+words.Word+words.Type+"#";
+                    token.push(s);
+                }
+                // this.record1.propertyWord=proWord;
+                this.$set(this.annotateTask,"newNerTokens",token);
+                this.annotateResult=this.annotateTask.newNerTokens;
             }
         },
         methods:{
@@ -136,6 +157,14 @@ export default {
                     }
                     // this.record1.propertyWord=proWord;
                     this.$set(this.record,"newPropertyWord",proWord);
+                }else if(this.record.annotation_type==="命名实体"){
+                    let token=[];
+                    for (let words of this.annotateTask.propertyWord){
+                        let s="#"+words.Word+words.Type+"#";
+                        token.push(s);
+                    }
+                    // this.record1.propertyWord=proWord;
+                    this.$set(this.record,"newNerTokens",token);
                 }
             },
             getSelect(event,word,index){
@@ -144,14 +173,16 @@ export default {
             handleMerge(right_index,flag){
                 if (flag===0){//中文分词
                     this.$set(this.annotateResult,right_index,this.record.newSegmentWord[right_index]);
-                } else {//词性标注
+                } else if (flag===1) {//词性标注
                     this.$set(this.annotateResult,right_index,this.record.newPropertyWord[right_index]);
+                }else if (flag===2) {//命名实体
+                    this.$set(this.annotateResult,right_index,this.record.newNerTokens[right_index]);
                 }
                 console.log(right_index)
             },
             commitResult(){
                 mergeAnnotate(this.annotateResult,this.annotateTask.doc_id,this.annotateTask.task_id,this.record.task_id,this.$store.state.username).then(res=>{
-                   if (res.data==true){
+                   if (res.data===true){
                        this.$notify({
                            title:"合并成功",
                            type:"success",

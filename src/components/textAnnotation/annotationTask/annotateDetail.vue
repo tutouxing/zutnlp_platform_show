@@ -10,6 +10,7 @@
           <span slot="label" v-if="annotation_type!==''" style="font-size: 25px;height: 40px"><i class="el-icon-date"></i> {{this.annotation_type}}</span>
           <div v-if="annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of newSegmentWord" ><p @click="getSelect($event,word,index)"> {{word}} </p><br/></div>
           <div v-if="annotation_type==='词性标注'" style="font-size: 25px;text-align: left" v-for="(word,index) of newPropertyWord"><p @click="getSelect($event,word,index)">{{word}}</p><br/></div>
+          <div v-if="annotation_type==='命名实体'" style="font-size: 25px;text-align: left" v-for="(word,index) of newNerTokens"><p @click="getSelect($event,word,index)">{{word}}</p><br/></div>
         </el-tab-pane>
         <el-tab-pane>
           <span slot="label" style="font-size: 25px;height: 40px"><i class="el-icon-date"></i> 标注记录</span>
@@ -86,6 +87,11 @@
                 <p v-if="record1.newpropertyWord[index].length===record2.newpropertyWord[index].length"> {{word}} </p>
                 <p v-if="record1.newpropertyWord[index].length!==record2.newpropertyWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
               </div>
+              <div v-if="record2.annotation_type==='命名实体'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newpropertyWord" >
+                <!--<p>{{word}}</p><br/>-->
+                <p v-if="record1.newNerTokens[index].length===record2.newNerTokens[index].length"> {{word}} </p>
+                <p v-if="record1.newNerTokens[index].length!==record2.newNerTokens[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
+              </div>
             </el-row>
           </el-col>
         </el-tab-pane>
@@ -119,6 +125,8 @@ export default {
                 newSegmentWord:[],
                 propertyWord:[],
                 newPropertyWord:[],
+                nerTokens:[],
+                newNerTokens:[],
                 record1:{},
                 record2:{},
             }
@@ -148,11 +156,14 @@ export default {
                     this.propertyWord.push(s);
                     this.newPropertyWord=this.propertyWord;
                 }
+            }else if(this.annotation_type==="命名实体"){
+                for (let words of this.task.tokens){
+                    let s=('#'+words.Word+words.Type+'#');
+                    this.nerTokens.push(s);
+                    this.newNerTokens=this.nerTokens;
+                }
             }
             this.getDoc();
-
-        },
-        watch:{
         },
         methods:{
             getDoc(){
@@ -201,18 +212,20 @@ export default {
             },
             //提交审核
             commitReview(){
-
+                this.save();
             },
             //还原修改
             resetChange(){
                 if (this.annotation_type==="词性标注")this.newPropertyWord=this.propertyWord;
                 else if (this.annotation_type==="中文分词")this.newSegmentWord=this.segmentWord;
+                else if (this.annotation_type==="命名实体")this.newNerTokens=this.nerTokens;
             },
             //保存
             save(){
                 let reqData;
                 if (this.annotation_type==="中文分词")reqData=this.newSegmentWord;
                 else if (this.annotation_type==="词性标注")reqData=this.newPropertyWord;
+                else if (this.annotation_type==="命名实体")reqData=this.newNerTokens;
                 saveReAnnotateByUser(reqData,this.$store.state.username,this.task.doc_id,this.task.task_id).then(()=>{
                     this.$notify({
                         title: '成功',
@@ -257,10 +270,16 @@ export default {
                     }
                     // this.record1.propertyWord=proWord;
                     this.$set(this.record1,"newpropertyWord",proWord);
+                }else if(this.record1.annotation_type==="命名实体"){
+                    let token=[];
+                    for (let words of this.record1.nerTokens){
+                        token.push("#"+words.Word+words.Type+"#");
+                    }
+                    // this.record1.propertyWord=proWord;
+                    this.$set(this.record1,"newNerTokens",token);
                 }
             },
             getSelectedRight(){
-                console.log(this.record2)
                 if(this.record2.annotation_type==="中文分词"){
                     let segWord=[];
                     for (let words of this.record2.segmentWord){
@@ -288,6 +307,13 @@ export default {
                     }
                     // this.record1.propertyWord=proWord;
                     this.$set(this.record2,"newpropertyWord",proWord);
+                }else if(this.record2.annotation_type==="命名实体"){
+                    let token=[];
+                    for (let words of this.record2.nerTokens){
+                        token.push("#"+words.Word+words.Type+"#");
+                    }
+                    // this.record1.propertyWord=proWord;
+                    this.$set(this.record2,"newNerTokens",token);
                 }
             }
         },

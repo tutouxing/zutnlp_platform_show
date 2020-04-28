@@ -61,12 +61,12 @@
             <!--分类对话框begin-->
             <el-dialog title="文本分类校正" :visible.sync="dialogTableVisibleClassify">
               <el-row>
-                <el-col :span="10">当前分类结果：</el-col>
+                <el-col :span="10" style="text-align: center">当前分类结果：</el-col>
                 <!--显示回调结果-->
-                <el-col :span="10">{{classifyResult}}</el-col>
+                <el-col :span="10" style="text-align: center">{{classifyResult}}</el-col>
               </el-row>
               <el-row>
-                <el-col :span="10">重新分类：</el-col>
+                <el-col :span="10" style="text-align: center">重新分类：</el-col>
                 <el-col :span="10">
                   <el-select
                       v-model="value"
@@ -85,7 +85,7 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-button @click="saveClassify(scope.row)">保存结果</el-button>
+                <el-button @click="saveClassify(scope.row)" style="margin-left: 40%" type="primary">保存结果</el-button>
               </el-row>
             </el-dialog>
             <!--文本分类对话框end-->
@@ -153,14 +153,14 @@ export default {
                     getDocClassify(row.doc_id).then(res=>{
                         console.log(res.data);
                         this.classifyResult=res.data;
-                        this.dialogTableVisibleClassify=true;
+
                     },err=>{
                         console.log(err)
                     })
                 }else {
                     this.classifyResult=row.classifyResult;
                 }
-
+                this.dialogTableVisibleClassify=true;
             },
             getOption(){
               console.log(this.value)
@@ -173,11 +173,15 @@ export default {
                   saveClassifyResult(this.doc_id,this.classifyResult).then(res=>{
                     if (res.data===true){
                         this.$notify({
-                            message:"分类成功！"
+                            message:"分类成功！",
+                            type:"success",
+                            duration:2000
                         })
                     } else {
                         this.$notify({
-                            message:"分类失败！"
+                            message:"分类失败！",
+                            type:"failure",
+                            duration:2000
                         })
                     }
                   },err=>{
@@ -188,12 +192,14 @@ export default {
                       if (res.data===true){
                           this.$notify({
                               type:"success",
-                              message:"分类成功！"
+                              message:"分类成功！",
+                              duration:2000
                           })
                       } else {
                           this.$notify({
-                              type:"failed",
-                              message:"分类失败！"
+                              type:"failure",
+                              message:"分类失败！",
+                              duration:2000
                           })
                       }
                   },err=>{
@@ -211,7 +217,7 @@ export default {
                         })
                     } else {
                         this.$notify({
-                            type:"failed",
+                            type:"failure",
                             message:"撤销失败！"
                         })
                     }

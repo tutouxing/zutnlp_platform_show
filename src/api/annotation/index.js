@@ -149,3 +149,11 @@ export function recallClassify(doc_id) {
         params:{doc_id}
     })
 }
+
+export function machineTranslate(text) {
+    return fetch({
+        url:"http://localhost:8848/doc/getTextTranslate",
+        method:"get",
+        params:{text}
+    })
+}
