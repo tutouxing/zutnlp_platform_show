@@ -150,10 +150,10 @@ export function recallClassify(doc_id) {
     })
 }
 
-export function machineTranslate(text) {
+export function machineTranslate(text,targetLang) {
     return fetch({
         url:"http://localhost:8848/doc/getTextTranslate",
         method:"get",
-        params:{text}
+        params:{text,targetLang}
     })
 }

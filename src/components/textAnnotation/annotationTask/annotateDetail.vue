@@ -134,6 +134,8 @@ export default {
         mounted(){
             this.task=this.$store.state.task;
             this.annotation_type=this.$store.state.annotationType;
+            console.log(this.task);
+            console.log(this.annotation_type);
             if(this.annotation_type==="中文分词"){
                 for (let words of this.task.segmentWord){
                     let s="#";
@@ -158,10 +160,10 @@ export default {
                 }
             }else if(this.annotation_type==="命名实体"){
                 for (let words of this.task.tokens){
-                    let s=('#'+words.Word+words.Type+'#');
+                    let s='#'+words.word+words.type+'#';
                     this.nerTokens.push(s);
-                    this.newNerTokens=this.nerTokens;
                 }
+                this.newNerTokens=this.nerTokens;
             }
             this.getDoc();
         },

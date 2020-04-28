@@ -365,7 +365,7 @@ export default {
                 if (row.opera === '发布') {//同上
                     publishTask(row.annotation_type, this.doc.doc_id,this.$store.state.username).then(res => {
                         this.getAllDocs();
-                        if (res.data == true) {
+                        if (res.data === true) {
                             this.$notify({
                                 title: '成功',
                                 message: '命名实体识别成功',
@@ -374,6 +374,13 @@ export default {
                             });
                             this.$set(this.gridData[1], 'status', '已发布')
                             this.$set(this.gridData[1], 'opera', '撤回')
+                        }else {
+                            this.$notify({
+                                title: '失败',
+                                message: '未识别到实体，创建任务失败',
+                                type: 'failure',
+                                duration: 2000
+                            });
                         }
                     }, err => {
                         console.log(err);
