@@ -29,6 +29,12 @@ import PlayPhoto from '../components/ClientWeb/TextTemplate/PlayPictrueMsg.vue'
 *
 *
 * */
+import SysDownLoad from '../components/sourceManageSys/SysDownLoad.vue'
+import corpusManage from '../components/sourceManageSys/corpusManage.vue'
+import creatCorpus from '../components/sourceManageSys/creatCorpus.vue'
+import creatTable from '../components/sourceManageSys/creatTable.vue'
+import creatPropsAndCon from '../components/sourceManageSys/creatPropsAndCon.vue'
+import perCorpusManage from '../components/sourceManageSys/perCorpusManage.vue'
 
 
 
@@ -227,6 +233,42 @@ export default[
             name: 'createproject',
             component: createproject,
         },
+        //子系统管理模块
+        //下载管理
+        {
+            path:"/SysDownLoad",
+            name:"SysDownLoad",
+            component:()=>import("../components/sourceManageSys/SysDownLoad.vue")
+        },
+        //代码生成工具
+        {
+            path:"/creatCorpus",
+            name:"creatCorpus",
+            component:()=>import("../components/sourceManageSys/creatCorpus.vue")
+        },
+        {
+            path:"/creatTable/creatPropsAndCon",
+            name:"creatPropsAndCon",
+            component:()=>import("../components/sourceManageSys/creatPropsAndCon.vue")
+        },
+        {
+            path:"/creatTable",
+            name:"creatTable",
+            component:()=>import("../components/sourceManageSys/creatTable.vue")
+        },
+        //语料库管理
+        {
+            path:"/corpusManage",
+            name:"corpusManage",
+            component:()=>import("../components/sourceManageSys//corpusManage.vue")
+        },
+        //语料库内容管理
+        {
+            path:"/perCorpusManage",
+            name:"perCorpusManage",
+            component:()=>import("../components/sourceManageSys//perCorpusManage.vue")
+        },
+
         //评论模块
         {
             path:"/comment",
@@ -346,6 +388,11 @@ export default[
 
     ]
   },
+    {
+        path:"/corpusUserDown",
+        name:"/corpusUserDown",
+        component:()=>import("../components/sourceManageSys//corpusUserDown.vue")
+    },
   {
         path:'/login',
         component:()=>import('../views/login/bgImg.vue')
