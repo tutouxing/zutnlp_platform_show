@@ -1,12 +1,14 @@
 <template>
 <!--    后台资源管理页面-->
     <div>
+        <el-input placeholder="请输入查询表单en" v-model="input3" style="width: 400px;float: left">
+            <el-button slot="append" icon="el-icon-search" @click="searchTable"></el-button>
+        </el-input>
         <el-button type="primary"  style="float:right"  @click="handleClick">上传<i class="el-icon-upload el-icon--right"></i></el-button>
         <el-dialog :visible.sync="dialogFormVisible"  :destroy-on-close=true  @upedTableData=handleUpData>
             <SysReourceUp  :tranToSon=this.tableData></SysReourceUp>
         </el-dialog>
-        <el-button type="primary"  style="float:right;margin:1px"   @click="findALLFile">刷新<i class="el-icon-upload el-icon--right"></i></el-button>
-
+        <el-button type="primary"  style="float:right;margin:1px"   @click="findALLFile">显示全部数据<i class="el-icon-upload el-icon--right"></i></el-button>
         <el-table
                 :data="tableData"
                 style="width: 100%">
@@ -45,6 +47,16 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="currentPage1"
+                :page-size="10"
+                layout="total, prev, pager, next"
+                :total=allData.length
+                next-click="next"
+                prev-click="prev">
+        </el-pagination>
     </div>
 </template>
 <script>
@@ -57,9 +69,53 @@
                 dialogFormVisible: false,
                 tableData:[],
                 search: '',
+                input3:'',
+                allData:[],
+                currentPage1: 5,
             }
         },
         methods: {
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+                let c=(val-1)*10
+                if(c==0&&this.allData.length<=10){
+                    this.tableData=this.allData
+                }
+                else if (c==0){
+                    this.tableData=[]
+                    for (var i=0;i<10;i++){
+                        this.tableData.push(this.allData[i])
+                    }
+                }
+                else {
+                    let a=this.allData.length%(c)
+                    console.log("我是c"+c);
+                    console.log("我是a"+a);
+                    if(a<=10){
+                        for (let m=0;m<10;m++){
+                            this.tableData.pop()
+                        }
+                        for (let b=c-1;b<this.allData.length;b++){
+                            this.tableData.push(this.allData[b])
+                        }
+                        console.log(`修改显示`);
+                    }
+                }
+                console.log(`当前页已经改变`);
+            },
+            searchTable(){
+                var tranData=[];
+                for(let i=0;i<this.allData.length;i++){
+                    if (this.allData[i].downLoadFileName.includes(this.input3)){
+                        tranData.push(this.tableData[i])
+                    }
+                }
+                this.tableData=tranData
+            },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
             },
@@ -78,9 +134,20 @@
             },
             findALLFile(){
                 FindALLFile().then(response=>{
-                    this.tableData=response.data;
+                    this.allData=response.data;
+                    if (this.allData.length<=10){
+                        this.tableData=this.allData
+                    }
+                    else {
+                        this.tableData=[];
+                        let i=0;
+                        for (;i<10;i++){
+                            this.tableData.push(this.allData[i])
+                        }
+                    }
                     console.log("wwaaaa"+this.tableData.length)
                 })
+                this.input3='';
             },
             handleEdit(event,row){
                 console.log(row.downLoadFileName)

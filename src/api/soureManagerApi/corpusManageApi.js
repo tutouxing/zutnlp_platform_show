@@ -17,7 +17,7 @@ export function DownLoadFile(fileName) {
     return fetch({
         url:'http://127.0.0.1:8848/File/downLoadFile',
         method:'post',
-        data: fileName
+        data: fileName,
     })
 }
 export function FindOneTypeFilePIC() {
@@ -53,10 +53,13 @@ export function FindOneTypeFileOTHER() {
     })
 }
 export function DeleteFile(fileName) {
+    console.log("DeleteFile"+fileName)
     return fetch({
         url:'http://127.0.0.1:8848/File/delete',
         method:'post',
-        data: fileName
+        params:{
+            'filename':fileName
+        }
     })
 }
 
@@ -71,14 +74,18 @@ export function FindEachProps(tableMessageName) {
     return fetch({
         url:'http://127.0.0.1:8848/TableMessage/findMyProps',
         method:'post',
-        data: tableMessageName,
+            params: {
+                'tablename':tableMessageName
+            }
     })
 }
 export function FindEachConns(tableMessageName) {
     return fetch({
         url:'http://127.0.0.1:8848/TableMessage/findMyConnection',
         method:'post',
-        data: tableMessageName,
+            params: {
+                'tablename':tableMessageName
+            }
     })
 }
 
