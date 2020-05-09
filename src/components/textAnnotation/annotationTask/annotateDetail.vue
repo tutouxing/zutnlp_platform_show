@@ -3,14 +3,14 @@
     <el-row>
       <el-tabs type="border-card">
         <el-tab-pane>
-          <span slot="label" style="font-size: 25px;height: 40px">原文查看</span>
-          <div v-html="content" style="font-size: 25px;text-align: left"></div>
-        </el-tab-pane>
-        <el-tab-pane>
           <span slot="label" v-if="annotation_type!==''" style="font-size: 25px;height: 40px"><i class="el-icon-date"></i> {{this.annotation_type}}</span>
           <div v-if="annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of newSegmentWord" ><p @click="getSelect($event,word,index)"> {{word}} </p><br/></div>
           <div v-if="annotation_type==='词性标注'" style="font-size: 25px;text-align: left" v-for="(word,index) of newPropertyWord"><p @click="getSelect($event,word,index)">{{word}}</p><br/></div>
           <div v-if="annotation_type==='命名实体'" style="font-size: 25px;text-align: left" v-for="(word,index) of newNerTokens"><p @click="getSelect($event,word,index)">{{word}}</p><br/></div>
+        </el-tab-pane>
+        <el-tab-pane>
+          <span slot="label" style="font-size: 25px;height: 40px">原文查看</span>
+          <div v-html="content" style="font-size: 25px;text-align: left"></div>
         </el-tab-pane>
         <el-tab-pane>
           <span slot="label" style="font-size: 25px;height: 40px"><i class="el-icon-date"></i> 标注记录</span>
@@ -53,9 +53,9 @@
               </el-select>
             </el-row>
             <el-row>
-              <div v-if="record1.annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of record1.newsegmentWord" >
+              <div v-if="record1.annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of record1.newSegmentWord" >
                 <p> {{word}} </p><br/>
-                <!--<p v-if="record1.newsegmentWord[index].length!==record2.newsegmentWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>-->
+                <!--<p v-if="record1.newSegmentWord[index].length!==record2.newSegmentWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>-->
               </div>
             </el-row>
           </el-col>
@@ -77,17 +77,17 @@
               </el-select>
             </el-row>
             <el-row>
-              <div v-if="record2.annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newsegmentWord" >
+              <div v-if="record2.annotation_type==='中文分词'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newSegmentWord" >
                 <!--<p>{{word}}</p><br/>-->
-                <p v-if="record1.newsegmentWord[index].length===record2.newsegmentWord[index].length"> {{word}} </p>
-                <p v-if="record1.newsegmentWord[index].length!==record2.newsegmentWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
+                <p v-if="record1.newSegmentWord[index].length===record2.newSegmentWord[index].length"> {{word}} </p>
+                <p v-if="record1.newSegmentWord[index].length!==record2.newSegmentWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
               </div>
-              <div v-if="record2.annotation_type==='词性标注'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newpropertyWord" >
+              <div v-if="record2.annotation_type==='词性标注'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newPropertyWord" >
                 <!--<p>{{word}}</p><br/>-->
-                <p v-if="record1.newpropertyWord[index].length===record2.newpropertyWord[index].length"> {{word}} </p>
-                <p v-if="record1.newpropertyWord[index].length!==record2.newpropertyWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
+                <p v-if="record1.newPropertyWord[index].length===record2.newPropertyWord[index].length"> {{word}} </p>
+                <p v-if="record1.newPropertyWord[index].length!==record2.newPropertyWord[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
               </div>
-              <div v-if="record2.annotation_type==='命名实体'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newpropertyWord" >
+              <div v-if="record2.annotation_type==='命名实体'" style="font-size: 25px;text-align: left" v-for="(word,index) of record2.newPropertyWord" >
                 <!--<p>{{word}}</p><br/>-->
                 <p v-if="record1.newNerTokens[index].length===record2.newNerTokens[index].length"> {{word}} </p>
                 <p v-if="record1.newNerTokens[index].length!==record2.newNerTokens[index].length" style="color: darkgoldenrod"> {{word}} </p><br/>
@@ -134,13 +134,11 @@ export default {
         mounted(){
             this.task=this.$store.state.task;
             this.annotation_type=this.$store.state.annotationType;
-            console.log(this.task);
-            console.log(this.annotation_type);
             if(this.annotation_type==="中文分词"){
                 for (let words of this.task.segmentWord){
                     let s="#";
                     for (let word of words){
-                        s+=word+"#";
+                        s+=word.word+"#";
                     }
                     if (s.length===2||s.length===1)continue;
                     this.segmentWord.push(s);
@@ -150,14 +148,14 @@ export default {
                 for (let words of this.task.propertyWord){
                     let s="#";
                     for (let word of words){
-                        s+=(word.replace(/\//g,"") +"#");
+                        s+=(word.word+"/"+word.pos +"#");
                     }
                     if (s.length===2||s.length===1){
                         continue;
                     }
                     this.propertyWord.push(s);
-                    this.newPropertyWord=this.propertyWord;
                 }
+                this.newPropertyWord=this.propertyWord;
             }else if(this.annotation_type==="命名实体"){
                 for (let words of this.task.tokens){
                     let s='#'+words.word+words.type+'#';
@@ -195,21 +193,34 @@ export default {
                   }
                   new_str+="#";
                   this.$set(this.newSegmentWord,index,this.segmentWord[index].replace(str,new_str))
-                  // console.log(this.segmentWord[index])
               }else if (this.annotation_type==="词性标注"){
-                  //与分词一样
-                  let str=win.toString(),new_str="#";
-                  let result,character;
-                  let reg = /[a-zA-Z]+/;  //[a-zA-Z]表示专匹配字母，g表示全局匹配
-                  while (result = str.match(reg)) { //判断str.match(reg)是否没有字母了
-                      str = str.replace(result[0], ''); //替换掉字母  result[0] 是 str.match(reg)匹配到的属字母
-                      character=result[0];
+                  //弹框输入新词性
+                  let str=win.toString(),new_str="";
+                  let pos = str.split("#");
+                  for (let i=0;i<pos.length;i++){
+                      if (pos[i]==="")continue;
+                      let p=pos[i].split("/");
+                      console.log(p);
+                      new_str+=p[0];
                   }
-                  for (let s of str.split("#")){
-                      new_str+=s;
-                  }
-                  new_str+=(character+"#");
-                  this.$set(this.newPropertyWord,index,this.newPropertyWord[index].replace(win.toString(),new_str))
+                  this.$prompt('请输入'+new_str+'的再标注词性', '提示', {
+                      confirmButtonText: '确定',
+                      cancelButtonText: '取消',
+                      inputPattern: /[a-z]+/,
+                      inputErrorMessage: '词性格式不正确'
+                  }).then(({ value }) => {
+                      this.$message({
+                          type: 'success',
+                          message: '再标注词性为: ' + value
+                      });
+                      pos=value;
+                      this.$set(this.newPropertyWord,index,this.newPropertyWord[index].replace(str,'#'+new_str+'/'+pos+'#'));
+                  }).catch(() => {
+                      this.$message({
+                          type: 'info',
+                          message: '取消输入'
+                      });
+                  });
               }
             },
             //提交审核
@@ -253,12 +264,12 @@ export default {
                         let s="#";
                         for (let word of words){
                             if (word.length===0)continue;
-                            s+=word+"#";
+                            s+=word.word+"#";
                         }
                         // if (s.length===2||s.length===1)continue;
                         segWord.push(s);
                     }
-                    this.$set(this.record1,"newsegmentWord",segWord);
+                    this.$set(this.record1,"newSegmentWord",segWord);
                     // this.record1.segmentWord=segWord;
                 }else if(this.record1.annotation_type==="词性标注"){
                     let proWord=[];
@@ -266,16 +277,16 @@ export default {
                         let s="#";
                         for (let word of words){
                             if (word.length===0)continue;
-                            s+=(word.replace(/\//g,"") +"#");
+                            s+=(word.word+"/"+word.pos+"#");
                         }
                         proWord.push(s);
                     }
                     // this.record1.propertyWord=proWord;
-                    this.$set(this.record1,"newpropertyWord",proWord);
+                    this.$set(this.record1,"newPropertyWord",proWord);
                 }else if(this.record1.annotation_type==="命名实体"){
                     let token=[];
                     for (let words of this.record1.nerTokens){
-                        token.push("#"+words.Word+words.Type+"#");
+                        token.push("#"+words.word+words.type+"#");
                     }
                     // this.record1.propertyWord=proWord;
                     this.$set(this.record1,"newNerTokens",token);
@@ -288,19 +299,19 @@ export default {
                         let s="#";
                         for (let word of words){
                             if (word.length===0)continue;
-                            s+=word+"#";
+                            s+=word.word+"#";
                         }
                         // if (s.length===2||s.length===1)continue;
                         segWord.push(s);
                     }
                     // this.record1.segmentWord=segWord;
-                    this.$set(this.record2,"newsegmentWord",segWord);
+                    this.$set(this.record2,"newSegmentWord",segWord);
                 }else if(this.record2.annotation_type==="词性标注"){
                     let proWord=[];
                     for (let words of this.record2.propertyWord){
                         let s="#";
                         for (let word of words){
-                            s+=(word.replace(/\//g,"") +"#");
+                            s+=(word.word+"/"+word.pos+"#");
                         }
                         if (s.length===2||s.length===1){
                             continue;
@@ -308,11 +319,11 @@ export default {
                         proWord.push(s);
                     }
                     // this.record1.propertyWord=proWord;
-                    this.$set(this.record2,"newpropertyWord",proWord);
+                    this.$set(this.record2,"newPropertyWord",proWord);
                 }else if(this.record2.annotation_type==="命名实体"){
                     let token=[];
                     for (let words of this.record2.nerTokens){
-                        token.push("#"+words.Word+words.Type+"#");
+                        token.push("#"+words.word+words.type+"#");
                     }
                     // this.record1.propertyWord=proWord;
                     this.$set(this.record2,"newNerTokens",token);

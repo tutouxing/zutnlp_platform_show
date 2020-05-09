@@ -97,7 +97,7 @@ export default {
                     let s="#";
                     for (let word of words){
                         if (word.length===0)continue;
-                        s+=word+"#";
+                        s+=word.word+"#";
                     }
                     // if (s.length===2||s.length===1)continue;
                     segWord.push(s);
@@ -111,7 +111,7 @@ export default {
                     let s="#";
                     for (let word of words){
                         if (word.length===0)continue;
-                        s+=(word.replace(/\//g,"") +"#");
+                        s+=(word.word+"/"+word.pos +"#");
                     }
                     proWord.push(s);
                 }
@@ -121,7 +121,7 @@ export default {
             }else if(this.annotateTask.annotation_type==="命名实体"){
                 let token=[];
                 for (let words of this.annotateTask.propertyWord){
-                    let s="#"+words.Word+words.Type+"#";
+                    let s="#"+words.word+words.type+"#";
                     token.push(s);
                 }
                 // this.record1.propertyWord=proWord;
@@ -138,7 +138,7 @@ export default {
                         let s="#";
                         for (let word of words){
                             if (word.length===0)continue;
-                            s+=word+"#";
+                            s+=word.word+"#";
                         }
                         // if (s.length===2||s.length===1)continue;
                         segWord.push(s);
@@ -151,7 +151,7 @@ export default {
                         let s="#";
                         for (let word of words){
                             if (word.length===0)continue;
-                            s+=(word.replace(/\//g,"") +"#");
+                            s+=(word.word+"/"+word.pos +"#");
                         }
                         proWord.push(s);
                     }
@@ -160,7 +160,7 @@ export default {
                 }else if(this.record.annotation_type==="命名实体"){
                     let token=[];
                     for (let words of this.annotateTask.propertyWord){
-                        let s="#"+words.Word+words.Type+"#";
+                        let s="#"+words.word+words.type+"#";
                         token.push(s);
                     }
                     // this.record1.propertyWord=proWord;
