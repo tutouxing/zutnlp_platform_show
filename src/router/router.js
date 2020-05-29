@@ -34,6 +34,7 @@ import corpusManage from '../components/sourceManageSys/corpusManage.vue'
 import creatCorpus from '../components/sourceManageSys/creatCorpus.vue'
 import creatTable from '../components/sourceManageSys/creatTable.vue'
 import creatPropsAndCon from '../components/sourceManageSys/creatPropsAndCon.vue'
+import corpusUserDownSearch from '../components/sourceManageSys/corpusUserDownSearch.vue'
 import perCorpusManage from '../components/sourceManageSys/perCorpusManage.vue'
 
 
@@ -270,6 +271,7 @@ export default[
             component:()=>import("../components/sourceManageSys//perCorpusManage.vue")
         },
 
+
         //评论模块
         {
             path:"/comment",
@@ -479,6 +481,11 @@ export default[
         path:'/prostage/chanel/:chName',
         name:'chName',
         component:()=>import('../views/prostage/content/amain.vue'),
+    },
+    {
+        path:"/corpusUserDownSearch/:content",
+        name:"corpusUserDownSearch",
+        component:()=>import("../components/sourceManageSys/corpusUserDownSearch.vue")
     },
 
 ]
