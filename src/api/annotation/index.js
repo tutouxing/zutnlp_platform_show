@@ -92,11 +92,11 @@ export function reAnnotate(str,annotation_type) {
     })
 }
 
-export function saveReAnnotateByUser(data,annotator,doc_id,task_id) {
+export function saveReAnnotateByUser(data,annotator,doc_id,task_id,flag) {
     return fetch({
         url:"http://localhost:8848/doc/saveReAnnotateByUser",
         method:"post",
-        params:{annotator,doc_id,task_id},
+        params:{annotator,doc_id,task_id,flag},
         data:data
     })
 }

@@ -181,6 +181,12 @@ export default {
         }
     },
     created() {
+        if (this.$store.state.groupId!==1){
+            this.$router.push(
+                {
+                    path:'/404'
+                });
+        }
         this.getAllDocs();
     },
     methods: {

@@ -99,6 +99,7 @@
                                 console.log(this.$store.state.userid);
                                 this.loading = false;
                                 this.$store.commit("SET_USERMENUS_STATE",response.data.group.menus);
+                                this.$store.commit("SET_GROUPID_STATE",response.data.group.id);
                                 this.$store.commit("SET_CHANNEL_STATE",response.data.channel);
                                 this.channel = response.data.channel;
                                 this.$store.commit("SET_AllCONTENT_STATE",this.channel);

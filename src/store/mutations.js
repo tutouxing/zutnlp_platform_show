@@ -37,6 +37,9 @@ const mutations = {
     SET_USERID_STATE (state, id) {
       state.userid = id;
     },
+    SET_GROUPID_STATE(state,id){
+        state.groupId=id;
+    },
     SET_COMP_STATE (state, comp) {
       state.comp = comp;
     },

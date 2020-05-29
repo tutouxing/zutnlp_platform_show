@@ -225,7 +225,26 @@ export default {
             },
             //提交审核
             commitReview(){
-                this.save();
+                let reqData,flag=1;
+                if (this.annotation_type==="中文分词")reqData=this.newSegmentWord;
+                else if (this.annotation_type==="词性标注")reqData=this.newPropertyWord;
+                else if (this.annotation_type==="命名实体")reqData=this.newNerTokens;
+                saveReAnnotateByUser(reqData,this.$store.state.username,this.task.doc_id,this.task.task_id,flag).then(()=>{
+                    this.$notify({
+                        title: '成功',
+                        message: '提交成功',
+                        type: 'success',
+                        duration: 2000
+                    });
+                },err=>{
+                    this.$notify({
+                        title: '失败',
+                        message: '提交失败',
+                        type: 'failure',
+                        duration: 2000
+                    });
+                    console.log(err)
+                })
             },
             //还原修改
             resetChange(){
@@ -239,7 +258,7 @@ export default {
                 if (this.annotation_type==="中文分词")reqData=this.newSegmentWord;
                 else if (this.annotation_type==="词性标注")reqData=this.newPropertyWord;
                 else if (this.annotation_type==="命名实体")reqData=this.newNerTokens;
-                saveReAnnotateByUser(reqData,this.$store.state.username,this.task.doc_id,this.task.task_id).then(()=>{
+                saveReAnnotateByUser(reqData,this.$store.state.username,this.task.doc_id,this.task.task_id,0).then(()=>{
                     this.$notify({
                         title: '成功',
                         message: '保存成功',

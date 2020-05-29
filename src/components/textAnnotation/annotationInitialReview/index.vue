@@ -133,14 +133,21 @@ export default {
             }
         },
         mounted(){
-            this.getTasks()
+            if (this.$store.state.groupId===13||this.$store.state.groupId===1){
+                this.getTasks()
+            }else {
+                this.$router.push(
+                    {
+                        path:'/404'
+                    });
+            }
         },
         methods:{
             getTasks(){
                 this.taskData=[];
                 findTasks().then((res)=>{
                     for (let task of res.data){
-                        if (task.phrase==="一标"){
+                        if (task.status==="待初审"){
                             this.taskData.push(task)
                         }
                     }

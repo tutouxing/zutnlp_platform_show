@@ -13,6 +13,7 @@ const state = {
     themeColor:'#545c64',
     pageone:'页面1-1',
     userid:'',
+    groupId:'',
     comp:'',
     channel:[],
     components:[],

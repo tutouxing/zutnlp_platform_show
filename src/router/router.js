@@ -134,7 +134,8 @@ export default[
         // },
         {
             path:'Admin/user',//用户观念管理
-            component:()=>import('../components/Admin/user/index')
+            component:()=>import('../components/Admin/user/index'),
+            meta:{role:['admin']}
         },
         {
             path:'Admin/group',
@@ -289,11 +290,13 @@ export default[
         {
             path:"/docsManage",
             name:"文档管理",
+            meta:{roles:['admin']},
             component:()=>import("../components/textAnnotation/docsManage/index.vue"),
         },
         {
             path:"/annotationTask",
             name:"标注任务",
+            meta:{roles:['admin','annotator']},
             component:()=>import("../components/textAnnotation/annotationTask/index.vue"),
         },
         {
@@ -309,16 +312,19 @@ export default[
         {
             path:"/myAnnotation",
             name:"我的标注",
+            meta:{roles:['admin','annotator']},
             component:()=>import("../components/textAnnotation/myAnnotation/index.vue"),
         },
         {
             path:"/annotationInitialReview",
             name:"标注初审",
+            meta:{roles:['admin','professional']},
             component:()=>import("../components/textAnnotation/annotationInitialReview/index.vue"),
         },
         {
             path:"/annotationFinalReview",
             name:"标注终审",
+            meta:{roles:['admin','professional']},
             component:()=>import("../components/textAnnotation/annotationFinalReview/index.vue"),
         },
         {

@@ -136,13 +136,20 @@ export default {
             }
         },
         mounted(){
-            this.getTasks()
+            if (this.$store.state.groupId===14||this.$store.state.groupId===1){
+                this.getTasks()
+            }else {
+                this.$router.push(
+                    {
+                        path:'/404'
+                    });
+            }
         },
         methods:{
             getTasks(){
                 findTasks().then((res)=>{
                     for (let task of res.data){
-                        if (task.phrase==="二标"){
+                        if (task.status==="待终审"){
                             this.taskData.push(task)
                         }
                     }
